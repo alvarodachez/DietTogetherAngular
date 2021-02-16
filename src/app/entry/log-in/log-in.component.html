@@ -1,1 +1,28 @@
-<p>log-in works!</p>
+<div id="divGeneral">
+
+    <div id="divTitle">
+        <h1>Inicia sesión</h1>
+    </div>
+    
+    <div id="divForm">
+        
+        <form action="">
+            <div class="formField">
+                <label for="user">Usuario</label><br>
+                <input type="text" name="user" id="inpUser">
+            </div>
+
+            <div class="formField">
+                <label for="pass">Contraseña</label><br>
+                <input type="password" name="pass" id="inpPass">
+            </div>
+        </form>
+
+        <button name="btnGo" [routerLink]="['/login']">Enviar</button>
+
+        <a href="" [routerLink]="['/signup']">
+            <p>Si todavía no <br> estás registrado...</p>
+        </a>
+    </div>
+
+</div>
