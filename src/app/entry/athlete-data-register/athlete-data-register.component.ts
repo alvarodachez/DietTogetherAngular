@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AthleteDtoClass } from '../models/athlete-dto';
 import { AthleteClass } from '../models/athlete.class';
+import { SignUpService } from '../services/sign-up.service';
 
 @Component({
   selector: 'app-athlete-data-register',
@@ -12,7 +14,7 @@ export class AthleteDataRegisterComponent implements OnInit {
   loginAthlete: AthleteClass;
   loginAthleteDto: AthleteDtoClass;
 
-  constructor() {
+  constructor(private signUpService: SignUpService, private route: Router) {
     this.loginAthlete = new AthleteClass("", "", "", "", "", "")
     this.loginAthleteDto = new AthleteDtoClass("", "", 0, 0)
   }
@@ -30,6 +32,12 @@ export class AthleteDataRegisterComponent implements OnInit {
     this.loginAthleteDto.birthDay = formData.birthDay;
 
     console.log(this.loginAthleteDto);
+
+    this.signUpService.athleteDataSign(this.loginAthleteDto).subscribe(response => {
+      console.log(response);
+      this.route.navigate(['login']);
+    })
+
   }
 
 }
