@@ -19,6 +19,8 @@ export class AthleteDataRegisterComponent implements OnInit {
 
   onSubmit(formData: AthleteClass) {
     console.log(formData);
+
+    
   }
 
 }

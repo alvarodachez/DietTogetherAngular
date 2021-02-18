@@ -34,7 +34,7 @@ export class SignUpComponent implements OnInit {
 
       console.log(response);
 
-      localStorage.setItem('username',response.username);
+      localStorage.setItem('dietUsername',response.username);
 
       this.route.navigate(['athlete']);
     });

@@ -4,6 +4,7 @@ import { UserSignUpDto } from '../models/signup-user-dto';
 import { Observable } from 'rxjs';
 import { urlServerProd } from '../../../environments/environment.prod';
 import { environment, urlServer } from 'src/environments/environment';
+import { AthleteDtoClass } from '../models/athlete-dto';
 
 
 @Injectable({
@@ -30,5 +31,14 @@ export class SignUpService {
     return this.http.post(endpoint, user);
 
   }
+
+  athleteDataSign(athleteDto: AthleteDtoClass): Observable<any> {
+
+    const endpoint = this.endPointDev + '/athlete/sign-up-data/' + localStorage.getItem('dietUsername');
+
+    return this.http.post(endpoint, athleteDto);
+  }
 }
+
+
 
