@@ -5,42 +5,49 @@
     </div>
     
     <div id="divForm">
-        
-        <form action="">
+        <form (ngSubmit)="onSubmit(athleteForm.value)" #athleteForm="ngForm">
             <div class="formField">
                 <label for="name">Nombre</label><br>
-                <input type="text" name="name" id="inpName">
+                <input #name="ngModel" [(ngModel)]="athleteForm.name" required type="text" name="name" id="inpName">
+                <div [hidden]="name.valid || name.pristine" class="">
+                    El nombre es obligatorio
+                </div>
             </div>
 
             <div class="formField">
                 <label for="surname">Apellidos</label><br>
-                <input type="text" name="surname" id="inpSurname">
+                <input #surname="ngModel" [(ngModel)]="athleteForm.surname" type="text" name="surname" id="inpSurname">
+                <div [hidden]="surname.valid || surname.pristine" class="">
+                    Los apellidos son obligatorios
+                </div>
             </div>
 
             <div class="formField">
-                <label for="birthdate">Fecha de nacimiento</label><br>
-                <input type="date" name="birthdate" id="inpBirthdate">
+                <label for="birthDay">Fecha de nacimiento</label><br>
+                <input #birthDay="ngModel" [(ngModel)]="athleteForm.birthDay" type="date" name="birthDay" id="inpBirthday">
+                <div [hidden]="birthDay.valid || birthDay.pristine" class="">
+                    La fecha de nacimiento es obligatoria
+                </div>
             </div>
             
             <div class="formField">
                 <label for="weight">Peso</label><br>
-                <input type="tel" name="weight" id="inpWeight">
+                <input #weight="ngModel" [(ngModel)]="athleteForm.weight" type="tel" name="weight" id="inpWeight">
+                <div [hidden]="weight.valid || weight.pristine" class="">
+                    El peso es obligatorio
+                </div>
             </div>
             
             <div class="formField">
                 <label for="height">Altura (metros)</label><br>
-                <input type="tel" name="height" id="inpHeight">
+                <input #height="ngModel" [(ngModel)]="athleteForm.height" type="tel" name="height" id="inpHeight">
+                <div [hidden]="height.valid || height.pristine" class="">
+                    La altura es obligatoria
+                </div>
             </div>
+
+            <button name="btnGo">Enviar</button>
         </form>
-
-        <button name="btnGo">Enviar</button>
-
-        <!-- <button name="btnGo" [routerLink]="['/athlete']">Enviar</button>
-
-        <a href="" [routerLink]="['/login']">
-            <p>Si ya estás registrado...</p>
-        </a> -->
     </div>
 
 </div>
-

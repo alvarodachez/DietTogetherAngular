@@ -4,13 +4,11 @@
         <h1>Inicia sesión</h1>
     </div>
     
-    <div id="divForm">
-        
-        <!-- <form action=""> -->
+    <div id="divForm">        
         <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
             <div class="formField">
                 <label for="user">Usuario</label><br>
-                <input #user="ngModel" [(ngModel)]="loginUser.user" required type="text" name="user" id="inpUser">
+                <input #user="ngModel" [(ngModel)]="loginUser.user" required type="text" name="username" id="inpUser">
                 <div [hidden]="user.valid || user.pristine" class="">
                     El usuario es obligatorio
                 </div>
@@ -18,7 +16,7 @@
 
             <div class="formField">
                 <label for="pass">Contraseña</label><br>
-                <input #pass="ngModel" [(ngModel)]="loginUser.pass" required type="password" name="pass" id="inpPass">
+                <input #pass="ngModel" [(ngModel)]="loginUser.pass" required type="password" name="password" id="inpPass">
                 <div [hidden]="pass.valid || pass.pristine" class="">
                     La contraseña es obligatoria
                 </div>

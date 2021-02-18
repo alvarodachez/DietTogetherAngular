@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AthleteClass } from '../models/athlete.class';
 
 @Component({
   selector: 'app-athlete-data-register',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AthleteDataRegisterComponent implements OnInit {
 
-  constructor() { }
+  loginAthlete: AthleteClass;
+
+  constructor() {
+    this.loginAthlete = new AthleteClass("", "", 0, 0)
+  }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(formData: AthleteClass) {
+    console.log(formData);
   }
 
 }
