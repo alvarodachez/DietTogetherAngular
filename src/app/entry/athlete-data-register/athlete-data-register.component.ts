@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AthleteDtoClass } from '../models/athlete-dto';
 import { AthleteClass } from '../models/athlete.class';
 
 @Component({
@@ -9,9 +10,11 @@ import { AthleteClass } from '../models/athlete.class';
 export class AthleteDataRegisterComponent implements OnInit {
 
   loginAthlete: AthleteClass;
+  loginAthleteDto: AthleteDtoClass;
 
   constructor() {
-    this.loginAthlete = new AthleteClass("", "", 0, 0)
+    this.loginAthlete = new AthleteClass("", "", "", "", "", "")
+    this.loginAthleteDto = new AthleteDtoClass("", "", 0, 0)
   }
 
   ngOnInit(): void {
@@ -20,7 +23,13 @@ export class AthleteDataRegisterComponent implements OnInit {
   onSubmit(formData: AthleteClass) {
     console.log(formData);
 
-    
+    this.loginAthleteDto.name = formData.name;
+    this.loginAthleteDto.surname = formData.surname;
+    this.loginAthleteDto.weight = parseFloat(formData.weightKilograms + "." + formData.weightGrams);
+    this.loginAthleteDto.height = parseFloat(formData.heightMeters + "." + formData.heightCentimeters);
+    this.loginAthleteDto.birthDay = formData.birthDay;
+
+    console.log(this.loginAthleteDto);
   }
 
 }

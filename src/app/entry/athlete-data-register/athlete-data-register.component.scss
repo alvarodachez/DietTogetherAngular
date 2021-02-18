@@ -10,15 +10,27 @@
     text-align: center;
 }
 
-/* #divForm p {
-    margin-top: 15%;
-    font-size: 30px;
-} */
-
 #divForm button {
     margin-top: 15%;
     font-size: 20px;
     margin-bottom: 10%;
+}
+
+.doubleInput {
+    display: flex;
+}
+
+.doubleInput input {
+    margin: 0 auto;
+    width: 25%;
+}
+
+.midInputLeft {
+    margin-left: 15%;
+}
+
+.midInputRight {
+    margin-right: 15%;
 }
 
 .formField {
