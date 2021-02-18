@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginClass } from '../models/login.class';
 
 @Component({
   selector: 'app-log-in',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogInComponent implements OnInit {
 
-  constructor() { }
+  loginUser: LoginClass;
+
+  constructor() {
+    this.loginUser = new LoginClass("", "");
+  }
 
   ngOnInit(): void {
   }
 
+  onSubmit(formData: any) {
+    console.log(formData);
+    // alert("hola");
+  }
+ 
 }

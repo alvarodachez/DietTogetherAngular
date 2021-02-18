@@ -6,19 +6,26 @@
     
     <div id="divForm">
         
-        <form action="">
+        <!-- <form action=""> -->
+        <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
             <div class="formField">
                 <label for="user">Usuario</label><br>
-                <input type="text" name="user" id="inpUser">
+                <input #user="ngModel" [(ngModel)]="loginUser.user" required type="text" name="user" id="inpUser">
+                <div [hidden]="user.valid || user.pristine" class="">
+                    El usuario es obligatorio
+                </div>
             </div>
 
             <div class="formField">
                 <label for="pass">Contraseña</label><br>
-                <input type="password" name="pass" id="inpPass">
+                <input #pass="ngModel" [(ngModel)]="loginUser.pass" required type="password" name="pass" id="inpPass">
+                <div [hidden]="pass.valid || pass.pristine" class="">
+                    La contraseña es obligatoria
+                </div>
             </div>
-        </form>
 
-        <button name="btnGo" [routerLink]="['/login']">Enviar</button>
+            <button name="btnGo" [disabled]="!loginForm.valid">Enviar</button>
+        </form>
 
         <a href="" [routerLink]="['/signup']">
             <p>Si todavía no <br> estás registrado...</p>
