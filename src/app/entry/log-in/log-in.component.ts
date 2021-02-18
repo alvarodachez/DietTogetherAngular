@@ -19,7 +19,6 @@ export class LogInComponent implements OnInit {
 
   onSubmit(formData: any) {
     console.log(formData);
-    // alert("hola");
   }
 
 }
