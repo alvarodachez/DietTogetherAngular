@@ -21,5 +21,5 @@ export class LogInComponent implements OnInit {
     console.log(formData);
     // alert("hola");
   }
- 
+
 }

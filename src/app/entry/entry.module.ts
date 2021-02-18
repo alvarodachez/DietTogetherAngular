@@ -8,6 +8,7 @@ import { AthleteDataRegisterComponent } from './athlete-data-register/athlete-da
 import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -33,12 +34,13 @@ const routes: Routes = [
     LogInComponent,
     SignUpComponent,
     WelcomeComponent,
-    AthleteDataRegisterComponent,
+    AthleteDataRegisterComponent
   ],
   exports: [],
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forChild(routes),
     ],
 })
