@@ -1,4 +1,4 @@
-<div id="divGeneral">
+<div id="divGeneral" class="container">
 
     <div id="divTitle">
         <h1>Regístrate</h1>
@@ -34,15 +34,13 @@
                     Las contraseñas no coinciden
                 </div>
             </div>
-            <button name="btnGo"
-                [disabled]="!signUpForm.valid || !(singUpClass.passAgain == singUpClass.pass)">Enviar</button>
+            <button name="btnGo" class="btn btn-primary btn-lg btn-mid"
+              [disabled]="!signUpForm.valid || !(singUpClass.passAgain == singUpClass.pass)">Enviar</button>
         </form>
 
-
-
-        <a href="" [routerLink]="['/login']">
-            <p>Si ya estás registrado...</p>
-        </a>
+        <button type="button" class="btn btn-link" [routerLink]="['/login']">
+            Si ya estás registrado...
+        </button>
     </div>
 
 </div>

@@ -1,9 +1,34 @@
-@import './variables';
-@import './mixins';
+// @import './variables';
+// @import './mixins';
+
+
+// scss-docs-start import-stack
+// Configuración general
+@import "functions";
+@import "variables";
+@import "mixins";
+@import "utilities";
+
+// módulos
+@import "containers";
+@import "grid";
+@import "nav";
+@import "navbar";
+@import "buttons";
+@import "button-group";
+@import "forms";
+@import "dropdown";
+
+
 
 html {
     font-family: monospace;
-    background-color: lightseagreen;
+    // background-color: lightseagreen;
+    // background-color: $primary;
+}
+
+body {
+    margin: 0;
 }
 
 /* A few custom styles for date inputs */
@@ -17,7 +42,7 @@ input {
     font-size: 18px;
     border:1px solid #ecf0f1;
     background:#ecf0f1;
-    padding:5px;
+    // padding:5px;
     display: inline-block !important;
     visibility: visible !important;
     border-radius:5px;
@@ -31,31 +56,28 @@ input[type="date"], focus {
 }
 
 
-button {
-    /* remove default behavior */
-    // appearance:none;
-    // -webkit-appearance:none;
+// button {
+//     /* remove default behavior */
+//     // appearance:none;
+//     // -webkit-appearance:none;
   
-    /* usual styles */
-    padding:10px;
-    border:none;
-    background-color:#3F51B5;
-    color:#fff;
-    font-weight:600;
-    border-radius:5px;
-    width:90%;
-}
+//     /* usual styles */
+//     padding:10px;
+//     border:none;
+//     // background-color:#3F51B5;
+//     background-color:$primary;
+//     color:#fff;
+//     font-weight:600;
+//     border-radius:5px;
+//     width:80%;
+// }
 
-button:disabled {
-    background-color:#909de7;
-}
+// button:disabled {
+//     // background-color:#909de7;
+//     background-color:$primary_dis;
+// }
 
-button:active {
-    background-color:#fff;
-    color:#3F51B5;
-
-}
-
-// button:valid {
-//     background-color:#27d427;
+// button:active {
+//     background-color:#fff;
+//     color:#3F51B5;
 // }

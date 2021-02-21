@@ -1,5 +1,6 @@
 #divGeneral {
     font-style: italic;
+    padding: 0; // eliminar espacios container
 }
 
 #divTitle {
@@ -18,7 +19,7 @@
 #divForm button {
     margin-top: 15%;
     font-size: 20px;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }
 
 .formField {

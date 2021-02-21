@@ -1,5 +1,6 @@
 #divGeneral {
     font-style: italic;
+    padding: 0; // eliminar espacios container
 }
 
 #divTitle {
@@ -18,61 +19,21 @@
 
 .doubleInput {
     display: flex;
+    justify-content: space-evenly;
 }
 
 .doubleInput input {
-    margin: 0 auto;
-    width: 25%;
+    width: 20%;
 }
 
 .midInputLeft {
-    margin-left: 15%;
+    margin-left: 10%;
 }
 
 .midInputRight {
-    margin-right: 15%;
+    margin-right: 10%;
 }
 
 .formField {
     margin-top: 15%;
 }
-
-
-
-/* Removes the clear button from date inputs */
-/* input[type="date"]::-webkit-clear-button {
-    display: none;
-} */
-
-/* Removes the spin button */
-/* input[type="date"]::-webkit-inner-spin-button { 
-    display: none;
-} */
-
-/* Always display the drop down caret */
-/* input[type="date"]::-webkit-calendar-picker-indicator {
-    color: #2c3e50;
-} */
-
-/* A few custom styles for date inputs */
-/* input {
-    text-align: center;
-    width: 70%;
-    appearance: none;
-    -webkit-appearance: none;
-    color: #95a5a6;
-    font-family: "Helvetica", arial, sans-serif;
-    font-size: 18px;
-    border:1px solid #ecf0f1;
-    background:#ecf0f1;
-    padding:5px;
-    display: inline-block !important;
-    visibility: visible !important;
-}
-
-input[type="date"], focus {
-    color: #95a5a6;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-} */
