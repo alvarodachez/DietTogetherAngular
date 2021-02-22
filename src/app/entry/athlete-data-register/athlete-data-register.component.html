@@ -1,71 +1,83 @@
-<div id="divGeneral" class="container">
+<div id="divEntryGeneral" class="container">
 
-    <div id="divTitle">
+    <div id="divEntryTitle">
         <h3>Introduce los siguientes datos <br> para empezar</h3>
     </div>
 
-    <div id="divForm">
+    <div id="divEntryForm">
         <form (ngSubmit)="onSubmit(athleteForm.value)" #athleteForm="ngForm">
-            <div class="formField">
-                <label for="name">Nombre</label><br>
-                <input #name="ngModel" [(ngModel)]="athleteForm.name" required type="text" name="name" id="inpName">
-                <div [hidden]="name.valid || name.pristine" class="">
-                    El nombre es obligatorio
-                </div>
+            <div class="entryFormField">
+              <label class="form-control-label" for="name">Nombre</label><br>
+              <input class="form-control" [ngClass]="{'is-invalid': name.invalid && name.dirty}" #name="ngModel"
+                [(ngModel)]="athleteForm.name" required type="text" name="name" id="inpName"
+                placeholder="Introduce nombre">
+              <div [hidden]="name.valid || name.pristine" class="invalid-feedback">
+                El nombre es obligatorio
+              </div>
             </div>
 
-            <div class="formField">
-                <label for="surname">Apellidos</label><br>
-                <input #surname="ngModel" [(ngModel)]="athleteForm.surname" required type="text" name="surname"
-                    id="inpSurname">
-                <div [hidden]="surname.valid || surname.pristine" class="">
+            <div class="entryFormField">
+                <label class="form-control-label" for="surname">Apellidos</label><br>
+                <input class="form-control" [ngClass]="{'is-invalid': surname.invalid && surname.dirty}" #surname="ngModel"
+                [(ngModel)]="athleteForm.surname" required type="text" name="surname"
+                    id="inpSurname" placeholder="Introduce apellidos">
+                <div [hidden]="surname.valid || surname.pristine" class="invalid-feedback">
                     Los apellidos son obligatorios
                 </div>
             </div>
 
-            <div class="formField">
-                <label for="birthDay">Fecha de nacimiento</label><br>
-                <input #birthDay="ngModel" [(ngModel)]="athleteForm.birthDay" required type="date" name="birthDay"
-                    id="inpBirthday">
-                <div [hidden]="birthDay.valid || birthDay.pristine" class="">
-                    La fecha de nacimiento es obligatoria
-                </div>
+            <div class="entryFormField">
+              <label class="form-control-label" for="birthDay">Fecha de nacimiento</label><br>
+              <input class="form-control" [ngClass]="{'is-invalid': birthDay.invalid && birthDay.dirty}"
+                #birthDay="ngModel" [(ngModel)]="athleteForm.birthDay" required type="date" name="birthDay"
+                id="inpBirthday">
+              <div [hidden]="birthDay.valid || birthDay.pristine" class="invalid-feedback">
+                La fecha de nacimiento es obligatoria
+              </div>
             </div>
 
-            <div class="formField">
-              <label for="weightKilograms">Peso (Kg y gramos)</label><br>
+            <div class="entryFormField">
+              <label class="form-control-label" for="weightKilograms">Peso (Kg y gramos)</label><br>
 
               <div class="doubleInput">
-                <input #weightKilograms="ngModel" [(ngModel)]="athleteForm.weightKilograms" required type="tel"
-                  name="weightKilograms" id="inpWeightKilograms" class="midInputLeft">
+                <input class="form-control midInputLeft"
+                  [ngClass]="{'is-invalid': weightKilograms.invalid && weightKilograms.dirty}"
+                  #weightKilograms="ngModel" [(ngModel)]="athleteForm.weightKilograms" required type="tel"
+                  name="weightKilograms" id="inpWeightKilograms" placeholder="Kilos">
                 <p>y</p>
-                <input #weightGrams="ngModel" [(ngModel)]="athleteForm.weightGrams" required type="tel"
-                  name="weightGrams" id="inpWeightGrams" class="midInputRight">
+                <input class="form-control midInputRight"
+                  [ngClass]="{'is-invalid': weightGrams.invalid && weightGrams.dirty}" #weightGrams="ngModel"
+                  [(ngModel)]="athleteForm.weightGrams" required type="tel" name="weightGrams" id="inpWeightGrams"
+                  placeholder="Gramos">
               </div>
 
-              <div [hidden]="weightKilograms.valid || weightKilograms.pristine" class="">
-                El peso (Kg) es obligatorio
+              <div [hidden]="weightKilograms.valid || weightKilograms.pristine" class="colorFallo">
+                Debes especificar los kilos (kg)
               </div>
-              <div [hidden]="weightGrams.valid || weightGrams.pristine" class="">
-                El peso (gramos) es obligatorio
+              <div [hidden]="weightGrams.valid || weightGrams.pristine" class="colorFallo">
+                Debes especificar los gramos (g)
               </div>
             </div>
 
-            <div class="formField">
-                <label>Altura (metros y centímetros)</label><br>
+            <div class="entryFormField">
+                <label class="form-control-label">Altura (metros y centímetros)</label><br>
 
                 <div class="doubleInput">
-                    <input #heightMeters="ngModel" [(ngModel)]="athleteForm.heightMeters" required type="tel"
-                        name="heightMeters" id="inpHeightMeters" class="midInputLeft">
-                    <p>y</p>
-                    <input #heightCentimeters="ngModel" [(ngModel)]="athleteForm.heightCentimeters" required type="tel"
-                        name="heightCentimeters" id="inpHeightCentimeters" class="midInputRight">
+                  <input class="form-control midInputLeft"
+                    [ngClass]="{'is-invalid': (heightMeters.invalid && heightMeters.dirty)}" #heightMeters="ngModel"
+                    [(ngModel)]="athleteForm.heightMeters" required type="tel" name="heightMeters" id="inpHeightMeters"
+                    placeholder="Metros">
+                  <p>y</p>
+                  <input class="form-control midInputRight"
+                    [ngClass]="{'is-invalid': (heightCentimeters.invalid && heightCentimeters.dirty)}"
+                    #heightCentimeters="ngModel" [(ngModel)]="athleteForm.heightCentimeters" required type="tel"
+                    name="heightCentimeters" id="inpHeightCentimeters" placeholder="Cent.">
                 </div>
-                <div [hidden]="heightMeters.valid || heightMeters.pristine" class="">
-                    La altura (metros) es obligatoria
+                <div [hidden]="heightMeters.valid || heightMeters.pristine" class="colorFallo">
+                  Debes especificar la altura (m)
                 </div>
-                <div [hidden]="heightCentimeters.valid || heightCentimeters.pristine" class="">
-                    La altura (centímetros) es obligatoria
+                <div [hidden]="heightCentimeters.valid || heightCentimeters.pristine" class="colorFallo">
+                  Debes especificar la altura (cm)
                 </div>
             </div>
 

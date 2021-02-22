@@ -1,0 +1,32 @@
+#divEntryGeneral {
+    font-style: italic;
+    padding: 0; // eliminar espacios container
+}
+
+#divEntryTitle {
+    text-align: center;
+}
+
+#divEntryForm {
+    text-align: center;
+
+    button {
+        margin-top: 15%;
+        font-size: 20px;
+        margin-bottom: 3%;
+    }
+}
+
+.entryFormField {
+    margin-top: 15%;
+
+    input {
+        padding-right: 0;
+        padding-left: 0;
+        width: 80%;
+    }
+}
+
+.colorFallo {
+    color: rgb(228, 118, 118);
+}
