@@ -1,33 +1,37 @@
-<div id="divGeneral">
+<div id="divEntryGeneral" class="container">
 
-    <div id="divTitle">
-        <h1>Inicia sesión</h1>
-    </div>
-    
-    <div id="divForm">        
-        <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
-            <div class="formField">
-                <label for="user">Usuario</label><br>
-                <input #user="ngModel" [(ngModel)]="loginUser.user" required type="text" name="username" id="inpUser">
-                <div [hidden]="user.valid || user.pristine" class="">
-                    El usuario es obligatorio
-                </div>
-            </div>
+  <div id="divEntryTitle">
+    <h1>Inicia sesión</h1>
+  </div>
 
-            <div class="formField">
-                <label for="pass">Contraseña</label><br>
-                <input #pass="ngModel" [(ngModel)]="loginUser.pass" required type="password" name="password" id="inpPass">
-                <div [hidden]="pass.valid || pass.pristine" class="">
-                    La contraseña es obligatoria
-                </div>
-            </div>
+  <div id="divEntryForm">
+    <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
+      <div class="entryFormField form-group">
+        <label class="form-control-label" for="user">Usuario</label><br>
+        <input class="input-entry form-control" [ngClass]="{'is-invalid': user.invalid && user.dirty}" #user="ngModel"
+          [(ngModel)]="loginUser.user" required type="text" name="username" id="inpUser"
+          placeholder="Introduce usuario">
+        <div [hidden]="user.valid || user.pristine" class="invalid-feedback">
+          El usuario es obligatorio
+        </div>
+      </div>
 
-            <button name="btnGo" [disabled]="!loginForm.valid">Enviar</button>
-        </form>
+      <div class="entryFormField form-group has-danger">
+        <label class="form-control-label" for="pass">Contraseña</label><br>
+        <input class="input-entry form-control" [ngClass]="{'is-invalid': pass.invalid && pass.dirty}" #pass="ngModel"
+          [(ngModel)]="loginUser.pass" required type="password" name="password" id="inpPass"
+          placeholder="Introduce contraseña">
+        <div [hidden]="pass.valid || pass.pristine" class="invalid-feedback">
+          La contraseña es obligatoria
+        </div>
+      </div>
 
-        <a href="" [routerLink]="['/signup']">
-            <p>Si todavía no <br> estás registrado...</p>
-        </a>
-    </div>
+      <button name="btnGo" class="btn btn-primary btn-lg btn-mid" [disabled]="!loginForm.valid">Enviar</button>
+    </form>
+
+    <button type="button" class="btn btn-link" [routerLink]="['/signup']">
+      Si todavía no estás registrado...
+    </button>
+  </div>
 
 </div>

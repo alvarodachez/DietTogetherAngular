@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserSignUpDto } from '../models/signup-user-dto';
 import { SignUpClass } from '../models/singup.class';
 import { SignUpService } from '../services/sign-up.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-up',
@@ -26,6 +27,14 @@ export class SignUpComponent implements OnInit {
 
   onSubmit(formData: any) {
 
+    Swal.fire({
+      title: 'Espere',
+      text: 'Se estan guardando sus datos',
+      icon: 'info',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
+
     console.log(formData);
     this.userSignUpDto.username = formData.username;
     this.userSignUpDto.password = formData.password;
@@ -35,6 +44,12 @@ export class SignUpComponent implements OnInit {
       console.log(response);
 
       localStorage.setItem('dietUsername',response.username);
+      Swal.fire({
+        title: 'Creado el usuario '+ this.userSignUpDto.username,
+        text:'Registro realizado correctamente.',
+        icon:'success',
+        input:undefined
+      });
 
       this.route.navigate(['athlete']);
     });
