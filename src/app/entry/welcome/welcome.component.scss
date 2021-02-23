@@ -1,11 +1,3 @@
-#divGeneral {
-    font-style: italic;
-}
-
-#divTitle {
-    text-align: center;
-}
-
 #imgWelcome {
     display: flex;
 
@@ -14,15 +6,15 @@
 }
 
 #divMain {
-    text-align: center;
-}
+  text-align: center;
 
-#divMain p {
+  p {
     margin-top: 15%;
     font-size: 30px;
-}
+  }
 
-#divMain button {
+  button {
     margin-top: 15%;
     font-size: 20px;
+  }
 }

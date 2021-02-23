@@ -1,12 +1,12 @@
-<div id="divGeneral" class="container">
+<div id="divEntryGeneral" class="container">
 
-  <div id="divTitle">
+  <div id="divEntryTitle">
     <h1>Inicia sesión</h1>
   </div>
 
-  <div id="divForm">
+  <div id="divEntryForm">
     <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
-      <div class="formField form-group">
+      <div class="entryFormField form-group">
         <label class="form-control-label" for="user">Usuario</label><br>
         <input class="form-control" [ngClass]="{'is-invalid': user.invalid && user.dirty}" #user="ngModel"
           [(ngModel)]="loginUser.user" required type="text" name="username" id="inpUser"
@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div class="formField form-group has-danger">
+      <div class="entryFormField form-group has-danger">
         <label class="form-control-label" for="pass">Contraseña</label><br>
         <input class="form-control" [ngClass]="{'is-invalid': pass.invalid && pass.dirty}" #pass="ngModel"
           [(ngModel)]="loginUser.pass" required type="password" name="password" id="inpPass"

@@ -1,31 +1,3 @@
-#divGeneral {
-    font-style: italic;
-    padding: 0; // eliminar espacios container
-}
-
-#divTitle {
-    text-align: center;
-}
-
-#divForm {
-    text-align: center;
-}
-
-#divForm button {
-    margin-top: 15%;
-    font-size: 20px;
-    margin-bottom: 10%;
-}
-
-.doubleInput {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.doubleInput input {
-    width: 20%;
-}
-
 .midInputLeft {
     margin-left: 10%;
 }
@@ -34,6 +6,11 @@
     margin-right: 10%;
 }
 
-.formField {
-    margin-top: 15%;
+.doubleInput {
+    display: flex;
+    justify-content: space-evenly;
+
+    input {
+        width: 33%;
+    }
 }
