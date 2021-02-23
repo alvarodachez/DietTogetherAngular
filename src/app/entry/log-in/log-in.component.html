@@ -8,7 +8,7 @@
     <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
       <div class="entryFormField form-group">
         <label class="form-control-label" for="user">Usuario</label><br>
-        <input class="form-control" [ngClass]="{'is-invalid': user.invalid && user.dirty}" #user="ngModel"
+        <input class="input-entry form-control" [ngClass]="{'is-invalid': user.invalid && user.dirty}" #user="ngModel"
           [(ngModel)]="loginUser.user" required type="text" name="username" id="inpUser"
           placeholder="Introduce usuario">
         <div [hidden]="user.valid || user.pristine" class="invalid-feedback">
@@ -18,7 +18,7 @@
 
       <div class="entryFormField form-group has-danger">
         <label class="form-control-label" for="pass">Contraseña</label><br>
-        <input class="form-control" [ngClass]="{'is-invalid': pass.invalid && pass.dirty}" #pass="ngModel"
+        <input class="input-entry form-control" [ngClass]="{'is-invalid': pass.invalid && pass.dirty}" #pass="ngModel"
           [(ngModel)]="loginUser.pass" required type="password" name="password" id="inpPass"
           placeholder="Introduce contraseña">
         <div [hidden]="pass.valid || pass.pristine" class="invalid-feedback">

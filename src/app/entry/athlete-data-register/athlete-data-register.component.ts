@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AthleteDtoClass } from '../models/athlete-dto';
 import { AthleteClass } from '../models/athlete.class';
 import { SignUpService } from '../services/sign-up.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-athlete-data-register',
@@ -24,6 +25,13 @@ export class AthleteDataRegisterComponent implements OnInit {
 
   onSubmit(formData: AthleteClass) {
     console.log(formData);
+    Swal.fire({
+      title: 'Espere',
+      text: 'Se estan guardando sus datos',
+      icon: 'info',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
 
     this.loginAthleteDto.name = formData.name;
     this.loginAthleteDto.surname = formData.surname;
@@ -35,6 +43,12 @@ export class AthleteDataRegisterComponent implements OnInit {
 
     this.signUpService.athleteDataSign(this.loginAthleteDto).subscribe(response => {
       console.log(response);
+      Swal.fire({
+        title: 'Registro de datos',
+        text:'Datos registrados correctamente.',
+        icon:'success',
+        input:undefined
+      });
       this.route.navigate(['login']);
     })
 

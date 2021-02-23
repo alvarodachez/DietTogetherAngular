@@ -8,7 +8,7 @@
         <form (ngSubmit)="onSubmit(athleteForm.value)" #athleteForm="ngForm">
             <div class="entryFormField">
               <label class="form-control-label" for="name">Nombre</label><br>
-              <input class="form-control" [ngClass]="{'is-invalid': name.invalid && name.dirty}" #name="ngModel"
+              <input class="input-entry form-control" [ngClass]="{'is-invalid': name.invalid && name.dirty}" #name="ngModel"
                 [(ngModel)]="athleteForm.name" required type="text" name="name" id="inpName"
                 placeholder="Introduce nombre">
               <div [hidden]="name.valid || name.pristine" class="invalid-feedback">
@@ -18,7 +18,7 @@
 
             <div class="entryFormField">
                 <label class="form-control-label" for="surname">Apellidos</label><br>
-                <input class="form-control" [ngClass]="{'is-invalid': surname.invalid && surname.dirty}" #surname="ngModel"
+                <input class="input-entry form-control" [ngClass]="{'is-invalid': surname.invalid && surname.dirty}" #surname="ngModel"
                 [(ngModel)]="athleteForm.surname" required type="text" name="surname"
                     id="inpSurname" placeholder="Introduce apellidos">
                 <div [hidden]="surname.valid || surname.pristine" class="invalid-feedback">
@@ -28,7 +28,7 @@
 
             <div class="entryFormField">
               <label class="form-control-label" for="birthDay">Fecha de nacimiento</label><br>
-              <input class="form-control" [ngClass]="{'is-invalid': birthDay.invalid && birthDay.dirty}"
+              <input class="input-entry form-control" [ngClass]="{'is-invalid': birthDay.invalid && birthDay.dirty}"
                 #birthDay="ngModel" [(ngModel)]="athleteForm.birthDay" required type="date" name="birthDay"
                 id="inpBirthday">
               <div [hidden]="birthDay.valid || birthDay.pristine" class="invalid-feedback">
@@ -40,12 +40,12 @@
               <label class="form-control-label" for="weightKilograms">Peso (Kg y gramos)</label><br>
 
               <div class="doubleInput">
-                <input class="form-control midInputLeft"
+                <input class="input-entry form-control midInputLeft"
                   [ngClass]="{'is-invalid': weightKilograms.invalid && weightKilograms.dirty}"
                   #weightKilograms="ngModel" [(ngModel)]="athleteForm.weightKilograms" required type="tel"
                   name="weightKilograms" id="inpWeightKilograms" placeholder="Kilos">
                 <p>y</p>
-                <input class="form-control midInputRight"
+                <input class="input-entry form-control midInputRight"
                   [ngClass]="{'is-invalid': weightGrams.invalid && weightGrams.dirty}" #weightGrams="ngModel"
                   [(ngModel)]="athleteForm.weightGrams" required type="tel" name="weightGrams" id="inpWeightGrams"
                   placeholder="Gramos">
@@ -63,12 +63,12 @@
                 <label class="form-control-label">Altura (metros y centímetros)</label><br>
 
                 <div class="doubleInput">
-                  <input class="form-control midInputLeft"
+                  <input class="input-entry form-control midInputLeft"
                     [ngClass]="{'is-invalid': (heightMeters.invalid && heightMeters.dirty)}" #heightMeters="ngModel"
                     [(ngModel)]="athleteForm.heightMeters" required type="tel" name="heightMeters" id="inpHeightMeters"
                     placeholder="Metros">
                   <p>y</p>
-                  <input class="form-control midInputRight"
+                  <input class="input-entry form-control midInputRight"
                     [ngClass]="{'is-invalid': (heightCentimeters.invalid && heightCentimeters.dirty)}"
                     #heightCentimeters="ngModel" [(ngModel)]="athleteForm.heightCentimeters" required type="tel"
                     name="heightCentimeters" id="inpHeightCentimeters" placeholder="Cent.">
