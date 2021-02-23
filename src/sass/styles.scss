@@ -7,17 +7,17 @@
 @import "functions";
 @import "variables";
 @import "mixins";
-@import "utilities";
-
-// módulos
-@import "containers";
+@import "reboot";
 @import "grid";
+@import "forms";
+@import "buttons";
+@import "transitions";
+@import "dropdown";
+@import "button-group";
 @import "nav";
 @import "navbar";
-@import "buttons";
-@import "button-group";
-@import "forms";
-@import "dropdown";
+@import "utilities";
+
 
 // components
 @import "components/entry/entry.scss";
@@ -25,63 +25,13 @@
 @import "../../node_modules/animate.css/animate.min";
 
 
-html {
-    font-family: monospace;
-    // background-color: lightseagreen;
-    // background-color: $primary;
-}
 
-body {
-    margin: 0;
-}
 
-/* A few custom styles for date inputs */
-.input-entry {
-    text-align: center;
-    width: 70%;
-    appearance: none;
-    -webkit-appearance: none;
-    color: #95a5a6;
-    font-family: "Helvetica", arial, sans-serif;
-    font-size: 18px;
-    border:1px solid #ecf0f1;
-    //background:#ecf0f1;
-    // padding:5px;
-    display: inline-block !important;
-    visibility: visible !important;
-    border-radius:5px;
-}
+// Estilos comunes
 
 input[type="date"], focus {
     color: #95a5a6;
     box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
+    // -webkit-box-shadow: none;
+    // -moz-box-shadow: none;
 }
-
-
-// button {
-//     /* remove default behavior */
-//     // appearance:none;
-//     // -webkit-appearance:none;
-  
-//     /* usual styles */
-//     padding:10px;
-//     border:none;
-//     // background-color:#3F51B5;
-//     background-color:$primary;
-//     color:#fff;
-//     font-weight:600;
-//     border-radius:5px;
-//     width:80%;
-// }
-
-// button:disabled {
-//     // background-color:#909de7;
-//     background-color:$primary_dis;
-// }
-
-// button:active {
-//     background-color:#fff;
-//     color:#3F51B5;
-// }
