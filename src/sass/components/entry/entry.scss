@@ -4,7 +4,9 @@
 }
 
 #divEntryTitle {
+    margin-top: 2vh;
     text-align: center;
+    margin-bottom: -5vh;
 }
 
 #divEntryForm {
@@ -14,6 +16,10 @@
         margin-top: 15%;
         font-size: 20px;
         margin-bottom: 3%;
+    }
+
+    .btn-link {
+        margin-top: 4.5vh;
     }
 }
 
@@ -29,4 +35,19 @@
 
 .colorFallo {
     color: rgb(228, 118, 118);
+}
+
+
+.input-entry {
+    text-align: center;
+    width: 70%;
+    appearance: none;
+    // -webkit-appearance: none;
+    color: #95a5a6;
+    font-family: "Helvetica", arial, sans-serif;
+    font-size: 18px;
+    border:1px solid;
+    display: inline-block !important;
+    visibility: visible !important;
+    border-radius:5px;
 }
