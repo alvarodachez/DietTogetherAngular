@@ -37,6 +37,10 @@ export class LogInComponent implements OnInit {
 
     this.logInService.login(this.userSignUpDto).subscribe(response => {
       console.log(response);
+
+      localStorage.setItem("dietUsername",response.username)
+      //console.log(response.headers.get('Authorization'));
+      
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -53,6 +57,8 @@ export class LogInComponent implements OnInit {
         icon: 'success',
         title: 'Bienvenid@ '+this.userSignUpDto.username
       })
+    },err => {
+      console.log(err)
     })
   }
 
