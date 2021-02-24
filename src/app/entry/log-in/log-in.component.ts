@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { LoginClass } from '../models/login.class';
 import { UserSignUpDto } from '../models/signup-user-dto';
 import { LogInService } from '../services/log-in.service';
@@ -15,7 +17,7 @@ export class LogInComponent implements OnInit {
 
   userSignUpDto: UserSignUpDto;
 
-  constructor(private logInService: LogInService) {
+  constructor(private logInService: LogInService, private route: Router) {
     this.loginUser = new LoginClass("", "");
     this.userSignUpDto = new UserSignUpDto("", "");
   }
@@ -38,7 +40,7 @@ export class LogInComponent implements OnInit {
     this.logInService.login(this.userSignUpDto).subscribe(response => {
       console.log(response);
 
-      localStorage.setItem("dietUsername",response.username)
+      localStorage.setItem("dietUsernameSession",response.username);
       //console.log(response.headers.get('Authorization'));
       
       const Toast = Swal.mixin({
@@ -53,6 +55,9 @@ export class LogInComponent implements OnInit {
         }
       })
       
+      // Redirigir a home, una vez logeado
+      this.route.navigate(["home"]);
+
       Toast.fire({
         icon: 'success',
         title: 'Bienvenid@ '+this.userSignUpDto.username
