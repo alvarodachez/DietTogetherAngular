@@ -20,7 +20,11 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import("./home/home.module").then(m => m.HomeModule)
-  }
+  },
+  {
+    path: 'social',
+    loadChildren: () => import("./social/social.module").then(m => m.SocialModule)
+  },
 
 ];
 
