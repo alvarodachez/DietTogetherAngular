@@ -5,7 +5,7 @@
     <i class="fas fa-bars text-white"></i>
   </button>
 
-  <a [routerLink]="['/welcome']" class="navbar-brand">Diet2gether</a>
+  <a [routerLink]="['/welcome']" class="navbar-brand" (click)="checkSessionStatus()">Diet2gether</a>
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
@@ -30,15 +30,33 @@
           <a class="dropdown-item" href="#">Separated link</a> -->
         </div>
       </li>
+
+      <!-- <i class="fas fa-power-off"></i> -->
     </ul>
 
-    
+
     <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </form> -->
   </div>
 
-  <i class="fas fa-user-circle text-white fa-2x"></i>
+  <div class="dropdown dropleft">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+      aria-expanded="false">
+      <i class="fas fa-user-circle text-white fa-2x"></i>
+    </a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Mi perfil</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a>
+      <!-- <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a> -->
+    </div>
+  </div>
+
+  
+
+  <!-- <i class="fas fa-power-off text-white fa-2x"></i> -->
 
 </nav>
