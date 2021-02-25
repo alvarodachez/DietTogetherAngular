@@ -12,7 +12,7 @@ export class FriendsService {
   endPointDev = "";
   endPointProd = "";
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     if (!environment.production) {
       this.endPointDev = urlServer.url;
     } else {
@@ -20,6 +20,19 @@ export class FriendsService {
     }
   }
 
+  getUsernamesByInitials(initials: string): Observable<any> {
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointDev + `/athlete/get-athletes-by-initials/${initials}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    return this.http.get(endpoint, httpOptions);
+  }
 
   getFriends(): Observable<any> {
     /* Obtener usuario de la sesión actual */
