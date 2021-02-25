@@ -14,6 +14,7 @@ export class FriendsComponent implements OnInit {
 
   borrar = localStorage.getItem("dietUsernameSession");
 
+  searchFriends: any = [];
   userFriends: any = [];
   friendRequests: any = [];
 
@@ -28,6 +29,29 @@ export class FriendsComponent implements OnInit {
     this.getFriendRequests();
   }
 
+  getUsernameByInitials() {
+    if (this.addFriendForm.value.username != undefined && this.addFriendForm.value.username != "") {
+
+      this.friendService.getUsernamesByInitials(this.addFriendForm.value.username).subscribe(res => {
+        console.log(res);
+
+        this.searchFriends = res;
+
+
+      })
+    }else{
+      this.searchFriends = [];
+    }
+
+  }
+
+  setFriendToSendRequest(friend) {
+
+    console.log(friend);
+    this.searchFriends = [];
+    
+    this.addFriendForm.setValue({username:friend})
+  }
 
   getFriends() {
     this.friendService.getFriends().subscribe(res => {
@@ -68,15 +92,15 @@ export class FriendsComponent implements OnInit {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-      
+
       this.getFriendRequests();
 
       Toast.fire({
         icon: 'success',
         title: 'Se ha enviado la solicitud a ' + username
       })
-      
-      this.addFriendForm.value.username = "";
+
+      this.addFriendForm.setValue({username:""})
     });
   }
 
@@ -124,7 +148,7 @@ export class FriendsComponent implements OnInit {
 
       this.getFriends();
       this.getFriendRequests();
-      
+
       Toast.fire({
         icon: 'success',
         title: 'Solicitud de amistad rechazada'
