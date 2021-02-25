@@ -40,7 +40,7 @@ export class LogInComponent implements OnInit {
     this.logInService.login(this.userSignUpDto).subscribe(response => {
       console.log(response);
 
-      localStorage.setItem("dietUsernameSession",response.username);
+      
       //console.log(response.headers.get('Authorization'));
       
       const Toast = Swal.mixin({
@@ -56,6 +56,8 @@ export class LogInComponent implements OnInit {
       })
       
       // Redirigir a home, una vez logeado
+      localStorage.setItem("dietUsernameSession",this.userSignUpDto.username);
+      localStorage.setItem("dietJwtSession",response);
       this.route.navigate(["home"]);
 
       Toast.fire({

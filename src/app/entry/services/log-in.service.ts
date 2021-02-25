@@ -24,15 +24,16 @@ export class LogInService {
 
 
   login(user: UserSignUpDto): Observable<any> {
-    const endpoint = this.endPointDev + '/user/logExample';
+    const endpoint = this.endPointDev + '/user/login';
 
     console.log(endpoint);
     console.log(user);
-    return this.http.post(endpoint, user);
+    return this.http.post(endpoint, user,{responseType:'text'});
   }
 
   logout(): void {
     localStorage.removeItem("dietUsernameSession");
+    localStorage.removeItem("dietJwtSession");
   }
 }
 
