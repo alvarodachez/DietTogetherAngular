@@ -1,10 +1,35 @@
-<p>friends works!</p>
+<div class="fondo">
+  <div class="titulo align-self-center text-center text-white">
+    <p>Social</p>
+    <!-- <p class="word">Lista de amigos</p> -->
+  </div>
+</div>
 
 <!-- 
     Banner - Social
     Subtitulo - Lista de amigos
     Lista - Listado de botones de amigos (listgroup)
+ -->
 
+<div class="container text-center mt-2">
+  <h1>Lista de amigos</h1>
+  <h4 *ngIf="userFriends">Tienes {{userFriends.length}} amigo/s</h4>
+
+  <div *ngFor="let friend of userFriends" class="list-group mt-2">
+    <button type="button" class="list-group-item list-group-item-action active">
+      {{friend}} <i class="fas fa-user-friends pl-5"></i>
+    </button>
+
+    <!-- [ngClass]="{'is-active': user.invalid && user.dirty} -->
+  </div>
+</div>
+
+
+<div class="container my-5">
+  <hr>
+</div>
+
+<!-- 
     Buzón - titulo
     Subtitulo - Solicitudes de amistad
         Al lado, icono modal para enviar solicitud de amistad
@@ -12,12 +37,47 @@
     Lista - Listado de botones de solicitudes (listgroup)
  -->
 
-<div class="list-group">
-  <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-    The current button
-  </button>
-  <button type="button" class="list-group-item list-group-item-action">A second item</button>
-  <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-  <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-  <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+<div class="container text-center">
+  <h1>Amigos</h1>
+  <h4>Solicitudes de amistad</h4>
+
+  <div class="list-group mt-2">
+    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+      The current button
+    </button>
+    <button type="button" class="list-group-item list-group-item-action">A second item</button>
+    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+  </div>
+
+</div>
+
+
+<div class="container my-5">
+  <hr>
+</div>
+
+<!-- 
+    Buzón - grupos
+    Subtitulo - Solicitudes de grupos
+        Al lado, icono modal para enviar solicitud de amistad
+            Modal. búsqueda de usuarios reactiva/tiempo real y enviar
+    Lista - Listado de botones de solicitudes (listgroup)
+ -->
+
+<div class="container text-center">
+  <h1>Grupos</h1>
+  <h4>Solicitudes de grupos</h4>
+
+  <div class="list-group mt-2">
+    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+      The current button
+    </button>
+    <button type="button" class="list-group-item list-group-item-action">A second item</button>
+    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+  </div>
+
 </div>
