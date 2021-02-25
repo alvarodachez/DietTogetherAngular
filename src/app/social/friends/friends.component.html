@@ -2,6 +2,7 @@
   <div class="titulo align-self-center text-center text-white">
     <p>Social</p>
     <!-- <p class="word">Lista de amigos</p> -->
+    <p class="word">Usuario actual: {{borrar}}</p>
   </div>
 </div>
 
@@ -38,17 +39,52 @@
  -->
 
 <div class="container text-center">
-  <h1>Amigos</h1>
-  <h4>Solicitudes de amistad</h4>
+  <h1>
+    Amigos
+    <i class="fas fa-user-plus" data-toggle="modal" data-target="#staticBackdrop"></i>
+  </h1>
+  <h4 *ngIf="friendRequests">Tienes {{friendRequests.length}} solicitud/es pendiente/s</h4>
 
-  <div class="list-group mt-2">
-    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-      The current button
+  <div id="staticBackdrop" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header padre">
+          <h5 class="modal-title hijo">Busca a tu amigo aquí</h5>
+        </div>
+        <div class="modal-body">
+          
+          <form [formGroup]="addFriendForm" action="">
+            <div class="form-group">
+              <label class="col-form-label" for="username">Introduce el nombre de usuario:</label>
+              <input type="text" formControlName="username" name="username" 
+                class="form-control text-center"
+                placeholder="usuario"
+                [class.is-invalid]="addFriendForm.get('username').touched && addFriendForm.get('username').invalid">
+              <div class="alert alert-danger"
+                [hidden]="addFriendForm.get('username').pristine || addFriendForm.get('username').valid">
+                El campo 'username' no es válido
+              </div>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" [disabled]="!addFriendForm.valid" (click)="sendFriendRequest()">Agregar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let friend of friendRequests" class="list-group mt-2">
+    <button type="button" class="list-group-item list-group-item-action active">
+      Solicitud enviada por {{friend.claimantAthlete}}
+      <i class="fas fa-check pl-5" (click)="acceptFriendRequest(friend.id)"></i> 
+      <i class="fas fa-times pl-5" (click)="rejectFriendRequest(friend.id)"></i>
     </button>
-    <button type="button" class="list-group-item list-group-item-action">A second item</button>
-    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+
+    <!-- [ngClass]="{'is-active': user.invalid && user.dirty} -->
   </div>
 
 </div>
