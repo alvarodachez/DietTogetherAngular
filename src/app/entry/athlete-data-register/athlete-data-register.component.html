@@ -1,88 +1,95 @@
 <div id="divEntryGeneral" class="container animate__animated animate__fadeInDownBig">
 
-    <div id="divEntryTitle">
-        <h3>Introduce los siguientes datos <br> para empezar</h3>
-    </div>
+  <div id="divEntryTitle">
+    <h3>Introduce los siguientes datos <br> para empezar</h3>
+  </div>
 
-    <div id="divEntryForm">
-        <form (ngSubmit)="onSubmit(athleteForm.value)" #athleteForm="ngForm">
-            <div class="entryFormField">
-              <label class="form-control-label" for="name">Nombre</label><br>
-              <input class="input-entry form-control" [ngClass]="{'is-invalid': name.invalid && name.dirty}" #name="ngModel"
-                [(ngModel)]="athleteForm.name" required type="text" name="name" id="inpName"
-                placeholder="Introduce nombre">
-              <div [hidden]="name.valid || name.pristine" class="invalid-feedback">
-                El nombre es obligatorio
-              </div>
-            </div>
+  <div id="divEntryForm">
 
-            <div class="entryFormField">
-                <label class="form-control-label" for="surname">Apellidos</label><br>
-                <input class="input-entry form-control" [ngClass]="{'is-invalid': surname.invalid && surname.dirty}" #surname="ngModel"
-                [(ngModel)]="athleteForm.surname" required type="text" name="surname"
-                    id="inpSurname" placeholder="Introduce apellidos">
-                <div [hidden]="surname.valid || surname.pristine" class="invalid-feedback">
-                    Los apellidos son obligatorios
-                </div>
-            </div>
+    <form [formGroup]="athleteForm" action="">
 
-            <div class="entryFormField">
-              <label class="form-control-label" for="birthDay">Fecha de nacimiento</label><br>
-              <input class="input-entry form-control" [ngClass]="{'is-invalid': birthDay.invalid && birthDay.dirty}"
-                #birthDay="ngModel" [(ngModel)]="athleteForm.birthDay" required type="date" name="birthDay"
-                id="inpBirthday">
-              <div [hidden]="birthDay.valid || birthDay.pristine" class="invalid-feedback">
-                La fecha de nacimiento es obligatoria
-              </div>
-            </div>
+      <div class="form-group entryFormField">
+        <label class="form-control-label" for="name">Nombre</label><br>
+        <input type="text" formControlName="name" name="name" class="input-entry form-control"
+          placeholder="Introduce nombre" required id="inpName"
+          [class.is-invalid]="athleteForm.get('name').touched && athleteForm.get('name').invalid">
+        <div class="alert colorFallo" [hidden]="athleteForm.get('name').pristine || athleteForm.get('name').valid">
+          El nombre es obligatorio
+        </div>
+      </div>
 
-            <div class="entryFormField">
-              <label class="form-control-label" for="weightKilograms">Peso (Kg y gramos)</label><br>
+      <div class="form-group entryFormField">
+        <label class="form-control-label" for="surname">Apellidos</label><br>
+        <input type="text" formControlName="surname" name="surname" class="input-entry form-control"
+          placeholder="Introduce apellidos" required id="inpSurname"
+          [class.is-invalid]="athleteForm.get('surname').touched && athleteForm.get('surname').invalid">
+        <div class="alert colorFallo"
+          [hidden]="athleteForm.get('surname').pristine || athleteForm.get('surname').valid">
+          Los apellidos son obligatorios
+        </div>
+      </div>
 
-              <div class="doubleInput">
-                <input class="input-entry form-control midInputLeft"
-                  [ngClass]="{'is-invalid': weightKilograms.invalid && weightKilograms.dirty}"
-                  #weightKilograms="ngModel" [(ngModel)]="athleteForm.weightKilograms" required type="tel"
-                  name="weightKilograms" id="inpWeightKilograms" placeholder="Kilos">
-                <p>y</p>
-                <input class="input-entry form-control midInputRight"
-                  [ngClass]="{'is-invalid': weightGrams.invalid && weightGrams.dirty}" #weightGrams="ngModel"
-                  [(ngModel)]="athleteForm.weightGrams" required type="tel" name="weightGrams" id="inpWeightGrams"
-                  placeholder="Gramos">
-              </div>
+      <div class="form-group entryFormField">
+        <label class="form-control-label" for="birthDay">Fecha de nacimiento</label><br>
+        <input type="date" formControlName="birthDay" name="birthDay" class="input-entry form-control"
+          placeholder="Introduce apellidos" required id="inpBirthday"
+          [class.is-invalid]="athleteForm.get('birthDay').touched && athleteForm.get('birthDay').invalid">
+        <div class="alert colorFallo"
+          [hidden]="athleteForm.get('birthDay').pristine || athleteForm.get('birthDay').valid">
+          El valor de la fecha de no es válido
+        </div>
+      </div>
 
-              <div [hidden]="weightKilograms.valid || weightKilograms.pristine" class="colorFallo">
-                Debes especificar los kilos (kg)
-              </div>
-              <div [hidden]="weightGrams.valid || weightGrams.pristine" class="colorFallo">
-                Debes especificar los gramos (g)
-              </div>
-            </div>
+      <div class="form-group entryFormField">
+        <label class="form-control-label">Peso (Kg y gramos)</label><br>
 
-            <div class="entryFormField">
-                <label class="form-control-label">Altura (metros y centímetros)</label><br>
+        <div class="doubleInput">
+          <input class="input-entry form-control midInputLeft" required type="tel" formControlName="weightKilograms"
+            name="weightKilograms" id="inpWeightKilograms" placeholder="Kilos"
+            [class.is-invalid]="athleteForm.get('weightKilograms').touched && athleteForm.get('weightKilograms').invalid">
+          <p>y</p>
+          <input class="input-entry form-control midInputRight" required type="tel" formControlName="weightGrams"
+            name="weightGrams" id="inpWeightGrams" placeholder="Gramos"
+            [class.is-invalid]="athleteForm.get('weightGrams').touched && athleteForm.get('weightGrams').invalid">
+        </div>
+      </div>
+      <div [hidden]="athleteForm.get('weightKilograms').valid || athleteForm.get('weightKilograms').pristine"
+        class="colorFallo">
+        El valor de los kilos (kg) no es válido
+      </div>
+      <div [hidden]="athleteForm.get('weightGrams').valid || athleteForm.get('weightGrams').pristine"
+        class="colorFallo">
+        El valor de los gramos (g) no es válido
+      </div>
 
-                <div class="doubleInput">
-                  <input class="input-entry form-control midInputLeft"
-                    [ngClass]="{'is-invalid': (heightMeters.invalid && heightMeters.dirty)}" #heightMeters="ngModel"
-                    [(ngModel)]="athleteForm.heightMeters" required type="tel" name="heightMeters" id="inpHeightMeters"
-                    placeholder="Metros">
-                  <p>y</p>
-                  <input class="input-entry form-control midInputRight"
-                    [ngClass]="{'is-invalid': (heightCentimeters.invalid && heightCentimeters.dirty)}"
-                    #heightCentimeters="ngModel" [(ngModel)]="athleteForm.heightCentimeters" required type="tel"
-                    name="heightCentimeters" id="inpHeightCentimeters" placeholder="Cent.">
-                </div>
-                <div [hidden]="heightMeters.valid || heightMeters.pristine" class="colorFallo">
-                  Debes especificar la altura (m)
-                </div>
-                <div [hidden]="heightCentimeters.valid || heightCentimeters.pristine" class="colorFallo">
-                  Debes especificar la altura (cm)
-                </div>
-            </div>
+      <div class="form-group entryFormField">
+        <label class="form-control-label">Altura (metros y centímetros)</label><br>
 
-            <button name="btnGo" class="btn btn-primary btn-lg btn-mid" [disabled]="!athleteForm.valid">Enviar</button>
-        </form>
-    </div>
+        <div class="doubleInput">
+          <input class="input-entry form-control midInputLeft" required type="tel" formControlName="heightMeters"
+            name="heightMeters" id="inpHeightMeters" placeholder="Metros"
+            [class.is-invalid]="athleteForm.get('heightMeters').touched && athleteForm.get('heightMeters').invalid">
+          <p>y</p>
+          <input class="input-entry form-control midInputRight" required type="tel" formControlName="heightCentimeters"
+            name="heightCentimeters" id="inpHeightCentimeters" placeholder="Cent."
+            [class.is-invalid]="athleteForm.get('heightCentimeters').touched && athleteForm.get('heightCentimeters').invalid">
+        </div>
+      </div>
+      <div [hidden]="athleteForm.get('heightMeters').valid || athleteForm.get('heightMeters').pristine"
+        class="colorFallo">
+        <!-- class="alert alert-danger colorFallo -->
+        El valor de los metros (m) no es válido
+      </div>
+      <div [hidden]="athleteForm.get('heightCentimeters').valid || athleteForm.get('heightCentimeters').pristine"
+        class="colorFallo">
+        El valor de los centímetros (cm) no es válido
+      </div>
+
+      <button name="btnGo" class="btn btn-primary btn-lg btn-mid" [disabled]="!athleteForm.valid"
+        (click)="sendAthleteData()">Enviar</button>
+
+    </form>
+
+  </div>
 
 </div>
