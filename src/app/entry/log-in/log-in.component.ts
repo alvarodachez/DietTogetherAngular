@@ -37,36 +37,7 @@ export class LogInComponent implements OnInit {
     this.userSignUpDto.username = formData.username;
     this.userSignUpDto.password = formData.password;
 
-    this.logInService.login(this.userSignUpDto).subscribe(response => {
-      console.log(response);
-
-      
-      //console.log(response.headers.get('Authorization'));
-      
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      // Redirigir a home, una vez logeado
-      localStorage.setItem("dietUsernameSession",this.userSignUpDto.username);
-      localStorage.setItem("dietJwtSession",response);
-      this.route.navigate(["home"]);
-
-      Toast.fire({
-        icon: 'success',
-        title: 'Bienvenid@ '+this.userSignUpDto.username
-      })
-    },err => {
-      console.log(err)
-    })
+    this.logInService.login(this.userSignUpDto);
   }
 
 }

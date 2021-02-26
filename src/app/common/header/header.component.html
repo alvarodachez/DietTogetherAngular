@@ -1,14 +1,14 @@
 <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
 
-  <button class="navbar-toggler border border-primary" type="button" data-toggle="collapse" data-target="#navbarBurger"
+  <button *ngIf="online == true" class="navbar-toggler border border-primary" type="button" data-toggle="collapse" data-target="#navbarBurger"
     aria-controls="navbarBurger" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fas fa-bars text-white"></i>
   </button>
 
-  <a [routerLink]="['/welcome']" class="navbar-brand mx-0" (click)="checkSessionStatus()">Diet2gether</a>
+  <a  class="navbar-brand mx-0" (click)="checkSessionStatus()">Diet2gether</a>
 
 
-  <button class="navbar-toggler border border-primary" type="button" data-toggle="collapse" data-target="#navbarProfile"
+  <button *ngIf="online == true" class="navbar-toggler border border-primary" type="button" data-toggle="collapse" data-target="#navbarProfile"
     aria-controls="navbarProfile" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fas fa-user-circle text-white"></i>
   </button>
@@ -44,12 +44,12 @@
     </ul>
   </div>
 
-  <div class="collapse navbar-collapse" id="navbarProfile">
-    <ul class="navbar-nav mr-auto">
+  <div  class="collapse navbar-collapse" id="navbarProfile">
+    <ul *ngIf="online == true" class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="#">Mi perfil</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="online == true" class="nav-item">
         <a class="nav-link" href="#" (click)="logout()">Cerrar sesión</a>
       </li>
     </ul>

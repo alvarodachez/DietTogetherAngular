@@ -10,12 +10,18 @@ import { LogInService } from 'src/app/entry/services/log-in.service';
 })
 export class HeaderComponent implements OnInit {
 
+  online: boolean = false;
+
   constructor(private route: Router, private login: LogInService) { }
 
   ngOnInit(): void {
+
+    if ((localStorage.getItem("dietUsernameSession") && (localStorage.getItem("dietUsernameSession") != "" && localStorage.getItem("dietUsernameSession") != undefined))) {
+      this.online = true;
+    }
   }
 
-  checkSessionStatus() {    
+  checkSessionStatus() {
     const username = localStorage.getItem("dietUsernameSession");
 
     if (username && (username != "" && username != undefined)) {
@@ -32,7 +38,7 @@ export class HeaderComponent implements OnInit {
     this.login.logout();
 
     // redirigir a welcome
-    this.route.navigate(["welcome"])
+    
   }
 
 }
