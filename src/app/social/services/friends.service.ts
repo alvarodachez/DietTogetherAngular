@@ -21,6 +21,7 @@ export class FriendsService {
   }
 
   getUsernamesByInitials(initials: string): Observable<any> {
+    /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
@@ -31,6 +32,7 @@ export class FriendsService {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
     };
 
+    /* obtiene los usuarios, buscando por las iniciales introducidas */
     return this.http.get(endpoint, httpOptions);
   }
 
@@ -126,11 +128,5 @@ export class FriendsService {
     /* rechazar solicitud de amistad */
     return this.http.post(endpoint, "", httpOptions);
   }
-
-
-
-
-
-  /* Búsqueda reactiva para input, llamar al método cada vez que se pulsa una tecla */
 
 }
