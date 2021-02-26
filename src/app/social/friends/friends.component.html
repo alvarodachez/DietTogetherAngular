@@ -6,15 +6,11 @@
   </div>
 </div>
 
-<!-- 
-    Banner - Social
-    Subtitulo - Lista de amigos
-    Lista - Listado de botones de amigos (listgroup)
- -->
-
 <div class="container text-center mt-2">
   <h1>Lista de amigos</h1>
-  <h4 *ngIf="userFriends">Tienes {{userFriends.length}} amigo/s</h4>
+  <h4 *ngIf="userFriends.length == 0">No tienes amigos actualmente</h4>
+  <h4 *ngIf="userFriends.length == 1">Tienes {{userFriends.length}} amigo</h4>
+  <h4 *ngIf="userFriends.length > 1">Tienes {{userFriends.length}} amigos</h4>
 
   <div *ngFor="let friend of userFriends" class="list-group mt-2">
     <button type="button" class="list-group-item list-group-item-action active">
@@ -30,20 +26,14 @@
   <hr>
 </div>
 
-<!-- 
-    Buzón - titulo
-    Subtitulo - Solicitudes de amistad
-        Al lado, icono modal para enviar solicitud de amistad
-            Modal. búsqueda de usuarios reactiva/tiempo real y enviar
-    Lista - Listado de botones de solicitudes (listgroup)
- -->
-
 <div class="container text-center">
   <h1>
     Amigos
     <i class="fas fa-user-plus" data-toggle="modal" data-target="#staticBackdrop"></i>
   </h1>
-  <h4 *ngIf="friendRequests">Tienes {{friendRequests.length}} solicitud/es pendiente/s</h4>
+  <h4 *ngIf="friendRequests.length == 0">No tienes solicitudes pendientes</h4>
+  <h4 *ngIf="friendRequests.length == 1">Tienes {{friendRequests.length}} solicitud pendiente</h4>
+  <h4 *ngIf="friendRequests.length > 1">Tienes {{friendRequests.length}} solicitudes pendientes</h4>
 
   <div id="staticBackdrop" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
