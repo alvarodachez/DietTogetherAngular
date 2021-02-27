@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'social',
     loadChildren: () => import("./social/social.module").then(m => m.SocialModule)
   },
+  {
+    path: 'group',
+    loadChildren: () => import("./group/group.module").then(m => m.GroupModule)
+  },
 
 ];
 
