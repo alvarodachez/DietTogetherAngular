@@ -1,0 +1,25 @@
+.fondo {
+    display: flex;
+
+    height: 25vh;
+    width: 100%;
+    background-color: #9CD3C4;
+
+    .titulo {
+        margin: auto auto;
+        font-size: 30px;
+    }
+
+    .word {
+        font-size: 20px;
+    }
+}
+
+.botones {
+    display: flex;
+    justify-content: space-evenly;
+
+    button {
+        width: 35%;
+    }
+}
