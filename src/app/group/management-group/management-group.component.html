@@ -1,0 +1,20 @@
+<div class="container text-center mt-2">
+
+    <h2>Crear tu grupo</h2>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button (click)="changeTradicional()" type="button" class="btn btn-secondary">Modo tradicional</button>
+        
+        <button (click)="changeObjetivo()" disabled type="button" class="btn btn-secondary">Modo objetivos</button>
+    </div>
+</div>
+
+<div *ngIf="showTraditional == true" class="container text-center">
+
+    TRADICIONAL
+</div>
+
+<div *ngIf="showTraditional == false" class="container text-center">
+
+    OBJETIVOS
+</div>
