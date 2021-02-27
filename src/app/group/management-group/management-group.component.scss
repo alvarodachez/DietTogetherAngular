@@ -1,0 +1,62 @@
+#divGroupForm {
+    margin-top: 10%;
+}
+
+.groupFormField {
+    margin-top: 15%;
+
+    input {
+        padding-right: 0;
+        padding-left: 0;
+        width: 80%;
+    }
+}
+
+.colorFallo {
+    color: rgb(228, 118, 118);
+}
+
+.friendsList {
+    margin-top: 10%;
+}
+
+.input-entry {
+    text-align: center;
+    width: 70%;
+    appearance: none;
+    // -webkit-appearance: none;
+    color: #95a5a6;
+    font-family: "Helvetica", arial, sans-serif;
+    font-size: 18px;
+    border:1px solid;
+    display: inline-block !important;
+    visibility: visible !important;
+    border-radius:5px;
+}
+
+#staticBackdrop {
+    font-size: 20px;
+
+    .alert {
+        font-size: 15px;
+    }
+    
+}
+
+.padre {
+    display: flex;
+}
+
+.hijo {
+    margin: auto auto;
+}
+
+.btnOrder {
+    .friendName {
+        width: 90%;
+    }
+
+    .friendButtons {
+        width: 10%;
+    }
+}

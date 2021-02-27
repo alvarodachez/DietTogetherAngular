@@ -4,17 +4,122 @@
 
     <div class="btn-group" role="group" aria-label="Basic example">
         <button (click)="changeTradicional()" type="button" class="btn btn-secondary">Modo tradicional</button>
-        
         <button (click)="changeObjetivo()" disabled type="button" class="btn btn-secondary">Modo objetivos</button>
     </div>
 </div>
 
 <div *ngIf="showTraditional == true" class="container text-center">
+    <!-- TRADICIONAL -->
 
-    TRADICIONAL
+    <div id="divGroupForm">
+
+        <form [formGroup]="groupForm" action="">
+    
+          <div class="form-group groupFormField">
+            <label class="form-control-label" for="name">Nombre del grupo</label><br>
+            <input type="text" formControlName="name" name="name" class="input-entry form-control"
+              placeholder="Introduce nombre" required id="inpName"
+              [class.is-invalid]="groupForm.get('name').touched && groupForm.get('name').invalid">
+            <div class="alert colorFallo" [hidden]="groupForm.get('name').pristine || groupForm.get('name').valid">
+              El nombre es obligatorio
+            </div>
+          </div>
+        
+          <div class="form-group groupFormField">
+            <label class="form-control-label" for="expireDate">Fecha de expiración</label><br>
+            <input type="date" formControlName="expireDate" name="expireDate" class="input-entry form-control"
+              placeholder="Introduce apellidos" required id="inpExpireDate"
+              [class.is-invalid]="groupForm.get('expireDate').touched && groupForm.get('expireDate').invalid">
+            <div class="alert colorFallo"
+              [hidden]="groupForm.get('expireDate').pristine || groupForm.get('expireDate').valid">
+              El valor de la fecha de no es válido
+            </div>
+          </div>
+
+
+          <div class="container text-center friendsList">
+            <h1>
+              Amigos
+              <i class="fas fa-user-plus" data-toggle="modal" data-target="#staticBackdrop"></i>
+            </h1>
+            <h4 *ngIf="friendsList.length == 0">Agrega algún amigo a la lista</h4>
+            <h4 *ngIf="friendsList.length == 1">Hay {{friendsList.length}} amigo en la lista</h4>
+            <h4 *ngIf="friendsList.length > 1">Hay {{friendsList.length}} amigos en la lista</h4>
+
+            <div id="staticBackdrop" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                  <div class="modal-header padre">
+                    <h5 class="modal-title hijo">Busca a tu amigo aquí</h5>
+                  </div>
+                  <div class="modal-body">
+
+                    <form [formGroup]="addFriendForm" action="">
+                      <div class="form-group">
+
+                        <label class="col-form-label" for="username">Introduce el nombre de usuario:</label>
+                        <input (keyup)="getUsernameByInitials()" type="text" autocomplete="off"
+                          formControlName="username" name="username" class="form-control text-center"
+                          placeholder="usuario"
+                          [class.is-invalid]="addFriendForm.get('username').touched && addFriendForm.get('username').invalid">
+
+                        <div class="list-group-item list-group-item-action active"
+                          *ngFor="let friend2 of searchFriends">
+                          <button type="button" class="list-group-item list-group-item-action active"
+                            (click)="setFriendToSendRequest(friend2)">
+                            {{friend2}} <i class="fas fa-user-friends pl-5"></i>
+                          </button>
+                        </div>
+                        <div class="alert alert-danger colorFallo"
+                          [hidden]="addFriendForm.get('username').pristine || addFriendForm.get('username').valid">
+                          El valor introducido no es válido
+                        </div>
+
+                      </div>
+                    </form>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" [disabled]="!addFriendForm.valid"
+                      (click)="addFriendToList()">Agregar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                      (click)="resetAddFriendForm()">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngFor="let friend of friendsList, let i = index" class="list-group">
+              <button type="button" class="list-group-item list-group-item-action active border border-white">
+                  <div class="btnOrder padre">
+                      <div class="friendName">
+                        {{ i }} - {{ friend }}
+                      </div>
+                      <!-- <div class="friendButtons">
+                        <i class="fas fa-check" (click)="acceptFriendRequest(friend.id)"></i>
+                      </div> -->
+                      <div class="friendButtons">
+                        <i class="fas fa-times" (click)="deleteFriendFromList(i)"></i>
+                      </div>
+                    </div>
+              </button>
+
+              <!-- [ngClass]="{'is-active': user.invalid && user.dirty} -->
+            </div>
+
+          </div>
+
+    
+          <button name="btnGo" class="btn btn-primary btn-lg btn-mid mt-5" [disabled]="!groupForm.valid"
+            (click)="createGroup()">Enviar</button>
+    
+        </form>
+    
+      </div>    
+
 </div>
 
 <div *ngIf="showTraditional == false" class="container text-center">
-
     OBJETIVOS
 </div>
