@@ -47,11 +47,14 @@
           <input class="input-entry form-control midInputLeft" required type="tel" formControlName="weightKilograms"
             name="weightKilograms" id="inpWeightKilograms" placeholder="Kilos"
             [class.is-invalid]="athleteForm.get('weightKilograms').touched && athleteForm.get('weightKilograms').invalid">
-          <p>y</p>
+            <p class="mt-2">y</p>
           <input class="input-entry form-control midInputRight" required type="tel" formControlName="weightGrams"
             name="weightGrams" id="inpWeightGrams" placeholder="Gramos"
             [class.is-invalid]="athleteForm.get('weightGrams').touched && athleteForm.get('weightGrams').invalid">
         </div>
+      </div>
+      <div class="text-muted">
+        Consejo: Si pesas 70.05 <br> debes indicar <span class="font-weight-bold">0</span>5 en los gramos
       </div>
       <div [hidden]="athleteForm.get('weightKilograms').valid || athleteForm.get('weightKilograms').pristine"
         class="colorFallo">
@@ -69,11 +72,14 @@
           <input class="input-entry form-control midInputLeft" required type="tel" formControlName="heightMeters"
             name="heightMeters" id="inpHeightMeters" placeholder="Metros"
             [class.is-invalid]="athleteForm.get('heightMeters').touched && athleteForm.get('heightMeters').invalid">
-          <p>y</p>
+          <p class="mt-2">y</p>
           <input class="input-entry form-control midInputRight" required type="tel" formControlName="heightCentimeters"
             name="heightCentimeters" id="inpHeightCentimeters" placeholder="Cent."
             [class.is-invalid]="athleteForm.get('heightCentimeters').touched && athleteForm.get('heightCentimeters').invalid">
         </div>
+      </div>
+      <div class="text-muted">
+        Consejo: Si mides 2.08 <br> debes indicar <span class="font-weight-bold">0</span>8 en los centímetros
       </div>
       <div [hidden]="athleteForm.get('heightMeters').valid || athleteForm.get('heightMeters').pristine"
         class="colorFallo">

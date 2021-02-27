@@ -32,7 +32,7 @@ export class AthleteDataRegisterComponent implements OnInit {
       Validators.required,            // requerido
       Validators.pattern('^[0-9]*$'), // números válidos, del 0 al 9
       Validators.minLength(1),        // número mínimo de caracteres, 1
-      Validators.maxLength(1),        // número máximo de caracteres, 1
+      Validators.maxLength(3),        // número máximo de caracteres, 3
     ]),
     heightMeters: new FormControl('', [
       Validators.required,            // requerido
