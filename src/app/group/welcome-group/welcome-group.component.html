@@ -1,10 +1,10 @@
 <div class="fondo">
-  <div class="titulo align-self-center text-center text-white">
-    <p>Grupos</p>
+  <div class="titulo align-self-center text-center">
+    <p class="text-white">Grupos</p>
     <!-- <p class="word">Lista de amigos</p> -->
     <ol class="breadcrumb container">
-      <li class="breadcrumb-item"><a href="/home">Home</a></li>
-      <li class="breadcrumb-item active">Grupos</li>
+      <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+      <li class="breadcrumb-item active" [routerLink]="['/group/welcome']">Grupos</li>
     </ol>
   </div>
 </div>
