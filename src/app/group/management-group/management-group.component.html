@@ -24,16 +24,16 @@
                     El nombre es obligatorio
                 </div>
             </div>
-
-            <div class="form-group groupFormField">
-                <label class="form-control-label" for="expireDate">Fecha de expiración</label><br>
-                <input type="date" formControlName="expireDate" name="expireDate" class="input-entry form-control"
-                    placeholder="Introduce apellidos" required id="inpExpireDate"
-                    [class.is-invalid]="groupForm.get('expireDate').touched && groupForm.get('expireDate').invalid">
-                <div class="alert colorFallo"
-                    [hidden]="groupForm.get('expireDate').pristine || groupForm.get('expireDate').valid">
-                    El valor de la fecha de no es válido
-                </div>
+          </div>
+        
+          <div class="form-group groupFormField">
+            <label class="form-control-label" for="expireDate">Fecha del objetivo</label><br>
+            <input type="date" formControlName="expireDate" name="expireDate" class="input-entry form-control"
+              placeholder="Introduce apellidos" required id="inpExpireDate"
+              [class.is-invalid]="groupForm.get('expireDate').touched && groupForm.get('expireDate').invalid">
+            <div class="alert colorFallo"
+              [hidden]="groupForm.get('expireDate').pristine || groupForm.get('expireDate').valid">
+              El valor de la fecha de no es válido
             </div>
 
 
@@ -112,9 +112,13 @@
             </div>
 
 
-            <button name="btnGo" class="btn btn-primary btn-lg btn-mid mt-5" [disabled]="!groupForm.valid"
-                (click)="createGroup()">Enviar</button>
-
+    
+          <button name="btnGo" class="btn btn-primary btn-lg btn-mid mt-5" 
+          [disabled]="(!groupForm.valid) || friendsList.length == 0"
+            (click)="createGroup()">
+            Enviar
+          </button>
+    
         </form>
 
     </div>

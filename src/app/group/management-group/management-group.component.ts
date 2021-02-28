@@ -61,6 +61,7 @@ export class ManagementGroupComponent implements OnInit {
     console.log(this.friendsList);
 
     this.friendsList.push(username);
+    this.addFriendForm.reset();
 
     console.log("Lista después:");
     console.log(this.friendsList);
