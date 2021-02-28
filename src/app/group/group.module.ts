@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 // Componentes
 import { WelcomeGroupComponent } from './welcome-group/welcome-group.component';
 import { ManagementGroupComponent } from './management-group/management-group.component';
+import { ViewGroupComponent } from './view-group/view-group.component';
 
 const routes: Routes = [
 
@@ -22,12 +23,17 @@ const routes: Routes = [
     path: 'management',
     component: ManagementGroupComponent,
   },
+  {
+    path: 'groupview',
+    component: ViewGroupComponent
+  }
 ];
 
 @NgModule({
   declarations: [
     WelcomeGroupComponent,
-    ManagementGroupComponent
+    ManagementGroupComponent,
+    ViewGroupComponent
   ],
   exports: [],
   imports: [
