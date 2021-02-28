@@ -17,6 +17,7 @@ export class FriendsComponent implements OnInit {
   searchFriends: any = [];
   userFriends: any = [];
   friendRequests: any = [];
+  groupRequests:any = [];
 
   addFriendForm = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -27,6 +28,7 @@ export class FriendsComponent implements OnInit {
   ngOnInit(): void {
     this.getFriends();
     this.getFriendRequests();
+    this.getGroupRequests();
   }
 
   getUsernameByInitials() {
@@ -71,6 +73,20 @@ export class FriendsComponent implements OnInit {
       }
 
       this.friendRequests = aux;
+    })
+  }
+
+  getGroupRequests() {
+    this.friendService.getGroupRequests().subscribe(res => {
+      let aux = [];
+
+      for (const request in res) {
+        if (res[request].requestStatus == 'PENDING') {
+          aux.push(res[request]);
+        }
+      }
+
+      this.groupRequests = aux;
     })
   }
 
@@ -130,6 +146,31 @@ export class FriendsComponent implements OnInit {
     });
   }
 
+  acceptGroupRequest(idRequest: any) {
+    this.friendService.acceptGroupRequest(idRequest).subscribe(res => {
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      
+      this.getGroupRequests();
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Solicitud de grupo aceptada'
+      })
+    });
+  }
+
 
   rejectFriendRequest(idRequest: any) {
     this.friendService.rejectFriendRequest(idRequest).subscribe(res => {
@@ -152,6 +193,31 @@ export class FriendsComponent implements OnInit {
       Toast.fire({
         icon: 'success',
         title: 'Solicitud de amistad rechazada'
+      })
+    });
+  }
+
+  rejectGroupRequest(idRequest: any) {
+    this.friendService.rejectGroupRequest(idRequest).subscribe(res => {
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      
+      this.getGroupRequests();
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Solicitud de grupo rechazada'
       })
     });
   }
