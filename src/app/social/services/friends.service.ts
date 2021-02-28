@@ -55,6 +55,24 @@ export class FriendsService {
     return this.http.get(endpoint, httpOptions);
   }
 
+  getGroupRequests(): Observable<any> {
+    /* Obtener usuario de la sesión actual */
+    const username = localStorage.getItem("dietUsernameSession");
+
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointDev + `/group/get-group-request/${username}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    /* obtener las solicitudes de amistad */
+    return this.http.get(endpoint, httpOptions);
+  }
 
   getFriendRequests(): Observable<any> {
     /* Obtener usuario de la sesión actual */
@@ -112,13 +130,45 @@ export class FriendsService {
     return this.http.post(endpoint, "", httpOptions);
   }
 
+  acceptGroupRequest(idRequest: any): Observable<any> {
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointDev + `/group/accept-group-request/${idRequest}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    /* aceptar solicitud de amistad */
+    return this.http.post(endpoint, "", httpOptions);
+  }
+
 
   rejectFriendRequest(idRequest: any): Observable<any> {
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/athlete/reject-friend-request/${idRequest}`;
+    const endpoint = this.endPointDev + `/group/reject-friend-request/${idRequest}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    /* rechazar solicitud de amistad */
+    return this.http.post(endpoint, "", httpOptions);
+  }
+
+  rejectGroupRequest(idRequest: any): Observable<any> {
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointDev + `/group/reject-group-request/${idRequest}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
