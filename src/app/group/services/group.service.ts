@@ -23,21 +23,21 @@ export class GroupService {
   }
 
 
-  getUsernamesByInitials(initials: string): Observable<any> {
-    /* Obtener token JWT del usuario actual */
-    const jwt = localStorage.getItem("dietJwtSession");
+  // getUsernamesByInitials(initials: string): Observable<any> {
+  //   /* Obtener token JWT del usuario actual */
+  //   const jwt = localStorage.getItem("dietJwtSession");
 
-    /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/athlete/get-athletes-by-initials/${initials}`;
+  //   /* Dirección del servidor - petición */
+  //   const endpoint = this.endPointDev + `/athlete/get-athletes-by-initials/${initials}`;
 
-    /* Cabecera necesaria para indicar token JWT */
-    let httpOptions = {
-      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
-    };
+  //   /* Cabecera necesaria para indicar token JWT */
+  //   let httpOptions = {
+  //     headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+  //   };
 
-    /* obtiene los usuarios, buscando por las iniciales introducidas */
-    return this.http.get(endpoint, httpOptions);
-  }
+  //   /* obtiene los usuarios, buscando por las iniciales introducidas */
+  //   return this.http.get(endpoint, httpOptions);
+  // }
 
 
   createGroup(groupForm: GroupInterface): Observable<any> {
@@ -57,6 +57,26 @@ export class GroupService {
 
     /* crear grupo con los datos finales para el backend */
     return this.http.post(endpoint, groupForm, httpOptions);
+  }
+
+
+  getFriends(): Observable<any> {
+    /* Obtener usuario de la sesión actual */
+    const username = localStorage.getItem("dietUsernameSession");
+
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointDev + `/athlete/get-friends/${username}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    /* Devolver array (string) con los amigos del usuario */
+    return this.http.get(endpoint, httpOptions);
   }
 
 }

@@ -12,7 +12,7 @@ export class ManagementGroupComponent implements OnInit {
   showTraditional: boolean;
 
   searchFriends: any = [];
-  userFriends: any = [];
+  // userFriends: any = [];
   friendsList: any = [];
 
   groupForm = new FormGroup({
@@ -28,6 +28,7 @@ export class ManagementGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.showTraditional = true;
+    this.getFriends();
   }
 
 
@@ -103,22 +104,31 @@ export class ManagementGroupComponent implements OnInit {
 
 
   // Buscar amigo de forma interactiva
-  getUsernameByInitials() {
-    if (
-      this.addFriendForm.value.username != undefined &&
-      this.addFriendForm.value.username != ''
-    ) {
-      this.groupService
-        .getUsernamesByInitials(this.addFriendForm.value.username)
-        .subscribe((res) => {
-          console.log("amigo:");
-          console.log(res);
+  // getUsernameByInitials() {
+  //   if (
+  //     this.addFriendForm.value.username != undefined &&
+  //     this.addFriendForm.value.username != ''
+  //   ) {
+  //     this.groupService
+  //       .getUsernamesByInitials(this.addFriendForm.value.username)
+  //       .subscribe((res) => {
+  //         console.log("amigo:");
+  //         console.log(res);
 
-          this.searchFriends = res;
-        });
-    } else {
-      this.searchFriends = [];
-    }
+  //         this.searchFriends = res;
+  //       });
+  //   } else {
+  //     this.searchFriends = [];
+  //   }
+  // }
+
+
+  getFriends() {
+    this.groupService.getFriends().subscribe(res => {
+      this.friendsList = res;
+      console.log(res);
+    });
   }
+
   
 }
