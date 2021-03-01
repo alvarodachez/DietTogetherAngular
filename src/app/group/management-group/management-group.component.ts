@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '../services/group.service';
 import { GroupInterface } from '../models/group.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-management-group',
@@ -40,42 +41,57 @@ export class ManagementGroupComponent implements OnInit {
     this.showTraditional = false;
   }
 
-  resetAddFriendForm() {
-    this.addFriendForm.reset();
-  }
+  
+  // resetAddFriendForm() {
+  //   this.addFriendForm.reset();
+  // }
 
-  setFriendToSendRequest(friend) {
-    console.log(friend);
-    this.searchFriends = [];
 
-    this.addFriendForm.setValue({ username: friend });
-  }
+  // setFriendToSendRequest(friend) {
+  //   console.log(friend);
+  //   this.searchFriends = [];
 
-  addFriendToList() {
-    let username = this.addFriendForm.value.username;
+  //   this.addFriendForm.setValue({ username: friend });
+  // }
 
-    console.log('Lista antes:');
-    console.log(this.friendsList);
 
-    this.friendsList.push(username);
-    this.addFriendForm.reset();
+  // addFriendToList() {
+  //   let username = this.addFriendForm.value.username;
 
-    console.log('Lista después:');
-    console.log(this.friendsList);
-  }
+  //   console.log('Lista antes:');
+  //   console.log(this.friendsList);
 
-  deleteFriendFromList(id: number) {
-    console.log('Lista antes eliminar:');
-    console.log(this.friendsList);
+  //   this.friendsList.push(username);
+  //   this.addFriendForm.reset();
 
-    delete this.friendsList[id];
+  //   console.log('Lista después:');
+  //   console.log(this.friendsList);
+  // }
 
-    console.log('Lista después eliminar:');
-    console.log(this.friendsList);
-  }
 
-  /* Crear grupo */
+  // deleteFriendFromList(id: number) {
+  //   console.log('Lista antes eliminar:');
+  //   console.log(this.friendsList);
+
+  //   delete this.friendsList[id];
+
+  //   console.log('Lista después eliminar:');
+  //   console.log(this.friendsList);
+  // }
+
+
+  /* Crear grupo de atletas */
   createGroup(): void {
+
+    Swal.fire({
+      title: 'Espere',
+      text: 'Se estan guardando sus datos',
+      icon: 'info',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
+
+
     /* Crear objeto para enviarlo al backend */
     let backendForm: GroupInterface = {
       name: this.groupForm.value.name,
@@ -91,54 +107,45 @@ export class ManagementGroupComponent implements OnInit {
     this.groupService.createGroup(backendForm).subscribe((group) => {
       console.log('group - creado');
       console.log(group);
+
+      Swal.fire({
+        title: `Grupo ${backendForm.name}`,
+        text:'Registro realizado correctamente.',
+        icon:'success',
+        input:undefined
+      });
+
+      this.groupForm.reset();
     });
   }
 
   onCheckboxChange(e) {
 
     if (e.target.checked) {
-      console.log(`añadir amigo ${e.target.checked}`);
+      // console.log(`añadir amigo ${e.target.checked}`);
 
-      console.log('Lista antes añadir:');
-      console.log(this.selectedFriendsList);
+      // console.log('Lista antes añadir:');
+      // console.log(this.selectedFriendsList);
   
       this.selectedFriendsList.push(e.target.id);
 
-      console.log('Lista después añadir:');
-      console.log(this.selectedFriendsList);
+      // console.log('Lista después añadir:');
+      // console.log(this.selectedFriendsList);
 
     } else {
       
-      console.log(`borrar amigo ${e.target.checked}`);
+      // console.log(`borrar amigo ${e.target.checked}`);
 
-      console.log('Lista después eliminar:');
-      console.log(this.selectedFriendsList);
+      // console.log('Lista después eliminar:');
+      // console.log(this.selectedFriendsList);
 
       this.selectedFriendsList.splice(this.selectedFriendsList.indexOf(e.target.id), 1);
 
-      console.log('Lista después eliminar:');
-      console.log(this.selectedFriendsList);
+      // console.log('Lista después eliminar:');
+      // console.log(this.selectedFriendsList);
     }
   }
 
-  // Buscar amigo de forma interactiva
-  // getUsernameByInitials() {
-  //   if (
-  //     this.addFriendForm.value.username != undefined &&
-  //     this.addFriendForm.value.username != ''
-  //   ) {
-  //     this.groupService
-  //       .getUsernamesByInitials(this.addFriendForm.value.username)
-  //       .subscribe((res) => {
-  //         console.log("amigo:");
-  //         console.log(res);
-
-  //         this.searchFriends = res;
-  //       });
-  //   } else {
-  //     this.searchFriends = [];
-  //   }
-  // }
 
   getFriends() {
     this.groupService.getFriends().subscribe((res) => {
