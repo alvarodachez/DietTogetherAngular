@@ -6,11 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Componentes
 import { FriendsComponent } from './friends/friends.component';
+import { CanActivateGuard } from '../entry/services/can-activate.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: FriendsComponent,
+    canActivate : [CanActivateGuard]
   },
 ];
 

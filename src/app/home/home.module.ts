@@ -4,11 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Componentes
 import { HomeComponent } from './home/home.component';
+import { CanActivateGuard } from '../entry/services/can-activate.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate : [CanActivateGuard]
   },
 ];
 
