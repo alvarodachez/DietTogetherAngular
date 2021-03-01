@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GroupService } from '../services/group.service';
 
 @Component({
   selector: 'app-welcome-group',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeGroupComponent implements OnInit {
 
-  constructor() { }
+  actualGroup: any;
+
+  constructor(private groupService: GroupService) { }
 
   ngOnInit(): void {
+    this.getActiveGroup();
   }
+
+  getActiveGroup() {
+    console.log("get active group");
+    
+    this.groupService.getActiveGroup().subscribe(res => {
+      // console.log(res.actualGroup);
+      this.actualGroup = res.actualGroup;
+      console.log(this.actualGroup);
+    });
+  }
+
 
 }
