@@ -76,10 +76,7 @@ export class LogInService {
     localStorage.removeItem("dietJwtSession");
 
     this.route.navigate(["welcome"])
-    setTimeout( () =>{
-
-      //location.reload();
-    },10)
+    
   }
 
   isLoggedIn(url:string){
