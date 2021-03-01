@@ -47,11 +47,12 @@
           <form [formGroup]="addFriendForm" action="">
             <div class="form-group">
               <label class="col-form-label" for="username">Introduce el nombre de usuario:</label>
-              <input (keyup)="getUsernameByInitials()" type="text" autocomplete="off" formControlName="username" name="username" class="form-control text-center"
-                placeholder="usuario"
+              <input (keyup)="getUsernameByInitials()" type="text" autocomplete="off" formControlName="username"
+                name="username" class="form-control text-center" placeholder="usuario"
                 [class.is-invalid]="addFriendForm.get('username').touched && addFriendForm.get('username').invalid">
               <div class="list-group-item list-group-item-action active" *ngFor="let friend2 of searchFriends">
-                <button type="button" class="list-group-item list-group-item-action active" (click)="setFriendToSendRequest(friend2)">
+                <button type="button" class="list-group-item list-group-item-action active"
+                  (click)="setFriendToSendRequest(friend2)">
                   {{friend2}} <i class="fas fa-user-friends pl-5"></i>
                 </button>
               </div>
@@ -99,16 +100,15 @@
 
 <div class="container text-center">
   <h1>Grupos</h1>
-  <h4>Solicitudes de grupos</h4>
+  <h4 *ngIf="groupRequests.length == 0">No tienes solicitudes de grupo pendientes</h4>
+  <h4 *ngIf="groupRequests.length == 1">Tienes {{friendRequests.length}} solicitud de grupo pendiente</h4>
+  <h4 *ngIf="groupRequests.length > 1">Tienes {{friendRequests.length}} solicitudes de grupo pendientes</h4>
 
-  <div class="list-group mt-2">
-    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-      The current button
+  <div *ngFor="let group of groupRequests" class="list-group mt-2">
+    <button type="button" class="list-group-item list-group-item-action active">
+      Solicitud de grupo enviada por {{group.claimantAthlete}}
+      <i class="fas fa-check pl-5" (click)="acceptGroupRequest(group.id)"></i>
+      <i class="fas fa-times pl-5" (click)="rejectGroupRequest(group.id)"></i>
     </button>
-    <button type="button" class="list-group-item list-group-item-action">A second item</button>
-    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
-  </div>
 
-</div>
+  </div>
