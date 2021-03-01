@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { urlServerProd } from '../../../environments/environment.prod';
 import { environment, urlServer } from 'src/environments/environment';
 import { UserSignUpDto } from '../models/signup-user-dto';
@@ -11,6 +11,12 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class LogInService {
+
+  readonly ISLOGGEDKEY = 'islogged';
+  public urlUsuarioIntentaAcceder = '';
+
+  public changeLoginStatusSubject = new Subject<boolean>();
+  public changeLoginStatus$ = this.changeLoginStatusSubject.asObservable();
 
   endPointDev = "";
   endPointProd = "";
@@ -43,6 +49,8 @@ export class LogInService {
       })
       
       // Redirigir a home, una vez logeado
+      localStorage.setItem(this.ISLOGGEDKEY,'true');
+      this.changeLoginStatusSubject.next(true);
       localStorage.setItem("dietUsernameSession",user.username);
       localStorage.setItem("dietJwtSession",response);
       this.route.navigate(["home"]);
@@ -52,7 +60,6 @@ export class LogInService {
           icon: 'success',
           title: 'Bienvenid@ '+user.username
         })
-        location.reload();
         
       },10)
   
@@ -63,14 +70,28 @@ export class LogInService {
   }
 
   logout(): void {
+    localStorage.removeItem(this.ISLOGGEDKEY);
+    this.changeLoginStatusSubject.next(false);
     localStorage.removeItem("dietUsernameSession");
     localStorage.removeItem("dietJwtSession");
 
     this.route.navigate(["welcome"])
     setTimeout( () =>{
 
-      location.reload();
+      //location.reload();
     },10)
+  }
+
+  isLoggedIn(url:string){
+    const isLogged = localStorage.getItem(this.ISLOGGEDKEY);
+
+    if(!isLogged){
+      this.urlUsuarioIntentaAcceder = url;
+
+      return false;
+    }
+
+    return true;
   }
 }
 

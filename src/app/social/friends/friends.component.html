@@ -1,8 +1,11 @@
 <div class="fondo">
-  <div class="titulo align-self-center text-center text-white">
-    <p>Social</p>
+  <div class="titulo align-self-center text-center ">
+    <p class="text-white">Social</p>
     <!-- <p class="word">Lista de amigos</p> -->
-    <p class="word">Usuario actual: {{borrar}}</p>
+    <ol class="breadcrumb container">
+      <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+      <li class="breadcrumb-item active" [routerLink]="['/social']">Social</li>
+    </ol>
   </div>
 </div>
 

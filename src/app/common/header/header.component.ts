@@ -12,19 +12,26 @@ export class HeaderComponent implements OnInit {
 
   online: boolean = false;
 
+
   constructor(private route: Router, private login: LogInService) { }
 
   ngOnInit(): void {
 
-    if ((localStorage.getItem("dietUsernameSession") && (localStorage.getItem("dietUsernameSession") != "" && localStorage.getItem("dietUsernameSession") != undefined))) {
+
+    this.online = this.login.isLoggedIn('');
+    this.login.changeLoginStatus$.subscribe((loggedStatus : boolean)=>{
+      this.online = loggedStatus;
+    })
+
+    /* if ((localStorage.getItem("dietUsernameSession") && (localStorage.getItem("dietUsernameSession") != "" && localStorage.getItem("dietUsernameSession") != undefined))) {
       this.online = true;
-    }
+    } */
   }
 
   checkSessionStatus() {
     const username = localStorage.getItem("dietUsernameSession");
 
-    if (username && (username != "" && username != undefined)) {
+    if (this.online == true) {
       // alert("home");
       this.route.navigate(["home"])
     } else {
