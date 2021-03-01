@@ -8,24 +8,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { WelcomeGroupComponent } from './welcome-group/welcome-group.component';
 import { ManagementGroupComponent } from './management-group/management-group.component';
 import { ViewGroupComponent } from './view-group/view-group.component';
+import { CanActivateGuard } from '../entry/services/can-activate.guard';
 
 const routes: Routes = [
 
   {
     path: '',
     component: WelcomeGroupComponent,
+    canActivate : [CanActivateGuard]
   },
   {
     path: 'welcome',
     component: WelcomeGroupComponent,
+    canActivate : [CanActivateGuard]
   },
   {
     path: 'management',
     component: ManagementGroupComponent,
+    canActivate : [CanActivateGuard]
   },
   {
     path: 'groupview',
-    component: ViewGroupComponent
+    component: ViewGroupComponent,
+    canActivate : [CanActivateGuard]
   }
 ];
 

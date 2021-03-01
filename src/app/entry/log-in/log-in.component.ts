@@ -17,6 +17,8 @@ export class LogInComponent implements OnInit {
 
   userSignUpDto: UserSignUpDto;
 
+  routeRedirect = '';
+
   constructor(private logInService: LogInService, private route: Router) {
     this.loginUser = new LoginClass("", "");
     this.userSignUpDto = new UserSignUpDto("", "");
@@ -38,6 +40,8 @@ export class LogInComponent implements OnInit {
     this.userSignUpDto.password = formData.password;
 
     this.logInService.login(this.userSignUpDto);
+    this.logInService.urlUsuarioIntentaAcceder = '';
+    this.route.navigate([this.routeRedirect]);
   }
 
 }
