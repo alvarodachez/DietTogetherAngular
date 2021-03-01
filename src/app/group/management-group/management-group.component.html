@@ -1,52 +1,61 @@
-<div class="container text-center mt-2">
+<div class="fondo">
+  <div class="titulo align-self-center text-center ">
+    <p class="text-white">Crea tu grupo</p>
+    <!-- <p class="word">Lista de amigos</p> -->
+    <ol class="breadcrumb container text-center">
+      <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+      <li class="breadcrumb-item" [routerLink]="['/group/welcome']">Grupos</li>
+      <li class="breadcrumb-item active" [routerLink]="['/group/management']">Crear grupo</li>
+    </ol>
+  </div>
+</div>
+<div class="container text-center mt-1">
 
-    <h2>Crear tu grupo</h2>
-
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button (click)="changeTradicional()" type="button" class="btn btn-secondary">Modo tradicional</button>
-        <button (click)="changeObjetivo()" disabled type="button" class="btn btn-secondary">Modo objetivos</button>
-    </div>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button (click)="changeTradicional()" type="button" class="btn btn-secondary">Modo tradicional</button>
+    <button (click)="changeObjetivo()" disabled type="button" class="btn btn-secondary">Modo objetivos</button>
+  </div>
 </div>
 
 <div *ngIf="showTraditional == true" class="container text-center">
-    <!-- TRADICIONAL -->
+  <!-- TRADICIONAL -->
 
-    <div id="divGroupForm">
+  <div id="divGroupForm">
 
-        <form [formGroup]="groupForm" action="">
-    
-          <div class="form-group groupFormField">
-            <label class="form-control-label" for="name">Nombre del grupo</label><br>
-            <input type="text" formControlName="name" name="name" class="input-entry form-control"
-              placeholder="Introduce nombre" required id="inpName"
-              [class.is-invalid]="groupForm.get('name').touched && groupForm.get('name').invalid">
-            <div class="alert colorFallo" [hidden]="groupForm.get('name').pristine || groupForm.get('name').valid">
-              El nombre es obligatorio
-            </div>
-          </div>
-        
-          <div class="form-group groupFormField">
-            <label class="form-control-label" for="expireDate">Fecha del objetivo</label><br>
-            <input type="date" formControlName="expireDate" name="expireDate" class="input-entry form-control"
-              placeholder="Introduce apellidos" required id="inpExpireDate"
-              [class.is-invalid]="groupForm.get('expireDate').touched && groupForm.get('expireDate').invalid">
-            <div class="alert colorFallo"
-              [hidden]="groupForm.get('expireDate').pristine || groupForm.get('expireDate').valid">
-              El valor de la fecha de no es válido
-            </div>
-          </div>
+    <form [formGroup]="groupForm" action="">
+
+      <div class="form-group groupFormField">
+        <label class="form-control-label" for="name">Nombre del grupo</label><br>
+        <input type="text" formControlName="name" name="name" class="input-entry form-control"
+          placeholder="Introduce nombre" required id="inpName"
+          [class.is-invalid]="groupForm.get('name').touched && groupForm.get('name').invalid">
+        <div class="alert colorFallo" [hidden]="groupForm.get('name').pristine || groupForm.get('name').valid">
+          El nombre es obligatorio
+        </div>
+      </div>
+
+      <div class="form-group groupFormField">
+        <label class="form-control-label" for="expireDate">Fecha del objetivo</label><br>
+        <input type="date" formControlName="expireDate" name="expireDate" class="input-entry form-control"
+          placeholder="Introduce apellidos" required id="inpExpireDate"
+          [class.is-invalid]="groupForm.get('expireDate').touched && groupForm.get('expireDate').invalid">
+        <div class="alert colorFallo"
+          [hidden]="groupForm.get('expireDate').pristine || groupForm.get('expireDate').valid">
+          El valor de la fecha de no es válido
+        </div>
+      </div>
 
 
-          <div class="container text-center friendsList">
-            <h1>
-              Amigos
-              <!-- <i class="fas fa-user-plus" data-toggle="modal" data-target="#staticBackdrop"></i> -->
-            </h1>
-            <h4 *ngIf="friendsList.length == 0">Agrega algún amigo a la lista</h4>
-            <h4 *ngIf="friendsList.length == 1">Hay {{friendsList.length}} amigo en la lista</h4>
-            <h4 *ngIf="friendsList.length > 1">Hay {{friendsList.length}} amigos en la lista</h4>
+      <div class="container text-center friendsList">
+        <h1>
+          Amigos
+          <!-- <i class="fas fa-user-plus" data-toggle="modal" data-target="#staticBackdrop"></i> -->
+        </h1>
+        <h4 *ngIf="friendsList.length == 0">Agrega algún amigo a la lista</h4>
+        <h4 *ngIf="friendsList.length == 1">Hay {{friendsList.length}} amigo en la lista</h4>
+        <h4 *ngIf="friendsList.length > 1">Hay {{friendsList.length}} amigos en la lista</h4>
 
-            <!-- <div id="staticBackdrop" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        <!-- <div id="staticBackdrop" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
               aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                 <div class="modal-content">
@@ -90,9 +99,9 @@
               </div>
             </div> -->
 
-            <div *ngFor="let friend of friendsList, let i = index" class="list-group">
+        <div *ngFor="let friend of friendsList, let i = index" class="list-group">
 
-              <!-- <button type="button" class="list-group-item list-group-item-action active border border-white">
+          <!-- <button type="button" class="list-group-item list-group-item-action active border border-white">
                   <div class="btnOrder padre">
                       <div class="friendName">
                         {{ i }} - {{ friend }}
@@ -103,38 +112,37 @@
                     </div>
               </button> -->
 
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="checkFriend">
-                  <label class="custom-control-label" for="checkFriend">{{ friend }}</label>
-                </div>
-              </div>
-
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkFriend">
+              <label class="custom-control-label" for="checkFriend">{{ friend }}</label>
             </div>
+          </div>
 
-            <!-- <div class="form-group">
+        </div>
+
+        <!-- <div class="form-group">
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
                 <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
               </div>
             </div> -->
-          
 
-          </div>
 
-    
-          <button name="btnGo" class="btn btn-primary btn-lg btn-mid mt-5" 
-          [disabled]="(!groupForm.valid) || friendsList.length == 0"
-            (click)="createGroup()">
-            Enviar
-          </button>
-    
-        </form>
-    
-      </div>    
+      </div>
+
+
+      <button name="btnGo" class="btn btn-primary btn-lg btn-mid mt-5"
+        [disabled]="(!groupForm.valid) || friendsList.length == 0" (click)="createGroup()">
+        Enviar
+      </button>
+
+    </form>
+
+  </div>
 
 </div>
 
 <div *ngIf="showTraditional == false" class="container text-center">
-    OBJETIVOS
+  OBJETIVOS
 </div>
