@@ -16,11 +16,9 @@
   <h4 *ngIf="userFriends.length > 1">Tienes {{userFriends.length}} amigos</h4>
 
   <div *ngFor="let friend of userFriends" class="list-group mt-2">
-    <button type="button" class="list-group-item list-group-item-action active">
+    <button type="button" class="list-group-item list-group-item-action active mx-auto">
       {{friend}} <i class="fas fa-user-friends pl-5"></i>
     </button>
-
-    <!-- [ngClass]="{'is-active': user.invalid && user.dirty} -->
   </div>
 </div>
 
@@ -54,23 +52,21 @@
                 name="username" class="form-control text-center" placeholder="usuario"
                 [class.is-invalid]="addFriendForm.get('username').touched && addFriendForm.get('username').invalid">
               <div class="list-group-item list-group-item-action active" *ngFor="let friend2 of searchFriends">
-                <button type="button" class="list-group-item list-group-item-action active"
-                  (click)="setFriendToSendRequest(friend2)">
+                <button type="button" class="list-group-item list-group-item-action active" data-dismiss="modal"
+                  (click)="sendFriendRequest(friend2)">
                   {{friend2}} <i class="fas fa-user-friends pl-5"></i>
                 </button>
               </div>
-              <div class="alert alert-danger"
+              <div class="alert alert-danger colorFallo"
                 [hidden]="addFriendForm.get('username').pristine || addFriendForm.get('username').valid">
-                El campo 'username' no es válido
+                El valor introducido no es válido
               </div>
             </div>
           </form>
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" [disabled]="!addFriendForm.valid"
-            (click)="sendFriendRequest()">Agregar</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetAddFriendForm()">Cerrar</button>
         </div>
       </div>
     </div>
