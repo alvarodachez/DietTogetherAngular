@@ -99,5 +99,19 @@ export class GroupService {
     return this.http.get(endpoint, httpOptions);
   }
 
+  getAthlete(username:string):Observable<any>{
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    const endpoint  = this.endPointDev + `/athlete/${username}`;
+
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    return this.http.get(endpoint, httpOptions);
+
+
+  }
+
 
 }
