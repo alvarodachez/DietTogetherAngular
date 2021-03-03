@@ -12,8 +12,6 @@ import { FriendsService } from '../services/friends.service';
 })
 export class FriendsComponent implements OnInit {
 
-  borrar = localStorage.getItem("dietUsernameSession");
-
   searchFriends: any = [];
   userFriends: any = [];
   friendRequests: any = [];

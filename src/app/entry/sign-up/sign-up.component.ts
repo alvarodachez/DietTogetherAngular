@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserSignUpDto } from '../models/signup-user-dto';
 import { SignUpClass } from '../models/singup.class';
@@ -10,16 +10,23 @@ import Swal from 'sweetalert2';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, AfterViewInit {
+
+  /* Se crea variable para aplicar foco en el primer campo del formulario */
+  @ViewChild('userFocus') userFocus: ElementRef;
 
   singUpClass: SignUpClass;
-
   userSignUpDto: UserSignUpDto;
 
   constructor(private signUpService: SignUpService, private route: Router) {
 
     this.singUpClass = new SignUpClass("", "", "");
     this.userSignUpDto = new UserSignUpDto("","");
+  }
+
+  /* Se aplica foco en el primer campo del formulario */
+  ngAfterViewInit(): void {
+    this.userFocus.nativeElement.focus();
   }
 
   ngOnInit(): void {

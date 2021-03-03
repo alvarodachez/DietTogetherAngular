@@ -1,50 +1,50 @@
 <div id="divEntryGeneral" class="container animate__animated animate__fadeInUp">
 
-    <div id="divEntryTitle">
-        <h1>Regístrate</h1>
-    </div>
+  <div id="divEntryTitle">
+    <h1>Regístrate</h1>
+  </div>
 
-    <div id="divEntryForm">
+  <div id="divEntryForm">
 
-        <form (ngSubmit)="onSubmit(signUpForm.value)" #signUpForm="ngForm">
-            <div class="entryFormField">
-              <label class="form-control-label" for="user">Usuario</label><br>
-              <input class="input-entry form-control" [ngClass]="{'is-invalid': user.invalid && user.dirty}" #user="ngModel"
-                [(ngModel)]="singUpClass.user" required type="text" name="username" id="inpUser"
-                placeholder="Introduce usuario">
-              <div [hidden]="user.valid || user.pristine" class="invalid-feedback">
-                El usuario es obligatorio
-              </div>
-            </div>
+    <form (ngSubmit)="onSubmit(signUpForm.value)" #signUpForm="ngForm">
+      <div class="entryFormField">
+        <label class="form-control-label" for="user">Usuario</label><br>
+        <input class="input-entry form-control" [ngClass]="{'is-invalid': user.invalid && user.dirty}" #user="ngModel"
+          [(ngModel)]="singUpClass.user" required type="text" name="username" id="inpUser" #userFocus
+          placeholder="Introduce usuario">
+        <div [hidden]="user.valid || user.pristine" class="invalid-feedback">
+          El usuario es obligatorio
+        </div>
+      </div>
 
-            <div class="entryFormField">
-              <label class="form-control-label" for="pass">Contraseña</label><br>
-              <input class="form-control input-entry" [ngClass]="{'is-invalid': pass.invalid && pass.dirty}" #pass="ngModel"
-                [(ngModel)]="singUpClass.pass" required type="password" name="password" id="inpPass"
-                placeholder="Introduce contraseña">
-              <div [hidden]="pass.valid || pass.pristine" class="invalid-feedback">
-                La contraseña es obligatoria
-              </div>
-            </div>
+      <div class="entryFormField">
+        <label class="form-control-label" for="pass">Contraseña</label><br>
+        <input class="form-control input-entry" [ngClass]="{'is-invalid': pass.invalid && pass.dirty}" #pass="ngModel"
+          [(ngModel)]="singUpClass.pass" required type="password" name="password" id="inpPass"
+          placeholder="Introduce contraseña">
+        <div [hidden]="pass.valid || pass.pristine" class="invalid-feedback">
+          La contraseña es obligatoria
+        </div>
+      </div>
 
-            <div class="entryFormField">
-              <label class="form-control-label" for="rptpass">Repite contraseña</label><br>
-              <input class="form-control input-entry" #passAgain="ngModel" id="inpRptpass"
-                [ngClass]="{'is-invalid': (passAgain.invalid && passAgain.dirty) || singUpClass.passAgain != singUpClass.pass }"
-                [(ngModel)]="singUpClass.passAgain" required type="password" name="rptpass"
-                placeholder="Introduce contraseña otra vez">
-              <div [hidden]="singUpClass.passAgain == singUpClass.pass" class="invalid-feedback">
-                Las contraseñas no coinciden
-              </div>
-            </div>
-            
-            <button name="btnGo" class="btn btn-primary btn-lg btn-mid"
-              [disabled]="!signUpForm.valid || !(singUpClass.passAgain == singUpClass.pass)">Enviar</button>
-        </form>
+      <div class="entryFormField">
+        <label class="form-control-label" for="rptpass">Repite contraseña</label><br>
+        <input class="form-control input-entry" #passAgain="ngModel" id="inpRptpass"
+          [ngClass]="{'is-invalid': (passAgain.invalid && passAgain.dirty) || singUpClass.passAgain != singUpClass.pass }"
+          [(ngModel)]="singUpClass.passAgain" required type="password" name="rptpass"
+          placeholder="Introduce contraseña otra vez">
+        <div [hidden]="singUpClass.passAgain == singUpClass.pass" class="invalid-feedback">
+          Las contraseñas no coinciden
+        </div>
+      </div>
 
-        <button type="button" class="btn btn-link" [routerLink]="['/login']">
-            Si ya estás registrado...
-        </button>
-    </div>
+      <button name="btnGo" class="btn btn-primary btn-lg btn-mid"
+        [disabled]="!signUpForm.valid || !(singUpClass.passAgain == singUpClass.pass)">Enviar</button>
+    </form>
+
+    <button type="button" class="btn btn-link" [routerLink]="['/login']">
+      Si ya estás registrado...
+    </button>
+  </div>
 
 </div>

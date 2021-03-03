@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -12,7 +12,11 @@ import { SignUpService } from '../services/sign-up.service';
   templateUrl: './athlete-data-register.component.html',
   styleUrls: ['./athlete-data-register.component.scss'],
 })
-export class AthleteDataRegisterComponent implements OnInit {
+export class AthleteDataRegisterComponent implements OnInit, AfterViewInit {
+
+  /* Se crea variable para aplicar foco en el primer campo del formulario */
+  @ViewChild('nameFocus') nameFocus: ElementRef;
+
   loginAthlete: AthleteClass;
   loginAthleteDto: AthleteDtoClass;
 
@@ -49,6 +53,11 @@ export class AthleteDataRegisterComponent implements OnInit {
   });
 
   constructor(private signUpService: SignUpService, private route: Router) { }
+
+  /* Se aplica foco en el primer campo del formulario */
+  ngAfterViewInit(): void {
+    this.nameFocus.nativeElement.focus();
+  }  
 
   ngOnInit(): void {}
 
