@@ -9,7 +9,7 @@
       <div class="entryFormField form-group">
         <label class="form-control-label" for="user">Usuario</label><br>
         <input class="input-entry form-control" [ngClass]="{'is-invalid': user.invalid && user.dirty}" #user="ngModel"
-          [(ngModel)]="loginUser.user" required type="text" name="username" id="inpUser"
+          [(ngModel)]="loginUser.user" required type="text" name="username" id="inpUser" #userFocus
           placeholder="Introduce usuario">
         <div [hidden]="user.valid || user.pristine" class="invalid-feedback">
           El usuario es obligatorio
