@@ -10,8 +10,10 @@ import { GroupService } from '../services/group.service';
 export class ViewGroupComponent implements OnInit {
   showActive: boolean;
 
-  actualGroup:any;
-  athletes:any = [];
+  actualGroup: any;
+  athletes: any = [];
+
+  registers: any;
 
   addRegisterForm = new FormGroup({
     weightKilograms: new FormControl('', [
@@ -29,14 +31,16 @@ export class ViewGroupComponent implements OnInit {
       Validators.maxLength(3),        // número máximo de caracteres, 3
     ]),
   });
-  
-  constructor(private groupService:GroupService) { 
+
+  constructor(private groupService: GroupService) {
     this.actualGroup = "hola";
+    this.registers = "holi";
   }
 
   ngOnInit(): void {
     this.showActive = true;
     this.getActualGroup();
+    this.getRegisters();
   }
 
   changeRanking() {
@@ -52,19 +56,19 @@ export class ViewGroupComponent implements OnInit {
     this.addRegisterForm.reset();
   }
 
-  getActualGroup(){
+  getActualGroup() {
     this.groupService.getActiveGroup().subscribe(response => {
 
       console.log(response.actualGroup);
 
       this.actualGroup = response.actualGroup;
 
-      this.actualGroup.athletes.forEach(athlete =>{
+      this.actualGroup.athletes.forEach(athlete => {
 
-        this.groupService.getAthlete(athlete).subscribe(res =>{
+        this.groupService.getAthlete(athlete).subscribe(res => {
           let athleteRanking = {
-            'name':athlete,
-            'point':res.gamePoints
+            'name': athlete,
+            'point': res.gamePoints
 
           }
 
@@ -75,9 +79,40 @@ export class ViewGroupComponent implements OnInit {
 
       })
 
-      this.athletes.sort(function(a,b){
+      this.athletes.sort(function (a, b) {
         return a.point - b.point;
       })
+    })
+  }
+
+  getRegisters() {
+    console.log("gol de cristiano")
+    this.groupService.getRegisters().subscribe(response => {
+      
+
+      if(response[0] == null){
+        this.registers = [];
+      }else{
+        this.registers = response;
+      }
+      console.log(this.registers);
+    },error => {
+      console.log(error);
+    })
+  }
+
+  crearRegistro(){
+
+    const registro = {
+      "weight":parseFloat(
+        this.addRegisterForm.value.weightKilograms + '.' + this.addRegisterForm.value.weightGrams)
+    }
+
+    this.groupService.createRegister(registro).subscribe(response=>{
+      console.log(response);
+      this.getRegisters();
+      this.actualGroup = [];
+      this.getActualGroup();
     })
   }
 
