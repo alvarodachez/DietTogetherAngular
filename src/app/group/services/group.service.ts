@@ -113,5 +113,31 @@ export class GroupService {
 
   }
 
+  getRegisters():Observable<any>{
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    const endpoint = this.endPointDev +"/register/get-registers/"+localStorage.getItem("dietUsernameSession");
+
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    return this.http.get(endpoint, httpOptions);
+
+  }
+
+  createRegister(register:any):Observable<any>{
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    const endpoint = this.endPointDev +"/register/create-register/"+localStorage.getItem("dietUsernameSession");
+
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    return this.http.post(endpoint,register,httpOptions);
+
+  }
+
 
 }

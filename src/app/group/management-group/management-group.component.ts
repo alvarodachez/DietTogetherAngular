@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '../services/group.service';
 import { GroupInterface } from '../models/group.interface';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-management-group',
@@ -26,7 +27,7 @@ export class ManagementGroupComponent implements OnInit {
     username: new FormControl('', Validators.required),
   });
 
-  constructor(private groupService: GroupService) {}
+  constructor(private groupService: GroupService, private route:Router) {}
 
   ngOnInit(): void {
     this.showTraditional = true;
@@ -78,6 +79,8 @@ export class ManagementGroupComponent implements OnInit {
       });
 
       this.groupForm.reset();
+
+      this.route.navigate(['/group/groupview'])
     });
   }
 
