@@ -64,6 +64,15 @@ export class LogInService {
       },10)
   
       
+    },error =>{
+
+      this.route.navigate(["login"]);
+      Swal.fire({
+        title: 'Error',
+        text: 'Ha habido un error en la autenticacion.',
+        icon: 'error',
+        
+      });
     })
     
     //return this.http.post(endpoint, user,{responseType:'text'});
