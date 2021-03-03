@@ -80,36 +80,16 @@
     Registros
     <i class="fas fa-plus" data-toggle="modal" data-target="#registerModal"></i>
   </h2>
-
-  <div class="card-group">
-
-    <div class="card border-primary">
-      <div class="card-header">Día 1</div>
-      <div class="card-body">
-        <!-- <h4 class="card-title">Primary card title</h4> -->
-        <p class="card-text">peso - x kg</p>
-        <p class="card-text">fecha - x fecha</p>
-        <p class="card-text">diferencia peso - x kg</p>
-      </div>
-    </div>
+  <h3 *ngIf="registers.length == 0">Aun no tienes ningun registro en este grupo</h3>
+  <div *ngFor="let register of registers" class="card-group">
 
     <div class="card border-primary">
-      <div class="card-header">Día 2</div>
+      <div class="card-header">Día {{register.weightDate}}</div>
       <div class="card-body">
         <!-- <h4 class="card-title">Primary card title</h4> -->
-        <p class="card-text">peso - x kg</p>
-        <p class="card-text">fecha - x fecha</p>
-        <p class="card-text">diferencia peso - x kg</p>
-      </div>
-    </div>
-
-    <div class="card border-primary">
-      <div class="card-header">Día 3</div>
-      <div class="card-body">
-        <!-- <h4 class="card-title">Primary card title</h4> -->
-        <p class="card-text">peso - x kg</p>
-        <p class="card-text">fecha - x fecha</p>
-        <p class="card-text">diferencia peso - x kg</p>
+        <p class="card-text">Peso Registrado => {{register.weight}} kg</p>
+        <p class="card-text">Fecha de Registro => {{register.weightDate}}</p>
+        <p class="card-text">Has perdido => {{register.weightDifference}} kg</p>
       </div>
     </div>
 
@@ -161,7 +141,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" [disabled]="!addRegisterForm.valid">Agregar</button>
+        <button type="button" class="btn btn-primary" (click)="crearRegistro()" [disabled]="!addRegisterForm.valid">Agregar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetAddRegisterForm()">Cerrar</button>
       </div>
     </div>
