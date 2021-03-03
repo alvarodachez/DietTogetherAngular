@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '../services/group.service';
 
 @Component({
@@ -11,6 +12,23 @@ export class ViewGroupComponent implements OnInit {
 
   actualGroup:any;
   athletes:any = [];
+
+  addRegisterForm = new FormGroup({
+    weightKilograms: new FormControl('', [
+      Validators.required,            // requerido
+      Validators.pattern('^[0-9]*$'), // números válidos, del 0 al 9
+      Validators.minLength(1),        // número mínimo de caracteres, 1
+      Validators.maxLength(3),        // número máximo de caracteres, 3
+      Validators.min(1),              // valor mínimo, 1
+      Validators.max(300),            // valor máximo, 300
+    ]),
+    weightGrams: new FormControl('', [
+      Validators.required,            // requerido
+      Validators.pattern('^[0-9]*$'), // números válidos, del 0 al 9
+      Validators.minLength(1),        // número mínimo de caracteres, 1
+      Validators.maxLength(3),        // número máximo de caracteres, 3
+    ]),
+  });
   
   constructor(private groupService:GroupService) { 
     this.actualGroup = "hola";
@@ -27,6 +45,11 @@ export class ViewGroupComponent implements OnInit {
 
   changeRegisters() {
     this.showActive = false;
+  }
+
+
+  resetAddRegisterForm() {
+    this.addRegisterForm.reset();
   }
 
   getActualGroup(){
