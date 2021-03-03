@@ -46,14 +46,14 @@
         </div>
 
 
-        <div class="container text-center friendsList">
+        <div class="container text-center mt-4">
           <h1>
             Amigos
             <!-- <i class="fas fa-user-plus" data-toggle="modal" data-target="#staticBackdrop"></i> -->
           </h1>
-          <h4 *ngIf="friendsList.length == 0">Agrega algún amigo a la lista</h4>
-          <h4 *ngIf="friendsList.length == 1">Hay {{friendsList.length}} amigo en la lista</h4>
-          <h4 *ngIf="friendsList.length > 1">Hay {{friendsList.length}} amigos en la lista</h4>
+          <h4 *ngIf="selectedFriendsList.length == 0">No hay amigos disponibles</h4>
+          <h4 *ngIf="selectedFriendsList.length == 1">Has seleccionado {{selectedFriendsList.length}} amigo</h4>
+          <h4 *ngIf="selectedFriendsList.length > 1">Has seleccionado {{selectedFriendsList.length}} amigos</h4>
 
           <div *ngFor="let friend of friendsList, let i = index" class="list-group">
             <div class="form-group">
@@ -67,7 +67,7 @@
         </div>
   
         <button name="btnGo" class="btn btn-primary btn-lg btn-mid mt-5" 
-        [disabled]="(!groupForm.valid) || friendsList.length == 0"
+        [disabled]="(!groupForm.valid) || selectedFriendsList.length == 0"
           (click)="createGroup()">
           Enviar
         </button>
