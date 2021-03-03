@@ -22,3 +22,63 @@
 .active {
     color: white;
 }
+
+.progress {
+    height: 4vh;
+}
+
+.card-group {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.modal {
+    font-size: 20px;
+}
+
+/* --- */
+
+.midInputLeft {
+    margin-left: 10%;
+}
+
+.midInputRight {
+    margin-right: 10%;
+}
+
+.doubleInput {
+    display: flex;
+    justify-content: space-evenly;
+
+    input {
+        width: 33%;
+    }
+}
+
+
+/* ----------- */
+
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+  
+    .card-group {
+        width: 100%;
+    }
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+    
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+  
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+  
+}
