@@ -41,44 +41,6 @@ export class ManagementGroupComponent implements OnInit {
     this.showTraditional = false;
   }
 
-  
-  // resetAddFriendForm() {
-  //   this.addFriendForm.reset();
-  // }
-
-
-  // setFriendToSendRequest(friend) {
-  //   console.log(friend);
-  //   this.searchFriends = [];
-
-  //   this.addFriendForm.setValue({ username: friend });
-  // }
-
-
-  // addFriendToList() {
-  //   let username = this.addFriendForm.value.username;
-
-  //   console.log('Lista antes:');
-  //   console.log(this.friendsList);
-
-  //   this.friendsList.push(username);
-  //   this.addFriendForm.reset();
-
-  //   console.log('Lista después:');
-  //   console.log(this.friendsList);
-  // }
-
-
-  // deleteFriendFromList(id: number) {
-  //   console.log('Lista antes eliminar:');
-  //   console.log(this.friendsList);
-
-  //   delete this.friendsList[id];
-
-  //   console.log('Lista después eliminar:');
-  //   console.log(this.friendsList);
-  // }
-
 
   /* Crear grupo de atletas */
   createGroup(): void {
@@ -120,29 +82,12 @@ export class ManagementGroupComponent implements OnInit {
   }
 
   onCheckboxChange(e) {
-
     if (e.target.checked) {
-      // console.log(`añadir amigo ${e.target.checked}`);
-
-      // console.log('Lista antes añadir:');
-      // console.log(this.selectedFriendsList);
-  
+      /* Añadir amigo a la lista de amigos seleccionados */
       this.selectedFriendsList.push(e.target.id);
-
-      // console.log('Lista después añadir:');
-      // console.log(this.selectedFriendsList);
-
     } else {
-      
-      // console.log(`borrar amigo ${e.target.checked}`);
-
-      // console.log('Lista después eliminar:');
-      // console.log(this.selectedFriendsList);
-
+      /* Eliminar amigo de la lista de amigos seleccionados */
       this.selectedFriendsList.splice(this.selectedFriendsList.indexOf(e.target.id), 1);
-
-      // console.log('Lista después eliminar:');
-      // console.log(this.selectedFriendsList);
     }
   }
 
