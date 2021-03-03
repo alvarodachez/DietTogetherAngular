@@ -11,7 +11,6 @@ export class WelcomeComponent implements OnInit {
   constructor(private route:Router) { }
 
   ngOnInit(): void {
-    
   }
 
 
@@ -22,7 +21,5 @@ export class WelcomeComponent implements OnInit {
 
     this.route.navigate(['/login']);
   }
-
-  
 
 }

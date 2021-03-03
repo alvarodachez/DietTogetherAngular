@@ -79,4 +79,25 @@ export class GroupService {
     return this.http.get(endpoint, httpOptions);
   }
 
+
+  getActiveGroup(): Observable<any> {
+    /* Obtener usuario de la sesión actual */
+    const username = localStorage.getItem("dietUsernameSession");
+
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointDev + `/athlete/${username}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    /* Devolver array (string) con los amigos del usuario */
+    return this.http.get(endpoint, httpOptions);
+  }
+
+
 }
