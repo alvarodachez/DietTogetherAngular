@@ -15,6 +15,8 @@ export class ViewGroupComponent implements OnInit {
   athletes: any = [];
   actualPage: number = 1;
 
+  progressBar: any;
+
   registers: any;
 
   addRegisterForm = new FormGroup({
@@ -37,12 +39,14 @@ export class ViewGroupComponent implements OnInit {
   constructor(private groupService: GroupService) {
     this.actualGroup = "hola";
     this.registers = "holi";
+    this.progressBar = "buenas";
   }
 
   ngOnInit(): void {
     this.showActive = true;
     this.getActualGroup();
     this.getRegisters();
+    this.getProgressBar();
   }
 
   changeRanking() {
@@ -61,7 +65,7 @@ export class ViewGroupComponent implements OnInit {
   getActualGroup() {
     this.groupService.getActiveGroup().subscribe(response => {
 
-      /* console.log(response.actualGroup); */
+      console.log(response.actualGroup);
 
       this.actualGroup = response.actualGroup;
 
@@ -81,7 +85,7 @@ export class ViewGroupComponent implements OnInit {
             this.athletes = this.athletes.sort((a: AthleteRankingInterface, b: AthleteRankingInterface) => {
 
               console.log("holi")
-              if (a.point <  b.point) {
+              if (a.point < b.point) {
                 return 1;
               }
 
@@ -114,7 +118,7 @@ export class ViewGroupComponent implements OnInit {
 
         if (this.registers.length > 1) {
 
-          this.registers = this.athletes.sort((a,b)=> new Date(a.weightDate) < new Date(b.weightDate));
+          this.registers = this.athletes.sort((a, b) => new Date(a.weightDate) < new Date(b.weightDate));
         }
 
 
@@ -137,6 +141,13 @@ export class ViewGroupComponent implements OnInit {
       this.getRegisters();
       this.athletes = [];
       this.getActualGroup();
+    })
+  }
+
+  getProgressBar() {
+    this.groupService.getProgressBar().subscribe(response => {
+      console.log(response);
+      this.progressBar = response;
     })
   }
 
