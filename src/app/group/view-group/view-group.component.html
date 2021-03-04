@@ -81,7 +81,7 @@
     <i class="fas fa-plus" data-toggle="modal" data-target="#registerModal" (click)="resetAddRegisterForm()"></i>
   </h2>
   <h3 *ngIf="registers.length == 0">Aun no tienes ningun registro en este grupo</h3>
-  <div *ngFor="let register of registers" class="card-group">
+  <div *ngFor="let register of registers | paginate:{itemsPerPage: 6, currentPage:actualPage};, let i = index" class="card-group">
 
     <div class="card border-primary">
       <div class="card-header">Día {{register.weightDate}}</div>
@@ -94,6 +94,8 @@
     </div>
 
   </div>
+
+  <pagination-controls class="container mt-2" (pageChange)="actualPage = $event"></pagination-controls>
 
 </div>
 
