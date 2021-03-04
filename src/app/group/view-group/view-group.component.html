@@ -78,7 +78,7 @@
 
   <h2>
     Registros
-    <i class="fas fa-plus" data-toggle="modal" data-target="#registerModal"></i>
+    <i class="fas fa-plus" data-toggle="modal" data-target="#registerModal" (click)="resetAddRegisterForm()"></i>
   </h2>
   <h3 *ngIf="registers.length == 0">Aun no tienes ningun registro en este grupo</h3>
   <div *ngFor="let register of registers | paginate:{itemsPerPage: 6, currentPage:actualPage};, let i = index" class="card-group">
@@ -143,7 +143,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="crearRegistro()" [disabled]="!addRegisterForm.valid">Agregar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearRegistro()" [disabled]="!addRegisterForm.valid">Agregar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetAddRegisterForm()">Cerrar</button>
       </div>
     </div>

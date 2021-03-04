@@ -20,6 +20,9 @@ export class LogInComponent implements OnInit, AfterViewInit {
   userSignUpDto: UserSignUpDto;
   routeRedirect = '';
 
+  /* Variable utilizada para ocultar la contraseña */
+  hidePass = true;
+
   constructor(private logInService: LogInService, private route: Router) {
     this.loginUser = new LoginClass("", "");
     this.userSignUpDto = new UserSignUpDto("", "");
