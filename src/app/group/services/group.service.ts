@@ -139,5 +139,18 @@ export class GroupService {
 
   }
 
+  getProgressBar():Observable<any>{
+
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    const endpoint = this.endPointDev +"/group/get-progress-bar/"+localStorage.getItem("dietUsernameSession");
+
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    return this.http.get(endpoint,httpOptions);
+  }
+
 
 }
