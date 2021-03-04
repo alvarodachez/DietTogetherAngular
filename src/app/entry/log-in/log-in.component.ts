@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginClass } from '../models/login.class';
@@ -11,17 +11,23 @@ import Swal from 'sweetalert2';
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss']
 })
-export class LogInComponent implements OnInit {
+export class LogInComponent implements OnInit, AfterViewInit {
+
+  /* Se crea variable para aplicar foco en el primer campo del formulario */
+  @ViewChild('userFocus') userFocus: ElementRef;
 
   loginUser: LoginClass;
-
   userSignUpDto: UserSignUpDto;
-
   routeRedirect = '';
 
   constructor(private logInService: LogInService, private route: Router) {
     this.loginUser = new LoginClass("", "");
     this.userSignUpDto = new UserSignUpDto("", "");
+  }
+
+  /* Se aplica foco en el primer campo del formulario */
+  ngAfterViewInit(): void {
+    this.userFocus.nativeElement.focus();
   }
 
   ngOnInit(): void {

@@ -12,8 +12,6 @@ import { FriendsService } from '../services/friends.service';
 })
 export class FriendsComponent implements OnInit {
 
-  borrar = localStorage.getItem("dietUsernameSession");
-
   searchFriends: any = [];
   userFriends: any = [];
   friendRequests: any = [];
@@ -91,8 +89,7 @@ export class FriendsComponent implements OnInit {
   }
 
 
-  sendFriendRequest() {
-    let username = this.addFriendForm.value.username;
+  sendFriendRequest(username: string) {
 
     this.friendService.sendFriendRequest(username).subscribe(res => {
       console.log(res);
@@ -107,17 +104,26 @@ export class FriendsComponent implements OnInit {
           toast.addEventListener('mouseenter', Swal.stopTimer)
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-      })
+      });
 
       this.getFriendRequests();
 
       Toast.fire({
         icon: 'success',
         title: 'Se ha enviado la solicitud a ' + username
-      })
+      });
 
-      this.addFriendForm.setValue({username:""})
+      this.resetAddFriendForm();
+
     });
+  }
+
+  resetAddFriendForm() {
+    /* Borrar la lista de amigos, para que no aparezcan amigos ya agregados al abrir el modal */
+    this.searchFriends = [];
+
+    /* Resetear el formulario de añadir amigos */
+    this.addFriendForm.reset();
   }
 
 

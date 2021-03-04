@@ -63,8 +63,8 @@
       <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
     </li>
     <li *ngIf="(i != 2 && i != 1 && i != 0)" class="list-group-item d-flex justify-content-between align-items-center">
-      <i class="fas fa-trophy text-white fa-2x"></i>
-      {{i}} {{athleteRanking.name}}
+      <span>{{i + 1}}</span> 
+      {{athleteRanking.name}}
       <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
     </li>
   </ul>
@@ -81,7 +81,7 @@
     <i class="fas fa-plus" data-toggle="modal" data-target="#registerModal"></i>
   </h2>
   <h3 *ngIf="registers.length == 0">Aun no tienes ningun registro en este grupo</h3>
-  <div *ngFor="let register of registers" class="card-group">
+  <div *ngFor="let register of registers | paginate:{itemsPerPage: 6, currentPage:actualPage};, let i = index" class="card-group">
 
     <div class="card border-primary">
       <div class="card-header">Día {{register.weightDate}}</div>
@@ -94,6 +94,8 @@
     </div>
 
   </div>
+
+  <pagination-controls class="container mt-2" (pageChange)="actualPage = $event"></pagination-controls>
 
 </div>
 

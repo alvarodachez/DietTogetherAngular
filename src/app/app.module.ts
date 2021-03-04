@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // Módulos
 import { EntryModule } from './entry/entry.module';
@@ -12,6 +13,7 @@ import { GroupModule } from './group/group.module';
 // Componentes
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { FooterComponent } from './common/footer/footer.component';
     EntryModule,
     HomeModule,
     SocialModule,
-    GroupModule
+    GroupModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

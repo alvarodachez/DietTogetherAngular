@@ -9,6 +9,7 @@ import { WelcomeGroupComponent } from './welcome-group/welcome-group.component';
 import { ManagementGroupComponent } from './management-group/management-group.component';
 import { ViewGroupComponent } from './view-group/view-group.component';
 import { CanActivateGuard } from '../entry/services/can-activate.guard';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
 
@@ -46,6 +47,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     RouterModule.forChild(routes),
   ],
 })

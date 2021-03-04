@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '../services/group.service';
+import { AthleteRankingInterface } from '../models/athlete-ranking.interface';
 
 @Component({
   selector: 'app-view-group',
@@ -12,6 +13,7 @@ export class ViewGroupComponent implements OnInit {
 
   actualGroup: any;
   athletes: any = [];
+  actualPage: number = 1;
 
   registers: any;
 
@@ -59,59 +61,81 @@ export class ViewGroupComponent implements OnInit {
   getActualGroup() {
     this.groupService.getActiveGroup().subscribe(response => {
 
-      console.log(response.actualGroup);
+      /* console.log(response.actualGroup); */
 
       this.actualGroup = response.actualGroup;
 
       this.actualGroup.athletes.forEach(athlete => {
 
         this.groupService.getAthlete(athlete).subscribe(res => {
-          let athleteRanking = {
-            'name': athlete,
-            'point': res.gamePoints
+          let athleteRanking: AthleteRankingInterface = {
+            name: res.name,
+            point: res.gamePoints
 
           }
 
           this.athletes.push(athleteRanking);
 
-          console.log(athleteRanking);
+          if (this.athletes.length > 1) {
+
+            this.athletes = this.athletes.sort((a: AthleteRankingInterface, b: AthleteRankingInterface) => {
+
+              console.log("holi")
+              if (a.point <  b.point) {
+                return 1;
+              }
+
+              if (a.point > b.point) {
+                return -1;
+              }
+
+              return 0;
+            })
+          }
+
+          /* console.log(athleteRanking); */
         })
 
       })
 
-      this.athletes.sort(function (a, b) {
-        return a.point - b.point;
-      })
+
     })
   }
 
   getRegisters() {
     console.log("gol de cristiano")
     this.groupService.getRegisters().subscribe(response => {
-      
 
-      if(response[0] == null){
+
+      if (response[0] == null) {
         this.registers = [];
-      }else{
+      } else {
         this.registers = response;
+
+        if (this.registers.length > 1) {
+
+          this.registers = this.athletes.sort((a,b)=> new Date(a.weightDate) < new Date(b.weightDate));
+        }
+
+
       }
       console.log(this.registers);
-    },error => {
+    }, error => {
       console.log(error);
     })
   }
 
-  crearRegistro(){
+  crearRegistro() {
 
     const registro = {
-      "weight":parseFloat(
+      "weight": parseFloat(
         this.addRegisterForm.value.weightKilograms + '.' + this.addRegisterForm.value.weightGrams)
     }
 
-    this.groupService.createRegister(registro).subscribe(response=>{
+    this.groupService.createRegister(registro).subscribe(response => {
       console.log(response);
       this.getRegisters();
-      this.actualGroup = [];
+      this.athletes = [];
       this.getActualGroup();
     })
   }

@@ -11,7 +11,7 @@
       <div class="form-group entryFormField">
         <label class="form-control-label" for="name">Nombre</label><br>
         <input type="text" formControlName="name" name="name" class="input-entry form-control"
-          placeholder="Introduce nombre" required id="inpName"
+          placeholder="Introduce nombre" required id="inpName" #nameFocus
           [class.is-invalid]="athleteForm.get('name').touched && athleteForm.get('name').invalid">
         <div class="alert colorFallo" [hidden]="athleteForm.get('name').pristine || athleteForm.get('name').valid">
           El nombre es obligatorio
