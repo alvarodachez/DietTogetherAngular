@@ -18,9 +18,13 @@
       </div>
 
       <div class="entryFormField">
-        <label class="form-control-label" for="pass">Contraseña</label><br>
+        <label class="form-control-label" for="pass">
+          Contraseña
+          <i *ngIf="hidePass" class="fas fa-eye" (click)="hidePass = !hidePass"></i>
+          <i *ngIf="!hidePass" class="fas fa-eye-slash" (click)="hidePass = !hidePass"></i>
+        </label><br>
         <input class="form-control input-entry" [ngClass]="{'is-invalid': pass.invalid && pass.dirty}" #pass="ngModel"
-          [(ngModel)]="singUpClass.pass" required type="password" name="password" id="inpPass"
+          [(ngModel)]="singUpClass.pass" required [type]="hidePass ? 'password' : 'text'" name="password" id="inpPass"
           placeholder="Introduce contraseña">
         <div [hidden]="pass.valid || pass.pristine" class="invalid-feedback">
           La contraseña es obligatoria
@@ -28,10 +32,14 @@
       </div>
 
       <div class="entryFormField">
-        <label class="form-control-label" for="rptpass">Repite contraseña</label><br>
+        <label class="form-control-label" for="rptpass">
+          Repite contraseña
+          <i *ngIf="hideRepeatPass" class="fas fa-eye" (click)="hideRepeatPass = !hideRepeatPass"></i>
+          <i *ngIf="!hideRepeatPass" class="fas fa-eye-slash" (click)="hideRepeatPass = !hideRepeatPass"></i>
+        </label><br>
         <input class="form-control input-entry" #passAgain="ngModel" id="inpRptpass"
           [ngClass]="{'is-invalid': (passAgain.invalid && passAgain.dirty) || singUpClass.passAgain != singUpClass.pass }"
-          [(ngModel)]="singUpClass.passAgain" required type="password" name="rptpass"
+          [(ngModel)]="singUpClass.passAgain" required [type]="hideRepeatPass ? 'password' : 'text'" name="rptpass"
           placeholder="Introduce contraseña otra vez">
         <div [hidden]="singUpClass.passAgain == singUpClass.pass" class="invalid-feedback">
           Las contraseñas no coinciden
