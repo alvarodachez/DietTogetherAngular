@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '../services/group.service';
+import { AthleteRankingInterface } from '../models/athlete-ranking.interface';
 
 @Component({
   selector: 'app-view-group',
@@ -66,9 +67,9 @@ export class ViewGroupComponent implements OnInit {
       this.actualGroup.athletes.forEach(athlete => {
 
         this.groupService.getAthlete(athlete).subscribe(res => {
-          let athleteRanking = {
-            'name': athlete,
-            'point': res.gamePoints
+          let athleteRanking:AthleteRankingInterface = {
+            name:res.name,
+            point:res.gamePoints
 
           }
 
@@ -79,8 +80,16 @@ export class ViewGroupComponent implements OnInit {
 
       })
 
-      this.athletes.sort(function (a, b) {
-        return a.point - b.point;
+      this.athletes.sort((a:AthleteRankingInterface,b:AthleteRankingInterface)=>{
+        if(a.point > b.point){
+          return 1;
+        }
+
+        if(a.point < b.point){
+          return -1;
+        }
+
+        return 0;
       })
     })
   }
@@ -111,7 +120,7 @@ export class ViewGroupComponent implements OnInit {
     this.groupService.createRegister(registro).subscribe(response=>{
       console.log(response);
       this.getRegisters();
-      this.actualGroup = [];
+      this.athletes = [];
       this.getActualGroup();
     })
   }
