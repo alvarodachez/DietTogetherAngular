@@ -9,13 +9,14 @@
     </ol>
   </div>
 </div>
-<div class="container text-center mt-2">
 
-  <div class="btn-group" role="group" aria-label="Basic example">
-      <button (click)="changeTradicional()" type="button" class="btn btn-secondary">Modo tradicional</button>
-      <button (click)="changeObjetivo()" disabled type="button" class="btn btn-secondary">Modo objetivos</button>
+<div class="text-center">
+  <div class="btn-group w-100" role="group" aria-label="Basic example">
+      <button (click)="changeTradicional()" type="button" class="btn btn-secondary w-50 rounded-0 active">Modo tradicional</button>
+      <button (click)="changeObjetivo()" disabled type="button" class="btn btn-secondary w-50 rounded-0">Modo objetivos</button>
   </div>
 </div>
+
 
 <div *ngIf="showTraditional == true" class="container text-center">
   <!-- TRADICIONAL -->
