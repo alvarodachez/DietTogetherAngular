@@ -73,7 +73,7 @@
   </div>
 
   <div *ngFor="let friend of friendRequests" class="list-group mt-2">
-    <button type="button" class="list-group-item list-group-item-action active">
+    <button type="button" class="list-group-item list-group-item-action active mx-auto">
       Solicitud enviada por {{friend.claimantAthlete}}
       <i class="fas fa-check pl-5" (click)="acceptFriendRequest(friend.id)"></i>
       <i class="fas fa-times pl-5" (click)="rejectFriendRequest(friend.id)"></i>
@@ -104,7 +104,7 @@
   <h4 *ngIf="groupRequests.length > 1">Tienes {{friendRequests.length}} solicitudes de grupo pendientes</h4>
 
   <div *ngFor="let group of groupRequests" class="list-group mt-2">
-    <button type="button" class="list-group-item list-group-item-action active">
+    <button type="button" class="list-group-item list-group-item-action active mx-auto">
       Solicitud de grupo enviada por {{group.claimantAthlete}}
       <i class="fas fa-check pl-5" (click)="acceptGroupRequest(group.id)"></i>
       <i class="fas fa-times pl-5" (click)="rejectGroupRequest(group.id)"></i>
