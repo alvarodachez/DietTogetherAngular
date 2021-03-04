@@ -17,15 +17,29 @@
       </div>
 
       <div class="entryFormField form-group has-danger">
-        <label class="form-control-label" for="pass">Contraseña</label><br>
+        <label class="form-control-label" for="pass">
+          Contraseña
+          <i *ngIf="hidePass" class="fas fa-eye" (click)="hidePass = !hidePass"></i>
+          <i *ngIf="!hidePass" class="fas fa-eye-slash" (click)="hidePass = !hidePass"></i>
+        </label><br>
+
         <input class="input-entry form-control" [ngClass]="{'is-invalid': pass.invalid && pass.dirty}" #pass="ngModel"
-          [(ngModel)]="loginUser.pass" required type="password" name="password" id="inpPass"
+          [(ngModel)]="loginUser.pass" required [type]="hidePass ? 'password' : 'text'" name="password" id="inpPass"
           placeholder="Introduce contraseña">
+          
+        <!-- <i class="fas fa-key ml-3" (click)="hidePass = !hidePass"></i> -->
         <div [hidden]="pass.valid || pass.pristine" class="invalid-feedback">
           La contraseña es obligatoria
         </div>
       </div>
 
+<!--       <div class="input-group">
+        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+        <div class="input-group-append">
+          <span class="input-group-text">.00</span>
+        </div>
+      </div>
+ -->
       <button name="btnGo" class="btn btn-primary btn-lg btn-mid" [disabled]="!loginForm.valid">Enviar</button>
     </form>
 

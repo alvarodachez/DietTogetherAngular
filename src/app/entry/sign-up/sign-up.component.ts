@@ -18,6 +18,10 @@ export class SignUpComponent implements OnInit, AfterViewInit {
   singUpClass: SignUpClass;
   userSignUpDto: UserSignUpDto;
 
+  /* Variable utilizada para ocultar la contraseña */
+  hidePass = true;
+  hideRepeatPass = true;
+
   constructor(private signUpService: SignUpService, private route: Router) {
 
     this.singUpClass = new SignUpClass("", "", "");
