@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { GroupService } from '../services/group.service';
 import { GroupInterface } from '../models/group.interface';
 import Swal from 'sweetalert2';
@@ -20,14 +20,16 @@ export class ManagementGroupComponent implements OnInit {
 
   groupForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    expireDate: new FormControl('', Validators.required),
+    expireDate: new FormControl('', [
+      Validators.required /* CustomValidators.dateMinimum('2018-12-12') ]*/,
+    ]),
   });
 
   addFriendForm = new FormGroup({
     username: new FormControl('', Validators.required),
   });
 
-  constructor(private groupService: GroupService, private route:Router) {}
+  constructor(private groupService: GroupService, private route: Router) {}
 
   ngOnInit(): void {
     this.showTraditional = true;
@@ -42,10 +44,8 @@ export class ManagementGroupComponent implements OnInit {
     this.showTraditional = false;
   }
 
-
   /* Crear grupo de atletas */
   createGroup(): void {
-
     Swal.fire({
       title: 'Espere',
       text: 'Se estan guardando sus datos',
@@ -53,7 +53,6 @@ export class ManagementGroupComponent implements OnInit {
       allowOutsideClick: false,
     });
     Swal.showLoading();
-
 
     /* Crear objeto para enviarlo al backend */
     let backendForm: GroupInterface = {
@@ -73,14 +72,14 @@ export class ManagementGroupComponent implements OnInit {
 
       Swal.fire({
         title: `Grupo ${backendForm.name}`,
-        text:'Registro realizado correctamente.',
-        icon:'success',
-        input:undefined
+        text: 'Registro realizado correctamente.',
+        icon: 'success',
+        input: undefined,
       });
 
       this.groupForm.reset();
 
-      this.route.navigate(['/group/groupview'])
+      this.route.navigate(['/group/groupview']);
     });
   }
 
@@ -90,10 +89,12 @@ export class ManagementGroupComponent implements OnInit {
       this.selectedFriendsList.push(e.target.id);
     } else {
       /* Eliminar amigo de la lista de amigos seleccionados */
-      this.selectedFriendsList.splice(this.selectedFriendsList.indexOf(e.target.id), 1);
+      this.selectedFriendsList.splice(
+        this.selectedFriendsList.indexOf(e.target.id),
+        1
+      );
     }
   }
-
 
   getFriends() {
     this.groupService.getFriends().subscribe((res) => {
@@ -101,4 +102,38 @@ export class ManagementGroupComponent implements OnInit {
       console.log(res);
     });
   }
+
+  // dateValidator(): ValidatorFn {
+  //   return (control:AbstractControl) : ValidationErrors | null => {
+
+  //       const value = control.value;
+
+  //       if (!value) {
+  //           return null;
+  //       }
+
+  //       const hasUpperCase = /[A-Z]+/.test(value);
+
+  //       const hasLowerCase = /[a-z]+/.test(value);
+
+  //       const hasNumeric = /[0-9]+/.test(value);
+
+  //       const passwordValid = hasUpperCase && hasLowerCase && hasNumeric;
+
+  //       return !passwordValid ? {passwordStrength:true}: null;
+  //   }
+  // }
+
+  // forbiddenNameValidator(): ValidatorFn {
+  //   return (control: AbstractControl): { [key: string]: any } | null => {
+  //     const forbidden = control.value;
+
+  //     if (!forbidden) {
+  //       return null;
+  //     }
+
+  //     return forbidden ? { forbiddenName: { value: control.value } } : null;
+  //   };
+  // }
+  
 }
