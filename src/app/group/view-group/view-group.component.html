@@ -114,11 +114,11 @@
             <label class="col-form-label" for="peso">Introduce el peso (Kg y gramos):</label>
 
             <div class="doubleInput">
-              <input class="input-entry form-control midInputLeft" required type="tel" formControlName="weightKilograms"
+              <input class="dietInput form-control midInputLeft" required type="tel" formControlName="weightKilograms"
                 name="weightKilograms" id="inpWeightKilograms" placeholder="Kilos"
                 [class.is-invalid]="addRegisterForm.get('weightKilograms').touched && addRegisterForm.get('weightKilograms').invalid">
               <p class="mt-2">y</p>
-              <input class="input-entry form-control midInputRight" required type="tel" formControlName="weightGrams"
+              <input class="dietInput form-control midInputRight" required type="tel" formControlName="weightGrams"
                 name="weightGrams" id="inpWeightGrams" placeholder="Gramos"
                 [class.is-invalid]="addRegisterForm.get('weightGrams').touched && addRegisterForm.get('weightGrams').invalid">
             </div>
