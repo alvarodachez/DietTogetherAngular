@@ -35,6 +35,10 @@
     font-size: 20px;
 }
 
+.dietInput {
+  @include dietInput;
+}
+
 /* --- */
 
 .midInputLeft {

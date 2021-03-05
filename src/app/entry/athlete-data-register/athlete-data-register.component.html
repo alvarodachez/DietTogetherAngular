@@ -10,7 +10,7 @@
 
       <div class="form-group entryFormField">
         <label class="form-control-label" for="name">Nombre</label><br>
-        <input type="text" formControlName="name" name="name" class="input-entry form-control"
+        <input type="text" formControlName="name" name="name" class="dietInput form-control"
           placeholder="Introduce nombre" required id="inpName" #nameFocus
           [class.is-invalid]="athleteForm.get('name').touched && athleteForm.get('name').invalid">
         <div class="alert colorFallo" [hidden]="athleteForm.get('name').pristine || athleteForm.get('name').valid">
@@ -20,7 +20,7 @@
 
       <div class="form-group entryFormField">
         <label class="form-control-label" for="surname">Apellidos</label><br>
-        <input type="text" formControlName="surname" name="surname" class="input-entry form-control"
+        <input type="text" formControlName="surname" name="surname" class="dietInput form-control"
           placeholder="Introduce apellidos" required id="inpSurname"
           [class.is-invalid]="athleteForm.get('surname').touched && athleteForm.get('surname').invalid">
         <div class="alert colorFallo"
@@ -31,7 +31,7 @@
 
       <div class="form-group entryFormField">
         <label class="form-control-label" for="birthDay">Fecha de nacimiento</label><br>
-        <input type="date" formControlName="birthDay" name="birthDay" class="input-entry form-control"
+        <input type="date" formControlName="birthDay" name="birthDay" class="dietInput form-control"
           placeholder="Introduce apellidos" required id="inpBirthday"
           [class.is-invalid]="athleteForm.get('birthDay').touched && athleteForm.get('birthDay').invalid">
         <div class="alert colorFallo"
@@ -44,11 +44,11 @@
         <label class="form-control-label">Peso (Kg y gramos)</label><br>
 
         <div class="doubleInput">
-          <input class="input-entry form-control midInputLeft" required type="tel" formControlName="weightKilograms"
+          <input class="dietInput form-control midInputLeft" required type="tel" formControlName="weightKilograms"
             name="weightKilograms" id="inpWeightKilograms" placeholder="Kilos"
             [class.is-invalid]="athleteForm.get('weightKilograms').touched && athleteForm.get('weightKilograms').invalid">
             <p class="mt-2">y</p>
-          <input class="input-entry form-control midInputRight" required type="tel" formControlName="weightGrams"
+          <input class="dietInput form-control midInputRight" required type="tel" formControlName="weightGrams"
             name="weightGrams" id="inpWeightGrams" placeholder="Gramos"
             [class.is-invalid]="athleteForm.get('weightGrams').touched && athleteForm.get('weightGrams').invalid">
         </div>
@@ -69,11 +69,11 @@
         <label class="form-control-label">Altura (metros y centímetros)</label><br>
 
         <div class="doubleInput">
-          <input class="input-entry form-control midInputLeft" required type="tel" formControlName="heightMeters"
+          <input class="dietInput form-control midInputLeft" required type="tel" formControlName="heightMeters"
             name="heightMeters" id="inpHeightMeters" placeholder="Metros"
             [class.is-invalid]="athleteForm.get('heightMeters').touched && athleteForm.get('heightMeters').invalid">
           <p class="mt-2">y</p>
-          <input class="input-entry form-control midInputRight" required type="tel" formControlName="heightCentimeters"
+          <input class="dietInput form-control midInputRight" required type="tel" formControlName="heightCentimeters"
             name="heightCentimeters" id="inpHeightCentimeters" placeholder="Cent."
             [class.is-invalid]="athleteForm.get('heightCentimeters').touched && athleteForm.get('heightCentimeters').invalid">
         </div>
