@@ -24,21 +24,5 @@
 }
 
 .details {
-    background-color: #A1C5CE;
-    border-radius: 5px;
-    color: white;
-    
-    .detailsText {
-        padding-top: 2vh;
-        padding-bottom: 2vh;
-    }
-
-    h2 {
-        color: whitesmoke;
-    }
-
-    a p {
-        color: #4D8593;
-        font-weight: 800;
-    }
+    @include dietInfoBox;
 }

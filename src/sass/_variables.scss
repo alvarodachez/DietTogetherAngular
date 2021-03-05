@@ -73,6 +73,11 @@ $danger:        $red !default;
 $light:         $gray-100 !default;
 $dark:          $gray-800 !default;
 
+$dietBannerBackground:      #9CD3C4;
+$dietInfoBoxBackground:     #A1C5CE;
+$dietInfoBoxLink:           #4D8593;
+
+
 $theme-colors: () !default;
 $theme-colors: map-merge(
   (
