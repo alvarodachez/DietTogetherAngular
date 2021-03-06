@@ -15,6 +15,10 @@ export class ViewGroupComponent implements OnInit {
   athletes: any = [];
   actualPage: number = 1;
 
+  nextRegisterDate:any;
+
+  isRegisterActive:boolean = true;
+
   progressBar: any;
 
   registers: any;
@@ -47,6 +51,7 @@ export class ViewGroupComponent implements OnInit {
     this.getActualGroup();
     this.getRegisters();
     this.getProgressBar();
+    
   }
 
   changeRanking() {
@@ -123,6 +128,7 @@ export class ViewGroupComponent implements OnInit {
 
 
       }
+      this.setNextRegisterDate();
       console.log(this.registers);
     }, error => {
       console.log(error);
@@ -149,6 +155,22 @@ export class ViewGroupComponent implements OnInit {
       console.log(response);
       this.progressBar = response;
     })
+  }
+
+  setNextRegisterDate(){
+
+    debugger
+    console.log("gola")
+    if(this.registers.length >= 1){
+
+      this.nextRegisterDate = this.registers[0].nextDateRegister;
+
+      if(new Date(Date.now()) > new Date(Date.parse(this.nextRegisterDate))){
+        this.isRegisterActive = true;
+      }else{
+        this.isRegisterActive = false;
+      }
+    }
   }
 
 }
