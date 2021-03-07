@@ -35,7 +35,7 @@ export class LogInService {
 
 
   login(user: UserSignUpDto):void {
-    const endpoint = 'https://diet2gether.oa.r.appspot.com' + '/user/login';
+    const endpoint = this.endPointDev + '/user/login';
 
     this.http.post(endpoint, user,{responseType:'text'}).subscribe(response => {
 
