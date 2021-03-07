@@ -15,7 +15,7 @@ export class FriendsComponent implements OnInit {
   searchFriends: any = [];
   userFriends: any = [];
   friendRequests: any = [];
-  groupRequests:any = [];
+  groupRequests: any = [];
 
   addFriendForm = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -39,7 +39,7 @@ export class FriendsComponent implements OnInit {
 
 
       })
-    }else{
+    } else {
       this.searchFriends = [];
     }
 
@@ -49,12 +49,15 @@ export class FriendsComponent implements OnInit {
 
     console.log(friend);
     this.searchFriends = [];
-    
-    this.addFriendForm.setValue({username:friend})
+
+    this.addFriendForm.setValue({ username: friend })
   }
 
   getFriends() {
+    
+    
     this.friendService.getFriends().subscribe(res => {
+      
       this.userFriends = res;
     })
   }
@@ -90,6 +93,14 @@ export class FriendsComponent implements OnInit {
 
 
   sendFriendRequest(username: string) {
+
+    Swal.fire({
+      title: 'Espere',
+      text: 'Se esta mandando su solicitud',
+      icon: 'info',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
 
     this.friendService.sendFriendRequest(username).subscribe(res => {
       console.log(res);
@@ -128,6 +139,14 @@ export class FriendsComponent implements OnInit {
 
 
   acceptFriendRequest(idRequest: any) {
+
+    Swal.fire({
+      title: 'Espere',
+      text: 'Se esta aceptando la solicitud',
+      icon: 'info',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
     this.friendService.acceptFriendRequest(idRequest).subscribe(res => {
 
       const Toast = Swal.mixin({
@@ -153,6 +172,13 @@ export class FriendsComponent implements OnInit {
   }
 
   acceptGroupRequest(idRequest: any) {
+    Swal.fire({
+      title: 'Espere',
+      text: 'Se esta aceptando la solicitud',
+      icon: 'info',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
     this.friendService.acceptGroupRequest(idRequest).subscribe(res => {
 
       const Toast = Swal.mixin({
@@ -167,7 +193,7 @@ export class FriendsComponent implements OnInit {
         }
       })
 
-      
+
       this.getGroupRequests();
 
       Toast.fire({
@@ -179,6 +205,14 @@ export class FriendsComponent implements OnInit {
 
 
   rejectFriendRequest(idRequest: any) {
+
+    Swal.fire({
+      title: 'Espere',
+      text: 'Se esta rechazando la solicitud',
+      icon: 'info',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
     this.friendService.rejectFriendRequest(idRequest).subscribe(res => {
 
       const Toast = Swal.mixin({
@@ -204,6 +238,13 @@ export class FriendsComponent implements OnInit {
   }
 
   rejectGroupRequest(idRequest: any) {
+    Swal.fire({
+      title: 'Espere',
+      text: 'Se esta rechazando la solicitud',
+      icon: 'info',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
     this.friendService.rejectGroupRequest(idRequest).subscribe(res => {
 
       const Toast = Swal.mixin({
@@ -218,7 +259,7 @@ export class FriendsComponent implements OnInit {
         }
       })
 
-      
+
       this.getGroupRequests();
 
       Toast.fire({

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '../services/group.service';
 import { AthleteRankingInterface } from '../models/athlete-ranking.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-group',
@@ -137,6 +138,8 @@ export class ViewGroupComponent implements OnInit {
 
   crearRegistro() {
 
+    
+
     const registro = {
       "weight": parseFloat(
         this.addRegisterForm.value.weightKilograms + '.' + this.addRegisterForm.value.weightGrams)
@@ -159,7 +162,7 @@ export class ViewGroupComponent implements OnInit {
 
   setNextRegisterDate(){
 
-    debugger
+    
     console.log("gola")
     if(this.registers.length >= 1){
 
