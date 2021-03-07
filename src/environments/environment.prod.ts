@@ -4,5 +4,6 @@ export const environment = {
 };
 
 export const urlServerProd = {
-  url:'http://localhost:8080'
+  //url:'http://localhost:8080'
+  url:'https://diet2gether.oa.r.appspot.com'
 }
