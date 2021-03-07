@@ -6,6 +6,7 @@ import { environment, urlServer } from 'src/environments/environment';
 import { UserSignUpDto } from '../models/signup-user-dto';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { GroupService } from '../../group/services/group.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,9 @@ export class LogInService {
   endPointDev = "";
   endPointProd = "";
 
-  constructor(private http: HttpClient, private route: Router) {
+  atletaRegister:any;
+
+  constructor(private http: HttpClient, private route: Router, private groupService: GroupService) {
 
     if (!environment.production) {
       this.endPointDev = urlServer.url;
@@ -53,15 +56,36 @@ export class LogInService {
       this.changeLoginStatusSubject.next(true);
       localStorage.setItem("dietUsernameSession",user.username);
       localStorage.setItem("dietJwtSession",response);
-      this.route.navigate(["home"]);
-      setTimeout( () =>{
+      this.groupService.getAthlete(localStorage.getItem("dietUsernameSession")).subscribe(res => {
+        console.log(res);
+        this.atletaRegister = res;
+        console.log(this.atletaRegister);
+      if(this.atletaRegister == null){
+        this.route.navigate(["athlete"])
+        setTimeout( () =>{
 
-        Toast.fire({
-          icon: 'success',
-          title: 'Bienvenid@ '+user.username
-        })
-        
-      },10)
+          Toast.fire({
+            icon: 'info',
+            title: user.username+' ,rellena tus datos.'
+          })
+          
+        },10)
+      }else{
+        this.route.navigate(["home"]);
+        setTimeout( () =>{
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Bienvenid@ '+user.username
+          })
+          
+        },10)
+      }
+      })
+
+      
+      console.log("No ha entrado")
+      
   
       
     },error =>{

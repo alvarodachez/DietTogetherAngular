@@ -62,7 +62,7 @@
       <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
     </li>
     <li *ngIf="(i != 2 && i != 1 && i != 0)" class="list-group-item d-flex justify-content-between align-items-center">
-      <span>{{i + 1}}</span> 
+      <span>{{i + 1}}</span>
       {{athleteRanking.name}}
       <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
     </li>
@@ -77,18 +77,27 @@
 
   <h2>
     Registros
-    <i class="fas fa-plus" data-toggle="modal" data-target="#registerModal" (click)="resetAddRegisterForm()"></i>
+    <i *ngIf="isRegisterActive == true" class="fas fa-plus" data-toggle="modal" data-target="#registerModal"
+      (click)="resetAddRegisterForm()"></i>
+    <!--     <i *ngIf="isRegisterActive == false" disabled class="fas fa-plus" data-toggle="modal" data-target="#registerModal" (click)="resetAddRegisterForm()"></i>-->
   </h2>
-  <h3 *ngIf="registers.length == 0">Aun no tienes ningun registro en este grupo</h3>
-  <div *ngFor="let register of registers | paginate:{itemsPerPage: 6, currentPage:actualPage};, let i = index" class="card-group">
+
+  <p *ngIf="isRegisterActive == false">
+    <i class="far fa-clock lead mt-2"></i> 
+    Aun no puedes añadir un registro
+  </p>
+
+  <h3 *ngIf="registers.length == 0"><i class="far fa-clock"></i> Aún no tienes ningún registro en este grupo</h3>
+  <div *ngFor="let register of registers | paginate:{itemsPerPage: 6, currentPage:actualPage};, let i = index"
+    class="card-group">
 
     <div class="card border-primary">
       <div class="card-header">Día {{register.weightDate}}</div>
       <div class="card-body">
         <!-- <h4 class="card-title">Primary card title</h4> -->
-        <p class="card-text">Peso Registrado => {{register.weight}} kg</p>
-        <p class="card-text">Fecha de Registro => {{register.weightDate}}</p>
-        <p class="card-text">Has perdido => {{register.weightDifference}} kg</p>
+        <p class="card-text"><i class="fas fa-weight"></i> Peso Registrado: {{register.weight}} kg</p>
+        <p class="card-text"><i class="far fa-calendar-alt"></i> Fecha de Registro: {{register.weightDate}}</p>
+        <p class="card-text"><i class="fas fa-balance-scale-left"></i> Has perdido: {{register.weightDifference}} kg</p>
       </div>
     </div>
 
@@ -142,8 +151,10 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearRegistro()" [disabled]="!addRegisterForm.valid">Agregar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetAddRegisterForm()">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearRegistro()"
+          [disabled]="!addRegisterForm.valid">Agregar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+          (click)="resetAddRegisterForm()">Cerrar</button>
       </div>
     </div>
   </div>

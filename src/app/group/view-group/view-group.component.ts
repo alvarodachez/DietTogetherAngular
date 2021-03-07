@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '../services/group.service';
 import { AthleteRankingInterface } from '../models/athlete-ranking.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-group',
@@ -14,6 +15,10 @@ export class ViewGroupComponent implements OnInit {
   actualGroup: any;
   athletes: any = [];
   actualPage: number = 1;
+
+  nextRegisterDate:any;
+
+  isRegisterActive:boolean = true;
 
   progressBar: any;
 
@@ -47,6 +52,7 @@ export class ViewGroupComponent implements OnInit {
     this.getActualGroup();
     this.getRegisters();
     this.getProgressBar();
+    
   }
 
   changeRanking() {
@@ -123,6 +129,7 @@ export class ViewGroupComponent implements OnInit {
 
 
       }
+      this.setNextRegisterDate();
       console.log(this.registers);
     }, error => {
       console.log(error);
@@ -130,6 +137,8 @@ export class ViewGroupComponent implements OnInit {
   }
 
   crearRegistro() {
+
+    
 
     const registro = {
       "weight": parseFloat(
@@ -149,6 +158,22 @@ export class ViewGroupComponent implements OnInit {
       console.log(response);
       this.progressBar = response;
     })
+  }
+
+  setNextRegisterDate(){
+
+    
+    console.log("gola")
+    if(this.registers.length >= 1){
+
+      this.nextRegisterDate = this.registers[0].nextDateRegister;
+
+      if(new Date(Date.now()) > new Date(Date.parse(this.nextRegisterDate))){
+        this.isRegisterActive = true;
+      }else{
+        this.isRegisterActive = false;
+      }
+    }
   }
 
 }

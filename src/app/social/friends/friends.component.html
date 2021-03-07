@@ -11,7 +11,7 @@
 
 <div class="container text-center mt-2">
   <h1>Lista de amigos</h1>
-  <h4 *ngIf="userFriends.length == 0">No tienes amigos actualmente</h4>
+  <h4 *ngIf="userFriends.length == 0">No tienes amigos actualmente <i class="far fa-frown fa-1x"></i></h4>
   <h4 *ngIf="userFriends.length == 1">Tienes {{userFriends.length}} amigo</h4>
   <h4 *ngIf="userFriends.length > 1">Tienes {{userFriends.length}} amigos</h4>
 
