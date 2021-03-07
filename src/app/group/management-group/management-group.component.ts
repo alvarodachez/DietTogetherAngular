@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators, FormBuilder } from '@angular/forms';
 import { GroupService } from '../services/group.service';
 import { GroupInterface } from '../models/group.interface';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-management-group',
@@ -18,22 +19,32 @@ export class ManagementGroupComponent implements OnInit {
   friendsList: any = [];
   selectedFriendsList: any = [];
 
-  groupForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    expireDate: new FormControl('', [
-      Validators.required /* CustomValidators.dateMinimum('2018-12-12') ]*/,
-    ]),
-  });
+
+  groupForm: FormGroup;
+
+
+
+
 
   addFriendForm = new FormGroup({
     username: new FormControl('', Validators.required),
   });
 
-  constructor(private groupService: GroupService, private route: Router) {}
+  constructor(private groupService: GroupService, private route: Router, private build: FormBuilder, private datePipe:DatePipe) {
+  }
 
   ngOnInit(): void {
+
+    
+    this.groupForm = this.build.group({
+
+      name: ['', Validators.required],
+      expireDate: ['', [Validators.required, this.validateGroupExpireDate]]
+    }, { validator: this.validateGroupExpireDate('expireDate') })
     this.showTraditional = true;
     this.getFriends();
+
+
   }
 
   changeTradicional() {
@@ -103,37 +114,33 @@ export class ManagementGroupComponent implements OnInit {
     });
   }
 
-  // dateValidator(): ValidatorFn {
-  //   return (control:AbstractControl) : ValidationErrors | null => {
 
-  //       const value = control.value;
 
-  //       if (!value) {
-  //           return null;
-  //       }
+  private validateGroupExpireDate(control: string) {
 
-  //       const hasUpperCase = /[A-Z]+/.test(value);
+    return (formGroup: FormGroup) => {
 
-  //       const hasLowerCase = /[a-z]+/.test(value);
+      
+      const expireDateForm = formGroup.controls[control];
 
-  //       const hasNumeric = /[0-9]+/.test(value);
+      
 
-  //       const passwordValid = hasUpperCase && hasLowerCase && hasNumeric;
+      let weekInMs = 1000 * 60 * 60 * 24 * 7;
 
-  //       return !passwordValid ? {passwordStrength:true}: null;
-  //   }
-  // }
+      let actualDate = new Date(Date.now());
 
-  // forbiddenNameValidator(): ValidatorFn {
-  //   return (control: AbstractControl): { [key: string]: any } | null => {
-  //     const forbidden = control.value;
+      let dateLimitOneMonth = new Date(actualDate.getTime() + (weekInMs * 4));
 
-  //     if (!forbidden) {
-  //       return null;
-  //     }
+     // let dateFormat = dateLimitOneMonth.get;
+      if (new Date(Date.parse(expireDateForm.value )) > dateLimitOneMonth ) {
 
-  //     return forbidden ? { forbiddenName: { value: control.value } } : null;
-  //   };
-  // }
-  
+        
+        expireDateForm.setErrors(null);
+      } else {
+        
+        expireDateForm.setErrors({passwordMismatch: true});
+      }
+    }
+  }
+
 }

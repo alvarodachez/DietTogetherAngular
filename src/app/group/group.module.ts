@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,6 +10,8 @@ import { ManagementGroupComponent } from './management-group/management-group.co
 import { ViewGroupComponent } from './view-group/view-group.component';
 import { CanActivateGuard } from '../entry/services/can-activate.guard';
 import { NgxPaginationModule } from 'ngx-pagination';
+
+
 
 const routes: Routes = [
 
@@ -50,5 +52,8 @@ const routes: Routes = [
     NgxPaginationModule,
     RouterModule.forChild(routes),
   ],
+  providers:[
+    DatePipe
+  ]
 })
 export class GroupModule { }

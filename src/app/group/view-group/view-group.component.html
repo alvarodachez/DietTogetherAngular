@@ -77,8 +77,10 @@
 
   <h2>
     Registros
-    <i class="fas fa-plus" data-toggle="modal" data-target="#registerModal" (click)="resetAddRegisterForm()"></i>
-  </h2>
+    <i *ngIf="isRegisterActive == true" class="fas fa-plus" data-toggle="modal" data-target="#registerModal" (click)="resetAddRegisterForm()"></i>
+<!--     <i *ngIf="isRegisterActive == false" disabled class="fas fa-plus" data-toggle="modal" data-target="#registerModal" (click)="resetAddRegisterForm()"></i>-->
+    <p *ngIf="isRegisterActive == false">Aun no puedes añadir un registro</p>
+</h2>
   <h3 *ngIf="registers.length == 0">Aun no tienes ningun registro en este grupo</h3>
   <div *ngFor="let register of registers | paginate:{itemsPerPage: 6, currentPage:actualPage};, let i = index" class="card-group">
 
