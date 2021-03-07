@@ -7,8 +7,8 @@ export const environment = {
 };
 
 export const urlServer = {
-  //url:'http://localhost:8080'
-  url: 'https://diet2gether.oa.r.appspot.com'
+  url:'http://localhost:8080'
+  //url: 'https://diet2gether.oa.r.appspot.com'
 }
 /*
  * For easier debugging in development mode, you can import the following file

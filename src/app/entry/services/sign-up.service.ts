@@ -12,22 +12,22 @@ import { AthleteDtoClass } from '../models/athlete-dto';
 })
 export class SignUpService {
 
-  endPointDev = "";
-  endPointProd = "";
+  endPointServer = "";
+
   
   constructor(private http: HttpClient) {
     /* especificar ip del servidor, para entorno local o producción */
     if (!environment.production) {
-      this.endPointDev = urlServer.url;
+      this.endPointServer = urlServer.url;
     } else {
-      this.endPointProd = urlServerProd.url;
+      this.endPointServer = urlServerProd.url;
     }
   }
 
 
   userSignUp(user: UserSignUpDto): Observable<any> {
     /* definir ruta del endpoint */
-    const endpoint = this.endPointDev + '/user/sign-up';
+    const endpoint = this.endPointServer + '/user/sign-up';
 
     /* realizar petición, registrar usuario */
     return this.http.post(endpoint, user);
@@ -36,7 +36,7 @@ export class SignUpService {
   
   athleteDataSign(athleteDto: AthleteDtoClass): Observable<any> {
     /* definir ruta del endpoint */
-    const endpoint = this.endPointDev + '/athlete/sign-up-data/' + localStorage.getItem('dietUsername');
+    const endpoint = this.endPointServer + '/athlete/sign-up-data/' + localStorage.getItem('dietUsername');
 
     /* realizar petición, registrar datos del atleta */
     return this.http.post(endpoint, athleteDto);

@@ -11,14 +11,14 @@ import { GroupInterfaceDto } from '../models/group.interface-dto';
 })
 export class GroupService {
 
-  endPointDev = "";
-  endPointProd = "";
+  endPointServer = "";
+  
 
   constructor(private http: HttpClient) {
     if (!environment.production) {
-      this.endPointDev = urlServer.url;
+      this.endPointServer = urlServer.url;
     } else {
-      this.endPointProd = urlServerProd.url;
+      this.endPointServer = urlServerProd.url;
     }
   }
 
@@ -48,7 +48,7 @@ export class GroupService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/group/create-group/${username}`;
+    const endpoint = this.endPointServer + `/group/create-group/${username}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -68,7 +68,7 @@ export class GroupService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/athlete/get-friends/${username}`;
+    const endpoint = this.endPointServer + `/athlete/get-friends/${username}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -88,7 +88,7 @@ export class GroupService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/athlete/${username}`;
+    const endpoint = this.endPointServer + `/athlete/${username}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -102,7 +102,7 @@ export class GroupService {
   getAthlete(username:string):Observable<any>{
     const jwt = localStorage.getItem("dietJwtSession");
 
-    const endpoint  = this.endPointDev + `/athlete/${username}`;
+    const endpoint  = this.endPointServer + `/athlete/${username}`;
 
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
@@ -116,7 +116,7 @@ export class GroupService {
   getRegisters():Observable<any>{
     const jwt = localStorage.getItem("dietJwtSession");
 
-    const endpoint = this.endPointDev +"/register/get-registers/"+localStorage.getItem("dietUsernameSession");
+    const endpoint = this.endPointServer +"/register/get-registers/"+localStorage.getItem("dietUsernameSession");
 
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
@@ -129,7 +129,7 @@ export class GroupService {
   createRegister(register:any):Observable<any>{
     const jwt = localStorage.getItem("dietJwtSession");
 
-    const endpoint = this.endPointDev +"/register/create-register/"+localStorage.getItem("dietUsernameSession");
+    const endpoint = this.endPointServer +"/register/create-register/"+localStorage.getItem("dietUsernameSession");
 
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
@@ -143,7 +143,7 @@ export class GroupService {
 
     const jwt = localStorage.getItem("dietJwtSession");
 
-    const endpoint = this.endPointDev +"/group/get-progress-bar/"+localStorage.getItem("dietUsernameSession");
+    const endpoint = this.endPointServer +"/group/get-progress-bar/"+localStorage.getItem("dietUsernameSession");
 
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
