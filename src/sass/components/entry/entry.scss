@@ -1,0 +1,92 @@
+#divEntryGeneral {
+    font-style: italic;
+    padding: 0; // eliminar espacios container
+}
+
+#divEntryTitle {
+    margin-top: 2vh;
+    text-align: center;
+    margin-bottom: -5vh;
+}
+
+#divEntryForm {
+    text-align: center;
+
+    button {
+        margin-top: 15%;
+        font-size: 20px;
+        margin-bottom: 3%;
+    }
+
+    .btn-link {
+        margin-top: 4.5vh;
+    }
+}
+
+.entryFormField {
+    margin-top: 15%;
+
+    input {
+        padding-right: 0;
+        padding-left: 0;
+        width: 80%;
+    }
+}
+
+.colorFallo {
+    color: rgb(228, 118, 118);
+}
+
+.dietInput {
+  @include dietInput;
+}
+
+
+
+/* ----------- */
+
+
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+  
+    #divEntryTitle {
+        margin-bottom: 5%;
+    }    
+    
+    .entryFormField {
+        margin-top: 5%;
+
+        input {
+            width: 50%;
+        }
+    }
+
+    #divEntryForm {
+    
+        button {
+            margin-top: 5%;
+            width: 25%;
+        }
+    
+        .btn-link {
+            width: 100%;
+        }
+    }
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+    
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+  
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+  
+}

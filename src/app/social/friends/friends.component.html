@@ -1,0 +1,113 @@
+<div class="fondo">
+  <div class="titulo align-self-center text-center ">
+    <p class="text-white">Social</p>
+    <!-- <p class="word">Lista de amigos</p> -->
+    <ol class="breadcrumb container">
+      <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+      <li class="breadcrumb-item active" [routerLink]="['/social']">Social</li>
+    </ol>
+  </div>
+</div>
+
+<div class="container text-center mt-2">
+  <h1>Lista de amigos</h1>
+  <h4 *ngIf="userFriends.length == 0">No tienes amigos actualmente <i class="far fa-frown fa-1x"></i></h4>
+  <h4 *ngIf="userFriends.length == 1">Tienes {{userFriends.length}} amigo</h4>
+  <h4 *ngIf="userFriends.length > 1">Tienes {{userFriends.length}} amigos</h4>
+
+  <div *ngFor="let friend of userFriends" class="list-group mt-2">
+    <button type="button" class="list-group-item list-group-item-action active mx-auto">
+      {{friend}} <i class="fas fa-user-friends pl-5"></i>
+    </button>
+  </div>
+</div>
+
+
+<div class="container my-5">
+  <hr>
+</div>
+
+<div class="container text-center">
+  <h1>
+    Amigos
+    <i class="fas fa-user-plus" data-toggle="modal" data-target="#staticBackdrop"></i>
+  </h1>
+  <h4 *ngIf="friendRequests.length == 0">No tienes solicitudes pendientes</h4>
+  <h4 *ngIf="friendRequests.length == 1">Tienes {{friendRequests.length}} solicitud pendiente</h4>
+  <h4 *ngIf="friendRequests.length > 1">Tienes {{friendRequests.length}} solicitudes pendientes</h4>
+
+  <div id="staticBackdrop" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header padre">
+          <h5 class="modal-title hijo">Busca a tu amigo aquí</h5>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="addFriendForm" action="">
+            <div class="form-group">
+              <label class="col-form-label" for="username">Introduce el nombre de usuario:</label>
+              <input (keyup)="getUsernameByInitials()" type="text" autocomplete="off" formControlName="username"
+                name="username" class="form-control text-center" placeholder="usuario"
+                [class.is-invalid]="addFriendForm.get('username').touched && addFriendForm.get('username').invalid">
+              <div class="list-group-item list-group-item-action active" *ngFor="let friend2 of searchFriends">
+                <button type="button" class="list-group-item list-group-item-action active" data-dismiss="modal"
+                  (click)="sendFriendRequest(friend2)">
+                  {{friend2}} <i class="fas fa-user-friends pl-5"></i>
+                </button>
+              </div>
+              <div class="alert alert-danger colorFallo"
+                [hidden]="addFriendForm.get('username').pristine || addFriendForm.get('username').valid">
+                El valor introducido no es válido
+              </div>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetAddFriendForm()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let friend of friendRequests" class="list-group mt-2">
+    <button type="button" class="list-group-item list-group-item-action active mx-auto">
+      Solicitud enviada por {{friend.claimantAthlete}}
+      <i class="fas fa-check pl-5" (click)="acceptFriendRequest(friend.id)"></i>
+      <i class="fas fa-times pl-5" (click)="rejectFriendRequest(friend.id)"></i>
+    </button>
+
+    <!-- [ngClass]="{'is-active': user.invalid && user.dirty} -->
+  </div>
+
+</div>
+
+
+<div class="container my-5">
+  <hr>
+</div>
+
+<!-- 
+    Buzón - grupos
+    Subtitulo - Solicitudes de grupos
+        Al lado, icono modal para enviar solicitud de amistad
+            Modal. búsqueda de usuarios reactiva/tiempo real y enviar
+    Lista - Listado de botones de solicitudes (listgroup)
+ -->
+
+<div class="container text-center">
+  <h1>Grupos</h1>
+  <h4 *ngIf="groupRequests.length == 0">No tienes solicitudes de grupo pendientes</h4>
+  <h4 *ngIf="groupRequests.length == 1">Tienes {{friendRequests.length}} solicitud de grupo pendiente</h4>
+  <h4 *ngIf="groupRequests.length > 1">Tienes {{friendRequests.length}} solicitudes de grupo pendientes</h4>
+
+  <div *ngFor="let group of groupRequests" class="list-group mt-2">
+    <button type="button" class="list-group-item list-group-item-action active mx-auto">
+      Solicitud de grupo enviada por {{group.claimantAthlete}}
+      <i class="fas fa-check pl-5" (click)="acceptGroupRequest(group.id)"></i>
+      <i class="fas fa-times pl-5" (click)="rejectGroupRequest(group.id)"></i>
+    </button>
+
+  </div>

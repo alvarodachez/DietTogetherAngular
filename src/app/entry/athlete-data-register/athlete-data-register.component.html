@@ -1,0 +1,101 @@
+<div id="divEntryGeneral" class="container animate__animated animate__fadeInDownBig">
+
+  <div id="divEntryTitle">
+    <h3>Introduce los siguientes datos <br> para empezar</h3>
+  </div>
+
+  <div id="divEntryForm">
+
+    <form [formGroup]="athleteForm" action="">
+
+      <div class="form-group entryFormField">
+        <label class="form-control-label" for="name">Nombre</label><br>
+        <input type="text" formControlName="name" name="name" class="dietInput form-control"
+          placeholder="Introduce nombre" required id="inpName" #nameFocus
+          [class.is-invalid]="athleteForm.get('name').touched && athleteForm.get('name').invalid">
+        <div class="alert colorFallo" [hidden]="athleteForm.get('name').pristine || athleteForm.get('name').valid">
+          El nombre es obligatorio
+        </div>
+      </div>
+
+      <div class="form-group entryFormField">
+        <label class="form-control-label" for="surname">Apellidos</label><br>
+        <input type="text" formControlName="surname" name="surname" class="dietInput form-control"
+          placeholder="Introduce apellidos" required id="inpSurname"
+          [class.is-invalid]="athleteForm.get('surname').touched && athleteForm.get('surname').invalid">
+        <div class="alert colorFallo"
+          [hidden]="athleteForm.get('surname').pristine || athleteForm.get('surname').valid">
+          Los apellidos son obligatorios
+        </div>
+      </div>
+
+      <div class="form-group entryFormField">
+        <label class="form-control-label" for="birthDay">Fecha de nacimiento</label><br>
+        <input type="date" formControlName="birthDay" name="birthDay" class="dietInput form-control"
+          placeholder="Introduce apellidos" required id="inpBirthday"
+          [class.is-invalid]="athleteForm.get('birthDay').touched && athleteForm.get('birthDay').invalid">
+        <div class="alert colorFallo"
+          [hidden]="athleteForm.get('birthDay').pristine || athleteForm.get('birthDay').valid">
+          El valor de la fecha de no es válido
+        </div>
+      </div>
+
+      <div class="form-group entryFormField">
+        <label class="form-control-label">Peso (Kg y gramos)</label><br>
+
+        <div class="doubleInput">
+          <input class="dietInput form-control midInputLeft" required type="tel" formControlName="weightKilograms"
+            name="weightKilograms" id="inpWeightKilograms" placeholder="Kilos"
+            [class.is-invalid]="athleteForm.get('weightKilograms').touched && athleteForm.get('weightKilograms').invalid">
+            <p class="mt-2">y</p>
+          <input class="dietInput form-control midInputRight" required type="tel" formControlName="weightGrams"
+            name="weightGrams" id="inpWeightGrams" placeholder="Gramos"
+            [class.is-invalid]="athleteForm.get('weightGrams').touched && athleteForm.get('weightGrams').invalid">
+        </div>
+      </div>
+      <div class="text-muted">
+        Consejo: Si pesas 70.05 <br> debes indicar <span class="font-weight-bold">0</span>5 en los gramos
+      </div>
+      <div [hidden]="athleteForm.get('weightKilograms').valid || athleteForm.get('weightKilograms').pristine"
+        class="colorFallo">
+        El valor de los kilos (kg) no es válido
+      </div>
+      <div [hidden]="athleteForm.get('weightGrams').valid || athleteForm.get('weightGrams').pristine"
+        class="colorFallo">
+        El valor de los gramos (g) no es válido
+      </div>
+
+      <div class="form-group entryFormField">
+        <label class="form-control-label">Altura (metros y centímetros)</label><br>
+
+        <div class="doubleInput">
+          <input class="dietInput form-control midInputLeft" required type="tel" formControlName="heightMeters"
+            name="heightMeters" id="inpHeightMeters" placeholder="Metros"
+            [class.is-invalid]="athleteForm.get('heightMeters').touched && athleteForm.get('heightMeters').invalid">
+          <p class="mt-2">y</p>
+          <input class="dietInput form-control midInputRight" required type="tel" formControlName="heightCentimeters"
+            name="heightCentimeters" id="inpHeightCentimeters" placeholder="Cent."
+            [class.is-invalid]="athleteForm.get('heightCentimeters').touched && athleteForm.get('heightCentimeters').invalid">
+        </div>
+      </div>
+      <div class="text-muted">
+        Consejo: Si mides 2.08 <br> debes indicar <span class="font-weight-bold">0</span>8 en los centímetros
+      </div>
+      <div [hidden]="athleteForm.get('heightMeters').valid || athleteForm.get('heightMeters').pristine"
+        class="colorFallo">
+        <!-- class="alert alert-danger colorFallo -->
+        El valor de los metros (m) no es válido
+      </div>
+      <div [hidden]="athleteForm.get('heightCentimeters').valid || athleteForm.get('heightCentimeters').pristine"
+        class="colorFallo">
+        El valor de los centímetros (cm) no es válido
+      </div>
+
+      <button name="btnGo" class="btn btn-primary btn-lg btn-mid" [disabled]="!athleteForm.valid"
+        (click)="sendAthleteData()">Enviar</button>
+
+    </form>
+
+  </div>
+
+</div>

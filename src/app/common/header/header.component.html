@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+
+  <button *ngIf="online == true" class="navbar-toggler border border-primary" type="button" data-toggle="collapse" data-target="#navbarBurger"
+    aria-controls="navbarBurger" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars text-white"></i>
+  </button>
+
+  <a  class="navbar-brand mx-0" (click)="checkSessionStatus()" style="cursor: pointer;">Diet2gether</a>
+
+
+  <button *ngIf="online == true" class="navbar-toggler border border-primary" type="button" data-toggle="collapse" data-target="#navbarProfile"
+    aria-controls="navbarProfile" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-user-circle text-white"></i>
+  </button>
+
+  <div *ngIf="online == true" class="collapse navbar-collapse" id="navbarBurger">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/social']">Social</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled"  href="#">Dieta</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+          aria-expanded="false">Actividades</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/group/welcome']">Grupos</a>
+          <a class="dropdown-item disabled" href="#">Privada</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="collapse navbar-collapse hola" id="navbarProfile">
+      <ul *ngIf="online == true" class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Mi perfil</a>
+        </li>
+        <li *ngIf="online == true" class="nav-item">
+          <a class="nav-link" href="#" (click)="logout()">Cerrar sesión</a>
+        </li>
+      </ul>
+  </div>
+
+</nav>

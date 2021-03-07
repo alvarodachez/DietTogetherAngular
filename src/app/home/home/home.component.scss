@@ -1,0 +1,28 @@
+@import "src/sass/styles.scss";
+
+
+.fondo {
+    @include dietBanner;
+
+    #carouselWords {
+        margin: auto auto;
+        font-size: 30px;
+    }
+
+    .word {
+        font-size: 20px;
+    }
+}
+
+.botones {
+    display: flex;
+    justify-content: space-evenly;
+
+    button {
+        width: 35%;
+    }
+}
+
+.details {
+    @include dietInfoBox;
+}

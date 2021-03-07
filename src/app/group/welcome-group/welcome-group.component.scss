@@ -1,0 +1,33 @@
+@import "src/sass/styles.scss";
+
+
+.fondo {
+    @include dietBanner;
+
+    .titulo {
+        margin: auto auto;
+        font-size: 30px;
+    }
+
+    .word {
+        font-size: 20px;
+    }
+}
+
+.botones {
+    display: flex;
+    justify-content: space-evenly;
+
+    button {
+        width: 35%;
+    }
+}
+
+.breadcrumb {
+    font-size: 20px;
+    background-color: #9CD3C4;
+}
+
+.active {
+    color: white;
+}

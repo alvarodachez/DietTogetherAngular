@@ -1,0 +1,49 @@
+/* Mixin creado para gestionar el diseño del banner */
+@mixin dietBanner {
+    display: flex;
+    height: 25vh;
+    width: 100%;
+    background-color: $dietBannerBackground;
+
+    .active {
+        color: white;
+    }
+}
+
+
+/* Mixin creado para gestionar el diseño de la caja de información */
+@mixin dietInfoBox {
+    background-color: $dietInfoBoxBackground;
+    border-radius: 5px;
+    color: white;
+    
+    .detailsText {
+        padding-top: 2vh;
+        padding-bottom: 2vh;
+    }
+
+    h2 {
+        color: whitesmoke;
+    }
+
+    a p {
+        color: $dietInfoBoxLink;
+        font-weight: 800;
+    }
+}
+
+
+/* Mixin creado para gestionar los inputs */
+@mixin dietInput {
+    text-align: center;
+    width: 70%;
+    appearance: none;
+    // -webkit-appearance: none;
+    color: #95a5a6;
+    font-family: "Helvetica", arial, sans-serif;
+    font-size: 18px;
+    border:1px solid;
+    display: inline-block !important;
+    visibility: visible !important;
+    border-radius:5px;
+}

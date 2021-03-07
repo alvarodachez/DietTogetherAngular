@@ -1,0 +1,51 @@
+<div id="divEntryGeneral" class="container animate__animated animate__fadeInDown">
+
+  <div id="divEntryTitle">
+    <h1>Inicia sesión</h1>
+  </div>
+
+  <div id="divEntryForm">
+    <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
+      <div class="entryFormField form-group">
+        <label class="form-control-label" for="user">Usuario</label><br>
+        <input class="dietInput form-control" [ngClass]="{'is-invalid': user.invalid && user.dirty}" #user="ngModel"
+          [(ngModel)]="loginUser.user" required type="text" name="username" id="inpUser" #userFocus
+          placeholder="Introduce usuario">
+        <div [hidden]="user.valid || user.pristine" class="invalid-feedback">
+          El usuario es obligatorio
+        </div>
+      </div>
+
+      <div class="entryFormField form-group has-danger">
+        <label class="form-control-label" for="pass">
+          Contraseña
+          <i *ngIf="hidePass" class="fas fa-eye" (click)="hidePass = !hidePass"></i>
+          <i *ngIf="!hidePass" class="fas fa-eye-slash" (click)="hidePass = !hidePass"></i>
+        </label><br>
+
+        <input class="dietInput form-control" [ngClass]="{'is-invalid': pass.invalid && pass.dirty}" #pass="ngModel"
+          [(ngModel)]="loginUser.pass" required [type]="hidePass ? 'password' : 'text'" name="password" id="inpPass"
+          placeholder="Introduce contraseña">
+          
+        <!-- <i class="fas fa-key ml-3" (click)="hidePass = !hidePass"></i> -->
+        <div [hidden]="pass.valid || pass.pristine" class="invalid-feedback">
+          La contraseña es obligatoria
+        </div>
+      </div>
+
+<!--       <div class="input-group">
+        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+        <div class="input-group-append">
+          <span class="input-group-text">.00</span>
+        </div>
+      </div>
+ -->
+      <button name="btnGo" class="btn btn-primary btn-lg btn-mid" [disabled]="!loginForm.valid">Enviar</button>
+    </form>
+
+    <button type="button" class="btn btn-link" [routerLink]="['/signup']">
+      Si todavía no estás registrado...
+    </button>
+  </div>
+
+</div>

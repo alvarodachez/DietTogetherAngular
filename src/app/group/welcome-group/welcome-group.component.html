@@ -1,0 +1,42 @@
+<div class="fondo">
+  <div class="titulo align-self-center text-center">
+    <p class="text-white">Grupos</p>
+    <!-- <p class="word">Lista de amigos</p> -->
+    <ol class="breadcrumb container">
+      <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+      <li class="breadcrumb-item active" [routerLink]="['/group/welcome']">Grupos</li>
+    </ol>
+  </div>
+</div>
+
+<div class="container text-center mt-4">
+  <h2>¿Qué puedes hacer aquí?</h2>
+
+  <div class="w-75 mx-auto">
+    <p>Esta es una de las secciones principales en Diet2gether.</p>
+    <p>Podrás visualizar el grupo en el que estás con tus amigos y visualizar sus estadísticas.</p>
+    <p>En caso de que no estés en un grupo podrás crear el tuyo e invitar a tus amigos.</p>
+    <p>¡A qué esperas!</p>
+  </div>
+
+  <div class="botones">
+    <button *ngIf="actualGroup != null" class="btn bg-secondary text-white " [routerLink]="['/group/groupview']">Ir a tu grupo</button>
+    <button *ngIf="actualGroup == null" class="btn bg-secondary text-white" [routerLink]="['/group/management']">Crear grupo</button>
+  </div>
+</div>
+
+<div class="container my-5">
+  <hr>
+</div>
+
+<div class="container text-center mt-2">
+  <h2>¿Cómo funcionan nuestros grupos?</h2>
+
+  <div class="w-75 mx-auto">
+    <p>Esta es una de las secciones principales en Diet2gether.</p>
+    <p>Podrás visualizar el grupo en el que estas con tus amigos y visualizar sus estadísticas.</p>
+    <p>En caso de que no estés en un grupo podrás crear el tuyo e invitar a tus amigos.</p>
+    <p>¡A qué esperas!</p>
+  </div>
+
+</div>
