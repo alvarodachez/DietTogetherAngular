@@ -152,7 +152,7 @@ export class FriendsService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointServer + `/group/reject-friend-request/${idRequest}`;
+    const endpoint = this.endPointServer + `/athlete/reject-friend-request/${idRequest}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
