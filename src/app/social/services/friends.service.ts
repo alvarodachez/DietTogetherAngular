@@ -9,14 +9,14 @@ import { urlServerProd } from 'src/environments/environment.prod';
 })
 export class FriendsService {
 
-  endPointDev = "";
-  endPointProd = "";
+  endPointServer = "";
+  
 
   constructor(private http: HttpClient) {
     if (!environment.production) {
-      this.endPointDev = urlServer.url;
+      this.endPointServer = urlServer.url;
     } else {
-      this.endPointProd = urlServerProd.url;
+      this.endPointServer = urlServerProd.url;
     }
   }
 
@@ -25,7 +25,7 @@ export class FriendsService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/athlete/get-athletes-by-initials/${initials}`;
+    const endpoint = this.endPointServer + `/athlete/get-athletes-by-initials/${initials}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -44,7 +44,7 @@ export class FriendsService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/athlete/get-friends/${username}`;
+    const endpoint = this.endPointServer + `/athlete/get-friends/${username}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -63,7 +63,7 @@ export class FriendsService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/group/get-group-request/${username}`;
+    const endpoint = this.endPointServer + `/group/get-group-request/${username}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -82,7 +82,7 @@ export class FriendsService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/athlete/get-friends-request/${username}`;
+    const endpoint = this.endPointServer + `/athlete/get-friends-request/${username}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -102,7 +102,7 @@ export class FriendsService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/athlete/send-friend-request/${username}&&${friend}`;
+    const endpoint = this.endPointServer + `/athlete/send-friend-request/${username}&&${friend}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -119,7 +119,7 @@ export class FriendsService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/athlete/accept-friend-request/${idRequest}`;
+    const endpoint = this.endPointServer + `/athlete/accept-friend-request/${idRequest}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -135,7 +135,7 @@ export class FriendsService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/group/accept-group-request/${idRequest}`;
+    const endpoint = this.endPointServer + `/group/accept-group-request/${idRequest}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -152,7 +152,7 @@ export class FriendsService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/group/reject-friend-request/${idRequest}`;
+    const endpoint = this.endPointServer + `/athlete/reject-friend-request/${idRequest}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -168,7 +168,7 @@ export class FriendsService {
     const jwt = localStorage.getItem("dietJwtSession");
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointDev + `/group/reject-group-request/${idRequest}`;
+    const endpoint = this.endPointServer + `/group/reject-group-request/${idRequest}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {

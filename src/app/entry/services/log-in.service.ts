@@ -19,23 +19,23 @@ export class LogInService {
   public changeLoginStatusSubject = new Subject<boolean>();
   public changeLoginStatus$ = this.changeLoginStatusSubject.asObservable();
 
-  endPointDev = "";
-  endPointProd = "";
+  endPointServer = '';
+  
 
   atletaRegister:any;
 
   constructor(private http: HttpClient, private route: Router, private groupService: GroupService) {
 
     if (!environment.production) {
-      this.endPointDev = urlServer.url;
+      this.endPointServer = urlServer.url;
     } else {
-      this.endPointProd = urlServerProd.url;
+      this.endPointServer = urlServerProd.url;
     }
   }
 
 
   login(user: UserSignUpDto):void {
-    const endpoint = this.endPointDev + '/user/login';
+    const endpoint = this.endPointServer + '/user/login';
 
     this.http.post(endpoint, user,{responseType:'text'}).subscribe(response => {
 

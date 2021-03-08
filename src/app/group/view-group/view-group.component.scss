@@ -1,9 +1,8 @@
-.fondo {
-    display: flex;
+@import "src/sass/styles.scss";
 
-    height: 25vh;
-    width: 100%;
-    background-color: #9CD3C4;
+
+.fondo {
+    @include dietBanner;
 
     .titulo {
         margin: auto auto;
@@ -34,6 +33,10 @@
 
 .modal {
     font-size: 20px;
+}
+
+.dietInput {
+  @include dietInput;
 }
 
 /* --- */

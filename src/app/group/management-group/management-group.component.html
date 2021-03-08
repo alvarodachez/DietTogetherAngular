@@ -27,7 +27,7 @@
   
         <div class="form-group groupFormField">
           <label class="form-control-label" for="name">Nombre del grupo</label><br>
-          <input type="text" formControlName="name" name="name" class="input-entry form-control"
+          <input type="text" formControlName="name" name="name" class="dietInput form-control"
             placeholder="Introduce nombre" required id="inpName"
             [class.is-invalid]="groupForm.get('name').touched && groupForm.get('name').invalid">
           <div class="alert colorFallo" [hidden]="groupForm.get('name').pristine || groupForm.get('name').valid">
@@ -37,7 +37,7 @@
       
         <div class="form-group groupFormField">
           <label class="form-control-label" for="expireDate">Fecha del objetivo</label><br>
-          <input id="expireDateFormulario"type="date" formControlName="expireDate" name="expireDate" class="input-entry form-control"
+          <input id="expireDateFormulario"type="date" formControlName="expireDate" name="expireDate" class="dietInput form-control"
             placeholder="Introduce apellidos" required id="inpExpireDate"
             [class.is-invalid]="groupForm.get('expireDate').touched && groupForm.get('expireDate').invalid">
           <div class="alert colorFallo"
