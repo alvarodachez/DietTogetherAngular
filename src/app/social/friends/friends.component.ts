@@ -30,12 +30,27 @@ export class FriendsComponent implements OnInit {
   }
 
   getUsernameByInitials() {
+
+    let selfUsername = localStorage.getItem("dietUsernameSession");
+    let auxFriends = [];
     if (this.addFriendForm.value.username != undefined && this.addFriendForm.value.username != "") {
 
       this.friendService.getUsernamesByInitials(this.addFriendForm.value.username).subscribe(res => {
         console.log(res);
 
-        this.searchFriends = res;
+        auxFriends = res;
+
+        for(let username of this.userFriends){
+
+          if(auxFriends.includes(username)){
+            auxFriends.splice(auxFriends.indexOf(username),1);
+          }
+
+          if(auxFriends.includes(selfUsername)){
+            auxFriends.splice(auxFriends.indexOf(selfUsername),1);
+          }
+        }
+        this.searchFriends = auxFriends;
 
 
       })
