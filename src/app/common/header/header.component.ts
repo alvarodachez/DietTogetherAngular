@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
   online: boolean = false;
 
+  admin: boolean = false;
 
   constructor(private route: Router, private login: LogInService) { }
 
@@ -19,8 +20,14 @@ export class HeaderComponent implements OnInit {
 
 
     this.online = this.login.isLoggedIn('');
-    this.login.changeLoginStatus$.subscribe((loggedStatus : boolean)=>{
+    this.admin = this.login.isAdmin('');
+
+    this.login.changeLoginStatus$.subscribe((loggedStatus: boolean) => {
       this.online = loggedStatus;
+    })
+
+    this.login.changeAdminStatus$.subscribe((adminStatus:boolean) => {
+      this.admin = adminStatus;
     })
 
     /* if ((localStorage.getItem("dietUsernameSession") && (localStorage.getItem("dietUsernameSession") != "" && localStorage.getItem("dietUsernameSession") != undefined))) {
@@ -45,7 +52,7 @@ export class HeaderComponent implements OnInit {
     this.login.logout();
 
     // redirigir a welcome
-    
+
   }
 
 }

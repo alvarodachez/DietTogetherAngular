@@ -44,6 +44,9 @@
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Mi perfil</a>
         </li>
+        <li *ngIf="admin == true" class="nav-item">
+          <a class="nav-link" routerLink="/admin-panel">Administrador</a>
+        </li>
         <li *ngIf="online == true" class="nav-item">
           <a class="nav-link" href="#" (click)="logout()">Cerrar sesión</a>
         </li>

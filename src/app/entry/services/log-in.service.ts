@@ -7,6 +7,7 @@ import { UserSignUpDto } from '../models/signup-user-dto';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { GroupService } from '../../group/services/group.service';
+import jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,16 @@ import { GroupService } from '../../group/services/group.service';
 export class LogInService {
 
   readonly ISLOGGEDKEY = 'islogged';
+  readonly ISADMINKEY = 'isadmin';
   public urlUsuarioIntentaAcceder = '';
+
+  public adminIntentaAcceder = '';
 
   public changeLoginStatusSubject = new Subject<boolean>();
   public changeLoginStatus$ = this.changeLoginStatusSubject.asObservable();
+
+  public changeAdminStatusSubject = new Subject<boolean>();
+  public changeAdminStatus$ = this.changeAdminStatusSubject.asObservable();
 
   endPointServer = '';
   
@@ -38,6 +45,13 @@ export class LogInService {
     const endpoint = this.endPointServer + '/user/login';
 
     this.http.post(endpoint, user,{responseType:'text'}).subscribe(response => {
+      
+
+      let roles = [];
+
+      let jwtDecode = jwt_decode(response);
+      roles = jwtDecode["roles"];
+      
 
       const Toast = Swal.mixin({
         toast: true,
@@ -56,6 +70,12 @@ export class LogInService {
       this.changeLoginStatusSubject.next(true);
       localStorage.setItem("dietUsernameSession",user.username);
       localStorage.setItem("dietJwtSession",response);
+
+      if(roles.includes("ADMIN")){
+        localStorage.setItem(this.ISADMINKEY,'true');
+        this.changeAdminStatusSubject.next(true);
+      }
+      
       this.groupService.getAthlete(localStorage.getItem("dietUsernameSession")).subscribe(res => {
         console.log(res);
         this.atletaRegister = res;
@@ -105,6 +125,9 @@ export class LogInService {
   logout(): void {
     localStorage.removeItem(this.ISLOGGEDKEY);
     this.changeLoginStatusSubject.next(false);
+    localStorage.removeItem(this.ISADMINKEY);
+    this.changeAdminStatusSubject.next(false);
+
     localStorage.removeItem("dietUsernameSession");
     localStorage.removeItem("dietJwtSession");
 
@@ -118,6 +141,17 @@ export class LogInService {
     if(!isLogged){
       this.urlUsuarioIntentaAcceder = url;
 
+      return false;
+    }
+
+    return true;
+  }
+
+  isAdmin(url:string){
+    const isAdmin = localStorage.getItem(this.ISADMINKEY)
+
+    if(!isAdmin){
+      this.adminIntentaAcceder = url;
       return false;
     }
 
