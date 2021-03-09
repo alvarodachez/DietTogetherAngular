@@ -91,6 +91,13 @@ export class ManagementGroupComponent implements OnInit {
       this.groupForm.reset();
 
       this.route.navigate(['/group/groupview']);
+    },error => {
+      Swal.fire({
+        title: "ERROR",
+        text: error.error.message,
+        icon:'error',
+        input:undefined
+      });
     });
   }
 

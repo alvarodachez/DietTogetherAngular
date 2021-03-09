@@ -14,6 +14,7 @@ import { ReportModule } from './report/report.module';
 // Componentes
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
+import { AdminPanelModule } from './admin-panel/admin-panel.module';
 
 
 
@@ -32,6 +33,7 @@ import { FooterComponent } from './common/footer/footer.component';
     GroupModule,
     ReportModule,
     NgxPaginationModule,
+    AdminPanelModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

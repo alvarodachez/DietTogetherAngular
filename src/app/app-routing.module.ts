@@ -33,6 +33,10 @@ const routes: Routes = [
     path: 'report',
     loadChildren: () => import("./report/report.module").then(m => m.ReportModule)
   },
+  {
+    path:'admin-panel',
+    loadChildren: () => import("./admin-panel/admin-panel.module").then(m => m.AdminPanelModule)
+  }
 
 ];
 
