@@ -17,7 +17,7 @@ export class AthleteDataRegisterComponent implements OnInit, AfterViewInit {
   /* Se crea variable para aplicar foco en el primer campo del formulario */
   @ViewChild('nameFocus') nameFocus: ElementRef;
 
-  loginAthlete: AthleteClass;
+  /* Variable que almacena los datos del atleta, para enviar al backend */
   loginAthleteDto: AthleteDtoClass;
 
   athleteForm = new FormGroup({
@@ -85,13 +85,11 @@ export class AthleteDataRegisterComponent implements OnInit, AfterViewInit {
     );
     this.loginAthleteDto.birthDay = this.athleteForm.value.birthDay;
 
-    console.log(this.loginAthleteDto);
 
     /* realizar petición para registrar los datos del atleta */
     this.signUpService
       .athleteDataSign(this.loginAthleteDto)
       .subscribe((response) => {
-        console.log(response);
         Swal.fire({
           title: 'Registro de datos',
           text: 'Datos registrados correctamente.',
