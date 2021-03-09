@@ -1,0 +1,124 @@
+@import "src/sass/styles.scss";
+
+
+.fondo {
+    @include dietBanner;
+
+    .titulo {
+        margin: auto auto;
+        font-size: 30px;
+    }
+
+    .word {
+        font-size: 20px;
+    }
+}
+.breadcrumb {
+    font-size: 20px;
+    background-color: #9CD3C4;
+}
+
+.active {
+    color: white;
+}
+
+#divGroupForm {
+    margin-top: 10%;
+}
+
+.groupFormField {
+    margin-top: 15%;
+
+    input {
+        padding-right: 0;
+        padding-left: 0;
+        width: 80%;
+    }
+}
+
+.colorFallo {
+    color: rgb(228, 118, 118);
+}
+
+.dietInput {
+  @include dietInput;
+}
+
+#staticBackdrop {
+    font-size: 20px;
+
+    .alert {
+        font-size: 15px;
+    }
+    
+}
+
+.padre {
+    display: flex;
+}
+
+.hijo {
+    margin: auto auto;
+}
+
+.btnOrder {
+    .friendName {
+        width: 90%;
+    }
+
+    .friendButtons {
+        width: 10%;
+    }
+}
+
+
+/* ----------- */
+
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+  
+    #divGroupForm {
+        margin-top: 5%;
+    }
+    
+    .groupFormField {
+        margin-top: 5%;
+    
+        input {
+            width: 70%;
+        }
+    }
+
+    .btn-mid {
+        width: 25%;
+    }
+    
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+    
+    #divGroupForm {
+        margin-top: 5%;
+    }
+    
+    .groupFormField {
+        margin-top: 5%;
+    
+        input {
+            width: 50%;
+        }
+    }
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+  
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+  
+}
