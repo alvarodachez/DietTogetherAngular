@@ -1,0 +1,44 @@
+<div id="divReportGeneral" class="container animate__animated animate__fadeInDownBig">
+
+  <div class="container text-center mt-3">
+    <h1>Reporte de errores</h1>
+    <h3 class="mx-auto w-75">Gracias por compartir tu opinión con nosotros! <i class="far fa-smile-beam"></i></h3>
+  </div>
+
+
+  <div id="divReportForm">
+
+    <form [formGroup]="reportForm" action="">
+
+      <div class="form-group reportFormField">
+        <label class="form-control-label" for="reportCategory">Tipo de reporte</label><br>
+        <select class="form-control dietInput" id="reportCategory" formControlName="reportCategory">
+          <option disabled selected value>Selecciona una opción</option>
+          <option value="SUGGESTION">Sugerencia</option>
+          <option value="BUG">Error/Bug</option>
+        </select>
+      </div>
+
+      <div class="form-group reportFormField">
+        <label class="form-control-label" for="description">
+          Descripción {{descriptionActualLength}}/{{descriptionMaxLength}}
+        </label><br>
+        <textarea formControlName="description" name="description" class="dietInput form-control"
+          placeholder="Introduce la descripción" required id="inpDescription" [maxlength]="descriptionMaxLength"
+          [class.is-invalid]="reportForm.get('description').touched && reportForm.get('description').invalid">
+        </textarea>
+        <div class="alert colorFallo"
+          [hidden]="reportForm.get('description').pristine || reportForm.get('description').valid">
+          La descripción es obligatoria
+        </div>
+      </div>
+
+      <button name="btnGo" class="btn btn-primary btn-lg btn-mid" [disabled]="!reportForm.valid"
+        (click)="sendReportData()">Enviar</button>
+
+    </form>
+
+  </div>
+
+
+</div>
