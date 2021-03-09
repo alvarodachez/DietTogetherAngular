@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { GroupService } from '../services/group.service';
 import { GroupInterface } from '../models/group.interface';
 import Swal from 'sweetalert2';
@@ -12,48 +12,49 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./management-group.component.scss'],
 })
 export class ManagementGroupComponent implements OnInit {
+  /* Variable usada para mostrar una pestaña u otra */
   showTraditional: boolean;
 
-  searchFriends: any = [];
-  // userFriends: any = [];
+  /* Variable que almacena la lista de amigos */
   friendsList: any = [];
+
+  /* Variable que almacena la lista de amigos seleccionados */
   selectedFriendsList: any = [];
 
-
+  /* Variable que almacena el grupo creado */
   groupForm: FormGroup;
 
-
-
-
-
-  addFriendForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-  });
-
-  constructor(private groupService: GroupService, private route: Router, private build: FormBuilder, private datePipe:DatePipe) {
-  }
+  constructor(
+    private groupService: GroupService,
+    private route: Router,
+    private build: FormBuilder,
+  ) {}
 
   ngOnInit(): void {
+    this.groupForm = this.build.group(
+      {
+        name: ['', Validators.required],
+        expireDate: ['', [Validators.required, this.validateGroupExpireDate]],
+      },
+      { validator: this.validateGroupExpireDate('expireDate') }
+    );
 
-    
-    this.groupForm = this.build.group({
-
-      name: ['', Validators.required],
-      expireDate: ['', [Validators.required, this.validateGroupExpireDate]]
-    }, { validator: this.validateGroupExpireDate('expireDate') })
     this.showTraditional = true;
     this.getFriends();
-
-
   }
 
+  
+  /* Método que establece la pestaña tradicional */
   changeTradicional() {
     this.showTraditional = true;
   }
 
+
+  /* Método que establece la pestaña objetivo */
   changeObjetivo() {
     this.showTraditional = false;
   }
+
 
   /* Crear grupo de atletas */
   createGroup(): void {
@@ -74,33 +75,33 @@ export class ManagementGroupComponent implements OnInit {
       challengeType: 'TRADITIONAL',
     };
 
-    console.log(backendForm);
-
     /* Realizar petición al backend, a través del servicio */
-    this.groupService.createGroup(backendForm).subscribe((group) => {
-      console.log('group - creado');
-      console.log(group);
+    this.groupService.createGroup(backendForm).subscribe(
+      (group) => {
+        Swal.fire({
+          title: `Grupo ${backendForm.name}`,
+          text: 'Registro realizado correctamente.',
+          icon: 'success',
+          input: undefined,
+        });
 
-      Swal.fire({
-        title: `Grupo ${backendForm.name}`,
-        text: 'Registro realizado correctamente.',
-        icon: 'success',
-        input: undefined,
-      });
+        this.groupForm.reset();
 
-      this.groupForm.reset();
-
-      this.route.navigate(['/group/groupview']);
-    },error => {
-      Swal.fire({
-        title: "ERROR",
-        text: error.error.message,
-        icon:'error',
-        input:undefined
-      });
-    });
+        this.route.navigate(['/group/groupview']);
+      },
+      (error) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: error.error.message,
+          icon: 'error',
+          input: undefined,
+        });
+      }
+    );
   }
 
+
+  /* Método que gestiona el checkbox de amigos */
   onCheckboxChange(e) {
     if (e.target.checked) {
       /* Añadir amigo a la lista de amigos seleccionados */
@@ -114,40 +115,29 @@ export class ManagementGroupComponent implements OnInit {
     }
   }
 
+
+  /* Método que obtiene la lista de amigos y almacena la lista en friendsList */
   getFriends() {
     this.groupService.getFriends().subscribe((res) => {
       this.friendsList = res;
-      console.log(res);
     });
   }
 
 
-
+  /* Método que valida la fecha de expiración/objetivo */
   private validateGroupExpireDate(control: string) {
-
     return (formGroup: FormGroup) => {
-
-      
       const expireDateForm = formGroup.controls[control];
 
-      
-
       let weekInMs = 1000 * 60 * 60 * 24 * 7;
-
       let actualDate = new Date(Date.now());
+      let dateLimitOneMonth = new Date(actualDate.getTime() + weekInMs * 4);
 
-      let dateLimitOneMonth = new Date(actualDate.getTime() + (weekInMs * 4));
-
-     // let dateFormat = dateLimitOneMonth.get;
-      if (new Date(Date.parse(expireDateForm.value )) > dateLimitOneMonth ) {
-
-        
+      if (new Date(Date.parse(expireDateForm.value)) > dateLimitOneMonth) {
         expireDateForm.setErrors(null);
       } else {
-        
-        expireDateForm.setErrors({passwordMismatch: true});
+        expireDateForm.setErrors({ passwordMismatch: true });
       }
-    }
+    };
   }
-
 }

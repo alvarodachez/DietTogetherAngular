@@ -37,9 +37,12 @@
       
         <div class="form-group groupFormField">
           <label class="form-control-label" for="expireDate">Fecha del objetivo</label><br>
-          <input id="expireDateFormulario"type="date" formControlName="expireDate" name="expireDate" class="dietInput form-control"
-            placeholder="Introduce apellidos" required id="inpExpireDate"
+          <input id="expireDateFormulario" type="date" formControlName="expireDate" name="expireDate"
+            class="dietInput form-control" placeholder="Introduce apellidos" required id="inpExpireDate"
             [class.is-invalid]="groupForm.get('expireDate').touched && groupForm.get('expireDate').invalid">
+          <div class="text-muted container mt-1 w-75">
+            * La fecha debe ser posterior a <span class="font-weight-bold">4 semanas</span> desde hoy.
+          </div>
           <div class="alert colorFallo"
             [hidden]="groupForm.get('expireDate').pristine || groupForm.get('expireDate').valid">
             El valor de la fecha de no es válido
