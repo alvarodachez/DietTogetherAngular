@@ -8,6 +8,7 @@ import { GroupService } from '../services/group.service';
 })
 export class WelcomeGroupComponent implements OnInit {
 
+  /* Variable que almacena el grupo actual */
   actualGroup: any;
 
   constructor(private groupService: GroupService) { }
@@ -16,13 +17,10 @@ export class WelcomeGroupComponent implements OnInit {
     this.getActiveGroup();
   }
 
+  /* Método que obtiene el grupo actual */
   getActiveGroup() {
-    console.log("get active group");
-    
     this.groupService.getActiveGroup().subscribe(res => {
-      // console.log(res.actualGroup);
       this.actualGroup = res.actualGroup;
-      console.log(this.actualGroup);
     });
   }
 
