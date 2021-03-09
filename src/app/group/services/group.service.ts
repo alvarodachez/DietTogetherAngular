@@ -76,62 +76,76 @@ export class GroupService {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
     };
 
-    /* Devolver array (string) con los amigos del usuario */
+    /* Devolver grupo activo */
     return this.http.get(endpoint, httpOptions);
   }
 
-  getAthlete(username:string):Observable<any>{
+
+  getAthlete(username:string):Observable<any> {
+    /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
+    /* Dirección del servidor - petición */
     const endpoint  = this.endPointServer + `/athlete/${username}`;
 
+    /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
     };
 
+    /* Devolver atleta activo */
     return this.http.get(endpoint, httpOptions);
-
-
   }
+
 
   getRegisters():Observable<any>{
+    /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
+    /* Dirección del servidor - petición */
     const endpoint = this.endPointServer +"/register/get-registers/"+localStorage.getItem("dietUsernameSession");
 
+    /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
     };
 
+    /* Devolver los registros del atleta */
     return this.http.get(endpoint, httpOptions);
-
   }
+
 
   createRegister(register:any):Observable<any>{
+    /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
+    /* Dirección del servidor - petición */
     const endpoint = this.endPointServer +"/register/create-register/"+localStorage.getItem("dietUsernameSession");
 
+    /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
     };
 
+    /* Crear registro de atleta */
     return this.http.post(endpoint,register,httpOptions);
-
   }
+
 
   getProgressBar():Observable<any>{
-
+    /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
+    /* Dirección del servidor - petición */
     const endpoint = this.endPointServer +"/group/get-progress-bar/"+localStorage.getItem("dietUsernameSession");
 
+    /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
     };
 
+    /* Devolver el progreso del atleta para la barra de progreso */
     return this.http.get(endpoint,httpOptions);
   }
-
 
 }

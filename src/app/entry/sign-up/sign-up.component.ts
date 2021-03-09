@@ -46,13 +46,10 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     });
     Swal.showLoading();
 
-    console.log(formData);
     this.userSignUpDto.username = formData.username;
     this.userSignUpDto.password = formData.password;
 
     this.signUpService.userSignUp(this.userSignUpDto).subscribe((response)=>{
-
-      console.log(response);
 
       localStorage.setItem('dietUsername',response.username);
       Swal.fire({
