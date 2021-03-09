@@ -22,53 +22,65 @@
     color: white;
 }
 
-#divGroupForm {
-    margin-top: 10%;
+.progress {
+    height: 4vh;
 }
 
-.groupFormField {
-    margin-top: 15%;
-
-    input {
-        padding-right: 0;
-        padding-left: 0;
-        width: 80%;
-    }
+.card-group {
+    width: 75%;
+    margin: 0 auto;
 }
 
-.colorFallo {
-    color: rgb(228, 118, 118);
+.modal {
+    font-size: 20px;
 }
 
 .dietInput {
   @include dietInput;
 }
 
-#staticBackdrop {
-    font-size: 20px;
+/* --- */
 
-    .alert {
-        font-size: 15px;
-    }
-    
+.midInputLeft {
+    margin-left: 10%;
 }
 
-.padre {
+.midInputRight {
+    margin-right: 10%;
+}
+
+.doubleInput {
     display: flex;
+    justify-content: space-evenly;
+
+    input {
+        width: 33%;
+    }
 }
 
-.hijo {
-    margin: auto auto;
+/* Iconos Font Awesome */
+.fas {
+    cursor: pointer;
 }
 
-.btnOrder {
-    .friendName {
-        width: 90%;
-    }
+.fas:hover {
+    color: #f3969a;
+}
 
-    .friendButtons {
-        width: 10%;
-    }
+.fas:active {
+    color: #78c2ad;
+}
+
+.far {
+    cursor: pointer;
+}
+
+.far:hover {
+    color: #f3969a;
+}
+
+.far:active {
+    color: #78c2ad;
 }
 
 
@@ -78,39 +90,15 @@
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) { 
   
-    #divGroupForm {
-        margin-top: 5%;
-    }
-    
-    .groupFormField {
-        margin-top: 5%;
-    
-        input {
-            width: 70%;
-        }
+    .card-group {
+        width: 100%;
     }
 
-    .btn-mid {
-        width: 25%;
-    }
-    
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) { 
     
-    #divGroupForm {
-        margin-top: 5%;
-    }
-    
-    .groupFormField {
-        margin-top: 5%;
-    
-        input {
-            width: 50%;
-        }
-    }
-
 }
 
 // Large devices (desktops, 992px and up)

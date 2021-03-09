@@ -35,4 +35,37 @@ export class AdminServiceService {
     /* Obtiene todos los reportes */
     return this.http.get(endpoint, httpOptions);
   }
+
+  assignReport(id:any):Observable<any>{
+
+    const username = localStorage.getItem("dietUsernameSession");
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointServer + '/report/assign-report/'+username+'&&'+id;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    return this.http.post(endpoint,"hola",httpOptions);
+  }
+
+  getAssignedReports():Observable<any>{
+    const username = localStorage.getItem("dietUsernameSession");
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointServer + '/report/get-assigned-reports/'+username;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    return this.http.get(endpoint,httpOptions);
+  }
 }
