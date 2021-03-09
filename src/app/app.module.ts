@@ -13,6 +13,7 @@ import { GroupModule } from './group/group.module';
 // Componentes
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
+import { AdminPanelModule } from './admin-panel/admin-panel.module';
 
 
 
@@ -29,6 +30,7 @@ import { FooterComponent } from './common/footer/footer.component';
     HomeModule,
     SocialModule,
     GroupModule,
+    AdminPanelModule,
     NgxPaginationModule
   ],
   providers: [],

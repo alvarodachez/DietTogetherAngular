@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'group',
     loadChildren: () => import("./group/group.module").then(m => m.GroupModule)
   },
+  {
+    path:'admin-panel',
+    loadChildren: () => import("./admin-panel/admin-panel.module").then(m => m.AdminPanelModule)
+  }
 
 ];
 
