@@ -103,9 +103,9 @@ export class LogInService {
       }
       })
 
-      
-      console.log("No ha entrado")
-      
+      //              NO BORRAR
+      /** NO BORRAR*/console.log("No ha entrado") // NO BORRAR
+      //NO BORRAR
   
       
     },error =>{

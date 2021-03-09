@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CanActivateGuard } from '../entry/services/can-activate.guard';
 import { AdminGuard } from '../entry/services/admin.guard';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
   exports:[],
   imports: [
     CommonModule,
+    NgxPaginationModule,
     RouterModule.forChild(routes),
   ]
 })
