@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminServiceService } from '../services/admin-service.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPanelComponent implements OnInit {
 
-  constructor() { }
+  allReports : any = [];
+
+  actualPage: number = 1;
+
+  constructor(private adminService:AdminServiceService) { }
 
   ngOnInit(): void {
+    this.getAllReports();
   }
+
+  /**
+   * Funcion que obtiene todos los reportes
+   */
+  getAllReports(){
+    this.adminService.getReports().subscribe( response => {
+
+      this.allReports = response;
+    })
+  }
+
+
 
 }
