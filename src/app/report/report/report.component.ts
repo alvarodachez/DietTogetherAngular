@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ReportInterface } from '../models/report.interface';
 import { ReportingService } from '../services/reporting.service';
@@ -10,7 +11,6 @@ import { ReportingService } from '../services/reporting.service';
   styleUrls: ['./report.component.scss'],
 })
 export class ReportComponent implements OnInit {
-
   /* Variable que indica la longitud máxima del campo description */
   descriptionMaxLength = 254;
 
@@ -29,7 +29,10 @@ export class ReportComponent implements OnInit {
     ]),
   });
 
-  constructor(private reportingService: ReportingService) {}
+  constructor(
+    private reportingService: ReportingService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
     /* Se establece la longitud por defecto y se aplica método para registrar los cambios de longitud */
@@ -40,13 +43,11 @@ export class ReportComponent implements OnInit {
   /* Método que registra los cambios de longitud del campo description */
   saveActualCharactersOfDescription() {
     this.reportForm.get('description').valueChanges.subscribe((value) => {
-
       /* Controlar que "value" no sea null (especificado por hacer reset del formulario) */
       if (value != null) {
         /* Se aplica el valor de la longitud actual del campo description */
         this.descriptionActualLength = value.length;
       }
-
     });
   }
 
@@ -60,29 +61,30 @@ export class ReportComponent implements OnInit {
       allowOutsideClick: false,
     });
     Swal.showLoading();
-    
+
     /* Recoger valores del formulario */
     let formData: ReportInterface = {
       description: this.reportForm.value.description,
-      reportCategory: this.reportForm.value.reportCategory
-    }
+      reportCategory: this.reportForm.value.reportCategory,
+    };
 
     /* realizar petición para registrar los datos del atleta */
-    this.reportingService
-      .createReport(formData)
-      .subscribe((res) => {
-        Swal.fire({
-          title: 'Registro de datos',
-          text: 'Datos registrados correctamente.',
-          icon: 'success',
-          input: undefined,
-        });
+    this.reportingService.createReport(formData).subscribe((res) => {
+      Swal.fire({
+        title: 'Registro de datos',
+        text: 'Datos registrados correctamente.',
+        icon: 'success',
+        input: undefined,
       });
+    });
 
-      /* Se resetea el formulario */
-      this.reportForm.reset();
+    /* Se resetea el formulario */
+    this.reportForm.reset();
 
-      /* Se resetea el contador de longitud del campo description */
-      this.descriptionActualLength = 0;
+    /* Se resetea el contador de longitud del campo description */
+    this.descriptionActualLength = 0;
+
+    /* Redirigir a home */
+    this.route.navigate(['/home']);
   }
 }

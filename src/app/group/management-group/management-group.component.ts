@@ -1,13 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { GroupService } from '../services/group.service';
 import { GroupInterface } from '../models/group.interface';
 import Swal from 'sweetalert2';
@@ -36,7 +28,6 @@ export class ManagementGroupComponent implements OnInit {
     private groupService: GroupService,
     private route: Router,
     private build: FormBuilder,
-    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
