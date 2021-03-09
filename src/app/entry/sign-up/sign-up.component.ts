@@ -63,6 +63,13 @@ export class SignUpComponent implements OnInit, AfterViewInit {
       });
 
       this.route.navigate(['athlete']);
+    }, error => {
+      Swal.fire({
+        title: "ERROR",
+        text: error.error.message,
+        icon:'error',
+        input:undefined
+      });
     });
 
 
