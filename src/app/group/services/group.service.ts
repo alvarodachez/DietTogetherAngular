@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment, urlServer } from 'src/environments/environment';
 import { urlServerProd } from 'src/environments/environment.prod';
 import { GroupInterface } from '../models/group.interface';
-import { GroupInterfaceDto } from '../models/group.interface-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,6 @@ export class GroupService {
 
   endPointServer = "";
   
-
   constructor(private http: HttpClient) {
     if (!environment.production) {
       this.endPointServer = urlServer.url;
@@ -21,23 +19,6 @@ export class GroupService {
       this.endPointServer = urlServerProd.url;
     }
   }
-
-
-  // getUsernamesByInitials(initials: string): Observable<any> {
-  //   /* Obtener token JWT del usuario actual */
-  //   const jwt = localStorage.getItem("dietJwtSession");
-
-  //   /* Dirección del servidor - petición */
-  //   const endpoint = this.endPointDev + `/athlete/get-athletes-by-initials/${initials}`;
-
-  //   /* Cabecera necesaria para indicar token JWT */
-  //   let httpOptions = {
-  //     headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
-  //   };
-
-  //   /* obtiene los usuarios, buscando por las iniciales introducidas */
-  //   return this.http.get(endpoint, httpOptions);
-  // }
 
 
   createGroup(groupForm: GroupInterface): Observable<any> {

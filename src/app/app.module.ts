@@ -9,6 +9,7 @@ import { EntryModule } from './entry/entry.module';
 import { HomeModule } from './home/home.module';
 import { SocialModule } from './social/social.module';
 import { GroupModule } from './group/group.module';
+import { ReportModule } from './report/report.module';
 
 // Componentes
 import { HeaderComponent } from './common/header/header.component';
@@ -30,8 +31,9 @@ import { AdminPanelModule } from './admin-panel/admin-panel.module';
     HomeModule,
     SocialModule,
     GroupModule,
+    ReportModule,
+    NgxPaginationModule,
     AdminPanelModule,
-    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
