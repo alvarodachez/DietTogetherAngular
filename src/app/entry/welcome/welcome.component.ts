@@ -8,18 +8,9 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private route:Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-
-  irLogin(){
-    let contenedor = document.getElementById('contenedor-welcome');
-
-    //contenedor.className = 'animate__animated animate__backOutLeft';
-
-    this.route.navigate(['/login']);
   }
 
 }

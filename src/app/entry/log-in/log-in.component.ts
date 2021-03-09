@@ -37,7 +37,6 @@ export class LogInComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(formData: any) {
-    console.log(formData);
     Swal.fire({
       title: 'Espere',
       text: 'Ingresando en la aplicacion.',
