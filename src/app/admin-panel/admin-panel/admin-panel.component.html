@@ -1,1 +1,42 @@
-<p>admin-panel works!</p>
+<div class="fondo">
+    <div class="titulo align-self-center text-center ">
+        <p class="text-white">Panel de administrador</p>
+        <!-- <p class="word">Lista de amigos</p> -->
+        <ol class="breadcrumb container text-center">
+            <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+            <li class="breadcrumb-item active" [routerLink]="['/admin-panel']">Panel Administrador</li>
+        </ol>
+    </div>
+</div>
+
+<div class="text-center">
+    <div class="btn-group w-100" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary w-50 rounded-0 active">Reportes</button>
+        <button disabled type="button" class="btn btn-secondary w-50 rounded-0">Admin 1</button>
+        <button disabled type="button" class="btn btn-secondary w-50 rounded-0">Admin 2</button>
+        <button disabled type="button" class="btn btn-secondary w-50 rounded-0">Admin 3</button>
+    </div>
+</div>
+
+<!--REPORTES-->
+<div class="text center">
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-info">
+                <th scope="col">Report ID</th>
+                <th scope="col">Send By</th>
+                <th scope="col">Report Type</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-primary">
+                <th scope="row">1</th>
+                <td>dachez</td>
+                <td>SUGGESTION</td>
+                <td>Cuando intento crear un grupo no me informa de que son 4 semanas minimo.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
