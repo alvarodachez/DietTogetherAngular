@@ -1,90 +1,83 @@
-<!-- *ngFor="let report of myReports, let i = index" -->
 <div class="fondo">
   <div class="titulo align-self-center text-center">
-    <p class="text-white">Reporte de errores</p>
-    <ol class="breadcrumb container text-center">
+    <p class="text-white">Panel de administrador</p>
+    <ol class="breadcrumb container">
       <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
-      <li class="breadcrumb-item " [routerLink]="['/admin-panel']">Panel Administrador</li>
+      <li class="breadcrumb-item" [routerLink]="['/admin-panel']">Admin</li>
       <li class="breadcrumb-item active">View Report</li>
     </ol>
   </div>
 </div>
+
+
 <div class="animate__animated animate__fadeInUp">
 
-    <div class="container" *ngIf="actualReport">
-
-        <div class="card border-primary mt-3 mb-3 w-75 mx-auto">
-          <div class="card-header">Report - {{actualReport.id}}</div>
-          <div class="card-body">
-            <div class="">
-              <h4 class="card-title">Athlete has reported</h4>
-              <p class="card-text">{{actualReport.athleteHasReported}}</p>
-            </div>
-            <div class="mt-4">
-              <h4 class="card-title">Admin to resolve</h4>
-              <p class="card-text">{{actualReport.adminToResolve}}</p>
-            </div>
-            <div class="mt-4">
-              <h4 class="card-title">Report status</h4>
-              <p class="card-text">{{actualReport.reportStatus}}</p>
-            </div>
-            <div class="mt-4">
-              <h4 class="card-title">Create report date</h4>
-              <p class="card-text">{{actualReport.createReportDate}}</p>
-            </div>
-            <div class="mt-4">
-              <h4 class="card-title">Report category</h4>
-              <p class="card-text">{{actualReport.reportCategory}}</p>
-            </div>
-            <div class="mt-4">
-              <h4 class="card-title">Description</h4>
-              <p class="card-text">{{actualReport.description}}</p>
-            </div>
-            <div *ngIf="actualReport.adminAnnotations" class="mt-4">
-                <h4 class="card-title">Admin annotations</h4>
-                <p class="card-text">{{actualReport.adminAnnotations}}</p>
-              </div>
-          </div>
+  <div class="container" *ngIf="actualReport">
+    <div class="card border-primary mt-3 mb-3 w-75 mx-auto">
+      <div class="card-header">Report - {{actualReport.id}}</div>
+      <div class="card-body">
+        <div class="">
+          <h4 class="card-title">Athlete has reported</h4>
+          <p class="card-text">{{actualReport.athleteHasReported}}</p>
         </div>
-      
+        <div class="mt-4">
+          <h4 class="card-title">Admin to resolve</h4>
+          <p class="card-text">{{actualReport.adminToResolve}}</p>
+        </div>
+        <div class="mt-4">
+          <h4 class="card-title">Report status</h4>
+          <p class="card-text">{{actualReport.reportStatus}}</p>
+        </div>
+        <div class="mt-4">
+          <h4 class="card-title">Create report date</h4>
+          <p class="card-text">{{actualReport.createReportDate}}</p>
+        </div>
+        <div class="mt-4">
+          <h4 class="card-title">Report category</h4>
+          <p class="card-text">{{actualReport.reportCategory}}</p>
+        </div>
+        <div class="mt-4">
+          <h4 class="card-title">Description</h4>
+          <p class="card-text">{{actualReport.description}}</p>
+        </div>
+        <div *ngIf="actualReport.adminAnnotations" class="mt-4">
+          <h4 class="card-title">Admin annotations</h4>
+          <p class="card-text">{{actualReport.adminAnnotations}}</p>
+        </div>
       </div>
-      
-      
-      <!-- Comprobar si el usuario admin actual es igual al ¡¡adminToResolve!! -->
-      <div *ngIf="actualUserAdmin == adminToResolve" id="divAdminReportForm" class="container">
-      
-        <form [formGroup]="adminReportForm" action="">
-      
-          <div class="form-group adminReportFormField">
-            <label class="form-control-label" for="description">
-              Anotaciones
-              <!-- {{descriptionActualLength}}/{{descriptionMaxLength}} -->
-            </label><br>
-            <textarea formControlName="description" name="description" class="dietInput form-control"
-              placeholder="Introduce la descripción" required id="inpDescription" [maxlength]="descriptionMaxLength"
-              [class.is-invalid]="adminReportForm.get('description').touched && adminReportForm.get('description').invalid">
+    </div>
+  </div>
+
+  <div *ngIf="actualUserAdmin == adminToResolve" id="divAdminReportForm" class="container">
+    <form [formGroup]="adminReportForm" action="">
+      <div class="form-group adminReportFormField">
+        <label class="form-control-label" for="description">
+          Anotaciones
+          <!-- {{descriptionActualLength}}/{{descriptionMaxLength}} -->
+        </label><br>
+        <textarea formControlName="description" name="description" class="dietInput form-control"
+          placeholder="Introduce la descripción" required id="inpDescription" [maxlength]="descriptionMaxLength"
+          [class.is-invalid]="adminReportForm.get('description').touched && adminReportForm.get('description').invalid">
               </textarea>
-            <div class="alert colorFallo"
-              [hidden]="adminReportForm.get('description').pristine || adminReportForm.get('description').valid">
-              Las anotaciones son obligatorias
-            </div>
-      
-            <div class="form-group adminReportFormField">
-              <label class="form-control-label" for="reportStatus">Estado del reporte</label><br>
-              <select class="form-control dietInput" id="reportStatus" formControlName="reportStatus">
-                <option disabled selected value>Selecciona una opción</option>
-                <option value="PENDING">Pendiente</option>
-                <option value="RESOLVED">Resuelto</option>
-              </select>
-            </div>
-      
-          </div>
-      
-          <button name="btnGo" class="btn btn-primary btn-lg btn-mid" [disabled]="!adminReportForm.valid"
-            (click)="sendReportData()">Enviar</button>
-      
-        </form>
-      
+        <div class="alert colorFallo"
+          [hidden]="adminReportForm.get('description').pristine || adminReportForm.get('description').valid">
+          Las anotaciones son obligatorias
+        </div>
+
+        <div class="form-group adminReportFormField">
+          <label class="form-control-label" for="reportStatus">Estado del reporte</label><br>
+          <select class="form-control dietInput" id="reportStatus" formControlName="reportStatus">
+            <option disabled selected value>Selecciona una opción</option>
+            <option value="PENDING">Pendiente</option>
+            <option value="RESOLVED">Resuelto</option>
+          </select>
+        </div>
+
       </div>
+
+      <button name="btnGo" class="btn btn-primary btn-lg btn-mid" [disabled]="!adminReportForm.valid"
+        (click)="sendReportData()">Enviar</button>
+    </form>
+  </div>
 
 </div>

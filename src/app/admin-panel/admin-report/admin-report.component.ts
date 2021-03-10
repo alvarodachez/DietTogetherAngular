@@ -93,16 +93,12 @@ export class AdminReportComponent implements OnInit {
       reportStatus: this.adminReportForm.value.reportStatus,
     };
 
-    console.log(formData);
-
     /* realizar petición para actualizar las anotaciones del administrador */
     this.adminService.updateReportAnnotation(this.actualReport.id, formData.description).subscribe((res) => {
 
       if (formData.reportStatus == "PENDING") {
-        console.log("entro en pending");
   
         this.adminService.setReportPending(this.actualReport.id).subscribe((res) => {
-          
           
           /* Swal.fire({
             title: 'Registro de datos',
@@ -114,7 +110,6 @@ export class AdminReportComponent implements OnInit {
       }
   
       if (formData.reportStatus == "RESOLVED") {
-        console.log("entro en resolved");
   
         this.adminService.setReportResolved(this.actualReport.id).subscribe((res) => {
   
