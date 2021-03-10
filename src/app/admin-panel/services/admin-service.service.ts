@@ -105,7 +105,48 @@ export class AdminServiceService {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
     };
 
+    /* Petición que actualiza las anotaciones de administrador */
     return this.http.post(endpoint, annotations ,httpOptions);
+  }
+
+
+  setReportResolved(id:any):Observable<any>{
+    /* Obtener el usuario actual */
+    const username = localStorage.getItem("dietUsernameSession");
+
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointServer + '/report/set-resolved-status/'+username+'&&'+id;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    /* Petición que establece el reporte como resuelto */
+    return this.http.post(endpoint, "resolved" ,httpOptions);
+  }
+
+
+  setReportPending(id:any):Observable<any>{
+    /* Obtener el usuario actual */
+    const username = localStorage.getItem("dietUsernameSession");
+
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointServer + '/report/set-pending-status/'+username+'&&'+id;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    /* Petición que establece el reporte como pendiente */
+    return this.http.post(endpoint, "pending" ,httpOptions);
   }
 
 }

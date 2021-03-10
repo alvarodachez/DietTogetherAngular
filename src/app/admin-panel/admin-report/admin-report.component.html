@@ -31,8 +31,8 @@
               <h4 class="card-title">Description</h4>
               <p class="card-text">{{actualReport.description}}</p>
             </div>
-            <div class="mt-4">
-                <h4 class="card-title">Description</h4>
+            <div *ngIf="actualReport.adminAnnotations" class="mt-4">
+                <h4 class="card-title">Admin annotations</h4>
                 <p class="card-text">{{actualReport.adminAnnotations}}</p>
               </div>
           </div>
@@ -65,7 +65,6 @@
               <select class="form-control dietInput" id="reportStatus" formControlName="reportStatus">
                 <option disabled selected value>Selecciona una opción</option>
                 <option value="PENDING">Pendiente</option>
-                <option value="ASSIGNED">Asignado</option>
                 <option value="RESOLVED">Resuelto</option>
               </select>
             </div>
