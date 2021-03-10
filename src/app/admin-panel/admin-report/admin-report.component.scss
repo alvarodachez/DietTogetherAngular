@@ -1,0 +1,83 @@
+@import "src/sass/styles.scss";
+
+#divAdminReportForm {
+    text-align: center;
+
+    button {
+        margin-top: 5%;
+        font-size: 20px;
+        margin-bottom: 3%;
+    }
+
+}
+
+.fondo {
+    @include dietBanner;
+
+    .titulo {
+        margin: auto auto;
+        font-size: 30px;
+    }
+
+    .word {
+        font-size: 20px;
+    }
+}
+
+.breadcrumb {
+    font-size: 20px;
+    background-color: #9CD3C4;
+}
+
+.active {
+    color: white;
+}
+
+.adminReportFormField {
+    margin-top: 5%;
+
+    textarea {
+        height: 20vh;
+        text-align: justify;
+    }
+}
+
+.dietInput {
+    @include dietInput;
+    appearance: auto;
+    width: 80%;
+}
+
+/* ----------- */
+
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+    
+    .adminReportFormField {
+        margin-top: 1%;
+    }
+
+    #divAdminReportForm {
+        button {
+            margin-top: 3%;
+            width: 25%;
+        }
+    }
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+    
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+  
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+  
+}
