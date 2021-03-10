@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from '../services/group.service';
 import { AthleteRankingInterface } from '../models/athlete-ranking.interface';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-group',
@@ -41,7 +42,7 @@ export class ViewGroupComponent implements OnInit {
     ]),
   });
 
-  constructor(private groupService: GroupService) {
+  constructor(private groupService: GroupService, private router:Router) {
     this.actualGroup = 'hola';
     this.registers = 'holi';
     this.progressBar = 'buenas';
@@ -151,5 +152,38 @@ export class ViewGroupComponent implements OnInit {
         this.isRegisterActive = false;
       }
     }
+  }
+
+  getOutGroup(){
+    Swal.fire({
+      title: 'Estas a punto de salir de un grupo',
+      text: "Si sales de un grupo no podras volver a el. Tus puntos se sumaran al total de tu perfil.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, quiero salir.'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        Swal.fire({
+          title: 'Espere',
+          text: 'Saliendo del grupo',
+          icon: 'info',
+          allowOutsideClick: false,
+        });
+        Swal.showLoading();
+        this.groupService.getOutGroup().subscribe(response => {
+
+          Swal.fire(
+            'Has salido de un grupo',
+            'Se han sumadado tus puntos',
+            'success'
+          )
+
+          this.router.navigate(['/group']);
+        })
+      }
+    })
   }
 }

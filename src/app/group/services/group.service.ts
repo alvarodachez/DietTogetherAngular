@@ -148,4 +148,19 @@ export class GroupService {
     return this.http.get(endpoint,httpOptions);
   }
 
+  getOutGroup():Observable<any>{
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointServer +"/group/get-out-group/"+localStorage.getItem("dietUsernameSession");
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    return this.http.post(endpoint,"hola",httpOptions);
+  }
+
 }
