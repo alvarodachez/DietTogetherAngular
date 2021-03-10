@@ -89,10 +89,26 @@ export class LogInService {
             } else {
               this.route.navigate(['home']);
               setTimeout(() => {
-                Toast.fire({
-                  icon: 'success',
-                  title: 'Bienvenid@ ' + user.username,
-                });
+                
+                Swal.fire({
+                  title: 'Bienvenido a la version Alpha de Diet2Gether',
+                  icon:'info',
+                  text:'Cualquier error o sugerencia que tenga, no dude en reportarla en la seccion de "Reporte Errores". Gracias por confiar en nosotros.',
+                  showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  },
+                  confirmButtonText: 'Ok'
+                }).then((result) => {
+
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Bienvenid@ ' + user.username,
+                  });
+                })
+                
               }, 10);
             }
           });
@@ -118,6 +134,7 @@ export class LogInService {
 
     localStorage.removeItem('dietUsernameSession');
     localStorage.removeItem('dietJwtSession');
+    localStorage.removeItem('dietFirstSession');
 
     this.route.navigate(['welcome']);
   }
