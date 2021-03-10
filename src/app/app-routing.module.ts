@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NotFoundComponent } from './common/not-found/not-found.component';
 import { WelcomeComponent } from './entry/welcome/welcome.component';
 
 const routes: Routes = [
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path:'admin-panel',
     loadChildren: () => import("./admin-panel/admin-panel.module").then(m => m.AdminPanelModule)
+  },
+  {
+    path:'**',
+    component: NotFoundComponent
   }
 
 ];
