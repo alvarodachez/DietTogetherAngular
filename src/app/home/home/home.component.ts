@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,5 +13,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
+
 
 }
