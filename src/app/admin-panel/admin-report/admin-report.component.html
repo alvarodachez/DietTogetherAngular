@@ -1,6 +1,15 @@
 <!-- *ngFor="let report of myReports, let i = index" -->
-
-<div class="animate__animated animate__fadeInDownBig">
+<div class="fondo">
+  <div class="titulo align-self-center text-center">
+    <p class="text-white">Reporte de errores</p>
+    <ol class="breadcrumb container text-center">
+      <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+      <li class="breadcrumb-item " [routerLink]="['/admin-panel']">Panel Administrador</li>
+      <li class="breadcrumb-item active">View Report</li>
+    </ol>
+  </div>
+</div>
+<div class="animate__animated animate__fadeInUp">
 
     <div class="container" *ngIf="actualReport">
 
