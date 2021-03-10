@@ -15,6 +15,7 @@ import { ReportModule } from './report/report.module';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { AdminPanelModule } from './admin-panel/admin-panel.module';
+import { NotFoundComponent } from './common/not-found/not-found.component';
 
 
 
@@ -23,6 +24,7 @@ import { AdminPanelModule } from './admin-panel/admin-panel.module';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
