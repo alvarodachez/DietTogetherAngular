@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NotFoundComponent } from './common/not-found/not-found.component';
 import { WelcomeComponent } from './entry/welcome/welcome.component';
 
 const routes: Routes = [
@@ -29,7 +30,22 @@ const routes: Routes = [
     path: 'group',
     loadChildren: () => import("./group/group.module").then(m => m.GroupModule)
   },
-
+  {
+    path: 'report',
+    loadChildren: () => import("./report/report.module").then(m => m.ReportModule)
+  },
+  {
+    path:'admin-panel',
+    loadChildren: () => import("./admin-panel/admin-panel.module").then(m => m.AdminPanelModule)
+  },
+  {
+    path:'**',
+    component: NotFoundComponent
+  },
+  {
+    path:'404',
+    component: NotFoundComponent
+  }
 ];
 
 @NgModule({

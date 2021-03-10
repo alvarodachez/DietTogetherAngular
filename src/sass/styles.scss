@@ -9,6 +9,7 @@
 @import "mixins";
 @import "reboot";
 @import "grid";
+@import "tables";
 @import "forms";
 @import "buttons";
 @import "transitions";
@@ -29,6 +30,8 @@
 
 // components
 @import "components/entry/entry.scss";
+@import "components/report/report.scss";
+
 @import "~@sweetalert2/theme-bulma/bulma.scss";
 @import "../../node_modules/animate.css/animate.min";
 

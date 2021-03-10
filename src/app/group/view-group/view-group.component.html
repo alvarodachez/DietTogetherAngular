@@ -1,6 +1,6 @@
 <div class="fondo">
   <div class="titulo align-self-center text-center ">
-    <p class="text-white">Bienvenid@ a {{actualGroup.name}}</p>
+    <p class="text-white">Bienvenid@ a {{actualGroup.name}} <i class="fas fa-question"></i></p>
     <!-- <p class="word">Lista de amigos</p> -->
     <ol class="breadcrumb container">
       <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
@@ -28,7 +28,7 @@
 <!-- Div Ranking -->
 <div *ngIf="showActive == true" class="container text-center mt-4 animate__animated animate__fadeIn">
 
-  <h2>Tiempo restante: {{progressBar.daysLeft}} dias </h2>
+  <h2>Tiempo restante: {{progressBar.daysLeft}} dias <i (click)="getOutGroup()" class="fas fa-sign-out-alt rotar ml-2"></i></h2>
 
   <!-- Barra de progreso -->
   <div class="progress mt-1 border border-primary text-dark">

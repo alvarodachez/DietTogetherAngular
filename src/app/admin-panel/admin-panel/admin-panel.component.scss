@@ -1,0 +1,112 @@
+@import "src/sass/styles.scss";
+
+
+.fondo {
+    @include dietBanner;
+
+    .titulo {
+        margin: auto auto;
+        font-size: 30px;
+    }
+
+    .word {
+        font-size: 20px;
+    }
+}
+.breadcrumb {
+    font-size: 20px;
+    background-color: #9CD3C4;
+}
+
+.active {
+    color: white;
+}
+
+.progress {
+    height: 4vh;
+}
+
+.card-group {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.modal {
+    font-size: 20px;
+}
+
+.dietInput {
+  @include dietInput;
+}
+
+/* --- */
+
+.midInputLeft {
+    margin-left: 10%;
+}
+
+.midInputRight {
+    margin-right: 10%;
+}
+
+.doubleInput {
+    display: flex;
+    justify-content: space-evenly;
+
+    input {
+        width: 33%;
+    }
+}
+
+/* Iconos Font Awesome */
+.fas {
+    cursor: pointer;
+}
+
+.fas:hover {
+    color: #f3969a;
+}
+
+.fas:active {
+    color: #78c2ad;
+}
+
+.far {
+    cursor: pointer;
+}
+
+.far:hover {
+    color: #f3969a;
+}
+
+.far:active {
+    color: #78c2ad;
+}
+
+
+/* ----------- */
+
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+  
+    .card-group {
+        width: 100%;
+    }
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+    
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+  
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+  
+}
