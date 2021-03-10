@@ -1,6 +1,9 @@
 @import "src/sass/styles.scss";
 
 
+.rotar{
+    transform: rotate(180deg);
+}
 .fondo {
     @include dietBanner;
 

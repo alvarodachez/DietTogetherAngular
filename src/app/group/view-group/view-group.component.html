@@ -28,7 +28,7 @@
 <!-- Div Ranking -->
 <div *ngIf="showActive == true" class="container text-center mt-4 animate__animated animate__fadeIn">
 
-  <h2>Tiempo restante: {{progressBar.daysLeft}} dias </h2>
+  <h2>Tiempo restante: {{progressBar.daysLeft}} dias <i (click)="getOutGroup()" class="fas fa-sign-out-alt rotar ml-2"></i></h2>
 
   <!-- Barra de progreso -->
   <div class="progress mt-1 border border-primary text-dark">
