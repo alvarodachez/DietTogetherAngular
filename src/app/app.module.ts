@@ -10,11 +10,11 @@ import { HomeModule } from './home/home.module';
 import { SocialModule } from './social/social.module';
 import { GroupModule } from './group/group.module';
 import { ReportModule } from './report/report.module';
+import { AdminPanelModule } from './admin-panel/admin-panel.module';
 
 // Componentes
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
-import { AdminPanelModule } from './admin-panel/admin-panel.module';
 import { NotFoundComponent } from './common/not-found/not-found.component';
 
 

@@ -50,10 +50,12 @@
                     <td>{{report.reportCategory}}</td>
                     <td>{{report.description}}</td>
                     <td *ngIf="report.reportStatus == 'PENDING'">
-                        <i class="fas fa-eye fa-2x mr-3"></i> 
+                        <i class="fas fa-eye fa-2x mr-3" [routerLink]="['report', report.id]"></i> 
                         <i (click)="assignReport(report.id)" class="far fa-hand-point-up fa-2x ml-5"></i>
                     </td>
-                    <td *ngIf="report.reportStatus != 'PENDING'"><i class="fas fa-eye fa-2x"></i> </td>
+                    <td *ngIf="report.reportStatus != 'PENDING'">
+                        <i class="fas fa-eye fa-2x" [routerLink]="['report', report.id]"></i>
+                    </td>
                 </tr>
             </tbody>
         </table>
