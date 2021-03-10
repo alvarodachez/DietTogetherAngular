@@ -95,7 +95,7 @@ export class AdminReportComponent implements OnInit {
 
     console.log(formData);
 
-    /* realizar petición para registrar los datos del atleta */
+    /* realizar petición para actualizar las anotaciones del administrador */
     this.adminService.updateReportAnnotation(this.actualReport.id, formData.description).subscribe((res) => {
       Swal.fire({
         title: 'Registro de datos',
@@ -104,6 +104,33 @@ export class AdminReportComponent implements OnInit {
         input: undefined,
       });
     });
+
+    if (formData.reportStatus == "PENDING") {
+      console.log("entro en pending");
+      
+      this.adminService.setReportPending(this.actualReport.id).subscribe((res) => {
+        Swal.fire({
+          title: 'Registro de datos',
+          text: 'Reporte pendiente.',
+          icon: 'success',
+          input: undefined,
+        });
+      });
+    }
+
+    if (formData.reportStatus == "RESOLVED") {
+      console.log("entro en resolved");
+
+      this.adminService.setReportResolved(this.actualReport.id).subscribe((res) => {
+        Swal.fire({
+          title: 'Registro de datos',
+          text: 'Reporte resuelto.',
+          icon: 'success',
+          input: undefined,
+        });
+      });
+    }
+
 
     /* Se resetea el formulario */
     this.adminReportForm.reset();

@@ -92,7 +92,9 @@
                     <td>{{report.createReportDate}}</td>
                     <td>{{report.reportCategory}}</td>
                     <td>{{report.description}}</td>
-                    <td *ngIf="report.reportStatus != 'PENDING'"><i class="fas fa-eye fa-2x"></i> </td>
+                    <td *ngIf="report.reportStatus != 'PENDING'">
+                        <i class="fas fa-eye fa-2x" [routerLink]="['report', report.id]"></i>
+                    </td>
                 </tr>
             </tbody>
         </table>
