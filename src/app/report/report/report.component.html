@@ -1,9 +1,9 @@
 <div class="fondo">
   <div class="titulo align-self-center text-center">
-    <p class="text-white">Reporte de errores</p>
+    <p class="text-white">Sugerencias de mejoras</p>
     <ol class="breadcrumb container text-center">
       <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
-      <li class="breadcrumb-item active" [routerLink]="['/report']">Report</li>
+      <li class="breadcrumb-item active" [routerLink]="['/report']">Sugerencias</li>
     </ol>
   </div>
 </div>
@@ -11,12 +11,11 @@
 <div id="divReportGeneral" class="container animate__animated animate__fadeInUp">
 
   <div class="container text-center mt-3">
-    <!-- <h1>Reporte de errores</h1> -->
     <h3 class="mx-auto w-75">Gracias por compartir tu opinión con nosotros! <i class="far fa-smile-beam"></i></h3>
   </div>
 
 
-  <div id="divReportForm">
+  <div id="divReportForm" class="container">
 
     <form [formGroup]="reportForm" action="">
 

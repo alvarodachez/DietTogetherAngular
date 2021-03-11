@@ -34,7 +34,6 @@
           <th scope="col">Report Status</th>
           <th scope="col">Post Date</th>
           <th scope="col">Report Category</th>
-          <th scope="col">Description</th>
           <th scope="col">Operations</th>
         </tr>
       </thead>
@@ -47,7 +46,6 @@
           <td>{{report.reportStatus}}</td>
           <td>{{report.createReportDate}}</td>
           <td>{{report.reportCategory}}</td>
-          <td>{{report.description}}</td>
           <td *ngIf="report.reportStatus == 'PENDING'">
             <i class="fas fa-eye fa-2x mr-3" [routerLink]="['report', report.id]"></i>
             <i (click)="assignReport(report.id)" class="far fa-hand-point-up fa-2x ml-5"></i>
@@ -76,7 +74,6 @@
           <th scope="col">Report Status</th>
           <th scope="col">Post Date</th>
           <th scope="col">Report Category</th>
-          <th scope="col">Description</th>
           <th scope="col">Operations</th>
         </tr>
       </thead>
@@ -89,7 +86,6 @@
           <td>{{report.reportStatus}}</td>
           <td>{{report.createReportDate}}</td>
           <td>{{report.reportCategory}}</td>
-          <td>{{report.description}}</td>
           <td *ngIf="report.reportStatus != 'PENDING'">
             <i class="fas fa-eye fa-2x" [routerLink]="['report', report.id]"></i>
           </td>

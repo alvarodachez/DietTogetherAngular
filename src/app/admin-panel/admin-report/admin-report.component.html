@@ -14,7 +14,7 @@
 
   <div class="container" *ngIf="actualReport">
     <div class="card border-primary mt-3 mb-3 w-75 mx-auto">
-      <div class="card-header">Report - {{actualReport.id}}</div>
+      <div class="card-header">Report -> {{actualReport.id}}</div>
       <div class="card-body">
         <div class="">
           <h4 class="card-title">Athlete has reported</h4>
@@ -56,7 +56,7 @@
           <!-- {{descriptionActualLength}}/{{descriptionMaxLength}} -->
         </label><br>
         <textarea formControlName="description" name="description" class="dietInput form-control"
-          placeholder="Introduce la descripción" required id="inpDescription" [maxlength]="descriptionMaxLength"
+          placeholder="Introduce las anotaciones" required id="inpDescription" [maxlength]="descriptionMaxLength"
           [class.is-invalid]="adminReportForm.get('description').touched && adminReportForm.get('description').invalid">
               </textarea>
         <div class="alert colorFallo"
