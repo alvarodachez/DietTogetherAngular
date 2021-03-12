@@ -91,9 +91,9 @@ export class LogInService {
               setTimeout(() => {
                 
                 Swal.fire({
-                  title: 'Bienvenido a la version Alpha de Diet2Gether',
+                  title: 'Bienvenido a la version Alpha de Diet2gether',
                   icon:'info',
-                  text:'Cualquier error o sugerencia que tenga, no dude en reportarla en la seccion de "Reporte Errores". Gracias por confiar en nosotros.',
+                  text:'Cualquier error o sugerencia que tenga, no dude en reportarla en la seccion de "Sugerencias de mejoras". Gracias por confiar en nosotros.',
                   showClass: {
                     popup: 'animate__animated animate__fadeInDown'
                   },

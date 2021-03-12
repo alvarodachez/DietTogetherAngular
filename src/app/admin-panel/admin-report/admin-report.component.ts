@@ -33,7 +33,7 @@ export class AdminReportComponent implements OnInit {
       Validators.maxLength(this.descriptionMaxLength), // número máximo de caracteres, 3
     ]),
     reportStatus: new FormControl('', [
-      Validators.required, // requerido
+       // requerido
     ]),
   });
 
@@ -41,7 +41,7 @@ export class AdminReportComponent implements OnInit {
     private adminService: AdminServiceService,
     private activatedRoute: ActivatedRoute,
     private route: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     /* Obtener usuario admin actual */
@@ -62,17 +62,17 @@ export class AdminReportComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     /* Obtener el reporte con el id indicado */
-    this.adminService.getOneReport(id).subscribe((res:FullReportInterface) => {
+    this.adminService.getOneReport(id).subscribe((res: FullReportInterface) => {
       // Guardar reporte dentro de la variable actualReport
       this.actualReport = res;
-      
+
       // Guardar el administrador asignado al reporte
       this.adminToResolve = res.adminToResolve;
     },
-    /* Si no existe el reporte, se redirige a la pantalla de error 404 */
-    (error) => {
-      this.route.navigate(['/404']);
-    });
+      /* Si no existe el reporte, se redirige a la pantalla de error 404 */
+      (error) => {
+        this.route.navigate(['/404']);
+      });
   }
 
 
@@ -93,10 +93,35 @@ export class AdminReportComponent implements OnInit {
       reportStatus: this.adminReportForm.value.reportStatus,
     };
 
-    console.log(formData);
-
     /* realizar petición para actualizar las anotaciones del administrador */
     this.adminService.updateReportAnnotation(this.actualReport.id, formData.description).subscribe((res) => {
+
+      if (formData.reportStatus == "PENDING") {
+  
+        this.adminService.setReportPending(this.actualReport.id).subscribe((res) => {
+          
+          /* Swal.fire({
+            title: 'Registro de datos',
+            text: 'Reporte pendiente.',
+            icon: 'success',
+            input: undefined,
+          }); */
+        });
+      }
+  
+      if (formData.reportStatus == "RESOLVED") {
+  
+        this.adminService.setReportResolved(this.actualReport.id).subscribe((res) => {
+  
+          /* Swal.fire({
+            title: 'Registro de datos',
+            text: 'Reporte resuelto.',
+            icon: 'success',
+            input: undefined,
+          }); */
+        });
+      }
+
       Swal.fire({
         title: 'Registro de datos',
         text: 'Datos registrados correctamente.',
@@ -105,31 +130,7 @@ export class AdminReportComponent implements OnInit {
       });
     });
 
-    if (formData.reportStatus == "PENDING") {
-      console.log("entro en pending");
-      
-      this.adminService.setReportPending(this.actualReport.id).subscribe((res) => {
-        Swal.fire({
-          title: 'Registro de datos',
-          text: 'Reporte pendiente.',
-          icon: 'success',
-          input: undefined,
-        });
-      });
-    }
-
-    if (formData.reportStatus == "RESOLVED") {
-      console.log("entro en resolved");
-
-      this.adminService.setReportResolved(this.actualReport.id).subscribe((res) => {
-        Swal.fire({
-          title: 'Registro de datos',
-          text: 'Reporte resuelto.',
-          icon: 'success',
-          input: undefined,
-        });
-      });
-    }
+    
 
 
     /* Se resetea el formulario */
