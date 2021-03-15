@@ -139,6 +139,7 @@ export class ViewGroupComponent implements OnInit {
   getProgressBar() {
     this.groupService.getProgressBar().subscribe((response) => {
       this.progressBar = response;
+      console.log(this.progressBar)
     });
   }
 
