@@ -1,7 +1,6 @@
 <div class="fondo">
-  <div class="titulo align-self-center text-center ">
+  <div class="titulo align-self-center text-center">
     <p class="text-white">Bienvenid@ a {{actualGroup.name}}</p>
-    <!-- <p class="word">Lista de amigos</p> -->
     <ol class="breadcrumb container">
       <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
       <li class="breadcrumb-item" [routerLink]="['/group/welcome']">Grupos</li>
@@ -28,7 +27,7 @@
 <!-- Div Ranking -->
 <div *ngIf="showActive == true" class="container text-center mt-4 animate__animated animate__fadeIn">
 
-  <h2>Tiempo restante: {{progressBar.daysLeft}} dias <i (click)="getOutGroup()" class="fas fa-sign-out-alt rotar ml-2"></i></h2>
+  <h2>Tiempo restante: {{progressBar.daysLeft}} días</h2>
 
   <!-- Barra de progreso -->
   <div class="progress mt-1 border border-primary text-dark">
@@ -44,29 +43,49 @@
   <!-- Ranking - Lista con badges -->
   <h2>Ranking</h2>
 
-  <ul class="list-group" *ngFor="let athleteRanking of athletes, let i = index ">
+  <ul class="list-group" *ngFor="let athleteRanking of athletes, let i = index">
 
     <li *ngIf="i == 0" class="list-group-item d-flex justify-content-between align-items-center">
-      <i class="fas fa-trophy text-warning fa-2x"></i>
-      {{athleteRanking.name}}
-      <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+      <div class="cupOrNumber">
+        <i class="fas fa-trophy text-warning fa-2x"></i>
+      </div>
+        {{athleteRanking.name}}
+      <div class="cupOrNumber">
+        <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+      </div>
     </li>
     <li *ngIf="i == 1" class="list-group-item d-flex justify-content-between align-items-center">
-      <i class="fas fa-trophy fa-2x"></i>
-      {{athleteRanking.name}}
-      <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+      <div class="cupOrNumber">
+        <i class="fas fa-trophy fa-2x"></i>
+      </div>
+        {{athleteRanking.name}}
+      <div class="cupOrNumber">
+        <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+      </div>
     </li>
     <li *ngIf="i == 2" class="list-group-item d-flex justify-content-between align-items-center">
-      <i class="fas fa-trophy text-danger fa-2x"></i>
-      {{athleteRanking.name}}
-      <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+      <div class="cupOrNumber">
+        <i class="fas fa-trophy text-danger fa-2x"></i>
+      </div>
+        {{athleteRanking.name}}
+      <div class="cupOrNumber">
+        <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+      </div>
     </li>
-    <li *ngIf="(i != 2 && i != 1 && i != 0)" class="list-group-item d-flex justify-content-between align-items-center">
-      <span>{{i + 1}}</span>
-      {{athleteRanking.name}}
-      <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+    <li *ngIf="(i > 2)" class="list-group-item d-flex justify-content-between align-items-center">
+      <div class="cupOrNumber">
+        <span class="number">{{i + 1}}</span>
+      </div>
+        {{athleteRanking.name}}
+      <div class="cupOrNumber">
+        <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+      </div>
     </li>
   </ul>
+
+  <h4 class="text-secondary mt-5" (click)="getOutGroup()">
+    Salir del grupo <i class="fas fa-sign-out-alt rotar"></i>
+  </h4>
 
 </div>
 
@@ -82,9 +101,10 @@
     <!--     <i *ngIf="isRegisterActive == false" disabled class="fas fa-plus" data-toggle="modal" data-target="#registerModal" (click)="resetAddRegisterForm()"></i>-->
   </h2>
 
-  <p *ngIf="isRegisterActive == false">
+  <p *ngIf="isRegisterActive == false" class="w-75 mx-auto">
     <i class="far fa-clock lead mt-2"></i> 
-    Aun no puedes añadir un registro
+    Aún no puedes añadir otro registro.<br>
+    Puedes crearlo el día {{ nextRegisterDate | date:'d/M' }}.
   </p>
 
   <h3 *ngIf="registers.length == 0"><i class="far fa-clock"></i> Aún no tienes ningún registro en este grupo</h3>
@@ -95,15 +115,27 @@
       <div class="card-header">Día {{register.weightDate}}</div>
       <div class="card-body">
         <!-- <h4 class="card-title">Primary card title</h4> -->
-        <p class="card-text"><i class="fas fa-weight"></i> Peso Registrado: {{register.weight}} kg</p>
-        <p class="card-text"><i class="far fa-calendar-alt"></i> Fecha de Registro: {{register.weightDate}}</p>
-        <p *ngIf="register.weightDifference >= 0" class="card-text"><i class="fas fa-balance-scale-left"></i> Has perdido: {{register.weightDifference}} kg</p>
-        <p *ngIf="register.weightDifference < 0" class="card-text"><i class="fas fa-balance-scale-left"></i> Has ganado: {{register.weightDifference * -1}} kg</p>
-        
+        <p class="card-text">
+          <i class="fas fa-weight"></i>
+          Peso: {{register.weight}} kg
+        </p>
+        <p class="card-text">
+          <i class="far fa-calendar-alt"></i>
+          Fecha: {{register.weightDate}}
+        </p>
+        <p *ngIf="register.weightDifference >= 0" class="card-text">
+          <i class="fas fa-balance-scale-left"></i>
+          Has perdido: {{register.weightDifference}} kg
+        </p>
+        <p *ngIf="register.weightDifference < 0" class="card-text">
+          <i class="fas fa-balance-scale-left"></i>
+          Has ganado: {{register.weightDifference * -1}} kg
+        </p>
       </div>
     </div>
-
   </div>
+
+  
 
   <pagination-controls class="container mt-2" (pageChange)="actualPage = $event"></pagination-controls>
 
