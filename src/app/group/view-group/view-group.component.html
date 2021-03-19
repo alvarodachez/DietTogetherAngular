@@ -1,6 +1,6 @@
 <div class="fondo">
   <div class="titulo align-self-center text-center ">
-    <p class="text-white">Bienvenid@ a {{actualGroup.name}} <i class="fas fa-question"></i></p>
+    <p class="text-white">Bienvenid@ a {{actualGroup.name}}</p>
     <!-- <p class="word">Lista de amigos</p> -->
     <ol class="breadcrumb container">
       <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
@@ -33,7 +33,7 @@
   <!-- Barra de progreso -->
   <div class="progress mt-1 border border-primary text-dark">
     <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar"
-      aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':progressBar.totalPercentage}">
+      aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':progressBar.totalPercentage+'%;'}">
     </div>
   </div>
 
@@ -97,7 +97,9 @@
         <!-- <h4 class="card-title">Primary card title</h4> -->
         <p class="card-text"><i class="fas fa-weight"></i> Peso Registrado: {{register.weight}} kg</p>
         <p class="card-text"><i class="far fa-calendar-alt"></i> Fecha de Registro: {{register.weightDate}}</p>
-        <p class="card-text"><i class="fas fa-balance-scale-left"></i> Has perdido: {{register.weightDifference}} kg</p>
+        <p *ngIf="register.weightDifference >= 0" class="card-text"><i class="fas fa-balance-scale-left"></i> Has perdido: {{register.weightDifference}} kg</p>
+        <p *ngIf="register.weightDifference < 0" class="card-text"><i class="fas fa-balance-scale-left"></i> Has ganado: {{register.weightDifference * -1}} kg</p>
+        
       </div>
     </div>
 
