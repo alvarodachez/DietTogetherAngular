@@ -42,6 +42,14 @@
   @include dietInput;
 }
 
+.cupOrNumber {
+    width: 10%;
+
+    .number {
+        font-size: 20px;
+    }
+}
+
 /* --- */
 
 .midInputLeft {

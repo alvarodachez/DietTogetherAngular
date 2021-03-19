@@ -157,8 +157,8 @@ export class ViewGroupComponent implements OnInit {
 
   getOutGroup(){
     Swal.fire({
-      title: 'Estas a punto de salir de un grupo',
-      text: "Si sales de un grupo no podras volver a el. Tus puntos se sumaran al total de tu perfil.",
+      title: '¡Estás a punto de salir!',
+      text: "Si sales del grupo no podrás volver a el. Tus puntos se sumarán al total de tu perfil.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -178,7 +178,7 @@ export class ViewGroupComponent implements OnInit {
 
           Swal.fire(
             'Has salido de un grupo',
-            'Se han sumadado tus puntos',
+            'Se han sumado tus puntos',
             'success'
           )
 
