@@ -1,13 +1,12 @@
 export const environment = {
   production: true,
-  urlServer:'https://diet2gether.oa.r.appspot.com'
+  urlServer:'https://tomcat.raulmorales.eu/diettogether'
 };
 
 export const urlServerProd = {
-  //url:'http://localhost:8080'
-  url:'https://diet2gether.oa.r.appspot.com'
+  url:'https://tomcat.raulmorales.eu/diettogether'
 }
 
 export const urlServer = {
-  url:'https://diet2gether.oa.r.appspot.com'
+  url:'https://tomcat.raulmorales.eu/diettogether'
 }
