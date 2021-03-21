@@ -103,20 +103,24 @@ export class ViewGroupComponent implements OnInit {
   getRegisters() {
     this.groupService.getRegisters().subscribe(
       (response) => {
+
+        
         if (response[0] == null) {
           this.registers = [];
         } else {
           this.registers = response;
 
-          if (this.registers.length > 1) {
+          /* if (this.registers.length > 1) {
             this.registers = this.athletes.sort(
               (a, b) => new Date(a.weightDate) < new Date(b.weightDate)
             );
-          }
+          } */
         }
         this.setNextRegisterDate();
       },
-      (error) => {}
+      (error) => {
+        
+      }
     );
   }
 
@@ -139,7 +143,7 @@ export class ViewGroupComponent implements OnInit {
   getProgressBar() {
     this.groupService.getProgressBar().subscribe((response) => {
       this.progressBar = response;
-      console.log(this.progressBar)
+      
     });
   }
 
