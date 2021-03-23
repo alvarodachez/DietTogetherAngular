@@ -16,6 +16,7 @@ import { SocialModule } from './social/social.module';
 import { GroupModule } from './group/group.module';
 import { ReportModule } from './report/report.module';
 import { AdminPanelModule } from './admin-panel/admin-panel.module';
+import { RegimeModule } from './regime/regime.module';
 
 // Componentes
 import { HeaderComponent } from './common/header/header.component';
@@ -39,6 +40,7 @@ import { NotFoundComponent } from './common/not-found/not-found.component';
     ReportModule,
     NgxPaginationModule,
     AdminPanelModule,
+    RegimeModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }

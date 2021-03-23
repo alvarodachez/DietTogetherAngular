@@ -1,0 +1,32 @@
+<div class="fondo">
+  <div class="titulo align-self-center text-center">
+    <p class="text-white">Mi dieta</p>
+    <ol class="breadcrumb container">
+      <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+      <li class="breadcrumb-item active" [routerLink]="['/regime']">Dieta</li>
+    </ol>
+  </div>
+</div>
+
+<div class="text-center">
+  <div class="btn-group w-100" role="group" aria-label="Basic example">
+    <button (click)="changeShowMenu('regime')" type="button" [ngClass]="{'active': showMenu == 'regime'}"
+      class="btn btn-secondary w-50 rounded-0">
+      Mi dieta
+    </button>
+    <button (click)="changeShowMenu('dishes')" type="button"
+      [ngClass]="{'active': showMenu == 'dishes'}" class="btn btn-secondary w-50 rounded-0">
+      Mis platos
+    </button>
+  </div>
+</div>
+
+<!--MI DIETA-->
+<div *ngIf="showMenu == 'regime'" class="animate__animated animate__fadeIn">
+    <h1 class="text-center">aquí va la dieta</h1>
+</div>
+
+<!--MIS PLATOS-->
+<div *ngIf="showMenu == 'dishes'" class="animate__animated animate__fadeIn">
+    <h1 class="text-center">aquí van los platos</h1>
+</div>
