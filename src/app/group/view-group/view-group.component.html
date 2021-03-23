@@ -101,18 +101,17 @@
     <!--     <i *ngIf="isRegisterActive == false" disabled class="fas fa-plus" data-toggle="modal" data-target="#registerModal" (click)="resetAddRegisterForm()"></i>-->
   </h2>
 
-  <p *ngIf="isRegisterActive == false" class="w-75 mx-auto">
+  <p *ngIf="isRegisterActive == false" class="mx-auto">
     <i class="far fa-clock lead mt-2"></i> 
     Aún no puedes añadir otro registro.<br>
     Puedes crearlo el día {{ nextRegisterDate | date:'d/M' }}.
   </p>
 
   <h3 *ngIf="registers.length == 0"><i class="far fa-clock"></i> Aún no tienes ningún registro en este grupo</h3>
-  <div *ngFor="let register of registers | paginate:{itemsPerPage: 6, currentPage:actualPage};, let i = index"
-    class="card-group">
-
-    <div class="card border-primary">
-      <div class="card-header">Día {{register.weightDate}}</div>
+  <div class="card-deck">
+    <div class="card border-primary"
+      *ngFor="let register of registers | paginate:{itemsPerPage: 6, currentPage:actualPage};, let i = index">
+      <div class="card-header">{{register.weightDate | date:'fullDate' }}</div>
       <div class="card-body">
         <!-- <h4 class="card-title">Primary card title</h4> -->
         <p class="card-text">
@@ -123,11 +122,11 @@
           <i class="far fa-calendar-alt"></i>
           Fecha: {{register.weightDate}}
         </p>
-        <p *ngIf="register.weightDifference >= 0" class="card-text">
+        <p *ngIf="register.weightDifference >= 0" class="card-text text-primary">
           <i class="fas fa-balance-scale-left"></i>
           Has perdido: {{register.weightDifference}} kg
         </p>
-        <p *ngIf="register.weightDifference < 0" class="card-text">
+        <p *ngIf="register.weightDifference < 0" class="card-text text-secondary">
           <i class="fas fa-balance-scale-left"></i>
           Has ganado: {{register.weightDifference * -1}} kg
         </p>
@@ -135,9 +134,11 @@
     </div>
   </div>
 
-  
-
-  <pagination-controls class="container mt-2" (pageChange)="actualPage = $event"></pagination-controls>
+  <div class="mt-4">
+    <pagination-controls class="" (pageChange)="actualPage = $event"
+      previousLabel="Anterior" nextLabel="Posterior" responsive="true">
+    </pagination-controls>
+  </div>
 
 </div>
 
