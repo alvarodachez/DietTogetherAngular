@@ -109,7 +109,7 @@ export class ViewGroupComponent implements OnInit {
           this.registers = [];
         } else {
           this.registers = response;
-
+          
           /* if (this.registers.length > 1) {
             this.registers = this.athletes.sort(
               (a, b) => new Date(a.weightDate) < new Date(b.weightDate)
