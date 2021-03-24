@@ -14,8 +14,8 @@
       class="btn btn-secondary w-50 rounded-0">
       Mi dieta
     </button>
-    <button (click)="changeShowMenu('dishes')" type="button"
-      [ngClass]="{'active': showMenu == 'dishes'}" class="btn btn-secondary w-50 rounded-0">
+    <button (click)="changeShowMenu('dishes')" type="button" [ngClass]="{'active': showMenu == 'dishes'}"
+      class="btn btn-secondary w-50 rounded-0">
       Mis platos
     </button>
   </div>
@@ -23,10 +23,80 @@
 
 <!--MI DIETA-->
 <div *ngIf="showMenu == 'regime'" class="animate__animated animate__fadeIn">
-    <h1 class="text-center">aquí va la dieta</h1>
+  <h1 class="text-center">aquí va la dieta</h1>
 </div>
 
 <!--MIS PLATOS-->
 <div *ngIf="showMenu == 'dishes'" class="animate__animated animate__fadeIn">
-    <h1 class="text-center">aquí van los platos</h1>
+
+  <div *ngIf="dishes.length == 0" class="container text-center mt-5">
+    <h1 class="mx-auto">No tienes platos registrados actualmente <i class="far fa-frown fa-1x"></i></h1>
+    <h4 class="w-75 mx-auto">Puedes crear un plato en el siguiente botón</h4>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+      Crear plato
+    </button>
+
+  </div>
+
+  <div *ngIf="dishes.length > 0">
+    <h3>el atleta tiene platos</h3>
+  </div>
+
+</div>
+
+
+<!-- Modal para agregar plato -->
+<div id="staticBackdrop" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header padre">
+        <h5 class="modal-title hijo">Creación de plato</h5>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="createDishForm" action="">
+          <div class="form-group">
+
+            <label class="col-form-label" for="name">Introduce el nombre del plato:</label>
+            <input type="text" autocomplete="off" formControlName="name" name="name" class="form-control text-center"
+              placeholder="Nombre del plato"
+              [class.is-invalid]="createDishForm.get('name').touched && createDishForm.get('name').invalid">
+            <div class="alert alert-danger colorFallo"
+              [hidden]="createDishForm.get('name').pristine || createDishForm.get('name').valid">
+              El valor introducido no es válido
+            </div>
+
+            <label class="col-form-label" for="description">Introduce la descripción:</label>
+            <input type="text" autocomplete="off" formControlName="description" name="description"
+              class="form-control text-center" placeholder="Descripción del plato"
+              [class.is-invalid]="createDishForm.get('description').touched && createDishForm.get('description').invalid">
+            <div class="alert alert-danger colorFallo"
+              [hidden]="createDishForm.get('description').pristine || createDishForm.get('description').valid">
+              El valor introducido no es válido
+            </div>
+
+            <!-- DIV de checkboxes para las categorías de los platos -->
+            <!-- <div *ngFor="let friend of friendsList, let i = index" class="list-group">
+                    <div class="form-group">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" [id]="friend"
+                        (change)="onCheckboxChange($event)">
+                        <label class="custom-control-label" [for]="friend">{{ friend }}</label>
+                      </div>
+                    </div>
+                  </div> -->
+          </div>
+          <button (click)="createDish()" type="button" class="btn btn-primary" [disabled]="!createDishForm.valid" 
+          >Enviar</button>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+          (click)="resetCreateDishForm()">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>
