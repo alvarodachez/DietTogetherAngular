@@ -88,6 +88,8 @@
                     </div>
                   </div> -->
           </div>
+          <button (click)="createDish()" type="button" class="btn btn-primary" [disabled]="!createDishForm.valid" 
+          >Enviar</button>
         </form>
 
       </div>
