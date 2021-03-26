@@ -37,7 +37,8 @@
 
   <!-- Sección Dieta, con platos y sin estructura de dieta -->
   <div *ngIf="dishes.length > 0 && daysRegime.length == 0" class="container text-center mt-4">
-    <h1 class="mx-auto">No tienes una <span class="text-primary">dieta</span> registrada actualmente <i class="far fa-frown fa-1x"></i></h1>
+    <h1 class="mx-auto">No tienes una <span class="text-primary">dieta</span> registrada actualmente <i
+        class="far fa-frown fa-1x"></i></h1>
     <h4 class="w-75 mx-auto">Tienes {{dishes.length}} platos registrados</h4>
     <h4 class="w-75 mx-auto">Pulsa el siguiente botón para crear una dieta</h4>
 
@@ -45,76 +46,55 @@
       Crear dieta
     </button>
   </div>
-  
+
   <!-- Sección Dieta, con platos y con estructura de dieta -->
   <div *ngIf="dishes.length > 0 && daysRegime.length > 0" class="container text-center mt-4">
     <h1 class="mx-auto">Mi dieta</h1>
-    <!-- <h4 class="w-75 mx-auto">Tienes {{dishes.length}} platos registrados</h4> -->
 
-    <div class="card-columns">
-      <div class="card border-primary" *ngFor="let day of daysRegime;, let i = index">
-        <div class="card-header selectColor text-white">{{day.day}}</div>
-        <div class="card-body">
-          <div *ngFor="let meal of daysRegime[i].meals, let m = index">
-            <!-- <h4 *ngIf="meal.dish != null" class="card-title">
-              {{meal.meal}}
-            </h4> -->
-            <h4 class="card-title">
-              {{meal.meal}}
-            </h4>
+    <div class="row row-cols-1 row-cols-lg-2">
+      <div class="col mb-4" *ngFor="let day of daysRegime;, let i = index">
 
-            <!-- <p *ngIf="meal.dish != null" class="card-text">
-              {{meal.dish.name}}
-            </p> -->
-            <div *ngIf="meal.dish != null" class="form-group">
-              <!-- <label for="selectDish">Selecciona plato</label> -->
-              <select class="custom-select text-center selectColor text-white" id="selectDish" (change)="onChangeDishSelect($event)">
-                <option disabled selected value class="text-center">
-                  {{meal.dish.name}}
-                </option>
-                <option *ngFor="let d of dishes" value="{{meal.id}}.{{d.id}}" class="text-center">
-                  <!-- {{meal.id}} - {{d.id}} - {{d.name}} -->
-                  {{d.name}}
-                </option>
-              </select>
-            </div>
+        <div class="card border-primary shadow rounded">
+          <h2 class="card-header selectColor text-white font-weight-bold">{{day.day}}</h2>
+          <div class="card-body">
+            <div *ngFor="let meal of daysRegime[i].meals, let m = index">
 
+              <h4 class="card-title">
+                {{meal.meal}}
+              </h4>
 
-            <!-- <p *ngIf="meal.dish == null" class="card-text">
-              Añadir plato (+)
-            </p> -->
-            <div *ngIf="meal.dish == null" class="form-group">
-              <!-- <label for="selectDish">Selecciona plato</label> -->
-              <select class="custom-select" id="selectDish" (change)="onChangeDishSelect($event)">
-                <option disabled selected value>Selecciona plato</option>
-                <option *ngFor="let d of dishes" value="{{meal.id}}.{{d.id}}">
-                  {{meal.id}} - {{d.id}} - {{d.name}}
-                </option>
-              </select>
-            </div>        
+              <div *ngIf="meal.dish != null" class="form-group">
+                <!-- <label for="selectDish">Selecciona plato</label> -->
+                <select class="custom-select text-center selectColor text-white" id="selectDish"
+                  (change)="onChangeDishSelect($event)">
+                  <option disabled selected value class="text-center">
+                    {{meal.dish.name}}
+                  </option>
+                  <option *ngFor="let d of dishes" value="{{meal.id}}.{{d.id}}" class="text-center">
+                    {{d.name}}
+                  </option>
+                </select>
+              </div>
 
+              <div *ngIf="meal.dish == null" class="form-group">
+                <!-- <label for="selectDish">Selecciona plato</label> -->
+                <select class="custom-select" id="selectDish" (change)="onChangeDishSelect($event)">
+                  <option disabled selected value>Selecciona plato</option>
+                  <option *ngFor="let d of dishes" value="{{meal.id}}.{{d.id}}">
+                    {{d.name}}
+                  </option>
+                </select>
+              </div>
 
+              <hr *ngIf="m <= 3" class="mb-3">
+            </div> <!-- fin . for daysRegime[i].meals -->
+          </div> <!-- fin . card body -->
+        </div> <!-- fin . card -->
+      </div> <!-- fin. col -->
+    </div> <!-- fin . row -->
 
-            <!-- <hr *ngIf="m <= 3 && meal.dish != null" class="mb-3"> -->
-            <hr *ngIf="m <= 3" class="mb-3">
-
-          </div>
-          <!-- <h4 *ngFor="let meal of daysRegime[i].meals" class="card-title">
-            <div *ngIf="meal.dish.name != null">
-              {{meal.dish.name}}
-            </div>
-          </h4> -->
-          
-          <!-- <p *ngIf="day.categories.length > 0" class="card-text">
-            {{day.categories}}
-          </p> -->
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-</div>
+  </div> 
+</div> <!-- fin . sección MI DIETA -->
 
 <!--MIS PLATOS-->
 <div *ngIf="showMenu == 'dishes'" class="animate__animated animate__fadeIn">
@@ -134,8 +114,8 @@
     <h4 class="w-75 mx-auto">Tienes {{dishes.length}} platos registrados</h4>
 
     <div class="card-columns">
-      <div class="card border-primary" *ngFor="let dish of dishes;, let i = index">
-        <div class="card-header">{{dish.name }}</div>
+      <div class="card border-primary shadow-sm rounded" *ngFor="let dish of dishes;, let i = index">
+        <h3 class="card-header selectColor text-white font-weight-bold">{{dish.name}}</h3>
         <div class="card-body">
           <h4 class="card-title">
             {{dish.description}}
@@ -196,6 +176,11 @@
                   <input type="checkbox" class="custom-control-input" name="categories" formControlName="categories"
                     [id]="category" (change)="onCheckboxChange($event)">
                   <label class="custom-control-label" [for]="category">{{ category }}</label>
+                  <!-- <label *ngIf="category != 'MEAT'" class="custom-control-label" [for]="category">{{ category }}</label>
+                  <label *ngIf="category == 'MEAT'" class="custom-control-label" [for]="category">
+                    <i class="fas fa-drumstick-bite"></i>
+                  </label> -->
+                  <!-- <i class="fas fa-drumstick-bite"></i> -->
                 </div>
               </div>
             </div>

@@ -39,10 +39,11 @@ export class RegimeComponent implements OnInit {
   ngOnInit(): void {
     /* Pestaña por defecto - Mi dieta */
     this.showMenu = 'regime';
-    // this.showMenu = 'dishes';
 
+    /* obtener los platos del atleta */
     this.getDishes();
 
+    /* obtener los días (dieta) del atleta */
     this.getDayRegime();
 
     /* obtener las categorías de los platos */
@@ -58,8 +59,8 @@ export class RegimeComponent implements OnInit {
    * Funcion que resetea los valores del formulario en el modal de crear plato
    */
   resetCreateDishForm() {
-    /* Borrar la lista de platos */
-    // this.dishes = [];
+    /* Se limpia la lista de categorías seleccionadas */
+    this.selectedCategoriesList = [];
 
     /* Resetear el formulario de añadir amigos */
     this.createDishForm.reset();
@@ -75,6 +76,15 @@ export class RegimeComponent implements OnInit {
   getDayRegime() {
     this.regimeService.getDayRegime().subscribe((response) => {
       console.log(response);
+
+      response[0].day = "Lunes";
+      response[1].day = "Martes";
+      response[2].day = "Miércoles";
+      response[3].day = "Jueves";
+      response[4].day = "Viernes";
+      response[5].day = "Sábado";
+      response[6].day = "Domingo";
+
       this.daysRegime = response;
     });
   }
@@ -100,6 +110,9 @@ export class RegimeComponent implements OnInit {
 
       /* Se resetea el formulario */
       this.resetCreateDishForm();
+
+      /* Se limpia la lista de categorías seleccionadas */
+      this.selectedCategoriesList = [];
 
       console.log(response);
     });
