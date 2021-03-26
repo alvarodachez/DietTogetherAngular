@@ -26,7 +26,6 @@ export class RegimeComponent implements OnInit {
   /* Variable que almacena la lista de categorías seleccionadas */
   selectedCategoriesList: any = [];
 
-
   /* Formulario reactivo para la creación del plato */
   createDishForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -38,8 +37,8 @@ export class RegimeComponent implements OnInit {
 
   ngOnInit(): void {
     /* Pestaña por defecto - Mi dieta */
-    // this.showMenu = 'regime';
-    this.showMenu = 'dishes';
+    this.showMenu = 'regime';
+    // this.showMenu = 'dishes';
 
     this.getDishes();
 
@@ -86,13 +85,13 @@ export class RegimeComponent implements OnInit {
     });
   }
 
+  /* Método que crea un plato nuevo */
   createDish() {
     let dish: DishInterface = {
       name: this.createDishForm.value.name,
       description: this.createDishForm.value.description,
-      categories: this.selectedCategoriesList
+      categories: this.selectedCategoriesList,
     };
-    console.log("...antes de enviar...");
 
     this.regimeService.createDish(dish).subscribe((response) => {
       /* Se refresca la lista de platos */
@@ -102,7 +101,6 @@ export class RegimeComponent implements OnInit {
       this.resetCreateDishForm();
 
       console.log(response);
-      console.log("...enviado...");
     });
   }
 
@@ -114,8 +112,21 @@ export class RegimeComponent implements OnInit {
     } else {
       /* Eliminar categoría de la lista de categorías seleccionadas */
       this.selectedCategoriesList.splice(
-        this.selectedCategoriesList.indexOf(e.target.id),1
+        this.selectedCategoriesList.indexOf(e.target.id),
+        1
       );
     }
+  }
+
+  /* Método que crea la estructura de la dieta */
+  createRegimeStructure() {
+    this.regimeService.createRegimeStructure().subscribe((response) => {
+
+      /* Se refresca la lista de dias (estructura de la dieta) */
+      this.getDayRegime();
+
+      console.log("Creada estructura de dieta...");
+      console.log(response);
+    });
   }
 }

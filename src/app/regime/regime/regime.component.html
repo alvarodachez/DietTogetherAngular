@@ -23,14 +23,98 @@
 
 <!--MI DIETA-->
 <div *ngIf="showMenu == 'regime'" class="animate__animated animate__fadeIn">
-  <h1 class="text-center">aquí va la dieta</h1>
+
+  <!-- Sección Dieta, sin platos -->
+  <div *ngIf="dishes.length == 0" class="container text-center mt-4">
+    <h1 class="mx-auto">No tienes una <span class="text-primary">dieta</span> registrada actualmente <i class="far fa-frown fa-1x"></i></h1>
+    <h4 class="w-75 mx-auto">Para crear una dieta debes tener platos registrados</h4>
+    <h4 class="w-75 mx-auto">Puedes crear uno en la sección Mis platos</h4>
+
+    <button type="button" class="btn btn-primary" (click)="changeShowMenu('dishes')">
+      Ir a mis platos
+    </button>
+  </div>
+
+  <!-- Sección Dieta, con platos y sin estructura de dieta -->
+  <div *ngIf="dishes.length > 0 && daysRegime.length == 0" class="container text-center mt-4">
+    <h1 class="mx-auto">No tienes una <span class="text-primary">dieta</span> registrada actualmente <i class="far fa-frown fa-1x"></i></h1>
+    <h4 class="w-75 mx-auto">Tienes {{dishes.length}} platos registrados</h4>
+    <h4 class="w-75 mx-auto">Pulsa el siguiente botón para crear una dieta</h4>
+
+    <button type="button" class="btn btn-primary" (click)="createRegimeStructure()">
+      Crear dieta
+    </button>
+  </div>
+  
+  <!-- Sección Dieta, con platos y con estructura de dieta -->
+  <div *ngIf="dishes.length > 0 && daysRegime.length > 0" class="container text-center mt-4">
+    <h1 class="mx-auto">Mi dieta</h1>
+    <h4 class="w-75 mx-auto">Tienes {{dishes.length}} platos registrados</h4>
+
+    <!-- 
+      0:
+        day: "MONDAY"
+        id: 15
+        meals: Array(5)
+        0:
+        dish: null
+        id: 71
+        meal: "BREAKFAST"
+     -->
+
+    <div class="card-columns">
+      <div class="card border-primary" *ngFor="let day of daysRegime;, let i = index">
+        <div class="card-header">{{day.day}}</div>
+        <div class="card-body">
+          <h4 class="card-title">
+            titulo
+          </h4>
+          <h4 *ngFor="let meal of daysRegime[i].meals" class="card-title">
+            <div *ngIf="meal.dish.name != null">
+              {{meal.dish.name}}
+            </div>
+          </h4>
+<!--           <p *ngIf="day.categories.length > 0" class="card-text">
+            {{day.categories}}
+          </p>
+ -->        </div>
+      </div>
+    </div>
+
+    <!-- <h4 class="w-75 mx-auto">Pulsa el siguiente botón para crear una dieta</h4>
+
+    <button type="button" class="btn btn-primary" (click)="createRegimeStructure()">
+      Crear dieta
+    </button> -->
+  </div>
+
+
+
+    <!-- <div class="card-columns">
+      <div class="card border-primary" *ngFor="let dish of dishes;, let i = index">
+        <div class="card-header">{{dish.name }}</div>
+        <div class="card-body">
+          <h4 class="card-title">
+            {{dish.description}}
+          </h4>
+          <p *ngIf="dish.categories.length > 0" class="card-text">
+            {{dish.categories}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#staticBackdrop">
+      Crear plato
+    </button> -->
+
 </div>
 
 <!--MIS PLATOS-->
 <div *ngIf="showMenu == 'dishes'" class="animate__animated animate__fadeIn">
 
   <div *ngIf="dishes.length == 0" class="container text-center mt-4">
-    <h1 class="mx-auto">No tienes platos registrados actualmente <i class="far fa-frown fa-1x"></i></h1>
+    <h1 class="mx-auto">No tienes <span class="text-primary">platos</span> registrados actualmente <i class="far fa-frown fa-1x"></i></h1>
     <h4 class="w-75 mx-auto">Puedes crear un plato en el siguiente botón</h4>
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
