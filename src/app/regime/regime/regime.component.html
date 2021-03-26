@@ -49,64 +49,70 @@
   <!-- Sección Dieta, con platos y con estructura de dieta -->
   <div *ngIf="dishes.length > 0 && daysRegime.length > 0" class="container text-center mt-4">
     <h1 class="mx-auto">Mi dieta</h1>
-    <h4 class="w-75 mx-auto">Tienes {{dishes.length}} platos registrados</h4>
-
-    <!-- 
-      0:
-        day: "MONDAY"
-        id: 15
-        meals: Array(5)
-        0:
-        dish: null
-        id: 71
-        meal: "BREAKFAST"
-     -->
+    <!-- <h4 class="w-75 mx-auto">Tienes {{dishes.length}} platos registrados</h4> -->
 
     <div class="card-columns">
       <div class="card border-primary" *ngFor="let day of daysRegime;, let i = index">
-        <div class="card-header">{{day.day}}</div>
+        <div class="card-header selectColor text-white">{{day.day}}</div>
         <div class="card-body">
-          <h4 class="card-title">
-            titulo
-          </h4>
-          <h4 *ngFor="let meal of daysRegime[i].meals" class="card-title">
+          <div *ngFor="let meal of daysRegime[i].meals, let m = index">
+            <!-- <h4 *ngIf="meal.dish != null" class="card-title">
+              {{meal.meal}}
+            </h4> -->
+            <h4 class="card-title">
+              {{meal.meal}}
+            </h4>
+
+            <!-- <p *ngIf="meal.dish != null" class="card-text">
+              {{meal.dish.name}}
+            </p> -->
+            <div *ngIf="meal.dish != null" class="form-group">
+              <!-- <label for="selectDish">Selecciona plato</label> -->
+              <select class="custom-select text-center selectColor text-white" id="selectDish" (change)="onChangeDishSelect($event)">
+                <option disabled selected value class="text-center">
+                  {{meal.dish.name}}
+                </option>
+                <option *ngFor="let d of dishes" value="{{meal.id}}.{{d.id}}" class="text-center">
+                  <!-- {{meal.id}} - {{d.id}} - {{d.name}} -->
+                  {{d.name}}
+                </option>
+              </select>
+            </div>
+
+
+            <!-- <p *ngIf="meal.dish == null" class="card-text">
+              Añadir plato (+)
+            </p> -->
+            <div *ngIf="meal.dish == null" class="form-group">
+              <!-- <label for="selectDish">Selecciona plato</label> -->
+              <select class="custom-select" id="selectDish" (change)="onChangeDishSelect($event)">
+                <option disabled selected value>Selecciona plato</option>
+                <option *ngFor="let d of dishes" value="{{meal.id}}.{{d.id}}">
+                  {{meal.id}} - {{d.id}} - {{d.name}}
+                </option>
+              </select>
+            </div>        
+
+
+
+            <!-- <hr *ngIf="m <= 3 && meal.dish != null" class="mb-3"> -->
+            <hr *ngIf="m <= 3" class="mb-3">
+
+          </div>
+          <!-- <h4 *ngFor="let meal of daysRegime[i].meals" class="card-title">
             <div *ngIf="meal.dish.name != null">
               {{meal.dish.name}}
             </div>
-          </h4>
-<!--           <p *ngIf="day.categories.length > 0" class="card-text">
+          </h4> -->
+          
+          <!-- <p *ngIf="day.categories.length > 0" class="card-text">
             {{day.categories}}
-          </p>
- -->        </div>
-      </div>
-    </div>
-
-    <!-- <h4 class="w-75 mx-auto">Pulsa el siguiente botón para crear una dieta</h4>
-
-    <button type="button" class="btn btn-primary" (click)="createRegimeStructure()">
-      Crear dieta
-    </button> -->
-  </div>
-
-
-
-    <!-- <div class="card-columns">
-      <div class="card border-primary" *ngFor="let dish of dishes;, let i = index">
-        <div class="card-header">{{dish.name }}</div>
-        <div class="card-body">
-          <h4 class="card-title">
-            {{dish.description}}
-          </h4>
-          <p *ngIf="dish.categories.length > 0" class="card-text">
-            {{dish.categories}}
-          </p>
+          </p> -->
         </div>
       </div>
     </div>
 
-    <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#staticBackdrop">
-      Crear plato
-    </button> -->
+  </div>
 
 </div>
 
@@ -125,6 +131,7 @@
 
   <div *ngIf="dishes.length > 0" class="container text-center mt-4">
     <h1 class="mx-auto">Mis platos</h1>
+    <h4 class="w-75 mx-auto">Tienes {{dishes.length}} platos registrados</h4>
 
     <div class="card-columns">
       <div class="card border-primary" *ngFor="let dish of dishes;, let i = index">
