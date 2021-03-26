@@ -20,25 +20,32 @@ export class RegimeComponent implements OnInit {
   /* Variable que almacena la dieta del atleta */
   daysRegime: DayRegimeInterface[] = [];
 
+  /* Variable que almacena las categorías de los platos */
+  dishesCategories: any[] = [];
+
+  /* Variable que almacena la lista de categorías seleccionadas */
+  selectedCategoriesList: any = [];
+
   /* Formulario reactivo para la creación del plato */
   createDishForm = new FormGroup({
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
-    //DAYRY, MEAT, FISH, EGG, VEGETABLE, NUT, POTATO, FRUIT, CEREAL
-    //categories: new FormControl('', Validators.required),
+    categories: new FormControl('', Validators.required),
   });
 
   constructor(private regimeService: RegimeService) {}
 
   ngOnInit(): void {
     /* Pestaña por defecto - Mi dieta */
-    // this.showMenu = 'regime';
-    this.showMenu = 'dishes';
+    this.showMenu = 'regime';
+    // this.showMenu = 'dishes';
 
     this.getDishes();
 
     this.getDayRegime();
 
+    /* obtener las categorías de los platos */
+    this.getCategoriesOfDishes();
   }
 
   /* Método que establece el valor de la pestaña actual */
@@ -51,37 +58,75 @@ export class RegimeComponent implements OnInit {
    */
   resetCreateDishForm() {
     /* Borrar la lista de platos */
-    this.dishes = [];
+    // this.dishes = [];
 
     /* Resetear el formulario de añadir amigos */
     this.createDishForm.reset();
   }
 
   getDishes() {
-
-    this.regimeService.getDishesByUsername().subscribe(response => {
+    this.regimeService.getDishesByUsername().subscribe((response) => {
       console.log(response);
       this.dishes = response;
-    })
+    });
   }
 
-  getDayRegime(){
-    this.regimeService.getDayRegime().subscribe(response => {
+  getDayRegime() {
+    this.regimeService.getDayRegime().subscribe((response) => {
       console.log(response);
       this.daysRegime = response;
-    })
+    });
   }
 
-  createDish(){
-
-    let dish:DishInterface = {
-      name:this.createDishForm.value.name,
-      description:this.createDishForm.value.description
-      
-    }
-
-    this.regimeService.createDish(dish).subscribe(response => {
+  getCategoriesOfDishes() {
+    this.regimeService.getMealCategories().subscribe((response) => {
       console.log(response);
-    })
+      this.dishesCategories = response;
+    });
+  }
+
+  /* Método que crea un plato nuevo */
+  createDish() {
+    let dish: DishInterface = {
+      name: this.createDishForm.value.name,
+      description: this.createDishForm.value.description,
+      categories: this.selectedCategoriesList,
+    };
+
+    this.regimeService.createDish(dish).subscribe((response) => {
+      /* Se refresca la lista de platos */
+      this.getDishes();
+
+      /* Se resetea el formulario */
+      this.resetCreateDishForm();
+
+      console.log(response);
+    });
+  }
+
+  /* Método que gestiona el checkbox de categorías */
+  onCheckboxChange(e) {
+    if (e.target.checked) {
+      /* Añadir categoría a la lista de categorías seleccionadas */
+      this.selectedCategoriesList.push(e.target.id);
+    } else {
+      /* Eliminar categoría de la lista de categorías seleccionadas */
+      this.selectedCategoriesList.splice(
+        this.selectedCategoriesList.indexOf(e.target.id),
+        1
+      );
+    }
+  }
+
+  /* Método que crea la estructura de la dieta */
+  createRegimeStructure() {
+    this.regimeService.createRegimeStructure().subscribe((response) => {
+
+      /* Se refresca la lista de dias (estructura de la dieta) */
+      this.getDayRegime();
+
+      console.log("Creada estructura de dieta...");
+      console.log(response);
+    });
   }
 }
