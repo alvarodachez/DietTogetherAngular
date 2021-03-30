@@ -49,6 +49,8 @@ export class LogInService {
         let roles = [];
 
         let jwtDecode = jwt_decode(response);
+
+        localStorage.setItem('timeToExpire',(new Date().getTime() + (jwtDecode['expirationTime'] -300000)).toString())
         roles = jwtDecode['roles'];
 
         const Toast = Swal.mixin({
@@ -89,26 +91,24 @@ export class LogInService {
             } else {
               this.route.navigate(['home']);
               setTimeout(() => {
-                
                 Swal.fire({
                   title: 'Bienvenido a la version Alpha de Diet2gether',
-                  icon:'info',
-                  text:'Cualquier error o sugerencia que tenga, no dude en reportarla en la seccion de "Sugerencias de mejoras". Gracias por confiar en nosotros.',
+                  icon: 'info',
+                  text:
+                    'Cualquier error o sugerencia que tenga, no dude en reportarla en la seccion de "Sugerencias de mejoras". Gracias por confiar en nosotros.',
                   showClass: {
-                    popup: 'animate__animated animate__fadeInDown'
+                    popup: 'animate__animated animate__fadeInDown',
                   },
                   hideClass: {
-                    popup: 'animate__animated animate__fadeOutUp'
+                    popup: 'animate__animated animate__fadeOutUp',
                   },
-                  confirmButtonText: 'Ok'
+                  confirmButtonText: 'Ok',
                 }).then((result) => {
-
                   Toast.fire({
                     icon: 'success',
                     title: 'Bienvenid@ ' + user.username,
                   });
-                })
-                
+                });
               }, 10);
             }
           });
@@ -135,8 +135,40 @@ export class LogInService {
     localStorage.removeItem('dietUsernameSession');
     localStorage.removeItem('dietJwtSession');
     localStorage.removeItem('dietFirstSession');
+    localStorage.removeItem('timeToExpire');
 
     this.route.navigate(['welcome']);
+  }
+
+  isUserInSession() {
+    
+    /* console.log(jwtDecode);
+
+    console.log('Expiracion: ' + new Date(jwtDecode['exp']));
+    console.log('Issue Date: ' + new Date(jwtDecode['iat']));
+    console.log('Fecha actual en ms:' + new Date().getTime());
+    console.log('Conversion a Fecha Actual: ' + new Date(new Date().getTime()));
+    console.log(
+      'Fecha de expiracion sumando a pelo: ' +
+        new Date(new Date().getTime() + jwtDecode['expirationTime'])
+    ); */
+
+    console.log(localStorage.getItem('timeToExpire'));
+    console.log(new Date(Number(localStorage.getItem('timeToExpire'))))
+    if(new Date() > (new Date(Number(localStorage.getItem('timeToExpire')))) && localStorage.getItem('timeToExpire')!=null){
+
+      console.log("Sesion Expirada");
+
+      this.logout();
+
+      Swal.fire({
+        title: 'Sesion Expirada.',
+        text: 'Su sesión ha cadudaco. Inicie sesión de nuevo.',
+        icon: 'error',
+      });
+    }else{
+      console.log("Session Activa");
+    }
   }
 
   isLoggedIn(url: string) {

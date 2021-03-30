@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment, urlServer } from 'src/environments/environment';
 import { urlServerProd } from 'src/environments/environment.prod';
 import { AdminReportInterface } from '../models/admin-report.interface';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AdminServiceService {
 
   endPointServer = "";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private login:LogInService) {
     if (!environment.production) {
       this.endPointServer = urlServer.url;
     } else {
@@ -21,6 +22,7 @@ export class AdminServiceService {
   }
 
   getReports(): Observable<any> {
+    this.login.isUserInSession();
 
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
@@ -38,6 +40,7 @@ export class AdminServiceService {
   }
 
   assignReport(id:any):Observable<any>{
+    this.login.isUserInSession();
 
     const username = localStorage.getItem("dietUsernameSession");
     /* Obtener token JWT del usuario actual */
@@ -55,6 +58,7 @@ export class AdminServiceService {
   }
 
   getAssignedReports():Observable<any>{
+    this.login.isUserInSession();
     const username = localStorage.getItem("dietUsernameSession");
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
@@ -74,6 +78,7 @@ export class AdminServiceService {
 
   /* Método que obtiene un reporte, indicando el id */
   getOneReport(id: string) {
+    this.login.isUserInSession();
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
@@ -91,6 +96,7 @@ export class AdminServiceService {
 
 
   updateReportAnnotation(id:any, annotations: string):Observable<any>{
+    this.login.isUserInSession();
     /* Obtener el usuario actual */
     const username = localStorage.getItem("dietUsernameSession");
 
@@ -111,6 +117,7 @@ export class AdminServiceService {
 
 
   setReportResolved(id:any):Observable<any>{
+    this.login.isUserInSession();
     /* Obtener el usuario actual */
     const username = localStorage.getItem("dietUsernameSession");
 
@@ -131,6 +138,7 @@ export class AdminServiceService {
 
 
   setReportPending(id:any):Observable<any>{
+    this.login.isUserInSession();
     /* Obtener el usuario actual */
     const username = localStorage.getItem("dietUsernameSession");
 

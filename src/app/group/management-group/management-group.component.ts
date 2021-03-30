@@ -5,6 +5,7 @@ import { GroupInterface } from '../models/group.interface';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Component({
   selector: 'app-management-group',
@@ -28,9 +29,12 @@ export class ManagementGroupComponent implements OnInit {
     private groupService: GroupService,
     private route: Router,
     private build: FormBuilder,
+    private login:LogInService,
   ) {}
 
   ngOnInit(): void {
+
+    this.login.isUserInSession();
     this.groupForm = this.build.group(
       {
         name: ['', Validators.required],
@@ -41,6 +45,8 @@ export class ManagementGroupComponent implements OnInit {
 
     this.showTraditional = true;
     this.getFriends();
+
+    
   }
 
   
@@ -58,6 +64,8 @@ export class ManagementGroupComponent implements OnInit {
 
   /* Crear grupo de atletas */
   createGroup(): void {
+    this.login.isUserInSession();
+    
     Swal.fire({
       title: 'Espere',
       text: 'Se estan guardando sus datos',
@@ -118,6 +126,7 @@ export class ManagementGroupComponent implements OnInit {
 
   /* Método que obtiene la lista de amigos y almacena la lista en friendsList */
   getFriends() {
+    this.login.isUserInSession();
     this.groupService.getFriends().subscribe((res) => {
       this.friendsList = res;
     });

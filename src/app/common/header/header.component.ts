@@ -33,6 +33,8 @@ export class HeaderComponent implements OnInit {
     /* if ((localStorage.getItem("dietUsernameSession") && (localStorage.getItem("dietUsernameSession") != "" && localStorage.getItem("dietUsernameSession") != undefined))) {
       this.online = true;
     } */
+
+    this.login.isUserInSession();
   }
 
   checkSessionStatus() {

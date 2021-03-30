@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { FriendsService } from '../services/friends.service';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Component({
   selector: 'app-friends',
@@ -31,9 +32,10 @@ export class FriendsComponent implements OnInit {
     username: new FormControl('', Validators.required),
   });
 
-  constructor(private friendService: FriendsService, private route: Router) { }
+  constructor(private friendService: FriendsService, private route: Router,private login:LogInService) { }
 
   ngOnInit(): void {
+    this.login.isUserInSession();
     /**
      * Funcion para obtener los amigos del usuario logeado
      */
