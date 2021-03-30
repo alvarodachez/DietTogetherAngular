@@ -5,6 +5,7 @@ import { DayRegimeInterface } from '../models/dayRegime.interface';
 import { DishInterface } from '../models/dish.interface';
 import { MealRegimeInterface } from '../models/mealRegimeInterface';
 import { RegimeService } from '../services/regime.service';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Component({
   selector: 'app-regime',
@@ -34,9 +35,10 @@ export class RegimeComponent implements OnInit {
     categories: new FormControl('', Validators.required),
   });
 
-  constructor(private regimeService: RegimeService) {}
+  constructor(private regimeService: RegimeService, private login:LogInService) {}
 
   ngOnInit(): void {
+    this.login.isUserInSession();
     /* Pestaña por defecto - Mi dieta */
     this.showMenu = 'regime';
 

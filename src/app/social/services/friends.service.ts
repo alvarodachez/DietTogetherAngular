@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment, urlServer } from 'src/environments/environment';
 import { urlServerProd } from 'src/environments/environment.prod';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class FriendsService {
   endPointServer = "";
   
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private login:LogInService) {
     if (!environment.production) {
       this.endPointServer = urlServer.url;
     } else {
@@ -21,6 +22,7 @@ export class FriendsService {
   }
 
   getUsernamesByInitials(initials: string): Observable<any> {
+    this.login.isUserInSession();
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
@@ -37,6 +39,7 @@ export class FriendsService {
   }
 
   getFriends(): Observable<any> {
+    this.login.isUserInSession();
     /* Obtener usuario de la sesión actual */
     const username = localStorage.getItem("dietUsernameSession");
 
@@ -56,6 +59,7 @@ export class FriendsService {
   }
 
   getGroupRequests(): Observable<any> {
+    this.login.isUserInSession();
     /* Obtener usuario de la sesión actual */
     const username = localStorage.getItem("dietUsernameSession");
 
@@ -75,6 +79,7 @@ export class FriendsService {
   }
 
   getFriendRequests(): Observable<any> {
+    this.login.isUserInSession();
     /* Obtener usuario de la sesión actual */
     const username = localStorage.getItem("dietUsernameSession");
 
@@ -95,6 +100,7 @@ export class FriendsService {
 
 
   sendFriendRequest(friend: string): Observable<any> {
+    this.login.isUserInSession();
     /* Obtener usuario de la sesión actual */
     const username = localStorage.getItem("dietUsernameSession");
 
@@ -115,6 +121,7 @@ export class FriendsService {
 
 
   acceptFriendRequest(idRequest: any): Observable<any> {
+    this.login.isUserInSession();
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
@@ -131,6 +138,7 @@ export class FriendsService {
   }
 
   acceptGroupRequest(idRequest: any): Observable<any> {
+    this.login.isUserInSession();
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
@@ -148,6 +156,7 @@ export class FriendsService {
 
 
   rejectFriendRequest(idRequest: any): Observable<any> {
+    this.login.isUserInSession();
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
@@ -164,6 +173,7 @@ export class FriendsService {
   }
 
   rejectGroupRequest(idRequest: any): Observable<any> {
+    this.login.isUserInSession();
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 

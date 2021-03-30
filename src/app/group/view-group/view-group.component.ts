@@ -4,6 +4,7 @@ import { GroupService } from '../services/group.service';
 import { AthleteRankingInterface } from '../models/athlete-ranking.interface';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Component({
   selector: 'app-view-group',
@@ -42,13 +43,14 @@ export class ViewGroupComponent implements OnInit {
     ]),
   });
 
-  constructor(private groupService: GroupService, private router:Router) {
+  constructor(private groupService: GroupService, private router:Router, private login:LogInService) {
     this.actualGroup = 'hola';
     this.registers = 'holi';
     this.progressBar = 'buenas';
   }
 
   ngOnInit(): void {
+    this.login.isUserInSession();
     this.showActive = true;
     this.getActualGroup();
     this.getRegisters();
@@ -68,6 +70,7 @@ export class ViewGroupComponent implements OnInit {
   }
 
   getActualGroup() {
+    this.login.isUserInSession();
     this.groupService.getActiveGroup().subscribe((response) => {
       this.actualGroup = response.actualGroup;
 
@@ -101,6 +104,7 @@ export class ViewGroupComponent implements OnInit {
   }
 
   getRegisters() {
+    this.login.isUserInSession();
     this.groupService.getRegisters().subscribe(
       (response) => {
 
@@ -125,6 +129,7 @@ export class ViewGroupComponent implements OnInit {
   }
 
   crearRegistro() {
+    this.login.isUserInSession();
     const registro = {
       weight: parseFloat(
         this.addRegisterForm.value.weightKilograms +
@@ -141,6 +146,7 @@ export class ViewGroupComponent implements OnInit {
   }
 
   getProgressBar() {
+    this.login.isUserInSession();
     this.groupService.getProgressBar().subscribe((response) => {
       this.progressBar = response;
       
@@ -160,6 +166,7 @@ export class ViewGroupComponent implements OnInit {
   }
 
   getOutGroup(){
+    this.login.isUserInSession();
     Swal.fire({
       title: '¡Estás a punto de salir!',
       text: "Si sales del grupo no podrás volver a el. Tus puntos se sumarán al total de tu perfil.",
