@@ -5,6 +5,7 @@ import { urlServerProd } from 'src/environments/environment.prod';
 import { DishInterface } from '../models/dish.interface';
 import { Observable } from 'rxjs';
 import { DayRegimeInterface } from '../models/dayRegime.interface';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { DayRegimeInterface } from '../models/dayRegime.interface';
 export class RegimeService {
   endPointServer = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private login:LogInService) {
     if (!environment.production) {
       this.endPointServer = urlServer.url;
     } else {
@@ -26,6 +27,7 @@ export class RegimeService {
    * @returns
    */
   createDish(dish: DishInterface): Observable<any> {
+    this.login.isUserInSession();
     const username = localStorage.getItem('dietUsernameSession');
 
     /* Obtener token JWT del usuario actual */
@@ -48,6 +50,7 @@ export class RegimeService {
    * @returns
    */
   getDishesByUsername(): Observable<DishInterface[]> {
+    this.login.isUserInSession();
     const username = localStorage.getItem('dietUsernameSession');
 
     /* Obtener token JWT del usuario actual */
@@ -69,6 +72,7 @@ export class RegimeService {
    * @returns
    */
   createRegimeStructure(): Observable<any> {
+    this.login.isUserInSession();
     const username = localStorage.getItem('dietUsernameSession');
 
     /* Obtener token JWT del usuario actual */
@@ -93,6 +97,7 @@ export class RegimeService {
    * @returns 
    */
   addDishToDay(meal:any,dish:any): Observable<any> {
+    this.login.isUserInSession();
     const username = localStorage.getItem('dietUsernameSession');
 
     /* Obtener token JWT del usuario actual */
@@ -111,6 +116,7 @@ export class RegimeService {
   }
 
   getDayRegime():Observable<DayRegimeInterface[]>{
+    this.login.isUserInSession();
 
     const username = localStorage.getItem('dietUsernameSession');
 
@@ -130,6 +136,7 @@ export class RegimeService {
   }
 
   getMealCategories():Observable<any>{
+    this.login.isUserInSession();
 
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem('dietJwtSession');

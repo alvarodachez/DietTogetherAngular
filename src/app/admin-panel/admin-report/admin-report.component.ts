@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { AdminReportInterface } from '../models/admin-report.interface';
 import { FullReportInterface } from '../models/full-report.interface';
 import { AdminServiceService } from '../services/admin-service.service';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Component({
   selector: 'app-admin-report',
@@ -41,14 +42,17 @@ export class AdminReportComponent implements OnInit {
     private adminService: AdminServiceService,
     private activatedRoute: ActivatedRoute,
     private route: Router,
+    private login:LogInService,
   ) { }
 
   ngOnInit(): void {
+    this.login.isUserInSession();
     /* Obtener usuario admin actual */
     this.getActualUserAdmin();
 
     /* Obtener el reporte actual */
     this.getActualReport();
+    
   }
 
 

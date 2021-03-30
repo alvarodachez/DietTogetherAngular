@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ReportInterface } from '../models/report.interface';
 import { ReportingService } from '../services/reporting.service';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Component({
   selector: 'app-report',
@@ -31,10 +32,11 @@ export class ReportComponent implements OnInit {
 
   constructor(
     private reportingService: ReportingService,
-    private route: Router
+    private route: Router, private login:LogInService
   ) {}
 
   ngOnInit(): void {
+    this.login.isUserInSession();
     /* Se establece la longitud por defecto y se aplica método para registrar los cambios de longitud */
     this.descriptionActualLength = 0;
     this.saveActualCharactersOfDescription();

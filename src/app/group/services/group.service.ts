@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment, urlServer } from 'src/environments/environment';
 import { urlServerProd } from 'src/environments/environment.prod';
 import { GroupInterface } from '../models/group.interface';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class GroupService {
 
 
   createGroup(groupForm: GroupInterface): Observable<any> {
+    
     /* Obtener usuario de la sesión actual */
     const username = localStorage.getItem("dietUsernameSession");
 
@@ -42,6 +44,7 @@ export class GroupService {
 
 
   getFriends(): Observable<any> {
+   
     /* Obtener usuario de la sesión actual */
     const username = localStorage.getItem("dietUsernameSession");
 
@@ -62,6 +65,7 @@ export class GroupService {
 
 
   getActiveGroup(): Observable<any> {
+    
     /* Obtener usuario de la sesión actual */
     const username = localStorage.getItem("dietUsernameSession");
 
@@ -82,6 +86,7 @@ export class GroupService {
 
 
   getAthlete(username:string):Observable<any> {
+    
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
@@ -99,6 +104,7 @@ export class GroupService {
 
 
   getRegisters():Observable<any>{
+  
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
@@ -116,6 +122,7 @@ export class GroupService {
 
 
   createRegister(register:any):Observable<any>{
+    
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
@@ -133,6 +140,7 @@ export class GroupService {
 
 
   getProgressBar():Observable<any>{
+    
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 
@@ -149,6 +157,7 @@ export class GroupService {
   }
 
   getOutGroup():Observable<any>{
+    
     /* Obtener token JWT del usuario actual */
     const jwt = localStorage.getItem("dietJwtSession");
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../services/admin-service.service';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -18,12 +19,14 @@ export class AdminPanelComponent implements OnInit {
 
   actualPage2: number = 1;
 
-  constructor(private adminService:AdminServiceService) { }
+  constructor(private adminService:AdminServiceService, private login:LogInService) { }
 
   ngOnInit(): void {
+    this.login.isUserInSession();
     this.showMenu = 'reportes';
     this.getAllReports();
     this.getMyReports();
+    
   }
 
   /**
