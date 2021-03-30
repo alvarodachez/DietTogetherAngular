@@ -95,10 +95,9 @@
 <div *ngIf="showActive == false" class="container text-center mt-4 animate__animated animate__fadeIn">
 
   <h2>
-    Registros
+    Mis registros
     <i *ngIf="isRegisterActive == true" class="fas fa-plus" data-toggle="modal" data-target="#registerModal"
       (click)="resetAddRegisterForm()"></i>
-    <!--     <i *ngIf="isRegisterActive == false" disabled class="fas fa-plus" data-toggle="modal" data-target="#registerModal" (click)="resetAddRegisterForm()"></i>-->
   </h2>
 
   <p *ngIf="isRegisterActive == false" class="mx-auto">
@@ -106,6 +105,13 @@
     Aún no puedes añadir otro registro.<br>
     Puedes crearlo el día {{ nextRegisterDate | date:'d/M' }}.
   </p>
+
+  <h3 *ngIf="weightDifference > 0" class="text-primary">
+    Has perdido {{weightDifference}}kg desde el inicio
+  </h3>
+  <h3 *ngIf="weightDifference < 0" class="text-secondary">
+    Has ganado {{weightDifference}}kg desde el inicio
+  </h3>
 
   <h3 *ngIf="registers.length == 0"><i class="far fa-clock"></i> Aún no tienes ningún registro en este grupo</h3>
   <div class="card-deck">

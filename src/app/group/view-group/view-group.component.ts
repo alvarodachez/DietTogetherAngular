@@ -16,14 +16,11 @@ export class ViewGroupComponent implements OnInit {
   actualGroup: any;
   athletes: any = [];
   actualPage: number = 1;
-
   nextRegisterDate: any;
-
   isRegisterActive: boolean = true;
-
   progressBar: any;
-
   registers: any;
+  weightDifference: number;
 
   addRegisterForm = new FormGroup({
     weightKilograms: new FormControl('', [
@@ -109,14 +106,36 @@ export class ViewGroupComponent implements OnInit {
           this.registers = [];
         } else {
           this.registers = response;
-          
           /* if (this.registers.length > 1) {
             this.registers = this.athletes.sort(
               (a, b) => new Date(a.weightDate) < new Date(b.weightDate)
             );
           } */
+
+          /* Se ordenan los registros por id */
+          if (this.registers.length > 1) {
+            this.registers.sort((a, b) => {
+              if (a.id < b.id) {
+                return 1;
+              }
+  
+              if (a.id > b.id) {
+                return -1;
+              }
+  
+              return 0;
+            });
+          }
         }
         this.setNextRegisterDate();
+
+        // Se resetea la diferencia de peso
+        this.weightDifference = 0;
+
+        // Se calcula la diferencia de peso, recorriendo todos los registros.
+        for (const r of this.registers) {
+          this.weightDifference += r.weightDifference;
+        }
       },
       (error) => {
         
@@ -191,4 +210,5 @@ export class ViewGroupComponent implements OnInit {
       }
     })
   }
+
 }
