@@ -17,6 +17,9 @@ export class RegimeComponent implements OnInit {
   /* Variable que almacena la pestaña mostrada actualmente */
   showMenu: string;
 
+  /* Variable que guarda los platos buscados por nombre */
+  dishesByName: DishInterface[] = [];
+
   /* Variable que almacena los platos del atleta */
   dishes: DishInterface[] = [];
 
@@ -47,7 +50,17 @@ export class RegimeComponent implements OnInit {
 
   idSelectedMeal;
 
-  constructor(private regimeService: RegimeService, private login:LogInService) {}
+  /**
+   * FORMULARIO REACTIVO CON EL PLATO PARA AÑADIRLO A LA DIETA
+   */
+  addDishForm = new FormGroup({
+    dish: new FormControl('', Validators.required),
+  });
+
+  constructor(
+    private regimeService: RegimeService,
+    private login: LogInService
+  ) {}
 
   ngOnInit(): void {
     this.login.isUserInSession();
@@ -92,6 +105,21 @@ export class RegimeComponent implements OnInit {
 
     /* Resetear el formulario de añadir amigos */
     this.selectDishForm.reset();
+  }
+
+  getDishesByName() {
+    this.regimeService
+      .getDishesByInitials(this.addDishForm.value.dish)
+      .subscribe((response) => {
+        if (
+          this.addDishForm.value.dish != undefined &&
+          this.addDishForm.value.dish != ''
+        ) {
+          this.dishesByName = response;
+        } else {
+          this.dishesByName = [];
+        }
+      });
   }
 
   getDishes() {
@@ -343,7 +371,6 @@ export class RegimeComponent implements OnInit {
 
   /* Obtener platos filtrados por la categoría seleccionada */
   getDishesFiltered() {
-
     /* resetear lista de platos filtrados */
     this.dishesFiltered = [];
 
@@ -353,7 +380,7 @@ export class RegimeComponent implements OnInit {
       for (let category of this.selectedCategoriesList) {
         category = category.slice(2, category.length);
 
-        console.log("category");
+        console.log('category');
         console.log(category);
 
         if (dish.categories.includes(category)) {
@@ -369,44 +396,40 @@ export class RegimeComponent implements OnInit {
     console.log(this.dishesFiltered);
   }
 
-
   /* Método que establece un plato a la comida (meal) correspondiente */
   setDishToMeal(e) {
-
     // Obtener el id del plato
     let dish = e.id;
 
-    this.regimeService.addDishToDay(this.idSelectedMeal, dish).subscribe((response) => {
-      /* Se refresca la lista de días */
-      this.getDayRegime();
-  
-      /* Se limpia el formulario de agregar plato a una comida de la dieta */
-      this.resetSelectDishForm();
+    this.regimeService
+      .addDishToDay(this.idSelectedMeal, dish)
+      .subscribe((response) => {
+        /* Se refresca la lista de días */
+        this.getDayRegime();
 
-      console.log(response);
-    });
+        /* Se limpia el formulario de agregar plato a una comida de la dieta */
+        this.resetSelectDishForm();
 
+        console.log(response);
+
+        this.dishesByName = [];
+        this.addDishForm.reset();
+      });
   }
-
 
   /* Método que establece el id de la comida (meal) seleccionada */
   setMeal(mealId: any) {
     this.idSelectedMeal = mealId;
   }
 
-
   /* Método que cambia la visibilidad de los platos, para mostrar los detalles */
   toggleDisplay(e) {
     let cardBody = e.target.nextSibling;
 
-    if (cardBody.classList.contains("d-none")) {
-      cardBody.classList.remove("d-none");
+    if (cardBody.classList.contains('d-none')) {
+      cardBody.classList.remove('d-none');
     } else {
-      cardBody.classList.add("d-none");
+      cardBody.classList.add('d-none');
     }
   }
-
-
-  
 }
-
