@@ -26,18 +26,19 @@
 
     <div class="col-md-6 m-auto">
       <div class="container text-center">
-        <h1>Actividades</h1>
+        <h1>Bienvenido {{actualUser | titlecase }}</h1>
 
-        <div class="w-75 mx-auto">
-          <p>En Diet2gether, puedes realizar actividades, que te ayudarán a alcanzar tu peso ideal.</p>
-          <p>Puedes realizarlas con amigos, o en privado.</p>
-          <p>Los puntos obtenidos en estas actividades, se almacenarán en un ranking.</p>
+        <h3>Hoy es {{dateNow | date:'fullDate'}}</h3>
+
+        <div class="w-75 mx-auto mt-4">
+          <p>Desde Diet2gether te deseamos que pases un buen día.</p>
+          <p>Esperamos que puedas cumplir todos tus objetivos.</p>
         </div>
 
-        <div class="botones">
+        <!-- <div class="botones">
           <button [routerLink]="['/group/welcome']" class="btn bg-secondary text-white">Grupo</button>
           <button class="btn bg-secondary text-white disabled">Privado</button>
-        </div>
+        </div> -->
       </div>
     </div>
 
