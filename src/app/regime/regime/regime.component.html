@@ -261,15 +261,40 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header d-flex">
-        <h5 class="modal-title mx-auto">Creación de plato</h5>
+        <h5 class="modal-title mx-auto">Añadir plato</h5>
       </div>
       <div class="modal-body">
+
+        <form [formGroup]="addDishForm" action="">
+          <div class="form-group text-center">
+            <label class="col-form-label mx-auto" for="dish">Filtra por nombre del plato:</label>
+            <input (keyup)="getDishesByName()" type="text" autocomplete="off" formControlName="dish"
+              name="username" class="form-control text-center" placeholder="Plato"
+              [class.is-invalid]="addDishForm.get('dish').touched && addDishForm.get('dish').invalid">
+            <div class="list-group-item list-group-item-action active" *ngFor="let dish of dishesByName">
+              <button type="button" class="list-group-item list-group-item-action active" data-dismiss="modal"
+                (click)="setDishToMeal(dish)">
+                {{dish.name}} 
+              </button>
+            </div>
+            <div class="alert alert-danger colorFallo"
+              [hidden]="addDishForm.get('dish').pristine || addDishForm.get('dish').valid">
+              El valor introducido no es válido
+            </div>
+          </div>
+        </form>
+        
+        <div class="d-flex">
+          <hr class="w-25">
+          <p>Ó</p>
+          <hr class="w-25">
+        </div>
 
         <form [formGroup]="selectDishForm" action="">
           <div class="form-group text-center">
 
             <!-- DIV de checkboxes para las categorías de los platos -->
-            <label class="col-form-label mx-auto" for="x">Categorías disponibles:</label>
+            <label class="col-form-label mx-auto" for="x">Filtra por categorías:</label>
             <div class="row row-cols-3">
               <div class="col custom-control custom-checkbox"
                 *ngFor="let category of dishesCategories, let i = index">

@@ -49,7 +49,7 @@
             <div class="form-group">
               <label class="col-form-label" for="username">Introduce el nombre de usuario:</label>
               <input (keyup)="getUsernameByInitials()" type="text" autocomplete="off" formControlName="username"
-                name="username" class="form-control text-center" placeholder="usuario"
+                name="username" class="form-control text-center" placeholder="Usuario"
                 [class.is-invalid]="addFriendForm.get('username').touched && addFriendForm.get('username').invalid">
               <div class="list-group-item list-group-item-action active" *ngFor="let friend2 of searchFriends">
                 <button type="button" class="list-group-item list-group-item-action active" data-dismiss="modal"
