@@ -21,6 +21,26 @@ export class RegimeService {
     }
   }
 
+  getDishesByInitials(initials: string): Observable<any> {
+    this.login.isUserInSession();
+
+    const username = localStorage.getItem('dietUsernameSession');
+
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem("dietJwtSession");
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointServer + `/regime/get-dishes-initials/${username}&&${initials}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${jwt}` }),
+    };
+
+    /* obtiene los usuarios, buscando por las iniciales introducidas */
+    return this.http.get(endpoint, httpOptions);
+  }
+
   /**
    * Creamos un plato y se lo añadimos al usuario
    * @param dish
