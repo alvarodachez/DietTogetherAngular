@@ -154,8 +154,8 @@ export class LogInService {
       this.logout();
 
       Swal.fire({
-        title: 'Sesion Expirada.',
-        text: 'Su sesión ha cadudaco. Inicie sesión de nuevo.',
+        title: 'Sesión Expirada.',
+        text: 'Su sesión ha caducado. Inicie sesión de nuevo.',
         icon: 'error',
       });
     }

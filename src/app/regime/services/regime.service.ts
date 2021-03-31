@@ -172,4 +172,26 @@ export class RegimeService {
 
     return this.http.get(endpoint,httpOptions);
   }
+
+  getDayOfWeekRegime():Observable<any>{
+
+    this.login.isUserInSession();
+
+    const username = localStorage.getItem('dietUsernameSession');
+
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem('dietJwtSession');
+
+    /* Dirección del servidor - petición */
+    const endpoint =
+      this.endPointServer +`/regime/get-day-week-regime/${username}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ Authorization: `Bearer ${jwt}` }),
+    };
+
+    return this.http.get(endpoint,httpOptions);
+
+  }
 }
