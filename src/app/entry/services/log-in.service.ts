@@ -50,7 +50,13 @@ export class LogInService {
 
         let jwtDecode = jwt_decode(response);
 
-        localStorage.setItem('timeToExpire',(new Date().getTime() + (jwtDecode['expirationTime'] -300000)).toString())
+        localStorage.setItem(
+          'timeToExpire',
+          (
+            new Date().getTime() +
+            (jwtDecode['expirationTime'] - 300000)
+          ).toString()
+        );
         roles = jwtDecode['roles'];
 
         const Toast = Swal.mixin({
@@ -141,24 +147,10 @@ export class LogInService {
   }
 
   isUserInSession() {
-    
-    /* console.log(jwtDecode);
-
-    console.log('Expiracion: ' + new Date(jwtDecode['exp']));
-    console.log('Issue Date: ' + new Date(jwtDecode['iat']));
-    console.log('Fecha actual en ms:' + new Date().getTime());
-    console.log('Conversion a Fecha Actual: ' + new Date(new Date().getTime()));
-    console.log(
-      'Fecha de expiracion sumando a pelo: ' +
-        new Date(new Date().getTime() + jwtDecode['expirationTime'])
-    ); */
-
-    console.log(localStorage.getItem('timeToExpire'));
-    console.log(new Date(Number(localStorage.getItem('timeToExpire'))))
-    if(new Date() > (new Date(Number(localStorage.getItem('timeToExpire')))) && localStorage.getItem('timeToExpire')!=null){
-
-      console.log("Sesion Expirada");
-
+    if (
+      new Date() > new Date(Number(localStorage.getItem('timeToExpire'))) &&
+      localStorage.getItem('timeToExpire') != null
+    ) {
       this.logout();
 
       Swal.fire({
@@ -166,8 +158,6 @@ export class LogInService {
         text: 'Su sesión ha cadudaco. Inicie sesión de nuevo.',
         icon: 'error',
       });
-    }else{
-      console.log("Session Activa");
     }
   }
 
