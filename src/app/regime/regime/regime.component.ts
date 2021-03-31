@@ -124,39 +124,20 @@ export class RegimeComponent implements OnInit {
 
   getDishes() {
     this.regimeService.getDishesByUsername().subscribe((response) => {
-      console.log(response);
       this.dishes = response;
     });
   }
 
   getDayRegime() {
     this.regimeService.getDayRegime().subscribe((response) => {
-      console.log(response);
-
-      /* response[0].day = 'Lunes';
-      response[1].day = 'Martes';
-      response[2].day = 'Miércoles';
-      response[3].day = 'Jueves';
-      response[4].day = 'Viernes';
-      response[5].day = 'Sábado';
-      response[6].day = 'Domingo'; */
+      
 
       this.daysRegime = response;
     });
   }
 
   getCategoriesOfDishes() {
-    /*
-    0: {name: "DAYRY", icon: "0_icon"}
-    1: {name: "MEAT", icon: "1_icon"}
-    2: {name: "FISH", icon: "2_icon"}
-    3: {name: "EGG", icon: "3_icon"}
-    4: {name: "VEGETABLE", icon: "4_icon"}
-    5: {name: "NUT", icon: "5_icon"}
-    6: {name: "POTATO", icon: "6_icon"}
-    7: {name: "FRUIT", icon: "7_icon"}
-    8: {name: "CEREAL", icon: "8_icon"}
-    */
+    
 
     this.dishesCategories = [
       {
@@ -197,8 +178,6 @@ export class RegimeComponent implements OnInit {
       },
     ];
 
-    console.log(this.dishesCategories);
-
     this.regimeService.getMealCategories().subscribe((response) => {
       for (let i = 0; i < response.length; i++) {
         const category = response[i];
@@ -224,8 +203,6 @@ export class RegimeComponent implements OnInit {
 
       /* Se limpia la lista de categorías seleccionadas */
       this.selectedCategoriesList = [];
-
-      console.log(response);
     });
   }
 
@@ -234,20 +211,12 @@ export class RegimeComponent implements OnInit {
     if (e.target.checked) {
       /* Añadir categoría a la lista de categorías seleccionadas */
       this.selectedCategoriesList.push(e.target.id);
-
-      console.log('añadir');
-      console.log(e.target.id);
-      console.log(this.selectedCategoriesList);
     } else {
       /* Eliminar categoría de la lista de categorías seleccionadas */
       this.selectedCategoriesList.splice(
         this.selectedCategoriesList.indexOf(e.target.id),
         1
       );
-
-      console.log('borrar');
-      console.log(e.target.id);
-      console.log(this.selectedCategoriesList);
     }
   }
 
@@ -256,37 +225,8 @@ export class RegimeComponent implements OnInit {
     this.regimeService.createRegimeStructure().subscribe((response) => {
       /* Se refresca la lista de dias (estructura de la dieta) */
       this.getDayRegime();
-
-      console.log('Creada estructura de dieta...');
-      console.log(response);
     });
   }
-
-  // /* Método que gestiona el desplegable de platos seleccionados */
-  // onChangeDishSelect(e) {
-  //   // console.log(e.target.value);
-
-  //   /* obtener valor del desplegable */
-  //   let value = e.target.value;
-
-  //   /* separar valores por el punto */
-  //   let valueSplit = splitAtPeriod(value, [value]);
-
-  //   /* guardar ambos valores en variables */
-  //   let meal = valueSplit[0];
-  //   let dish = valueSplit[1];
-
-  //   console.log(valueSplit);
-  //   console.log(meal);
-  //   console.log(dish);
-
-  //   this.regimeService.addDishToDay(meal, dish).subscribe((response) => {
-  //     /* Se refresca la lista de días */
-  //     this.getDayRegime();
-
-  //     console.log(response);
-  //   });
-  // }
 
   addIconToCategory(category: string): string {
     switch (category) {
@@ -349,10 +289,6 @@ export class RegimeComponent implements OnInit {
       /* Añadir categoría a la lista de categorías seleccionadas */
       this.selectedCategoriesList.push(e.target.id);
 
-      console.log('añadir');
-      console.log(e.target.id);
-      console.log(this.selectedCategoriesList);
-
       this.getDishesFiltered();
     } else {
       /* Eliminar categoría de la lista de categorías seleccionadas */
@@ -360,10 +296,6 @@ export class RegimeComponent implements OnInit {
         this.selectedCategoriesList.indexOf(e.target.id),
         1
       );
-
-      console.log('borrar');
-      console.log(e.target.id);
-      console.log(this.selectedCategoriesList);
 
       this.getDishesFiltered();
     }
@@ -380,9 +312,6 @@ export class RegimeComponent implements OnInit {
       for (let category of this.selectedCategoriesList) {
         category = category.slice(2, category.length);
 
-        console.log('category');
-        console.log(category);
-
         if (dish.categories.includes(category)) {
           categoriesCont++;
         }
@@ -392,8 +321,6 @@ export class RegimeComponent implements OnInit {
         }
       }
     }
-
-    console.log(this.dishesFiltered);
   }
 
   /* Método que establece un plato a la comida (meal) correspondiente */
@@ -409,8 +336,6 @@ export class RegimeComponent implements OnInit {
 
         /* Se limpia el formulario de agregar plato a una comida de la dieta */
         this.resetSelectDishForm();
-
-        console.log(response);
 
         this.dishesByName = [];
         this.addDishForm.reset();
