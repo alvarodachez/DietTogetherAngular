@@ -4,12 +4,6 @@ import { NotFoundComponent } from './common/not-found/not-found.component';
 import { WelcomeComponent } from './entry/welcome/welcome.component';
 
 const routes: Routes = [
-
-  /* Entry Module */
-    // path: 'welcome',
-    // path: 'login',
-    // path: 'signup',
-    // path: 'athlete',
   {
     path: '',
     component: WelcomeComponent,
@@ -17,6 +11,11 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import("./entry/entry.module").then(m => m.EntryModule)
+    /* Entry Module */
+      // path: 'welcome',
+      // path: 'login',
+      // path: 'signup',
+      // path: 'athlete',
   },
   {
     path: 'home',
@@ -37,6 +36,10 @@ const routes: Routes = [
   {
     path:'admin-panel',
     loadChildren: () => import("./admin-panel/admin-panel.module").then(m => m.AdminPanelModule)
+  },
+  {
+    path:'regime',
+    loadChildren: () => import("./regime/regime.module").then(m => m.RegimeModule)
   },
   {
     path:'**',

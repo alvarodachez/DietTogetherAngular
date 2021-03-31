@@ -1,0 +1,65 @@
+@import "src/sass/styles.scss";
+
+.fondo {
+    @include dietBanner;
+
+    .titulo {
+        margin: auto auto;
+        font-size: 30px;
+    }
+
+    .word {
+        font-size: 20px;
+    }
+}
+.breadcrumb {
+    font-size: 20px;
+    background-color: #9CD3C4;
+}
+.active {
+    color: white;
+}
+
+.selectColor {
+    background-color: $dietBannerBackground;
+}
+
+.mealCardColor {
+    background-color: #bff1e4;
+}
+
+.pointer {
+    cursor: pointer;
+
+    
+}
+
+.pointer:hover {
+    color: $primary;
+    background-color: white;
+}
+
+
+/* ----------- */
+
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+    
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+  
+}
+

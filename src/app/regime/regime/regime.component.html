@@ -1,0 +1,328 @@
+<div class="fondo">
+  <div class="titulo align-self-center text-center">
+    <p class="text-white">Mi dieta</p>
+    <ol class="breadcrumb container">
+      <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+      <li class="breadcrumb-item active" [routerLink]="['/regime']">Dieta</li>
+    </ol>
+  </div>
+</div>
+
+<div class="text-center">
+  <div class="btn-group w-100" role="group" aria-label="Basic example">
+    <button (click)="changeShowMenu('regime')" type="button" [ngClass]="{'active': showMenu == 'regime'}"
+      class="btn btn-secondary w-50 rounded-0">
+      Mi dieta
+    </button>
+    <button (click)="changeShowMenu('dishes')" type="button" [ngClass]="{'active': showMenu == 'dishes'}"
+      class="btn btn-secondary w-50 rounded-0">
+      Mis platos
+    </button>
+  </div>
+</div>
+
+<!--MI DIETA-->
+<div *ngIf="showMenu == 'regime'" class="animate__animated animate__fadeIn">
+
+  <!-- Sección Dieta, sin platos -->
+  <div *ngIf="dishes.length == 0" class="container text-center mt-4">
+    <h1 class="mx-auto">No tienes una <span class="text-primary">dieta</span> registrada actualmente <i class="far fa-frown fa-1x"></i></h1>
+    <h4 class="w-75 mx-auto">Para crear una dieta debes tener platos registrados</h4>
+    <h4 class="w-75 mx-auto">Puedes crear uno en la sección Mis platos</h4>
+
+    <button type="button" class="btn btn-primary" (click)="changeShowMenu('dishes')">
+      Ir a mis platos
+    </button>
+  </div>
+
+  <!-- Sección Dieta, con platos y sin estructura de dieta -->
+  <div *ngIf="dishes.length > 0 && daysRegime.length == 0" class="container text-center mt-4">
+    <h1 class="mx-auto">No tienes una <span class="text-primary">dieta</span> registrada actualmente <i
+        class="far fa-frown fa-1x"></i></h1>
+    <h4 class="w-75 mx-auto">Tienes {{dishes.length}} platos registrados</h4>
+    <h4 class="w-75 mx-auto">Pulsa el siguiente botón para crear una dieta</h4>
+
+    <button type="button" class="btn btn-primary" (click)="createRegimeStructure()">
+      Crear dieta
+    </button>
+  </div>
+
+  <!-- Sección Dieta, con platos y con estructura de dieta -->
+  <div *ngIf="dishes.length > 0 && daysRegime.length > 0" class="container text-center mt-4">
+    <!-- <h1 class="mx-auto">Mi dieta</h1> -->
+
+    <div class="row row-cols-1 row-cols-lg-2">
+      <div class="col mb-4" *ngFor="let day of daysRegime;, let i = index">
+
+        <div class="card border-primary shadow rounded">
+          <h2 class="card-header selectColor text-white font-weight-bold">{{day.day}}</h2>
+          <div class="card-body">
+            <div *ngFor="let meal of daysRegime[i].meals, let m = index">
+
+              <h4 *ngIf="meal.dish == null" class="card-title">
+                {{meal.meal}}
+              </h4>
+
+              <h4 *ngIf="meal.dish != null" class="card-title">
+                {{meal.meal}} <i class="fas fa-exchange-alt pointer" data-toggle="modal" data-target="#modalSelectDish"
+                  (click)="setMeal(meal.id)"></i>
+              </h4>
+
+              <div *ngIf="meal.dish != null" class="form-group">
+
+                <div class="card shadow-sm rounded">
+                  <h3 class="card-header mealCardColor font-weight-bold pointer"
+                    (click)="toggleDisplay($event)">
+                    {{meal.dish.name}}
+                  </h3>
+                  <div class="card-body d-none">
+                    <h4 class="card-title">
+                      {{meal.dish.description}}
+                    </h4>
+
+                    <hr *ngIf="meal.dish.categories.length > 0">
+
+                    <div class="d-flex text-center" *ngIf="meal.dish.categories.length > 0">
+                      <div *ngFor="let cat of meal.dish.categories, let i = index" class="card-text mx-auto">
+                        <i [ngClass]="addIconToCategory(cat)"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div *ngIf="meal.dish != null" class="form-group">
+                <select class="custom-select text-center selectColor text-white" id="selectDish"
+                  (change)="onChangeDishSelect($event)">
+                  <option disabled selected value class="text-center">
+                    {{meal.dish.name}}
+                  </option>
+                  <option *ngFor="let d of dishes" value="{{meal.id}}.{{d.id}}" class="text-center">
+                    {{d.name}}
+                  </option>
+                </select>
+              </div> -->
+
+              <div *ngIf="meal.dish == null" class="form-group">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalSelectDish"
+                  (click)="setMeal(meal.id)">
+                  Elegir plato
+                </button>
+              </div>
+
+              <!-- <div *ngIf="meal.dish == null" class="form-group">
+                <select class="custom-select" id="selectDish" (change)="onChangeDishSelect($event)">
+                  <option disabled selected value>Selecciona plato</option>
+                  <option *ngFor="let d of dishes" value="{{meal.id}}.{{d.id}}">
+                    {{d.name}}
+                  </option>
+                </select>
+              </div> -->
+
+
+              <hr *ngIf="m <= 3" class="mb-3">
+            </div> <!-- fin . for daysRegime[i].meals -->
+          </div> <!-- fin . card body -->
+        </div> <!-- fin . card -->
+      </div> <!-- fin. col -->
+    </div> <!-- fin . row -->
+
+  </div> 
+</div> <!-- fin . sección MI DIETA -->
+
+<!--MIS PLATOS-->
+<div *ngIf="showMenu == 'dishes'" class="animate__animated animate__fadeIn">
+
+  <div *ngIf="dishes.length == 0" class="container text-center mt-4">
+    <h1 class="mx-auto">No tienes <span class="text-primary">platos</span> registrados actualmente <i class="far fa-frown fa-1x"></i></h1>
+    <h4 class="w-75 mx-auto">Puedes crear un plato en el siguiente botón</h4>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+      Crear plato
+    </button>
+
+  </div>
+
+  <div *ngIf="dishes.length > 0" class="container text-center mt-4">
+    <!-- <h1 class="mx-auto">Mis platos</h1> -->
+    <h4 class="w-75 mx-auto">Tienes {{dishes.length}} platos registrados</h4>
+
+    <div class="card-columns">
+      <div class="card border-primary shadow-sm rounded" *ngFor="let dish of dishes;, let i = index">
+        <h3 class="card-header selectColor text-white font-weight-bold">{{dish.name}}</h3>
+        <div class="card-body">
+          <h4 class="card-title">
+            {{dish.description}}
+          </h4>
+          <!-- <p class="card-text">
+            {{dish.description}}
+          </p> -->
+          <hr *ngIf="dish.categories.length > 0">
+
+          <div class="d-flex text-center" *ngIf="dish.categories.length > 0">
+            <div *ngFor="let cat of dish.categories, let i = index" class="card-text mx-auto">
+              <i [ngClass]="addIconToCategory(cat)"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#staticBackdrop">
+      Crear plato
+    </button>
+  </div>
+
+</div>
+
+
+<!-- Modal para agregar plato -->
+<div id="staticBackdrop" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-flex">
+        <h5 class="modal-title mx-auto">Creación de plato</h5>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="createDishForm" action="">
+          <div class="form-group text-center">
+
+            <label class="col-form-label mx-auto" for="name">Introduce el nombre del plato:</label>
+            <input type="text" autocomplete="off" formControlName="name" name="name" class="form-control text-center"
+              placeholder="Nombre del plato"
+              [class.is-invalid]="createDishForm.get('name').touched && createDishForm.get('name').invalid">
+            <div class="alert alert-danger colorFallo"
+              [hidden]="createDishForm.get('name').pristine || createDishForm.get('name').valid">
+              El valor introducido no es válido
+            </div>
+
+            <label class="col-form-label mx-auto mt-2" for="description">Introduce la descripción:</label>
+            <input type="text" autocomplete="off" formControlName="description" name="description"
+              class="form-control text-center" placeholder="Descripción del plato"
+              [class.is-invalid]="createDishForm.get('description').touched && createDishForm.get('description').invalid">
+            <div class="alert alert-danger colorFallo"
+              [hidden]="createDishForm.get('description').pristine || createDishForm.get('description').valid">
+              El valor introducido no es válido
+            </div>
+
+
+            <!-- DIV de checkboxes para las categorías de los platos -->
+            <label class="col-form-label mx-auto mt-2" for="x">Categorías:</label>
+            <div class="row row-cols-3">
+              <div class="col custom-control custom-checkbox"
+                *ngFor="let category of dishesCategories, let i = index">
+                <input type="checkbox" class="custom-control-input" name="categories" formControlName="categories"
+                  [id]="category.name" (change)="onCheckboxChange($event)">
+                <label class="custom-control-label" [for]="category.name">
+                  <i [class]="category.icon"></i>
+                </label>
+              </div>
+            </div>
+
+            <!-- DIV de checkboxes para las categorías de los platos -->
+            <!-- <div *ngFor="let category of dishesCategories, let i = index" class="d-flex list-group mt-2">
+              <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" name="categories" formControlName="categories"
+                    [id]="category.name" (change)="onCheckboxChange($event)">
+                  <label class="custom-control-label" [for]="category.name">
+                    <i [class]="category.icon"></i>
+                  </label>
+                </div>
+              </div>
+            </div> -->
+
+          </div>
+          <div class="d-flex">
+            <button (click)="createDish()" type="button" class="btn btn-primary mx-auto" data-dismiss="modal"
+              [disabled]="!createDishForm.valid || selectedCategoriesList.length <= 0">
+              Enviar
+            </button>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+          (click)="resetCreateDishForm()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal para elegir plato -->
+<div id="modalSelectDish" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="modalSelectDishLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-flex">
+        <h5 class="modal-title mx-auto">Añadir plato</h5>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="addDishForm" action="">
+          <div class="form-group text-center">
+            <label class="col-form-label mx-auto" for="dish">Filtra por nombre del plato:</label>
+            <input (keyup)="getDishesByName()" type="text" autocomplete="off" formControlName="dish"
+              name="username" class="form-control text-center" placeholder="Plato"
+              [class.is-invalid]="addDishForm.get('dish').touched && addDishForm.get('dish').invalid">
+            <div class="list-group-item list-group-item-action active" *ngFor="let dish of dishesByName">
+              <button type="button" class="list-group-item list-group-item-action active" data-dismiss="modal"
+                (click)="setDishToMeal(dish)">
+                {{dish.name}} 
+              </button>
+            </div>
+            <div class="alert alert-danger colorFallo"
+              [hidden]="addDishForm.get('dish').pristine || addDishForm.get('dish').valid">
+              El valor introducido no es válido
+            </div>
+          </div>
+        </form>
+        
+        <div class="d-flex">
+          <hr class="w-25">
+          <p>Ó</p>
+          <hr class="w-25">
+        </div>
+
+        <form [formGroup]="selectDishForm" action="">
+          <div class="form-group text-center">
+
+            <!-- DIV de checkboxes para las categorías de los platos -->
+            <label class="col-form-label mx-auto" for="x">Filtra por categorías:</label>
+            <div class="row row-cols-3">
+              <div class="col custom-control custom-checkbox"
+                *ngFor="let category of dishesCategories, let i = index">
+                <input type="checkbox" class="custom-control-input" name="categories" formControlName="categories"
+                  [id]="'f_'+category.name" (change)="onCheckboxChangeForSelectDish($event)">
+                <label class="custom-control-label" [for]="'f_'+category.name">
+                  <i [class]="category.icon"></i>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group mt-2">
+              <div class="list-group-item list-group-item-action active border border-white rounded" *ngFor="let dish of dishesFiltered">
+                <button type="button" class="list-group-item list-group-item-action active" data-dismiss="modal"
+                  (click)="setDishToMeal(dish)">
+                  {{dish.name}}
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+          (click)="resetSelectDishForm()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

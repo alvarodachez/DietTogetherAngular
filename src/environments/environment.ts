@@ -8,7 +8,7 @@ export const environment = {
 
 export const urlServer = {
   url:'http://localhost:8080'
-  //url: 'https://tomcat.raulmorales.eu/diettogether'
+  // url: 'https://tomcat.raulmorales.eu/diettogether'
   //url: 'https://diet2gether.oa.r.appspot.com'
 }
 /*

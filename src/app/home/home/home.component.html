@@ -22,8 +22,66 @@
     </div>
   </div>
 
-
   <div class="row mx-auto mt-4">
+
+    <div class="col-md-6 m-auto">
+      <div class="container text-center">
+        <h1>Bienvenido {{actualUser | titlecase }}</h1>
+
+        <h3>Hoy es {{dateNow | date:'fullDate'}}</h3>
+
+        <div class="w-75 mx-auto mt-4">
+          <p>Desde Diet2gether te deseamos que pases un buen día.</p>
+          <p>Esperamos que puedas cumplir todos tus objetivos.</p>
+        </div>
+
+        <!-- <div class="botones">
+          <button [routerLink]="['/group/welcome']" class="btn bg-secondary text-white">Grupo</button>
+          <button class="btn bg-secondary text-white disabled">Privado</button>
+        </div> -->
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="container mt-4 mt-md-0 details text-center w-75">
+        <div *ngIf="dayRegime.id!=null  && dishNullFlag"class="detailsText">
+          <h2>¿Que vas a comer hoy? </h2>
+          <h4>{{dateNow | date:'fullDate'}}</h4>
+
+          <div>
+            <div *ngFor="let meal of dayRegime.meals">
+              <h3 *ngIf="meal.dish != null">{{meal.meal}}</h3>
+              <p *ngIf="meal.dish!= null">{{meal.dish.name}}</p>
+              <hr class="w-50" *ngIf="meal.dish!= null && meal!= null">
+            </div>
+          </div>
+          
+        </div>
+        <div *ngIf="dayRegime.id==null || !dishNullFlag"class="detailsText">
+          <h2>¿Que vas a comer hoy?</h2>
+          <h4>{{dateNow | date:'fullDate'}}</h4>
+
+          <h3 *ngIf="dayRegime.id==null" class="mt-3">
+            Aun no tienes una dieta.
+          </h3>
+          <h3 *ngIf="!dishNullFlag" class="mt-3">
+            Aun no has añadido platos a tu dieta.
+          </h3>
+          <div class="botones">
+            <button [routerLink]="['/regime']" class="btn bg-secondary text-white">Ir a dietas</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="container my-5">
+    <hr>
+  </div>
+
+  <div class="row mx-auto">
 
     <div class="col-md-6 m-auto">
       <div class="container text-center">
@@ -80,7 +138,7 @@
         </div>
 
         <div class="botones">
-          <button class="btn bg-secondary text-white disabled">Ir a dietas</button>
+          <button [routerLink]="['/regime']" class="btn bg-secondary text-white">Ir a dietas</button>
         </div>
       </div>
 

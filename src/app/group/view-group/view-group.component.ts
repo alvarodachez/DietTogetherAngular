@@ -4,6 +4,7 @@ import { GroupService } from '../services/group.service';
 import { AthleteRankingInterface } from '../models/athlete-ranking.interface';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { LogInService } from '../../entry/services/log-in.service';
 
 @Component({
   selector: 'app-view-group',
@@ -16,14 +17,11 @@ export class ViewGroupComponent implements OnInit {
   actualGroup: any;
   athletes: any = [];
   actualPage: number = 1;
-
   nextRegisterDate: any;
-
   isRegisterActive: boolean = true;
-
   progressBar: any;
-
   registers: any;
+  weightDifference: number;
 
   addRegisterForm = new FormGroup({
     weightKilograms: new FormControl('', [
@@ -42,13 +40,14 @@ export class ViewGroupComponent implements OnInit {
     ]),
   });
 
-  constructor(private groupService: GroupService, private router:Router) {
+  constructor(private groupService: GroupService, private router:Router, private login:LogInService) {
     this.actualGroup = 'hola';
     this.registers = 'holi';
     this.progressBar = 'buenas';
   }
 
   ngOnInit(): void {
+    this.login.isUserInSession();
     this.showActive = true;
     this.getActualGroup();
     this.getRegisters();
@@ -68,6 +67,7 @@ export class ViewGroupComponent implements OnInit {
   }
 
   getActualGroup() {
+    this.login.isUserInSession();
     this.groupService.getActiveGroup().subscribe((response) => {
       this.actualGroup = response.actualGroup;
 
@@ -101,6 +101,7 @@ export class ViewGroupComponent implements OnInit {
   }
 
   getRegisters() {
+    this.login.isUserInSession();
     this.groupService.getRegisters().subscribe(
       (response) => {
 
@@ -109,14 +110,36 @@ export class ViewGroupComponent implements OnInit {
           this.registers = [];
         } else {
           this.registers = response;
-          
           /* if (this.registers.length > 1) {
             this.registers = this.athletes.sort(
               (a, b) => new Date(a.weightDate) < new Date(b.weightDate)
             );
           } */
+
+          /* Se ordenan los registros por id */
+          if (this.registers.length > 1) {
+            this.registers.sort((a, b) => {
+              if (a.id < b.id) {
+                return 1;
+              }
+  
+              if (a.id > b.id) {
+                return -1;
+              }
+  
+              return 0;
+            });
+          }
         }
         this.setNextRegisterDate();
+
+        // Se resetea la diferencia de peso
+        this.weightDifference = 0;
+
+        // Se calcula la diferencia de peso, recorriendo todos los registros.
+        for (const r of this.registers) {
+          this.weightDifference += r.weightDifference;
+        }
       },
       (error) => {
         
@@ -125,6 +148,7 @@ export class ViewGroupComponent implements OnInit {
   }
 
   crearRegistro() {
+    this.login.isUserInSession();
     const registro = {
       weight: parseFloat(
         this.addRegisterForm.value.weightKilograms +
@@ -141,6 +165,7 @@ export class ViewGroupComponent implements OnInit {
   }
 
   getProgressBar() {
+    this.login.isUserInSession();
     this.groupService.getProgressBar().subscribe((response) => {
       this.progressBar = response;
       
@@ -160,6 +185,7 @@ export class ViewGroupComponent implements OnInit {
   }
 
   getOutGroup(){
+    this.login.isUserInSession();
     Swal.fire({
       title: '¡Estás a punto de salir!',
       text: "Si sales del grupo no podrás volver a el. Tus puntos se sumarán al total de tu perfil.",
@@ -191,4 +217,5 @@ export class ViewGroupComponent implements OnInit {
       }
     })
   }
+
 }
