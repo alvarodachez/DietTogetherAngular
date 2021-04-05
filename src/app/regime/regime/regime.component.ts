@@ -7,6 +7,7 @@ import { DishCategoryInterface } from '../models/dishCategory.interface';
 import { MealRegimeInterface } from '../models/mealRegimeInterface';
 import { RegimeService } from '../services/regime.service';
 import { LogInService } from '../../entry/services/log-in.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-regime',
@@ -222,9 +223,26 @@ export class RegimeComponent implements OnInit {
 
   /* Método que crea la estructura de la dieta */
   createRegimeStructure() {
+    /* Mostrar aviso - cargando */
+    Swal.fire({
+      title: 'Espere',
+      text: 'Se está creando la dieta',
+      icon: 'info',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
+    
     this.regimeService.createRegimeStructure().subscribe((response) => {
       /* Se refresca la lista de dias (estructura de la dieta) */
       this.getDayRegime();
+
+      /* Se muestra aviso */
+      Swal.fire({
+        title: 'Dieta creada',
+        text: 'Datos registrados correctamente.',
+        icon: 'success',
+        input: undefined,
+      });
     });
   }
 
