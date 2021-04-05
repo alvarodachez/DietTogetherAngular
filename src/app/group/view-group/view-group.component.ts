@@ -76,8 +76,11 @@ export class ViewGroupComponent implements OnInit {
           let athleteRanking: AthleteRankingInterface = {
             name: res.name,
             point: res.gamePoints,
+            roles:res.roles,
+            username:res.username
           };
 
+          console.log(athleteRanking)
           this.athletes.push(athleteRanking);
 
           if (this.athletes.length > 1) {

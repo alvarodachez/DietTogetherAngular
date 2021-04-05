@@ -153,7 +153,7 @@ export class GroupService {
     const jwt = localStorage.getItem('dietJwtSession');
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointServer + `/athlete/${username}`;
+    const endpoint = this.endPointServer + `/athlete/get-athlete-ranking/${username}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
