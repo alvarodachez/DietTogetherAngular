@@ -23,6 +23,8 @@ export class ViewGroupComponent implements OnInit {
   registers: any;
   weightDifference: number;
 
+  registersToVerify: any = [];
+
   addRegisterForm = new FormGroup({
     weightKilograms: new FormControl('', [
       Validators.required, // requerido
@@ -52,6 +54,7 @@ export class ViewGroupComponent implements OnInit {
     this.getActualGroup();
     this.getRegisters();
     this.getProgressBar();
+    this.getRegistersToVerify();
   }
 
   changeRanking() {
@@ -80,7 +83,7 @@ export class ViewGroupComponent implements OnInit {
             username:res.username
           };
 
-          console.log(athleteRanking)
+          // console.log(athleteRanking)
           this.athletes.push(athleteRanking);
 
           if (this.athletes.length > 1) {
@@ -219,6 +222,47 @@ export class ViewGroupComponent implements OnInit {
         })
       }
     })
+  }
+
+  getRegistersToVerify() {
+    // Obtener lista de registros por verificar
+    this.groupService.getRegistersToVerify().subscribe(res => {
+      this.registersToVerify = res;
+
+      // console.log("Controlar en backend que solo el group manager pueda obtener la lista de registros para verificar:");
+      // console.log(this.registersToVerify);
+      // console.log(this.registersToVerify.length);
+    });
+  }
+
+  verifyRegister(idRegister: any) {
+    // Aceptar registro en la verificación
+    this.groupService.verifyRegister(idRegister).subscribe(res => {
+      // console.log("verificando registro... " + idRegister);
+      // console.log(res);
+
+      this.resetGroupAndRegistersToVerify();
+    });
+  }
+
+  declineRegister(idRegister: any) {
+    // Denegar registro en la verificación
+    this.groupService.declineRegister(idRegister).subscribe(res => {
+      // console.log("Rechazando registro... " + idRegister);
+      // console.log(res);
+
+      this.resetGroupAndRegistersToVerify();
+    });
+  }
+
+  resetGroupAndRegistersToVerify() {
+    /* Resetear grupo */
+    this.actualGroup = 'reset';
+    this.athletes = [];
+    this.getActualGroup();
+
+    /* Resetear registros por verificar */
+    this.getRegistersToVerify();
   }
 
 }
