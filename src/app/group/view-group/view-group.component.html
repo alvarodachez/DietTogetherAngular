@@ -136,14 +136,14 @@
   </p>
 
   <h3 *ngIf="weightDifference > 0" class="text-primary">
-    Has perdido {{weightDifference}}kg desde el inicio
+    Has perdido {{weightDifference | number: "1.2-2"}} kg desde el inicio
   </h3>
   <h3 *ngIf="weightDifference < 0" class="text-secondary">
-    Has ganado {{weightDifference}}kg desde el inicio
+    Has ganado {{weightDifference | number: "1.2-2"}} kg desde el inicio
   </h3>
 
   <h3 *ngIf="registers.length == 0"><i class="far fa-clock"></i> Aún no tienes ningún registro en este grupo</h3>
-  <div class="card-deck">
+  <div class="card-columns">
     <div class="card border-primary"
       *ngFor="let register of registers | paginate:{itemsPerPage: 6, currentPage:actualPage};, let i = index">
       <div class="card-header">{{register.weightDate | date:'fullDate' }}</div>
