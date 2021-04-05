@@ -49,7 +49,14 @@
       <div class="cupOrNumber">
         <i class="fas fa-trophy text-warning fa-2x"></i>
       </div>
-        {{athleteRanking.name}}
+
+      <div  class="d-flex">
+        <i  *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+        <p class="my-auto mx-2">{{athleteRanking.name}}</p>
+        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+      </div>
+      
+      
       <div class="cupOrNumber">
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
       </div>
@@ -58,7 +65,11 @@
       <div class="cupOrNumber">
         <i class="fas fa-trophy fa-2x"></i>
       </div>
-        {{athleteRanking.name}}
+      <div  class="d-flex">
+        <i  *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+        <p class="my-auto mx-2">{{athleteRanking.name}}</p>
+        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+      </div>
       <div class="cupOrNumber">
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
       </div>
@@ -67,7 +78,16 @@
       <div class="cupOrNumber">
         <i class="fas fa-trophy text-danger fa-2x"></i>
       </div>
-        {{athleteRanking.name}}
+      <div *ngIf="" class="cupOrNumber">
+        <div class="cupOrNumber">
+          <i class="fas fa-trophy text-warning fa-2x"></i>
+        </div>
+      </div>
+      <div  class="d-flex">
+        <i  *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+        <p class="my-auto mx-2">{{athleteRanking.name}}</p>
+        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+      </div>
       <div class="cupOrNumber">
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
       </div>
@@ -76,7 +96,16 @@
       <div class="cupOrNumber">
         <span class="number">{{i + 1}}</span>
       </div>
-        {{athleteRanking.name}}
+      <div *ngIf="" class="cupOrNumber">
+        <div class="cupOrNumber">
+          <i class="fas fa-trophy text-warning fa-2x"></i>
+        </div>
+      </div>
+      <div  class="d-flex">
+        <i  *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+        <p class="my-auto mx-2">{{athleteRanking.name}}</p>
+        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+      </div>
       <div class="cupOrNumber">
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
       </div>
