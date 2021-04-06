@@ -40,6 +40,68 @@
     <hr>
   </div>
 
+
+  <!-- GroupManager - Lista de registros por verificar -->
+  <div *ngIf="(registersToVerify != null) && (registersToVerify.length > 0)" class="mb-4">
+    <h2>Verificaciones</h2>
+  
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center bg-primary text-white font-weight-bold">
+        <div class="w-25">
+          <p class="my-auto">Atleta</p>
+        </div>
+  
+        <div class="w-25">
+          <p class="my-auto">Fecha</p>
+        </div>
+        
+        <div class="w-25">
+          <p class="my-auto">Diferencia</p>
+        </div>
+  
+        <div class="w-25">
+          <p class="my-auto">Acciones</p>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="list-group" *ngFor="let register of registersToVerify, let i = index">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="w-25">
+          <p class="my-auto">{{register.athlete}}</p>
+        </div>
+  
+        <div class="w-25">
+          <p class="my-auto">{{register.weightDate | date:'d/M'}}</p>
+        </div>
+        
+        <div class="w-25">
+          <p *ngIf="register.weightDifference > 0" class="my-auto text-primary">
+            {{register.weightDifference * -1}}
+          </p>
+          <p *ngIf="register.weightDifference < 0" class="my-auto text-secondary">
+            +{{register.weightDifference * -1}}
+          </p>
+        </div>
+  
+        <!-- <div class="w-25">
+          <button type="button" class="btn btn-primary w-50">
+            <i class="fas fa-check"></i>  
+          </button>
+          <button type="button" class="btn btn-secondary w-50">
+            <i class="fas fa-times"></i>
+          </button>
+        </div> -->
+
+        <div class="w-25">
+          <i class="fas fa-check text-primary w-50" (click)="verifyRegister(register.id)"></i>
+          <i class="fas fa-times text-secondary w-50" (click)="declineRegister(register.id)"></i>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
   <!-- Ranking - Lista con badges -->
   <h2>Ranking</h2>
 
@@ -49,24 +111,22 @@
       <div class="cupOrNumber">
         <i class="fas fa-trophy text-warning fa-2x"></i>
       </div>
-
-      <div  class="d-flex">
-        <i  *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+      <div class="d-flex">
+        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
         <p class="my-auto mx-2">{{athleteRanking.name}}</p>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
       </div>
-      
-      
       <div class="cupOrNumber">
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
       </div>
     </li>
+
     <li *ngIf="i == 1" class="list-group-item d-flex justify-content-between align-items-center">
       <div class="cupOrNumber">
         <i class="fas fa-trophy fa-2x"></i>
       </div>
-      <div  class="d-flex">
-        <i  *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+      <div class="d-flex">
+        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
         <p class="my-auto mx-2">{{athleteRanking.name}}</p>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
       </div>
@@ -74,6 +134,7 @@
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
       </div>
     </li>
+
     <li *ngIf="i == 2" class="list-group-item d-flex justify-content-between align-items-center">
       <div class="cupOrNumber">
         <i class="fas fa-trophy text-danger fa-2x"></i>
@@ -83,8 +144,8 @@
           <i class="fas fa-trophy text-warning fa-2x"></i>
         </div>
       </div>
-      <div  class="d-flex">
-        <i  *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+      <div class="d-flex">
+        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
         <p class="my-auto mx-2">{{athleteRanking.name}}</p>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
       </div>
@@ -92,6 +153,7 @@
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
       </div>
     </li>
+
     <li *ngIf="(i > 2)" class="list-group-item d-flex justify-content-between align-items-center">
       <div class="cupOrNumber">
         <span class="number">{{i + 1}}</span>
@@ -101,8 +163,8 @@
           <i class="fas fa-trophy text-warning fa-2x"></i>
         </div>
       </div>
-      <div  class="d-flex">
-        <i  *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+      <div class="d-flex">
+        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
         <p class="my-auto mx-2">{{athleteRanking.name}}</p>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
       </div>
@@ -136,14 +198,14 @@
   </p>
 
   <h3 *ngIf="weightDifference > 0" class="text-primary">
-    Has perdido {{weightDifference}}kg desde el inicio
+    Has perdido {{weightDifference | number: "1.2-2"}} kg desde el inicio
   </h3>
   <h3 *ngIf="weightDifference < 0" class="text-secondary">
-    Has ganado {{weightDifference}}kg desde el inicio
+    Has ganado {{weightDifference | number: "1.2-2"}} kg desde el inicio
   </h3>
 
   <h3 *ngIf="registers.length == 0"><i class="far fa-clock"></i> Aún no tienes ningún registro en este grupo</h3>
-  <div class="card-deck">
+  <div class="card-columns">
     <div class="card border-primary"
       *ngFor="let register of registers | paginate:{itemsPerPage: 6, currentPage:actualPage};, let i = index">
       <div class="card-header">{{register.weightDate | date:'fullDate' }}</div>
