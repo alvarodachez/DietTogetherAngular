@@ -41,7 +41,7 @@ export class GroupService {
       headers: new HttpHeaders({ Authorization: `Bearer ${jwt}` }),
     };
 
-    /* crear grupo con los datos finales para el backend */
+    /* enviar petición al backend */
     return this.http.post(endpoint, 'holi', httpOptions);
   }
 
@@ -66,7 +66,7 @@ export class GroupService {
       headers: new HttpHeaders({ Authorization: `Bearer ${jwt}` }),
     };
 
-    /* crear grupo con los datos finales para el backend */
+    /* enviar petición al backend */
     return this.http.post(endpoint, 'holi', httpOptions);
   }
 
@@ -87,10 +87,10 @@ export class GroupService {
       headers: new HttpHeaders({ Authorization: `Bearer ${jwt}` }),
     };
 
-    /* crear grupo con los datos finales para el backend */
+    /* enviar petición al backend */
     return this.http.get(endpoint, httpOptions);
-
   }
+
   createGroup(groupForm: GroupInterface): Observable<any> {
     /* Obtener usuario de la sesión actual */
     const username = localStorage.getItem('dietUsernameSession');
@@ -153,7 +153,7 @@ export class GroupService {
     const jwt = localStorage.getItem('dietJwtSession');
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointServer + `/athlete/${username}`;
+    const endpoint = this.endPointServer + `/athlete/get-athlete-ranking/${username}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
@@ -236,6 +236,7 @@ export class GroupService {
       headers: new HttpHeaders({ Authorization: `Bearer ${jwt}` }),
     };
 
+    /* enviar petición al backend */
     return this.http.post(endpoint, 'hola', httpOptions);
   }
 }
