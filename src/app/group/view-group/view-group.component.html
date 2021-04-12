@@ -101,6 +101,19 @@
     </ul>
   </div>
 
+  <!-- Mensaje para el BoostAthlete-->
+  <div *ngIf="isBoostAthlete == actualUserSession" class="mb-4 ">
+
+    <div class="d-flex text-center d-flex justify-content-between align-items-center">
+      <i class="fas fa-angle-double-up text-primary fa-2x"></i>
+      <h2 class=" ">Esta semana te ha invadido la grasa!</h2>
+      <i class="fas fa-angle-double-up text-primary fa-2x"></i>
+    </div>
+    <h4>Desde Diet2gether queremos darte un empujon para recuperarte de esa semana anterior. <br>Se ortogaran mas puntos si igualas, o superas el siguiente reto:</h4>
+
+    <h3 class="text-secondary"> Perder la cantidad de: {{actualGroup.boostDay.boostAthlete.weightChallenge}} g</h3>
+
+  </div>
 
   <!-- Ranking - Lista con badges -->
   <h2>Ranking</h2>
@@ -113,8 +126,10 @@
       </div>
       <div class="d-flex">
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
         <p class="my-auto mx-2">{{athleteRanking.name}}</p>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
       </div>
       <div class="cupOrNumber">
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
@@ -126,9 +141,11 @@
         <i class="fas fa-trophy fa-2x"></i>
       </div>
       <div class="d-flex">
+        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
         <p class="my-auto mx-2">{{athleteRanking.name}}</p>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
       </div>
       <div class="cupOrNumber">
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
@@ -145,9 +162,11 @@
         </div>
       </div>
       <div class="d-flex">
+        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
         <p class="my-auto mx-2">{{athleteRanking.name}}</p>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
       </div>
       <div class="cupOrNumber">
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
@@ -164,9 +183,11 @@
         </div>
       </div>
       <div class="d-flex">
+        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
         <p class="my-auto mx-2">{{athleteRanking.name}}</p>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
+        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
       </div>
       <div class="cupOrNumber">
         <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
