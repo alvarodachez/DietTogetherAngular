@@ -24,6 +24,8 @@ export class ViewGroupComponent implements OnInit {
   weightDifference: number;
   registersToVerify: any = [];
   userIsGroupAdmin: boolean;
+  isBoostAthlete:string = "false";
+  actualUserSession = "Holis"
 
   addRegisterForm = new FormGroup({
     weightKilograms: new FormControl('', [
@@ -78,6 +80,14 @@ export class ViewGroupComponent implements OnInit {
       this.actualGroup = response.actualGroup;
 
       const actualUser = localStorage.getItem('dietUsernameSession');
+      this.actualUserSession = actualUser;
+
+      console.log(this.actualGroup)
+      if(this.actualGroup.boostDay.boostAthlete != null && this.actualGroup.boostDay.boostAthlete != undefined){
+
+        console.log("hola desde el if")
+        this.isBoostAthlete = this.actualGroup.boostDay.boostAthlete.username;
+      }
 
       this.actualGroup.athletes.forEach((athlete) => {
         this.groupService.getAthlete(athlete).subscribe((res) => {
