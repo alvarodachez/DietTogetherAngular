@@ -125,8 +125,8 @@
         <i class="fas fa-trophy text-warning fa-2x"></i>
       </div>
       <div class="d-flex">
-        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
         <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
+        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
         <p class="my-auto mx-2">{{athleteRanking.name}}</p>
         <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
         <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
