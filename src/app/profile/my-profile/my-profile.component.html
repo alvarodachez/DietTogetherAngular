@@ -1,0 +1,58 @@
+<div class="container animate__animated animate__fadeInDownBig">
+  <form [formGroup]="profileForm" action="">
+
+    <div class="form-group entryFormField">
+      <label class="form-control-label" for="name">Nombre</label><br>
+      <input type="text" formControlName="name" name="name" class="dietInput form-control"
+        [placeholder]="athleteName | titlecase" required id="inpName" #nameFocus
+        [class.is-invalid]="profileForm.get('name').touched && profileForm.get('name').invalid">
+      <div class="alert colorFallo" [hidden]="profileForm.get('name').pristine || profileForm.get('name').valid">
+        El nombre es obligatorio
+      </div>
+    </div>
+
+    <div class="form-group entryFormField">
+      <label class="form-control-label" for="surname">Apellidos</label><br>
+      <input type="text" formControlName="surname" name="surname" class="dietInput form-control"
+      [placeholder]="athleteSurname | titlecase" required id="inpSurname"
+        [class.is-invalid]="profileForm.get('surname').touched && profileForm.get('surname').invalid">
+      <div class="alert colorFallo" [hidden]="profileForm.get('surname').pristine || profileForm.get('surname').valid">
+        Los apellidos son obligatorios
+      </div>
+    </div>
+
+    <div class="form-group entryFormField">
+      <label class="form-control-label" for="birthDay">Fecha de nacimiento</label><br>
+      <input type="text" formControlName="birthDay" name="birthDay" class="dietInput form-control"
+      [placeholder]="athleteBirthday | date:'dd/MM/yyyy'" required id="inpBirthday"
+        [class.is-invalid]="profileForm.get('birthDay').touched && profileForm.get('birthDay').invalid">
+      <div class="alert colorFallo"
+        [hidden]="profileForm.get('birthDay').pristine || profileForm.get('birthDay').valid">
+        El valor de la fecha de no es válido
+      </div>
+    </div>
+
+    <div class="form-group entryFormField">
+      <label class="form-control-label" for="totalPoints">Puntos Diet2gether</label><br>
+      <input type="text" formControlName="totalPoints" name="totalPoints" class="dietInput form-control"
+      [placeholder]="athleteTotalPoints + ' puntos'" required id="inpTotalPoints"
+        [class.is-invalid]="profileForm.get('totalPoints').touched && profileForm.get('totalPoints').invalid">
+    </div>
+
+    <div class="form-group entryFormField">
+      <label class="form-control-label" for="imc">IMC</label><br>
+      <input disabled type="text" name="imc" class="dietInput form-control" [placeholder]="athleteIMC | number: '1.2-2'"
+        required id="inpImc">
+    </div>
+
+    <div class="form-group entryFormField">
+        <label class="form-control-label" for="imc">Baremo IMC</label><br>
+        <input disabled type="text" name="imc" class="dietInput form-control" [placeholder]="athleteScale"
+          required id="inpImc">
+      </div>
+
+    <button name="btnGo" class="btn btn-primary btn-lg btn-mid" [disabled]="!profileForm.valid"
+      (click)="sendProfileData()">Enviar</button>
+
+  </form>
+</div>

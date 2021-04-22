@@ -42,7 +42,7 @@
   <div class="collapse navbar-collapse hola" id="navbarProfile">
       <ul *ngIf="online == true" class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Mi perfil</a>
+          <a class="nav-link" routerLink="/profile">Mi perfil</a>
         </li>
         <li *ngIf="admin == true" class="nav-item">
           <a class="nav-link" routerLink="/admin-panel">Administrador</a>
