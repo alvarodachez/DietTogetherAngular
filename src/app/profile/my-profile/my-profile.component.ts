@@ -18,7 +18,9 @@ export class MyProfileComponent implements OnInit {
   athleteBirthday: any = '';
   athleteTotalPoints: any = -1;
   athleteIMC: any = '';
-  athleteScale: any = '';
+  athleteActualScale: any = '';
+  athleteScales: any = [];
+
 
   profileForm = new FormGroup({
     name: new FormControl({value: '', disabled: true}, Validators.required),
@@ -48,9 +50,8 @@ export class MyProfileComponent implements OnInit {
       this.athleteBirthday = res.birthDay;
       this.athleteTotalPoints = res.totalPoints;
       this.athleteIMC = res.physicalData.imc.imcValue;
-      this.athleteScale = res.physicalData.imc.actualScale;
-
-      console.log(this.athleteScale);
+      this.athleteActualScale = res.physicalData.imc.actualScale;
+      this.athleteScales = res.physicalData.imc.scales;
 
       console.log(this.actualAthlete);
     });
