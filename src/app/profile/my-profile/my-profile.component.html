@@ -27,9 +27,9 @@
 </div>
 
 
-<div class="container animate__animated animate__fadeInDownBig">
+<div class="container">
 
-  <form *ngIf="showMenu == 'personal'" [formGroup]="profileForm" action="" autocomplete="off">
+  <form *ngIf="showMenu == 'personal'" [formGroup]="profileForm" action="" autocomplete="off" class="animate__animated animate__fadeIn">
 
     <h2 class="text-center mt-4 mb-4">
       Datos personales
@@ -104,7 +104,7 @@
 
 
 
-  <div *ngIf="showMenu == 'imc'">
+  <div *ngIf="showMenu == 'imc'" class="animate__animated animate__fadeIn">
 
     <h2 class="text-center mt-4 mb-4">
       Datos IMC
@@ -131,7 +131,7 @@
   </div>
 
 
-  <div *ngIf="showMenu == 'scales'">
+  <div *ngIf="showMenu == 'scales'" class="animate__animated animate__fadeIn">
 
     <h2 class="text-center mt-4 mb-4">
       Baremos personales
