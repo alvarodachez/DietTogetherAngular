@@ -9,7 +9,6 @@ import { ProfileService } from '../services/profile.service';
   styleUrls: ['./my-profile.component.scss'],
 })
 export class MyProfileComponent implements OnInit {
-
   /* Variable que almacena la pestaña mostrada actualmente */
   showMenu: string;
 
@@ -28,17 +27,26 @@ export class MyProfileComponent implements OnInit {
   athleteHeight: any = '';
   athleteWeight: any = '';
 
-  birthdateType: string = "text";
+  birthdateType: string = 'text';
   profileFormLocked: boolean = true;
 
   profileForm = new FormGroup({
-    name: new FormControl({value: '', disabled: true}, Validators.required),
-    surname: new FormControl({value: '', disabled: true}, Validators.required),
-    birthDay: new FormControl({value: '', disabled: true}, Validators.required),
+    name: new FormControl({ value: '', disabled: true }, Validators.required),
+    surname: new FormControl(
+      { value: '', disabled: true },
+      Validators.required
+    ),
+    birthDay: new FormControl(
+      { value: '', disabled: true },
+      Validators.required
+    ),
     // height: new FormControl({value: '', disabled: true}, Validators.required),
   });
 
-  constructor(private profileService: ProfileService, private login:LogInService) {}
+  constructor(
+    private profileService: ProfileService,
+    private login: LogInService
+  ) {}
 
   ngOnInit(): void {
     /* Pestaña por defecto - Datos personales */
@@ -58,8 +66,7 @@ export class MyProfileComponent implements OnInit {
   /* Método que obtiene el atleta actual */
   getActualAthlete() {
     this.login.isUserInSession();
-    this.profileService.getAthlete().subscribe(res => {
-      
+    this.profileService.getAthlete().subscribe((res) => {
       this.actualAthlete = res;
 
       this.athleteName = res.name;
@@ -75,7 +82,6 @@ export class MyProfileComponent implements OnInit {
       console.log(this.actualAthlete);
     });
   }
-
 
   /* Establecer formulario ProfileForm como modificable */
   setProfileFormToModify() {
@@ -101,18 +107,31 @@ export class MyProfileComponent implements OnInit {
 
   /* Método auxiliar que convierte el tipo del campo birtdate, de string a date */
   birthdateStringToDate() {
-    this.birthdateType == "text" ? this.birthdateType = "date" : this.birthdateType = "text";
+    this.birthdateType == 'text'
+      ? (this.birthdateType = 'date')
+      : (this.birthdateType = 'text');
   }
 
   /* Método auxiliar que cambia el estado del formulario ProfileForm (bloqueado o desbloqueado) */
   unlockOrBlockProfileForm() {
-    this.profileFormLocked == true ? this.profileFormLocked = false : this.profileFormLocked = true;
+    this.profileFormLocked == true
+      ? (this.profileFormLocked = false)
+      : (this.profileFormLocked = true);
   }
-
 
   /* Enviar los datos modificados del formulario sendProfileForm */
   sendProfileForm() {
+    console.log(this.profileForm.get('name'))
+    const data = {
+      name: this.profileForm.get('name').value,
+      surname: this.profileForm.get('surname').value,
+      birthDay: this.profileForm.get('birthDay').value
+    };
 
+    this.profileService.updateProfileData(data).subscribe( res => {
+      this.getActualAthlete();
+      
+      this.setProfileFormToModify();
+    })
   }
-  
 }
