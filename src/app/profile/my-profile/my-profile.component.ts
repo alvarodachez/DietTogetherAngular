@@ -36,7 +36,7 @@ export class MyProfileComponent implements OnInit {
       { value: '', disabled: true },
       Validators.required
     ),
-    birthDay: new FormControl(
+    birthday: new FormControl(
       { value: '', disabled: true },
       Validators.required
     ),
@@ -87,12 +87,12 @@ export class MyProfileComponent implements OnInit {
   setProfileFormToModify() {
     let name = this.profileForm.get('name');
     let surname = this.profileForm.get('surname');
-    let birthDay = this.profileForm.get('birthDay');
+    let birthday = this.profileForm.get('birthday');
     // let height = this.profileForm.get('height');
 
     name.disabled ? name.enable() : name.disable();
     surname.disabled ? surname.enable() : surname.disable();
-    birthDay.disabled ? birthDay.enable() : birthDay.disable();
+    birthday.disabled ? birthday.enable() : birthday.disable();
     // height.disabled ? height.enable() : height.disable();
 
     /* Establecer foco para resaltar los campos */
@@ -121,17 +121,18 @@ export class MyProfileComponent implements OnInit {
 
   /* Enviar los datos modificados del formulario sendProfileForm */
   sendProfileForm() {
-    console.log(this.profileForm.get('name'))
     const data = {
       name: this.profileForm.get('name').value,
       surname: this.profileForm.get('surname').value,
-      birthDay: this.profileForm.get('birthDay').value
+      birthday: this.profileForm.get('birthday').value,
     };
 
-    this.profileService.updateProfileData(data).subscribe( res => {
+    this.profileService.updateProfileData(data).subscribe((res) => {
       this.getActualAthlete();
-      
+
       this.setProfileFormToModify();
-    })
+    });
+
+    this.profileForm.reset();
   }
 }
