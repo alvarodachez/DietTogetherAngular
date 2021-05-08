@@ -1,1 +1,135 @@
-<p>management-private works!</p>
+<div class="fondo">
+  <div class="titulo align-self-center text-center ">
+    <p class="text-white">Actividad privada</p>
+    <ol class="breadcrumb container text-center">
+      <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+      <li class="breadcrumb-item" [routerLink]="['/private/welcome']">Actividad privada</li>
+      <li class="breadcrumb-item active" [routerLink]="['/private/management']">Crear</li>
+    </ol>
+  </div>
+</div>
+
+
+<h2 class="mt-4 text-center">Crear actividad privada</h2>
+
+
+<div id="divPrivateForm" class="container text-center">
+
+  <form [formGroup]="privateForm" action="">
+
+    <div class="form-group privateFormField mt-5">
+      <label class="form-control-label">Peso objetivo</label><br>
+
+      <div class="doubleInput">
+        <input class="dietInput form-control midInputLeft" required type="tel" formControlName="weightKilograms"
+          name="weightKilograms" id="inpWeightKilograms" placeholder="Kilos"
+          [class.is-invalid]="privateForm.get('weightKilograms').touched && privateForm.get('weightKilograms').invalid">
+        <p class="mt-2">y</p>
+        <input class="dietInput form-control midInputRight" required type="tel" formControlName="weightGrams"
+          name="weightGrams" id="inpWeightGrams" placeholder="Gramos"
+          [class.is-invalid]="privateForm.get('weightGrams').touched && privateForm.get('weightGrams').invalid">
+      </div>
+    </div>
+    <div class="text-muted">
+      Consejo: Si pesas 70.05 <br> debes indicar <span class="font-weight-bold">0</span>5 en los gramos
+    </div>
+    <div [hidden]="privateForm.get('weightKilograms').valid || privateForm.get('weightKilograms').pristine"
+      class="colorFallo">
+      El valor de los kilos (kg) no es válido
+    </div>
+    <div [hidden]="privateForm.get('weightGrams').valid || privateForm.get('weightGrams').pristine" class="colorFallo">
+      El valor de los gramos (g) no es válido
+    </div>
+
+    <div class="form-group privateFormField mt-5">
+      <label class="form-control-label" for="expireDate">Fecha del objetivo</label><br>
+      <input id="expireDateFormulario" type="date" formControlName="expireDate" name="expireDate"
+        class="dietInput form-control" placeholder="Introduce apellidos" required id="inpExpireDate"
+        [class.is-invalid]="privateForm.get('expireDate').touched && privateForm.get('expireDate').invalid">
+      <div class="text-muted container mt-1 w-75">
+        * La fecha debe ser posterior a <span class="font-weight-bold">4 semanas</span> desde hoy.
+      </div>
+      <div class="alert colorFallo"
+        [hidden]="privateForm.get('expireDate').pristine || privateForm.get('expireDate').valid">
+        El valor de la fecha de no es válido
+      </div>
+    </div>
+
+
+
+    <div class="text-center mt-5">
+      <label class="form-control-label">Modo de actividad</label><br>
+
+      <div class="btn-group w-100" role="group" aria-label="Basic example">
+        <button (click)="changeActivityMode('LOSE')" type="button"
+          class="btn btn-secondary w-50 rounded border border-white"
+          [ngClass]="{'active': activityMode == 'LOSE'}">Adelgazar</button>
+        <button (click)="changeActivityMode('MAINTAIN')" type="button"
+          class="btn btn-secondary w-50 rounded border border-white"
+          [ngClass]="{'active': activityMode == 'MAINTAIN'}">Mantenimiento</button>
+        <button (click)="changeActivityMode('GAIN')" type="button"
+          class="btn btn-secondary w-50 rounded border border-white"
+          [ngClass]="{'active': activityMode == 'GAIN'}">Engordar</button>
+      </div>
+    </div>
+
+    <div *ngIf="activityMode == 'LOSE'" class="container text-center mt-4">
+      <p class="w-75 mx-auto">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque similique, consectetur
+        temporibus distinctio unde
+        eius nostrum cumque quis asperiores ducimus fugiat quas incidunt voluptatem error? Eaque labore asperiores
+        doloremque quia?</p>
+    </div>
+
+    <div *ngIf="activityMode == 'MAINTAIN'" class="container text-center mt-4">
+      <p class="w-75 mx-auto">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium excepturi autem quod
+        voluptatem impedit
+        officia animi sit esse sint? Obcaecati perferendis corrupti suscipit tenetur sequi? Harum neque at sunt
+        mollitia!
+      </p>
+    </div>
+
+    <div *ngIf="activityMode == 'GAIN'" class="container text-center mt-4">
+      <p class="w-75 mx-auto">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam quo est veniam porro,
+        dignissimos culpa, sint
+        aliquam eius possimus quos excepturi cum voluptates, voluptas fugiat rerum illum minima beatae vitae.</p>
+    </div>
+
+
+
+    <div class="text-center mt-5">
+      <label class="form-control-label">Modo de registro</label><br>
+
+      <div class="btn-group w-100" role="group" aria-label="Basic example">
+        <button (click)="changeRegisterMode('PROGRESSIVE')" type="button"
+          class="btn btn-secondary w-50 rounded border border-white"
+          [ngClass]="{'active': registerMode == 'PROGRESSIVE'}">Progresivo</button>
+        <button (click)="changeRegisterMode('CLASSIC')" type="button"
+          class="btn btn-secondary w-50 rounded border border-white"
+          [ngClass]="{'active': registerMode == 'CLASSIC'}">Clásico</button>
+      </div>
+    </div>
+
+    <div *ngIf="registerMode == 'PROGRESSIVE'" class="container text-center mt-4">
+      <p class="w-75 mx-auto">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. In libero quisquam incidunt,
+        deserunt tempore minima quae, recusandae, aut non quos voluptatem! Itaque, numquam suscipit quisquam totam
+        quidem aut vitae natus!
+      </p>
+    </div>
+
+    <div *ngIf="registerMode == 'CLASSIC'" class="container text-center mt-4">
+      <p class="w-75 mx-auto">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta veniam, ad fugiat nemo perspiciatis ipsa sed
+        maiores quam vero ex sapiente laborum? Repellat harum dicta culpa molestiae aperiam architecto eius.
+      </p>
+    </div>
+
+
+
+    <button name="btnGo" class="btn btn-primary btn-lg btn-mid mt-5" (click)="createPrivateActivity()"
+      [disabled]="(!privateForm.valid) || activityMode == '' || registerMode == ''">
+      Enviar
+    </button>
+
+  </form>
+</div>
