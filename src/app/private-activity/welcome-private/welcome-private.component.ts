@@ -22,12 +22,11 @@ export class WelcomePrivateComponent implements OnInit {
   /* Método que obtiene la actividad privada actual */
   getActivePrivateActivity() {
     this.login.isUserInSession();
-    this.privateService.getActivePrivateActivity().subscribe(res => {
-      // console.log(res);
-      this.actualPrivateActivity = res.actualPrivateActivity;
+    this.privateService.getPrivateActivity().subscribe(res => {
+      this.actualPrivateActivity = res;
       
-      console.log("this.actualPrivateActivity...");
-      console.log(this.actualPrivateActivity);
+      console.log("getPrivateActivity...");
+      console.log(res);
     });
   }
 

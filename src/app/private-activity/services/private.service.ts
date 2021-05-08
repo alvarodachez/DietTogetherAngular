@@ -20,7 +20,7 @@ export class PrivateService {
     }
   }
   
-  getActivePrivateActivity(): Observable<any> {
+  getPrivateActivity(): Observable<any> {
     /* Obtener usuario de la sesión actual */
     const username = localStorage.getItem('dietUsernameSession');
 
@@ -28,7 +28,7 @@ export class PrivateService {
     const jwt = localStorage.getItem('dietJwtSession');
 
     /* Dirección del servidor - petición */
-    const endpoint = this.endPointServer + `/athlete/${username}`;
+    const endpoint = this.endPointServer + `/private-activity/get-private-activity/${username}`;
 
     /* Cabecera necesaria para indicar token JWT */
     let httpOptions = {
