@@ -82,10 +82,8 @@ export class ViewGroupComponent implements OnInit {
       const actualUser = localStorage.getItem('dietUsernameSession');
       this.actualUserSession = actualUser;
 
-      console.log(this.actualGroup)
       if(this.actualGroup.boostDay.boostAthlete != null && this.actualGroup.boostDay.boostAthlete != undefined){
 
-        console.log("hola desde el if")
         this.isBoostAthlete = this.actualGroup.boostDay.boostAthlete.username;
       }
 

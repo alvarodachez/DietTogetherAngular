@@ -18,6 +18,7 @@ import { ReportModule } from './report/report.module';
 import { AdminPanelModule } from './admin-panel/admin-panel.module';
 import { RegimeModule } from './regime/regime.module';
 import { ProfileModule } from './profile/profile.module';
+import { PrivateModule } from './private-activity/private.module';
 
 // Componentes
 import { HeaderComponent } from './common/header/header.component';
@@ -43,6 +44,7 @@ import { NotFoundComponent } from './common/not-found/not-found.component';
     AdminPanelModule,
     RegimeModule,
     ProfileModule,
+    PrivateModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }
