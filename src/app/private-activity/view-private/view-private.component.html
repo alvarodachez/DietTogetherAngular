@@ -13,10 +13,10 @@
   <div class="btn-group w-100" role="group" aria-label="Basic example">
     <button (click)="changeMenuTab('estado')" type="button" class="btn btn-secondary w-50 rounded-0"
       [ngClass]="{'active': activeMenuTab == 'estado'}">Estado</button>
+    <button *ngIf="registerMode == 'PROGRESSIVE'" (click)="changeMenuTab('diario')" type="button"
+      class="btn btn-secondary w-50 rounded-0" [ngClass]="{'active': activeMenuTab == 'diario'}">Diario</button>
     <button (click)="changeMenuTab('registros')" type="button" class="btn btn-secondary w-50 rounded-0"
       [ngClass]="{'active': activeMenuTab == 'registros'}">Registros</button>
-    <button *ngIf="registerMode == 'PROGRESSIVE'" (click)="changeMenuTab('diario')" type="button" class="btn btn-secondary w-50 rounded-0"
-      [ngClass]="{'active': activeMenuTab == 'diario'}">Diario</button>
   </div>
 </div>
 
@@ -78,7 +78,7 @@
     </li>
   </ul> -->
 
-  <h4 class="text-secondary mt-5 cursor-salir" (click)="getOutGroup()">
+  <h4 class="text-secondary mt-5 cursor-salir" (click)="getOutActivity()">
     Abandonar actividad <i class="fas fa-sign-out-alt rotar"></i>
   </h4>
 
@@ -86,16 +86,17 @@
 
 
 
-<!-- Div Registros -->
-<div *ngIf="activeMenuTab == 'registros'" class="container text-center mt-4 animate__animated animate__fadeIn">
+<!-- Div Registros - CLASSIC y PROGRESSIVE -->
+<div *ngIf="activeMenuTab == 'registros'"
+  class="container text-center mt-4 animate__animated animate__fadeIn">
 
   <h2>
     Mis registros
-    <i *ngIf="isRegisterActive == true" class="fas fa-plus" data-toggle="modal" data-target="#registerModal"
+    <i *ngIf="isRegisterActive == true && registerMode == 'CLASSIC'" class="fas fa-plus" data-toggle="modal" data-target="#registerModal"
       (click)="resetAddRegisterForm()"></i>
   </h2>
 
-  <p *ngIf="isRegisterActive == false" class="mx-auto">
+  <p *ngIf="isRegisterActive == false && registerMode == 'CLASSIC'" class="mx-auto">
     <i class="far fa-clock lead mt-2"></i>
     Aún no puedes añadir otro registro.<br>
     Puedes crearlo el día {{ nextRegisterDate | date:'d/M' }}.
@@ -146,8 +147,73 @@
       responsive="true">
     </pagination-controls>
   </div>
-
 </div>
+
+
+
+<!-- Div Diario - PROGRESSIVE -->
+<div *ngIf="activeMenuTab == 'diario'"
+  class="container text-center mt-4 animate__animated animate__fadeIn">
+
+  <h2>
+    Registros diarios
+    <i *ngIf="isRegisterActive == true && registerMode == 'PROGRESSIVE'" class="fas fa-plus" data-toggle="modal"
+      data-target="#registerModal" (click)="resetAddRegisterForm()"></i>
+  </h2>
+
+  <p *ngIf="isRegisterActive == false" class="mx-auto">
+    <i class="far fa-clock lead mt-2"></i>
+    Aún no puedes añadir otro registro.<br>
+    Puedes crearlo el día {{ nextRegisterDate | date:'d/M' }}.
+  </p>
+
+  <h3 *ngIf="weightDifference > 0" class="text-primary">
+    Has perdido {{weightDifference | number: "1.2-2"}} kg desde el inicio
+  </h3>
+  <h3 *ngIf="weightDifference < 0" class="text-secondary">
+    Has ganado {{weightDifference | number: "1.2-2"}} kg desde el inicio
+  </h3>
+
+  <h3 *ngIf="registersProgressiveMode.length == 0">
+      <i class="far fa-clock"></i> Aún no tienes registros en esta actividad
+  </h3>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
+    <div class="col mb-4"
+      *ngFor="let register of registersProgressiveMode | paginate:{itemsPerPage: 4, currentPage:actualPage};, let i = index">
+
+      <div class="card border-primary">
+        <div class="card-header">{{register.weightDate | date:'fullDate' }}</div>
+        <div class="card-body">
+          <p class="card-text">
+            <i class="fas fa-weight"></i>
+            Peso: {{register.weight}} kg
+          </p>
+          <p class="card-text">
+            <i class="far fa-calendar-alt"></i>
+            Fecha: {{register.weightDate}}
+          </p>
+          <p *ngIf="register.weightDifference >= 0" class="card-text text-primary">
+            <i class="fas fa-balance-scale-left"></i>
+            Has perdido: {{register.weightDifference}} kg
+          </p>
+          <p *ngIf="register.weightDifference < 0" class="card-text text-secondary">
+            <i class="fas fa-balance-scale-left"></i>
+            Has ganado: {{register.weightDifference * -1}} kg
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-4 pr-4">
+    <pagination-controls class="" (pageChange)="actualPage = $event" previousLabel="Anterior" nextLabel="Posterior"
+      responsive="true">
+    </pagination-controls>
+  </div>
+</div>
+
 
 
 <div id="registerModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"

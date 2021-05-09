@@ -35,6 +35,9 @@ export class ViewPrivateComponent implements OnInit {
   weightDifference = 0;
 
   actualPage: number = 1;
+
+  /* Variable que almacena los registros del modo progresivo */
+  registersProgressiveMode: any = [];
   
 
   /* Variable que almacena el formulario para añadir un registro */
@@ -94,16 +97,27 @@ export class ViewPrivateComponent implements OnInit {
       console.log("registerMode...");
       console.log(this.registerMode);
 
-      /* el campo totalRegisters existe también en el modo progresivo????? */
       if (this.actualPrivateActivity.totalRegisters != null) {
         this.registersClassicMode = this.actualPrivateActivity.totalRegisters;
+
         /* Se ordenan los registros por id, si existe más de uno */
         if (this.registersClassicMode.length > 1) {
           this.sortRegisters(this.registersClassicMode);
         }
+
+        this.setNextRegisterDate(this.registersClassicMode);
       }
 
-      this.setNextRegisterDate();
+      if (this.actualPrivateActivity.daylyRegisters != null) {
+        this.registersProgressiveMode = this.actualPrivateActivity.daylyRegisters;
+
+        /* Se ordenan los registros por id, si existe más de uno */
+        if (this.registersProgressiveMode.length > 1) {
+          this.sortRegisters(this.registersProgressiveMode);
+        }
+
+        this.setNextRegisterDate(this.registersProgressiveMode);
+      }
 
       // Se resetea la diferencia de peso
       this.weightDifference = 0;
@@ -123,9 +137,9 @@ export class ViewPrivateComponent implements OnInit {
     });
   }
 
-  setNextRegisterDate() {
-    if (this.registersClassicMode.length >= 1) {
-      this.nextRegisterDate = this.registersClassicMode[0].nextDateRegister;
+  setNextRegisterDate(registers: any) {
+    if (registers.length >= 1) {
+      this.nextRegisterDate = registers[0].nextDateRegister;
 
       if (new Date(Date.now()) > new Date(Date.parse(this.nextRegisterDate))) {
         this.isRegisterActive = true;
@@ -153,11 +167,11 @@ export class ViewPrivateComponent implements OnInit {
     console.log(register);
 
     this.privateService.createRegister(register).subscribe((response) => {
-      // this.getRegisters();
-      // this.athletes = [];
-      // this.getActualGroup();
-      
+      console.log("createRegister...");
+      console.log(response);
+
       this.getActivePrivateActivity();
+      this.getAthleteRanking();
     });
   }
 
@@ -180,6 +194,10 @@ export class ViewPrivateComponent implements OnInit {
     for (const r of registers) {
       this.weightDifference += r.weightDifference;
     }
+  }
+
+  getOutActivity() {
+    console.log("pendiente getOutActivity");
   }
 
 }
