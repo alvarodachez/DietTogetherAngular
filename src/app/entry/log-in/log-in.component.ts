@@ -30,7 +30,7 @@ export class LogInComponent implements OnInit, AfterViewInit {
 
   /* Se aplica foco en el primer campo del formulario */
   ngAfterViewInit(): void {
-    this.userFocus.nativeElement.focus();
+    // this.userFocus.nativeElement.focus();
   }
 
   ngOnInit(): void {
