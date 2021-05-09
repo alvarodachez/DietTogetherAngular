@@ -66,7 +66,7 @@
           [ngClass]="{'active': activityMode == 'LOSE'}">Adelgazar</button>
         <button (click)="changeActivityMode('MAINTAIN')" type="button"
           class="btn btn-secondary w-50 rounded border border-white"
-          [ngClass]="{'active': activityMode == 'MAINTAIN'}">Mantenimiento</button>
+          [ngClass]="{'active': activityMode == 'MAINTAIN'}" disabled>Mantenimiento</button>
         <button (click)="changeActivityMode('GAIN')" type="button"
           class="btn btn-secondary w-50 rounded border border-white"
           [ngClass]="{'active': activityMode == 'GAIN'}">Engordar</button>

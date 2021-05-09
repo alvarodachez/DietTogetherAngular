@@ -1,0 +1,102 @@
+@import "src/sass/styles.scss";
+
+
+.fondo {
+    @include dietBanner;
+
+    .titulo {
+        margin: auto auto;
+        font-size: 30px;
+    }
+
+    .word {
+        font-size: 20px;
+    }
+}
+
+.breadcrumb {
+    font-size: 20px;
+    background-color: #9CD3C4;
+}
+
+.active {
+    color: white;
+}
+
+.progress {
+    height: 4vh;
+}
+
+.modal {
+    font-size: 20px;
+}
+
+.dietInput {
+  @include dietInput;
+}
+
+.cupOrNumber {
+    width: 10%;
+
+    .number {
+        font-size: 20px;
+    }
+}
+
+/* --- */
+.cursor-salir{
+    cursor: pointer;
+}
+.midInputLeft {
+    margin-left: 10%;
+}
+
+.midInputRight {
+    margin-right: 10%;
+}
+
+.doubleInput {
+    display: flex;
+    justify-content: space-evenly;
+
+    input {
+        width: 33%;
+    }
+}
+
+/* Iconos Font Awesome */
+.fas {
+    cursor: pointer;
+}
+
+.fas:hover {
+    color: #f3969a;
+}
+
+.fas:active {
+    color: #78c2ad;
+}
+
+
+/* ----------- */
+
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+    
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+  
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+  
+}

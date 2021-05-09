@@ -119,8 +119,8 @@ export class ManagementPrivateComponent implements OnInit {
 
         this.privateForm.reset();
 
-        // this.route.navigate(['/private/privateview']);
-        this.route.navigate(['/private/welcome']);
+        this.route.navigate(['/private/privateview']);
+        // this.route.navigate(['/private/welcome']);
 
       },
       (error) => {
