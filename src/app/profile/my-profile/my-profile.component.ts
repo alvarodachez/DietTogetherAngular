@@ -78,8 +78,6 @@ export class MyProfileComponent implements OnInit {
       this.athleteScales = res.physicalData.imc.scales;
       this.athleteHeight = res.physicalData.height;
       this.athleteWeight = res.physicalData.weight;
-
-      console.log(this.actualAthlete);
     });
   }
 

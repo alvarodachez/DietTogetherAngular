@@ -24,9 +24,6 @@ export class WelcomePrivateComponent implements OnInit {
     this.login.isUserInSession();
     this.privateService.getPrivateActivity().subscribe(res => {
       this.actualPrivateActivity = res;
-      
-      console.log("getPrivateActivity...");
-      console.log(res);
     });
   }
 
