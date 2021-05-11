@@ -56,7 +56,7 @@ export class AthleteDataRegisterComponent implements OnInit, AfterViewInit {
 
   /* Se aplica foco en el primer campo del formulario */
   ngAfterViewInit(): void {
-    this.nameFocus.nativeElement.focus();
+    // this.nameFocus.nativeElement.focus();
   }  
 
   ngOnInit(): void {}

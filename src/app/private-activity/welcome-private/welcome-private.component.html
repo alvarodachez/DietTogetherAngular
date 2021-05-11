@@ -1,0 +1,42 @@
+<div class="fondo">
+  <div class="titulo align-self-center text-center">
+    <p class="text-white">Actividad privada</p>
+    <ol class="breadcrumb container">
+      <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
+      <li class="breadcrumb-item active" [routerLink]="['/private/welcome']">Actividad privada</li>
+    </ol>
+  </div>
+</div>
+
+<div class="container text-center mt-4">
+  <h2>¿Qué puedes hacer aquí?</h2>
+
+  <div class="w-75 mx-auto">
+    <p>Esta es una de las secciones principales en Diet2gether.</p>
+    <p>Podrás visualizar la actividad privada en la que estás y revisar las estadísticas.</p>
+    <p>En caso de que no estés en una actividad privada podrás empezarla en cualquier momento.</p>
+    <p>¡A qué esperas!</p>
+  </div>
+
+  <button *ngIf="actualPrivateActivity != null" class="btn bg-secondary text-white"
+    [routerLink]="['/private/privateview']">Ir a tu actividad</button>
+  <button *ngIf="actualPrivateActivity == null" class="btn bg-secondary text-white"
+    [routerLink]="['/private/management']">Crear actividad privada</button>
+
+</div>
+
+<div class="container my-5">
+  <hr>
+</div>
+
+<div class="container text-center mt-2">
+  <h2>¿Cómo funciona la actividad privada?</h2>
+
+  <div class="w-75 mx-auto">
+    <p>Esta actividad puede realizarse en diferentes modos.</p>
+    <p>Podrás adelgazar, engordar o mantenerte en tu peso ideal.</p>
+    <p>Elige como quieres que registrar tus pesos. De una forma clásica, o mas precisa.</p>
+    <p>¡Aquí comienza tu cambio!</p>
+  </div>
+
+</div>

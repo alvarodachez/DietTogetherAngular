@@ -42,6 +42,14 @@ const routes: Routes = [
     loadChildren: () => import("./regime/regime.module").then(m => m.RegimeModule)
   },
   {
+    path:'profile',
+    loadChildren: () => import("./profile/profile.module").then(m => m.ProfileModule)
+  },
+  {
+    path:'private',
+    loadChildren: () => import("./private-activity/private.module").then(m => m.PrivateModule)
+  },
+  {
     path:'**',
     component: NotFoundComponent
   },

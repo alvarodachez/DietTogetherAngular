@@ -61,9 +61,7 @@
           <h3 *ngIf="!dishNullFlag" class="mt-3">
             Aún no has añadido platos a tu dieta.
           </h3>
-          <div class="botones">
-            <button [routerLink]="['/regime']" class="btn bg-secondary text-white">Ir a dietas</button>
-          </div>
+          <button [routerLink]="['/regime']" class="btn bg-secondary text-white">Ir a dietas</button>
         </div>
       </div>
     </div>
@@ -89,7 +87,7 @@
 
         <div class="botones">
           <button [routerLink]="['/group/welcome']" class="btn bg-secondary text-white">Grupo</button>
-          <button class="btn bg-secondary text-white disabled">Privado</button>
+          <button [routerLink]="['/private/welcome']" class="btn bg-secondary text-white">Privado</button>
         </div>
       </div>
     </div>
