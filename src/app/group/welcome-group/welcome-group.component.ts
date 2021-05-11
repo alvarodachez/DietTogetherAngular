@@ -12,6 +12,9 @@ export class WelcomeGroupComponent implements OnInit {
   /* Variable que almacena el grupo actual */
   actualGroup: any;
 
+  /* Variable que almacena la actividad privada actual */
+  actualPrivateActivity: any;
+
   constructor(private groupService: GroupService, private login:LogInService) { }
 
   ngOnInit(): void {
@@ -24,6 +27,7 @@ export class WelcomeGroupComponent implements OnInit {
     this.login.isUserInSession();
     this.groupService.getActiveGroup().subscribe(res => {
       this.actualGroup = res.actualGroup;
+      this.actualPrivateActivity = res.actualPrivateActivity;
     });
   }
 
