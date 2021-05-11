@@ -40,18 +40,17 @@
 
 
   <!-- Puntuación - Lista con badges -->
-  <h2>Ranking</h2>
+  <h2>Datos de la actividad</h2>
 
   <div class="card">
-    <div class="card-header bg-primary text-white">Datos de la actividad</div>
-    <div class="card-body">
+    <div class="card-header bg-primary text-white">Puntos y objetivo</div>
+    <!-- <div class="card-body">
       <h5 class="card-title">Card title</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
+    </div> -->
     <ul *ngIf="actualPrivateActivity" class="list-group list-group-flush">
-      <li class="list-group-item">Modo de actividad: {{actualPrivateActivity.privateActivityMode}}</li>
-      <li class="list-group-item">Modo de registros: {{actualPrivateActivity.registerMode}}</li>
-      <li class="list-group-item">Peso objetivo: {{actualPrivateActivity.weightObjective}}</li>
+      
+      <li class="list-group-item">Peso objetivo: {{actualPrivateActivity.weightObjective}} Kg</li>
     </ul>
     <ul *ngIf="athleteRanking" class="list-group list-group-flush">
       <li class="list-group-item">
@@ -62,6 +61,60 @@
       <a href="#" class="card-link">Card link</a>
       <a href="#" class="card-link">Another link</a>
     </div> -->
+  </div>
+
+  <div class="container my-5">
+    <hr>
+  </div>
+
+  <div *ngIf="actualPrivateActivity" class="row mx-auto">
+
+    <div class="col-md-6 m-auto">
+
+      <div *ngIf="actualPrivateActivity.privateActivityMode == 'LOSE'" class="container text-center">
+        <h1>{{actualPrivateActivity.privateActivityMode | titlecase}}</h1>
+        <div class="w-75 mx-auto">
+          <p>Este modo servira para motivarte a adelgazar y que estes en tu peso ideal.</p>
+          <p>Los puntos incrementaran cuando bajes peso.</p>
+        </div>
+
+      </div>
+
+      <div *ngIf="actualPrivateActivity.privateActivityMode == 'GAIN'" class="container text-center">
+        <h1>{{actualPrivateActivity.privateActivityMode | titlecase}}</h1>
+        <div class="w-75 mx-auto">
+          <p>Este modo servira para motivarte a poder engordar y que estes en tu peso ideal.</p>
+          <p>Los puntos incrementaran cuando subas de peso</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-6 m-auto">
+
+      <div *ngIf="actualPrivateActivity.registerMode == 'PROGRESSIVE'" class="container text-center">
+        <h1>{{actualPrivateActivity.registerMode | titlecase}}</h1>
+
+        <div class="w-75 mx-auto">
+          <p>Este es un nuevo y mas preciso modo para registrar tus pesos.</p>
+          <p>Registra tu peso una vez al dia y espera a ver los resultados calculados automaticamente por nuestra web tras cada semana.</p>
+        </div>
+
+      </div>
+
+      <div *ngIf="actualPrivateActivity.registerMode == 'CLASSIC'" class="container text-center">
+        <h1>{{actualPrivateActivity.registerMode | titlecase}}</h1>
+
+        <div class="w-75 mx-auto">
+          <p>El modo clasico para registrar tus pesos en Diet2Gether.</p>
+          <p>En este modo se registra un peso cada semana, es una experiencia mas relajada.</p>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
   <!-- <ul class="list-group" *ngIf="athleteRanking != null">
