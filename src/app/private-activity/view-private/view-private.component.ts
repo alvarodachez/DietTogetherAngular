@@ -90,12 +90,7 @@ export class ViewPrivateComponent implements OnInit {
     this.login.isUserInSession();
     this.privateService.getPrivateActivity().subscribe(res => {
       this.actualPrivateActivity = res;
-      console.log("getPrivateActivity...");
-      console.log(this.actualPrivateActivity);
-
       this.registerMode = res.registerMode;
-      console.log("registerMode...");
-      console.log(this.registerMode);
 
       if (this.actualPrivateActivity.totalRegisters != null) {
         this.registersClassicMode = this.actualPrivateActivity.totalRegisters;
@@ -131,9 +126,6 @@ export class ViewPrivateComponent implements OnInit {
   getAthleteRanking() {
     this.privateService.getAthleteRanking().subscribe(res => {
       this.athleteRanking = res;
-      
-      console.log("getAthleteRanking...");
-      console.log(this.athleteRanking);
     });
   }
 
@@ -163,13 +155,7 @@ export class ViewPrivateComponent implements OnInit {
       weight: parseFloat(kilograms + '.' + grams),
     };
 
-    console.log('register...');
-    console.log(register);
-
     this.privateService.createRegister(register).subscribe((response) => {
-      console.log("createRegister...");
-      console.log(response);
-
       this.getActivePrivateActivity();
       this.getAthleteRanking();
     });

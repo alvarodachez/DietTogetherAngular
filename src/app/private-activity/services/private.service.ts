@@ -115,4 +115,23 @@ export class PrivateService {
     return this.http.post(endpoint, register, httpOptions);
   }
 
+  getActiveGroup(): Observable<any> {
+    /* Obtener usuario de la sesión actual */
+    const username = localStorage.getItem('dietUsernameSession');
+
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem('dietJwtSession');
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointServer + `/athlete/${username}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ Authorization: `Bearer ${jwt}` }),
+    };
+
+    /* Devolver grupo activo */
+    return this.http.get(endpoint, httpOptions);
+  }
+
 }
