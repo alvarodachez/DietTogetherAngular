@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LogInService } from 'src/app/entry/services/log-in.service';
+import Swal from 'sweetalert2';
 import { PrivateService } from '../services/private.service';
 
 @Component({
@@ -183,7 +184,35 @@ export class ViewPrivateComponent implements OnInit {
   }
 
   getOutActivity() {
-    console.log("pendiente getOutActivity");
+    Swal.fire({
+      title: '¡Estás a punto de salir!',
+      text:
+        'Si sales de la actividad no podrás volver a ella. Tus puntos se sumarán al total de tu perfil.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, quiero salir.',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Espere',
+          text: 'Saliendo del grupo',
+          icon: 'info',
+          allowOutsideClick: false,
+        });
+        Swal.showLoading();
+        this.privateService.getOut().subscribe((response) => {
+          Swal.fire(
+            'Has salido de la actividad',
+            'Se han sumado tus puntos',
+            'success'
+          );
+
+          this.router.navigate(['/welcome']);
+        });
+      }
+    });
   }
 
 }
