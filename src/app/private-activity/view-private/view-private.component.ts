@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LogInService } from 'src/app/entry/services/log-in.service';
+import Swal from 'sweetalert2';
 import { PrivateService } from '../services/private.service';
 
 @Component({
@@ -35,6 +36,9 @@ export class ViewPrivateComponent implements OnInit {
   weightDifference = 0;
 
   actualPage: number = 1;
+
+  /* Variable que almacena los registros del modo progresivo */
+  registersProgressiveMode: any = [];
   
 
   /* Variable que almacena el formulario para añadir un registro */
@@ -87,23 +91,29 @@ export class ViewPrivateComponent implements OnInit {
     this.login.isUserInSession();
     this.privateService.getPrivateActivity().subscribe(res => {
       this.actualPrivateActivity = res;
-      console.log("getPrivateActivity...");
-      console.log(this.actualPrivateActivity);
-
       this.registerMode = res.registerMode;
-      console.log("registerMode...");
-      console.log(this.registerMode);
 
-      /* el campo totalRegisters existe también en el modo progresivo????? */
       if (this.actualPrivateActivity.totalRegisters != null) {
         this.registersClassicMode = this.actualPrivateActivity.totalRegisters;
+
         /* Se ordenan los registros por id, si existe más de uno */
         if (this.registersClassicMode.length > 1) {
           this.sortRegisters(this.registersClassicMode);
         }
+
+        this.setNextRegisterDate(this.registersClassicMode);
       }
 
-      this.setNextRegisterDate();
+      if (this.actualPrivateActivity.daylyRegisters != null) {
+        this.registersProgressiveMode = this.actualPrivateActivity.daylyRegisters;
+
+        /* Se ordenan los registros por id, si existe más de uno */
+        if (this.registersProgressiveMode.length > 1) {
+          this.sortRegisters(this.registersProgressiveMode);
+        }
+
+        this.setNextRegisterDate(this.registersProgressiveMode);
+      }
 
       // Se resetea la diferencia de peso
       this.weightDifference = 0;
@@ -117,15 +127,12 @@ export class ViewPrivateComponent implements OnInit {
   getAthleteRanking() {
     this.privateService.getAthleteRanking().subscribe(res => {
       this.athleteRanking = res;
-      
-      console.log("getAthleteRanking...");
-      console.log(this.athleteRanking);
     });
   }
 
-  setNextRegisterDate() {
-    if (this.registersClassicMode.length >= 1) {
-      this.nextRegisterDate = this.registersClassicMode[0].nextDateRegister;
+  setNextRegisterDate(registers: any) {
+    if (registers.length >= 1) {
+      this.nextRegisterDate = registers[0].nextDateRegister;
 
       if (new Date(Date.now()) > new Date(Date.parse(this.nextRegisterDate))) {
         this.isRegisterActive = true;
@@ -149,15 +156,9 @@ export class ViewPrivateComponent implements OnInit {
       weight: parseFloat(kilograms + '.' + grams),
     };
 
-    console.log('register...');
-    console.log(register);
-
     this.privateService.createRegister(register).subscribe((response) => {
-      // this.getRegisters();
-      // this.athletes = [];
-      // this.getActualGroup();
-      
       this.getActivePrivateActivity();
+      this.getAthleteRanking();
     });
   }
 
@@ -180,6 +181,38 @@ export class ViewPrivateComponent implements OnInit {
     for (const r of registers) {
       this.weightDifference += r.weightDifference;
     }
+  }
+
+  getOutActivity() {
+    Swal.fire({
+      title: '¡Estás a punto de salir!',
+      text:
+        'Si sales de la actividad no podrás volver a ella. Tus puntos se sumarán al total de tu perfil.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, quiero salir.',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Espere',
+          text: 'Saliendo del grupo',
+          icon: 'info',
+          allowOutsideClick: false,
+        });
+        Swal.showLoading();
+        this.privateService.getOut().subscribe((response) => {
+          Swal.fire(
+            'Has salido de la actividad',
+            'Se han sumado tus puntos',
+            'success'
+          );
+
+          this.router.navigate(['/welcome']);
+        });
+      }
+    });
   }
 
 }

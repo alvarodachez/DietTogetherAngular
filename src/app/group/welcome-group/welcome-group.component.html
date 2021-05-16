@@ -8,7 +8,7 @@
   </div>
 </div>
 
-<div class="container text-center mt-4">
+<div *ngIf="actualPrivateActivity == null" class="container text-center mt-4">
   <h2>¿Qué puedes hacer aquí?</h2>
 
   <div class="w-75 mx-auto">
@@ -22,6 +22,11 @@
     <button *ngIf="actualGroup != null" class="btn bg-secondary text-white " [routerLink]="['/group/groupview']">Ir a tu grupo</button>
     <button *ngIf="actualGroup == null" class="btn bg-secondary text-white" [routerLink]="['/group/management']">Crear grupo</button>
   </div>
+</div>
+
+<div *ngIf="actualPrivateActivity != null" class="container text-center mt-4">
+  <h2 class="mx-auto">No es posible crear un grupo <i class="far fa-frown fa-1x"></i></h2>
+  <h4 class="w-75 mx-auto">Para crear un grupo, debes abandonar tu actividad privada</h4>
 </div>
 
 <div class="container my-5">

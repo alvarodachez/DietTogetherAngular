@@ -132,7 +132,5 @@ export class ManagementPrivateComponent implements OnInit {
         });
       }
     );
-
-    console.log(backendForm);
   }
 }

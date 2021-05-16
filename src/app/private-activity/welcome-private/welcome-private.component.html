@@ -8,7 +8,7 @@
   </div>
 </div>
 
-<div class="container text-center mt-4">
+<div *ngIf="actualGroup == null" class="container text-center mt-4">
   <h2>¿Qué puedes hacer aquí?</h2>
 
   <div class="w-75 mx-auto">
@@ -22,7 +22,11 @@
     [routerLink]="['/private/privateview']">Ir a tu actividad</button>
   <button *ngIf="actualPrivateActivity == null" class="btn bg-secondary text-white"
     [routerLink]="['/private/management']">Crear actividad privada</button>
+</div>
 
+<div *ngIf="actualGroup != null" class="container text-center mt-4">
+  <h2 class="mx-auto">No es posible crear una actividad privada <i class="far fa-frown fa-1x"></i></h2>
+  <h4 class="w-75 mx-auto">Para crear una actividad privada, debes abandonar tu grupo</h4>
 </div>
 
 <div class="container my-5">
@@ -33,10 +37,10 @@
   <h2>¿Cómo funciona la actividad privada?</h2>
 
   <div class="w-75 mx-auto">
-    <p>Esta es una de las secciones principales en Diet2gether.</p>
-    <p>Podrás visualizar la actividad privada en la que estás y revisar las estadísticas.</p>
-    <p>En caso de que no estés en una actividad privada podrás empezarla en cualquier momento.</p>
-    <p>¡A qué esperas!</p>
+    <p>Esta actividad puede realizarse en diferentes modos.</p>
+    <p>Podrás adelgazar, engordar o mantenerte en tu peso ideal.</p>
+    <p>Elige como quieres que registrar tus pesos. De una forma clásica, o mas precisa.</p>
+    <p>¡Aquí comienza tu cambio!</p>
   </div>
 
 </div>
