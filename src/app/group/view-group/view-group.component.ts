@@ -12,6 +12,21 @@ import { LogInService } from '../../entry/services/log-in.service';
   styleUrls: ['./view-group.component.scss'],
 })
 export class ViewGroupComponent implements OnInit {
+
+  /** Grafica para registros totales */
+  chartData : any[];
+  labelX = "Fechas";
+  labelY = "Pesos";
+
+  maxLabelWeightRegister;
+  minLabelWeightRegister;
+
+  /** Grafica para puntos del grupo */
+  chartPointData : any[];
+
+  /* Variable que almacena la pestaña activa: estado, registros o diario */
+  activeMenuTab: string;
+
   showActive: boolean;
 
   actualGroup: any;
@@ -55,11 +70,21 @@ export class ViewGroupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.activeMenuTab = 'ranking';
     this.login.isUserInSession();
     this.showActive = true;
     this.getActualGroup();
     this.getRegisters();
     this.getProgressBar();
+    
+    this.getChartTotalRegisters();
+
+    this.getChartPoints();
+  }
+
+  changeMenuTab(toChange: string) {
+    this.activeMenuTab = toChange;
   }
 
   changeRanking() {
@@ -271,5 +296,37 @@ export class ViewGroupComponent implements OnInit {
 
     /* Resetear registros por verificar */
     this.getRegistersToVerify();
+  }
+
+  getChartTotalRegisters() {
+  
+    this.groupService.getChartTotalRegisters().subscribe(res => {
+      console.log(res);
+      this.chartData = res;
+      let series = res[0].series
+      console.log(series)
+      let maxValue = 0;
+      let minValue = 999999999;
+
+      for(let s of series){
+        if(s.value < minValue){
+          minValue = s.value;
+        }
+
+        if(s.value > maxValue){
+          maxValue = s.value;
+        }
+      }
+
+      /* this.maxLabelWeightRegister = maxValue;
+      this.minLabelWeightRegister = minValue; */
+    })
+  }
+
+  getChartPoints(){
+    this.groupService.getChartPoints().subscribe( response => {
+      console.log(response)
+      this.chartPointData = response;
+    })
   }
 }

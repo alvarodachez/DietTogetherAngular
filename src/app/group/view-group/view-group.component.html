@@ -1,89 +1,137 @@
 <div class="fondo">
   <div class="titulo align-self-center text-center">
-    <p class="text-white">Bienvenid@ a {{actualGroup.name}}</p>
+    <p class="text-white">Bienvenid@ a {{ actualGroup.name }}</p>
     <ol class="breadcrumb container">
       <li class="breadcrumb-item" [routerLink]="['/home']">Home</li>
       <li class="breadcrumb-item" [routerLink]="['/group/welcome']">Grupos</li>
-      <li class="breadcrumb-item active" [routerLink]="['/group/groupview']">Tu grupo</li>
+      <li class="breadcrumb-item active" [routerLink]="['/group/groupview']">
+        Tu grupo
+      </li>
     </ol>
   </div>
 </div>
 
-<div class="text-center w-100">
-  <div class="btn-group-lg" role="group" aria-label="Basic example">
-    <button *ngIf="showActive == true" (click)="changeRanking()" type="button"
-      class="btn btn-secondary w-50 rounded-0 active">Ranking</button>
-    <button *ngIf="showActive == true" (click)="changeRegisters()" type="button"
-      class="btn btn-secondary w-50 rounded-0">Registros</button>
-
-    <button *ngIf="showActive == false" (click)="changeRanking()" type="button"
-      class="btn btn-secondary w-50 rounded-0">Ranking</button>
-    <button *ngIf="showActive == false" (click)="changeRegisters()" type="button"
-      class="btn btn-secondary w-50 rounded-0 active">Registros</button>
+<div class="text-center">
+  <div class="btn-group w-100" role="group" aria-label="Basic example">
+    <button
+      (click)="changeMenuTab('ranking')"
+      type="button"
+      class="btn btn-secondary w-50 rounded-0"
+      [ngClass]="{ active: activeMenuTab == 'ranking' }"
+    >
+      Ranking
+    </button>
+    <button
+      (click)="changeMenuTab('registros')"
+      type="button"
+      class="btn btn-secondary w-50 rounded-0"
+      [ngClass]="{ active: activeMenuTab == 'registros' }"
+    >
+      Registros
+    </button>
+    <button
+      (click)="changeMenuTab('estadisticas')"
+      type="button"
+      class="btn btn-secondary w-50 rounded-0"
+      [ngClass]="{ active: activeMenuTab == 'estadisticas' }"
+    >
+      Estadisticas
+    </button>
   </div>
 </div>
 
-
 <!-- Div Ranking -->
-<div *ngIf="showActive == true" class="container text-center mt-4 animate__animated animate__fadeIn">
-
-  <h2>Tiempo restante: {{progressBar.daysLeft}} días</h2>
+<div
+  *ngIf="activeMenuTab == 'ranking'"
+  class="container text-center mt-4 animate__animated animate__fadeIn"
+>
+  <h2>Tiempo restante: {{ progressBar.daysLeft }} días</h2>
 
   <!-- Barra de progreso -->
   <div class="progress mt-1 border border-primary text-dark">
-    <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar"
-      aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width':progressBar.totalPercentage+'%'}">
-    </div>
+    <div
+      class="progress-bar bg-primary progress-bar-striped progress-bar-animated"
+      role="progressbar"
+      aria-valuenow="75"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [ngStyle]="{ width: progressBar.totalPercentage + '%' }"
+    ></div>
   </div>
 
   <div class="container my-5">
-    <hr>
+    <hr />
   </div>
 
-
   <!-- GroupManager - Lista de registros por verificar -->
-  <div *ngIf="(registersToVerify != null) && (registersToVerify.length > 0)" class="mb-4">
+  <div
+    *ngIf="registersToVerify != null && registersToVerify.length > 0"
+    class="mb-4"
+  >
     <h2>Verificar registros</h2>
-  
+
     <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-center bg-primary text-white font-weight-bold">
+      <li
+        class="
+          list-group-item
+          d-flex
+          justify-content-between
+          align-items-center
+          bg-primary
+          text-white
+          font-weight-bold
+        "
+      >
         <div class="w-25">
           <p class="my-auto">Atleta</p>
         </div>
-  
+
         <div class="w-25">
           <p class="my-auto">Fecha</p>
         </div>
-        
+
         <div class="w-25">
           <p class="my-auto">Diferencia</p>
         </div>
-  
+
         <div class="w-25">
           <p class="my-auto">Acciones</p>
         </div>
       </li>
     </ul>
 
-    <ul class="list-group" *ngFor="let register of registersToVerify, let i = index">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
+    <ul
+      class="list-group"
+      *ngFor="let register of registersToVerify; let i = index"
+    >
+      <li
+        class="
+          list-group-item
+          d-flex
+          justify-content-between
+          align-items-center
+        "
+      >
         <div class="w-25">
-          <p class="my-auto">{{register.athlete}}</p>
+          <p class="my-auto">{{ register.athlete }}</p>
         </div>
-  
+
         <div class="w-25">
-          <p class="my-auto">{{register.weightDate | date:'d/M'}}</p>
+          <p class="my-auto">{{ register.weightDate | date: "d/M" }}</p>
         </div>
-        
+
         <div class="w-25">
           <p *ngIf="register.weightDifference > 0" class="my-auto text-primary">
-            {{register.weightDifference * -1}}
+            {{ register.weightDifference * -1 }}
           </p>
-          <p *ngIf="register.weightDifference < 0" class="my-auto text-secondary">
-            +{{register.weightDifference * -1}}
+          <p
+            *ngIf="register.weightDifference < 0"
+            class="my-auto text-secondary"
+          >
+            +{{ register.weightDifference * -1 }}
           </p>
         </div>
-  
+
         <!-- <div class="w-25">
           <button type="button" class="btn btn-primary w-50">
             <i class="fas fa-check"></i>  
@@ -94,65 +142,120 @@
         </div> -->
 
         <div class="w-25">
-          <i class="fas fa-check text-primary w-50" (click)="verifyRegister(register.id)"></i>
-          <i class="fas fa-times text-secondary w-50" (click)="declineRegister(register.id)"></i>
+          <i
+            class="fas fa-check text-primary w-50"
+            (click)="verifyRegister(register.id)"
+          ></i>
+          <i
+            class="fas fa-times text-secondary w-50"
+            (click)="declineRegister(register.id)"
+          ></i>
         </div>
       </li>
     </ul>
   </div>
 
   <!-- Mensaje para el BoostAthlete-->
-  <div *ngIf="isBoostAthlete == actualUserSession" class="mb-4 ">
-
-    <div class="d-flex text-center d-flex justify-content-between align-items-center">
+  <div *ngIf="isBoostAthlete == actualUserSession" class="mb-4">
+    <div
+      class="
+        d-flex
+        text-center
+        d-flex
+        justify-content-between
+        align-items-center
+      "
+    >
       <i class="fas fa-angle-double-up text-primary fa-2x"></i>
-      <h2 class=" ">Esta semana te ha invadido la grasa!</h2>
+      <h2 class="">Esta semana te ha invadido la grasa!</h2>
       <i class="fas fa-angle-double-up text-primary fa-2x"></i>
     </div>
-    <h4>Desde Diet2gether queremos darte un empujon para recuperarte de esa semana anterior. <br>Se ortogaran mas puntos si igualas, o superas el siguiente reto:</h4>
+    <h4>
+      Desde Diet2gether queremos darte un empujon para recuperarte de esa semana
+      anterior. <br />Se ortogaran mas puntos si igualas, o superas el siguiente
+      reto:
+    </h4>
 
-    <h3 class="text-secondary"> Perder la cantidad de: {{actualGroup.boostDay.boostAthlete.weightChallenge}} g</h3>
-
+    <h3 class="text-secondary">
+      Perder la cantidad de:
+      {{ actualGroup.boostDay.boostAthlete.weightChallenge }} g
+    </h3>
   </div>
 
   <!-- Ranking - Lista con badges -->
   <h2>Ranking</h2>
 
-  <ul class="list-group" *ngFor="let athleteRanking of athletes, let i = index">
-
-    <li *ngIf="i == 0" class="list-group-item d-flex justify-content-between align-items-center">
+  <ul class="list-group" *ngFor="let athleteRanking of athletes; let i = index">
+    <li
+      *ngIf="i == 0"
+      class="list-group-item d-flex justify-content-between align-items-center"
+    >
       <div class="cupOrNumber">
         <i class="fas fa-trophy text-warning fa-2x"></i>
       </div>
       <div class="d-flex">
-        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
-        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
-        <p class="my-auto mx-2">{{athleteRanking.name}}</p>
-        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
-        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
+        <i
+          *ngIf="isBoostAthlete == athleteRanking.username"
+          class="fas fa-angle-double-up text-primary fa-1x"
+        ></i>
+        <i
+          *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')"
+          class="fas fa-crown text-warning fa-1x"
+        ></i>
+        <p class="my-auto mx-2">{{ athleteRanking.name }}</p>
+        <i
+          *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')"
+          class="fas fa-crown text-warning fa-1x"
+        ></i>
+        <i
+          *ngIf="isBoostAthlete == athleteRanking.username"
+          class="fas fa-angle-double-up text-primary fa-1x"
+        ></i>
       </div>
       <div class="cupOrNumber">
-        <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+        <span class="badge badge-primary badge-pill">{{
+          athleteRanking.point
+        }}</span>
       </div>
     </li>
 
-    <li *ngIf="i == 1" class="list-group-item d-flex justify-content-between align-items-center">
+    <li
+      *ngIf="i == 1"
+      class="list-group-item d-flex justify-content-between align-items-center"
+    >
       <div class="cupOrNumber">
         <i class="fas fa-trophy fa-2x"></i>
       </div>
       <div class="d-flex">
-        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
-        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
-        <p class="my-auto mx-2">{{athleteRanking.name}}</p>
-        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
-        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
+        <i
+          *ngIf="isBoostAthlete == athleteRanking.username"
+          class="fas fa-angle-double-up text-primary fa-1x"
+        ></i>
+        <i
+          *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')"
+          class="fas fa-crown text-warning fa-1x"
+        ></i>
+        <p class="my-auto mx-2">{{ athleteRanking.name }}</p>
+        <i
+          *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')"
+          class="fas fa-crown text-warning fa-1x"
+        ></i>
+        <i
+          *ngIf="isBoostAthlete == athleteRanking.username"
+          class="fas fa-angle-double-up text-primary fa-1x"
+        ></i>
       </div>
       <div class="cupOrNumber">
-        <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+        <span class="badge badge-primary badge-pill">{{
+          athleteRanking.point
+        }}</span>
       </div>
     </li>
 
-    <li *ngIf="i == 2" class="list-group-item d-flex justify-content-between align-items-center">
+    <li
+      *ngIf="i == 2"
+      class="list-group-item d-flex justify-content-between align-items-center"
+    >
       <div class="cupOrNumber">
         <i class="fas fa-trophy text-danger fa-2x"></i>
       </div>
@@ -162,20 +265,37 @@
         </div>
       </div>
       <div class="d-flex">
-        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
-        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
-        <p class="my-auto mx-2">{{athleteRanking.name}}</p>
-        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
-        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
+        <i
+          *ngIf="isBoostAthlete == athleteRanking.username"
+          class="fas fa-angle-double-up text-primary fa-1x"
+        ></i>
+        <i
+          *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')"
+          class="fas fa-crown text-warning fa-1x"
+        ></i>
+        <p class="my-auto mx-2">{{ athleteRanking.name }}</p>
+        <i
+          *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')"
+          class="fas fa-crown text-warning fa-1x"
+        ></i>
+        <i
+          *ngIf="isBoostAthlete == athleteRanking.username"
+          class="fas fa-angle-double-up text-primary fa-1x"
+        ></i>
       </div>
       <div class="cupOrNumber">
-        <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+        <span class="badge badge-primary badge-pill">{{
+          athleteRanking.point
+        }}</span>
       </div>
     </li>
 
-    <li *ngIf="(i > 2)" class="list-group-item d-flex justify-content-between align-items-center">
+    <li
+      *ngIf="i > 2"
+      class="list-group-item d-flex justify-content-between align-items-center"
+    >
       <div class="cupOrNumber">
-        <span class="number">{{i + 1}}</span>
+        <span class="number">{{ i + 1 }}</span>
       </div>
       <div *ngIf="" class="cupOrNumber">
         <div class="cupOrNumber">
@@ -183,14 +303,28 @@
         </div>
       </div>
       <div class="d-flex">
-        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
-        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
-        <p class="my-auto mx-2">{{athleteRanking.name}}</p>
-        <i *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')" class="fas fa-crown text-warning fa-1x"></i>
-        <i *ngIf="isBoostAthlete == athleteRanking.username" class="fas fa-angle-double-up text-primary fa-1x"></i>
+        <i
+          *ngIf="isBoostAthlete == athleteRanking.username"
+          class="fas fa-angle-double-up text-primary fa-1x"
+        ></i>
+        <i
+          *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')"
+          class="fas fa-crown text-warning fa-1x"
+        ></i>
+        <p class="my-auto mx-2">{{ athleteRanking.name }}</p>
+        <i
+          *ngIf="athleteRanking.roles.includes('GROUP_MANAGER')"
+          class="fas fa-crown text-warning fa-1x"
+        ></i>
+        <i
+          *ngIf="isBoostAthlete == athleteRanking.username"
+          class="fas fa-angle-double-up text-primary fa-1x"
+        ></i>
       </div>
       <div class="cupOrNumber">
-        <span class="badge badge-primary badge-pill">{{athleteRanking.point}}</span>
+        <span class="badge badge-primary badge-pill">{{
+          athleteRanking.point
+        }}</span>
       </div>
     </li>
   </ul>
@@ -198,121 +332,221 @@
   <h4 class="text-secondary mt-5 cursor-salir" (click)="getOutGroup()">
     Salir del grupo <i class="fas fa-sign-out-alt rotar"></i>
   </h4>
-
 </div>
 
-
-
 <!-- Div Registros -->
-<div *ngIf="showActive == false" class="container text-center mt-4 animate__animated animate__fadeIn">
-
+<div
+  *ngIf="activeMenuTab == 'registros'"
+  class="container text-center mt-4 animate__animated animate__fadeIn"
+>
   <h2>
     Mis registros
-    <i *ngIf="isRegisterActive == true" class="fas fa-plus" data-toggle="modal" data-target="#registerModal"
-      (click)="resetAddRegisterForm()"></i>
+    <i
+      *ngIf="isRegisterActive == true"
+      class="fas fa-plus"
+      data-toggle="modal"
+      data-target="#registerModal"
+      (click)="resetAddRegisterForm()"
+    ></i>
   </h2>
 
   <p *ngIf="isRegisterActive == false" class="mx-auto">
     <i class="far fa-clock lead mt-2"></i>
-    Aún no puedes añadir otro registro.<br>
-    Puedes crearlo el día {{ nextRegisterDate | date:'d/M' }}.
+    Aún no puedes añadir otro registro.<br />
+    Puedes crearlo el día {{ nextRegisterDate | date: "d/M" }}.
   </p>
 
   <h3 *ngIf="weightDifference > 0" class="text-primary">
-    Has perdido {{weightDifference | number: "1.2-2"}} kg desde el inicio
+    Has perdido {{ weightDifference | number: "1.2-2" }} kg desde el inicio
   </h3>
   <h3 *ngIf="weightDifference < 0" class="text-secondary">
-    Has ganado {{weightDifference | number: "1.2-2"}} kg desde el inicio
+    Has ganado {{ weightDifference | number: "1.2-2" }} kg desde el inicio
   </h3>
 
-  <h3 *ngIf="registers.length == 0"><i class="far fa-clock"></i> Aún no tienes ningún registro en este grupo</h3>
+  <h3 *ngIf="registers.length == 0">
+    <i class="far fa-clock"></i> Aún no tienes ningún registro en este grupo
+  </h3>
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
-    <div class="col mb-4"
-      *ngFor="let register of registers | paginate:{itemsPerPage: 4, currentPage:actualPage};, let i = index">
-
+    <div
+      class="col mb-4"
+      *ngFor="
+        let register of registers
+          | paginate: { itemsPerPage: 4, currentPage: actualPage };
+        let i = index
+      "
+    >
       <div class="card border-primary">
-        <div class="card-header">{{register.weightDate | date:'fullDate' }}</div>
+        <div class="card-header">
+          {{ register.weightDate | date: "fullDate" }}
+        </div>
         <div class="card-body">
           <!-- <h4 class="card-title">Primary card title</h4> -->
           <p class="card-text">
             <i class="fas fa-weight"></i>
-            Peso: {{register.weight}} kg
+            Peso: {{ register.weight }} kg
           </p>
           <p class="card-text">
             <i class="far fa-calendar-alt"></i>
-            Fecha: {{register.weightDate}}
+            Fecha: {{ register.weightDate }}
           </p>
-          <p *ngIf="register.weightDifference >= 0" class="card-text text-primary">
+          <p
+            *ngIf="register.weightDifference >= 0"
+            class="card-text text-primary"
+          >
             <i class="fas fa-balance-scale-left"></i>
-            Has perdido: {{register.weightDifference}} kg
+            Has perdido: {{ register.weightDifference }} kg
           </p>
-          <p *ngIf="register.weightDifference < 0" class="card-text text-secondary">
+          <p
+            *ngIf="register.weightDifference < 0"
+            class="card-text text-secondary"
+          >
             <i class="fas fa-balance-scale-left"></i>
-            Has ganado: {{register.weightDifference * -1}} kg
+            Has ganado: {{ register.weightDifference * -1 }} kg
           </p>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="mt-4 pr-4">
-    <pagination-controls class="" (pageChange)="actualPage = $event" previousLabel="Anterior" nextLabel="Posterior"
-      responsive="true">
+    <pagination-controls
+      class=""
+      (pageChange)="actualPage = $event"
+      previousLabel="Anterior"
+      nextLabel="Posterior"
+      responsive="true"
+    >
     </pagination-controls>
   </div>
-
 </div>
 
+<div
+  *ngIf="activeMenuTab == 'estadisticas'"
+  class="container text-center mt-4 animate__animated animate__fadeIn"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-12">
+        <h3>Registros totales</h3>
+        <app-linear-chart
+          class="w-50"
+          [chartData]="chartData"
+          [labelX]="labelX"
+          [labelY]="labelY"
+          [minLabel]="minLabelWeightRegister"
+          [maxLabel]="maxLabelWeightRegister"
+        ></app-linear-chart>
+      </div>
+      <div class="col-md-6 col-lg-12">
+        <h3>Puntos del grupo</h3>
+        <app-pie-chart-advenced
+        [single]="chartPointData">
 
-<div id="registerModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        </app-pie-chart-advenced>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="registerModal"
+  class="modal fade"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+    role="document"
+  >
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title mx-auto">Nuevo registro de peso</h5>
       </div>
       <div class="modal-body">
-
         <form [formGroup]="addRegisterForm" action="">
-
           <div class="form-group text-center">
-            <label class="col-form-label" for="peso">Introduce el peso (Kg y gramos):</label>
+            <label class="col-form-label" for="peso"
+              >Introduce el peso (Kg y gramos):</label
+            >
 
             <div class="doubleInput">
-              <input class="dietInput form-control midInputLeft" required type="tel" formControlName="weightKilograms"
-                name="weightKilograms" id="inpWeightKilograms" placeholder="Kilos"
-                [class.is-invalid]="addRegisterForm.get('weightKilograms').touched && addRegisterForm.get('weightKilograms').invalid">
+              <input
+                class="dietInput form-control midInputLeft"
+                required
+                type="tel"
+                formControlName="weightKilograms"
+                name="weightKilograms"
+                id="inpWeightKilograms"
+                placeholder="Kilos"
+                [class.is-invalid]="
+                  addRegisterForm.get('weightKilograms').touched &&
+                  addRegisterForm.get('weightKilograms').invalid
+                "
+              />
               <p class="mt-2">y</p>
-              <input class="dietInput form-control midInputRight" required type="tel" formControlName="weightGrams"
-                name="weightGrams" id="inpWeightGrams" placeholder="Gramos"
-                [class.is-invalid]="addRegisterForm.get('weightGrams').touched && addRegisterForm.get('weightGrams').invalid">
+              <input
+                class="dietInput form-control midInputRight"
+                required
+                type="tel"
+                formControlName="weightGrams"
+                name="weightGrams"
+                id="inpWeightGrams"
+                placeholder="Gramos"
+                [class.is-invalid]="
+                  addRegisterForm.get('weightGrams').touched &&
+                  addRegisterForm.get('weightGrams').invalid
+                "
+              />
             </div>
           </div>
 
           <div class="text-muted text-center">
-            Consejo: Si pesas 70.05 <br> debes indicar <span class="font-weight-bold">0</span>5 en los gramos
+            Consejo: Si pesas 70.05 <br />
+            debes indicar <span class="font-weight-bold">0</span>5 en los gramos
           </div>
 
           <div
-            [hidden]="addRegisterForm.get('weightKilograms').valid || addRegisterForm.get('weightKilograms').pristine"
-            class="colorFallo text-center">
+            [hidden]="
+              addRegisterForm.get('weightKilograms').valid ||
+              addRegisterForm.get('weightKilograms').pristine
+            "
+            class="colorFallo text-center"
+          >
             El valor de los kilos (kg) no es válido
           </div>
-          <div [hidden]="addRegisterForm.get('weightGrams').valid || addRegisterForm.get('weightGrams').pristine"
-            class="colorFallo text-center">
+          <div
+            [hidden]="
+              addRegisterForm.get('weightGrams').valid ||
+              addRegisterForm.get('weightGrams').pristine
+            "
+            class="colorFallo text-center"
+          >
             El valor de los gramos (g) no es válido
           </div>
-
         </form>
-
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearRegistro()"
-          [disabled]="!addRegisterForm.valid">Agregar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-          (click)="resetAddRegisterForm()">Cerrar</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="crearRegistro()"
+          [disabled]="!addRegisterForm.valid"
+        >
+          Agregar
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="resetAddRegisterForm()"
+        >
+          Cerrar
+        </button>
       </div>
     </div>
   </div>
