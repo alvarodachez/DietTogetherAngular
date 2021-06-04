@@ -8,157 +8,318 @@
   </div>
 </div>
 
-
 <div class="text-center">
   <div class="btn-group w-100" role="group" aria-label="Basic example">
-    <button (click)="changeShowMenu('personal')" type="button" [ngClass]="{'active': showMenu == 'personal'}"
-      class="btn btn-secondary w-50 rounded-0">
+    <button
+      (click)="changeShowMenu('personal')"
+      type="button"
+      [ngClass]="{ active: showMenu == 'personal' }"
+      class="btn btn-secondary w-50 rounded-0"
+    >
       Personal
     </button>
-    <button (click)="changeShowMenu('imc')" type="button" [ngClass]="{'active': showMenu == 'imc'}"
-      class="btn btn-secondary w-50 rounded-0">
+    <button
+      (click)="changeShowMenu('imc')"
+      type="button"
+      [ngClass]="{ active: showMenu == 'imc' }"
+      class="btn btn-secondary w-50 rounded-0"
+    >
       IMC
     </button>
-    <button (click)="changeShowMenu('scales')" type="button" [ngClass]="{'active': showMenu == 'scales'}"
-      class="btn btn-secondary w-50 rounded-0">
+    <button
+      (click)="changeShowMenu('scales')"
+      type="button"
+      [ngClass]="{ active: showMenu == 'scales' }"
+      class="btn btn-secondary w-50 rounded-0"
+    >
       Baremos
+    </button>
+
+    <button
+      (click)="changeShowMenu('stats')"
+      type="button"
+      [ngClass]="{ active: showMenu == 'stats' }"
+      class="btn btn-secondary w-50 rounded-0"
+    >
+      Estadisticas
     </button>
   </div>
 </div>
 
-
 <div class="container">
-
-  <form *ngIf="showMenu == 'personal'" [formGroup]="profileForm" action="" autocomplete="off" class="animate__animated animate__fadeIn">
-
-    <h2 class="text-center mt-4 mb-4">
-      Datos personales
-    </h2>
+  <form
+    *ngIf="showMenu == 'personal'"
+    [formGroup]="profileForm"
+    action=""
+    autocomplete="off"
+    class="animate__animated animate__fadeIn"
+  >
+    <h2 class="text-center mt-4 mb-4">Datos personales</h2>
 
     <div class="form-group text-center">
-      <label class="form-control-label" for="name">Nombre</label><br>
-      <input type="text" formControlName="name" name="name" class="dietInput form-control"
-        [placeholder]="athleteName | titlecase" required id="inpName" #nameFocus
-        [class.is-invalid]="profileForm.get('name').touched && profileForm.get('name').invalid">
-      <div *ngIf="!profileFormLocked" class="alert colorFallo" [hidden]="profileForm.get('name').pristine || profileForm.get('name').valid">
+      <label class="form-control-label" for="name">Nombre</label><br />
+      <input
+        type="text"
+        formControlName="name"
+        name="name"
+        class="dietInput form-control"
+        [placeholder]="athleteName | titlecase"
+        required
+        id="inpName"
+        #nameFocus
+        [class.is-invalid]="
+          profileForm.get('name').touched && profileForm.get('name').invalid
+        "
+      />
+      <div
+        *ngIf="!profileFormLocked"
+        class="alert colorFallo"
+        [hidden]="
+          profileForm.get('name').pristine || profileForm.get('name').valid
+        "
+      >
         El nombre es obligatorio
       </div>
     </div>
 
     <div class="form-group text-center">
-      <label class="form-control-label" for="surname">Apellidos</label><br>
-      <input type="text" formControlName="surname" name="surname" class="dietInput form-control"
-        [placeholder]="athleteSurname | titlecase" required id="inpSurname"
-        [class.is-invalid]="profileForm.get('surname').touched && profileForm.get('surname').invalid">
-      <div *ngIf="!profileFormLocked" class="alert colorFallo" [hidden]="profileForm.get('surname').pristine || profileForm.get('surname').valid">
+      <label class="form-control-label" for="surname">Apellidos</label><br />
+      <input
+        type="text"
+        formControlName="surname"
+        name="surname"
+        class="dietInput form-control"
+        [placeholder]="athleteSurname | titlecase"
+        required
+        id="inpSurname"
+        [class.is-invalid]="
+          profileForm.get('surname').touched &&
+          profileForm.get('surname').invalid
+        "
+      />
+      <div
+        *ngIf="!profileFormLocked"
+        class="alert colorFallo"
+        [hidden]="
+          profileForm.get('surname').pristine ||
+          profileForm.get('surname').valid
+        "
+      >
         Los apellidos son obligatorios
       </div>
     </div>
 
     <div class="form-group text-center">
-      <label class="form-control-label" for="birthday">Fecha de nacimiento</label><br>
-      <input [type]="this.birthdateType" formControlName="birthday" name="birthday" class="dietInput form-control"
-        [placeholder]="athleteBirthday | date:'dd/MM/yyyy'" required id="inpBirthday"
-        [class.is-invalid]="profileForm.get('birthday').touched && profileForm.get('birthday').invalid">
-      <div *ngIf="!profileFormLocked" class="alert colorFallo"
-        [hidden]="profileForm.get('birthday').pristine || profileForm.get('birthday').valid">
+      <label class="form-control-label" for="birthday"
+        >Fecha de nacimiento</label
+      ><br />
+      <input
+        [type]="this.birthdateType"
+        formControlName="birthday"
+        name="birthday"
+        class="dietInput form-control"
+        [placeholder]="athleteBirthday | date: 'dd/MM/yyyy'"
+        required
+        id="inpBirthday"
+        [class.is-invalid]="
+          profileForm.get('birthday').touched &&
+          profileForm.get('birthday').invalid
+        "
+      />
+      <div
+        *ngIf="!profileFormLocked"
+        class="alert colorFallo"
+        [hidden]="
+          profileForm.get('birthday').pristine ||
+          profileForm.get('birthday').valid
+        "
+      >
         El valor de la fecha de no es válido
       </div>
     </div>
 
     <div class="form-group text-center">
-      <label class="form-control-label" for="height">Altura</label><br>
-      <input disabled type="text" name="height" class="dietInput form-control" [placeholder]="athleteHeight"
-        id="inpHeight">
+      <label class="form-control-label" for="height">Altura</label><br />
+      <input
+        disabled
+        type="text"
+        name="height"
+        class="dietInput form-control"
+        [placeholder]="athleteHeight"
+        id="inpHeight"
+      />
     </div>
 
     <div class="form-group text-center">
-      <label class="form-control-label" for="weight">Peso</label><br>
-      <input disabled type="text" name="weight" class="dietInput form-control" [placeholder]="athleteWeight"
-        id="weight">
+      <label class="form-control-label" for="weight">Peso</label><br />
+      <input
+        disabled
+        type="text"
+        name="weight"
+        class="dietInput form-control"
+        [placeholder]="athleteWeight"
+        id="weight"
+      />
     </div>
 
     <div class="form-group text-center">
-      <label class="form-control-label" for="username">Usuario</label><br>
-      <input disabled type="text" name="username" class="dietInput form-control" [placeholder]="actualUser"
-        id="username">
+      <label class="form-control-label" for="username">Usuario</label><br />
+      <input
+        disabled
+        type="text"
+        name="username"
+        class="dietInput form-control"
+        [placeholder]="actualUser"
+        id="username"
+      />
     </div>
 
     <div class="form-group text-center">
-      <button *ngIf="profileFormLocked" class="btn btn-primary btn-lg mt-4 btnSize"
-        (click)="setProfileFormToModify()">
+      <button
+        *ngIf="profileFormLocked"
+        class="btn btn-primary btn-lg mt-4 btnSize"
+        (click)="setProfileFormToModify()"
+      >
         Modificar
       </button>
 
-      <button *ngIf="!profileFormLocked" class="btn btn-primary btn-lg mt-4 btnSize"
-        (click)="sendProfileForm()">
+      <button
+        *ngIf="!profileFormLocked"
+        class="btn btn-primary btn-lg mt-4 btnSize"
+        (click)="sendProfileForm()"
+      >
         Enviar
       </button>
-      <button *ngIf="!profileFormLocked" class="btn btn-secondary btn-lg mt-4 btnSize"
-        (click)="setProfileFormToModify()">
+      <button
+        *ngIf="!profileFormLocked"
+        class="btn btn-secondary btn-lg mt-4 btnSize"
+        (click)="setProfileFormToModify()"
+      >
         Cancelar
       </button>
     </div>
-
   </form>
 
-
-
   <div *ngIf="showMenu == 'imc'" class="animate__animated animate__fadeIn">
-
-    <h2 class="text-center mt-4 mb-4">
-      Datos IMC
-    </h2>
+    <h2 class="text-center mt-4 mb-4">Datos IMC</h2>
 
     <div class="form-group text-center">
-      <label class="form-control-label" for="imc">IMC actual</label><br>
-      <input disabled type="text" name="imc" class="dietInput form-control" [placeholder]="athleteIMC | number: '1.2-2'"
-        required id="inpImc">
+      <label class="form-control-label" for="imc">IMC actual</label><br />
+      <input
+        disabled
+        type="text"
+        name="imc"
+        class="dietInput form-control"
+        [placeholder]="athleteIMC | number: '1.2-2'"
+        required
+        id="inpImc"
+      />
     </div>
 
     <div class="form-group text-center">
-      <label class="form-control-label" for="actualScale">Baremo IMC actual</label><br>
-      <input disabled type="text" name="actualScale" class="dietInput form-control" [placeholder]="athleteActualScale"
-        required id="inpActualScale">
+      <label class="form-control-label" for="actualScale"
+        >Baremo IMC actual</label
+      ><br />
+      <input
+        disabled
+        type="text"
+        name="actualScale"
+        class="dietInput form-control"
+        [placeholder]="athleteActualScale"
+        required
+        id="inpActualScale"
+      />
     </div>
 
     <div class="form-group text-center">
-      <label class="form-control-label" for="totalPoints">Puntos Diet2gether</label><br>
-      <input disabled type="text" name="totalPoints" class="dietInput form-control"
-        [placeholder]="athleteTotalPoints + ' puntos'" id="inpTotalPoints">
+      <label class="form-control-label" for="totalPoints"
+        >Puntos Diet2gether</label
+      ><br />
+      <input
+        disabled
+        type="text"
+        name="totalPoints"
+        class="dietInput form-control"
+        [placeholder]="athleteTotalPoints + ' puntos'"
+        id="inpTotalPoints"
+      />
     </div>
-
   </div>
 
-
   <div *ngIf="showMenu == 'scales'" class="animate__animated animate__fadeIn">
-
-    <h2 class="text-center mt-4 mb-4">
-      Baremos personales
-    </h2>
+    <h2 class="text-center mt-4 mb-4">Baremos personales</h2>
 
     <div class="form-group text-center">
-      <div *ngFor="let scale of athleteScales, let i = index">
+      <div *ngFor="let scale of athleteScales; let i = index">
         <div *ngIf="athleteActualScale == scale.scale">
           <label class="form-control-label" for="imc">
             <i class="far fa-hand-point-right text-primary"></i>
-            {{scale.scale}}
-            <i class="far fa-hand-point-left text-primary"></i>
-          </label><br>
+            {{ scale.scale }}
+            <i class="far fa-hand-point-left text-primary"></i> </label
+          ><br />
         </div>
         <div *ngIf="athleteActualScale != scale.scale">
-          <label class="form-control-label" for="imc">{{scale.scale}}</label>
+          <label class="form-control-label" for="imc">{{ scale.scale }}</label>
         </div>
 
-        <input disabled type="text" name="imc" class="dietInput form-control mb-3"
-          [placeholder]="(scale.weightScale | number: '1.2-2') + ' kg'">
+        <input
+          disabled
+          type="text"
+          name="imc"
+          class="dietInput form-control mb-3"
+          [placeholder]="(scale.weightScale | number: '1.2-2') + ' kg'"
+        />
         <!-- <input *ngIf="(i + 1) < athleteScales.length" disabled type="text" name="imc" class="dietInput form-control mb-4"
           [placeholder]="scale.weightScale | number: '1.2-2'" required id="inpImc">
         <input *ngIf="(i + 1) == athleteScales.length" disabled type="text" name="imc" class="dietInput form-control"
           [placeholder]="scale.weightScale | number: '1.2-2'" required id="inpImc"> -->
       </div>
     </div>
-
   </div>
 
+  <div *ngIf="showMenu == 'stats'" class="animate__animated animate__fadeIn">
+    <h2 class="text-center mt-4 mb-4">Estadisticas</h2>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-12">
+          <h3>Registros totales</h3>
+          <app-linear-chart
+            class="w-50"
+            [chartData]="chartData"
+            [labelX]="labelX"
+            [labelY]="labelY"
+            [minLabel]="minLabelWeightRegister"
+            [maxLabel]="maxLabelWeightRegister"
+          ></app-linear-chart>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <h3>Diferencias de peso</h3>
+          <app-linear-chart
+            class="w-50"
+            [chartData]="chartWeightDifferenceData"
+            [labelX]="labelXWeightDifference"
+            [labelY]="labelYWeightDifference"
+            [minLabel]="minLabelWeightDifferenceRegister"
+            [maxLabel]="maxLabelWeightDifferenceRegister"
+          ></app-linear-chart>
+        </div>
+      </div>
+<hr>
+      <div class="row mt-5">
+        <div class="col-md-6">
+          <h3>Puntuacion total</h3>
+          <app-linear-gauge-chart
+          [value]="totalPoints"
+          [units]="textValue"
+          class="w-25"></app-linear-gauge-chart>
+          
+        </div>
+        <div class="col-md-6">
+          <h3>Baremos</h3>
+          <app-gauge-chart [single]="chartScaleData"></app-gauge-chart>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -56,4 +56,42 @@ export class ProfileService {
     /* Devolver grupo activo */
     return this.http.put(endpoint, data);
   }
+
+  getChartTotalRegisters(): Observable<any> {
+    /* Obtener usuario de la sesión actual */
+    const username = localStorage.getItem('dietUsernameSession');
+
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem('dietJwtSession');
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointServer + `/chart/get-profile-total-register/${username}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ Authorization: `Bearer ${jwt}` }),
+    };
+
+    /* Devolver grupo activo */
+    return this.http.get(endpoint, httpOptions);
+  }
+
+  getChartTotalWeightDifferenceRegisters(): Observable<any> {
+    /* Obtener usuario de la sesión actual */
+    const username = localStorage.getItem('dietUsernameSession');
+
+    /* Obtener token JWT del usuario actual */
+    const jwt = localStorage.getItem('dietJwtSession');
+
+    /* Dirección del servidor - petición */
+    const endpoint = this.endPointServer + `/chart/get-profile-total-weight-difference-register/${username}`;
+
+    /* Cabecera necesaria para indicar token JWT */
+    let httpOptions = {
+      headers: new HttpHeaders({ Authorization: `Bearer ${jwt}` }),
+    };
+
+    /* Devolver grupo activo */
+    return this.http.get(endpoint, httpOptions);
+  }
 }

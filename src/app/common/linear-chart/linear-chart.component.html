@@ -1,0 +1,21 @@
+<div class="altura-grafica">
+  <!-- <h3>Registros</h3> -->
+
+  <ngx-charts-line-chart
+    [scheme]="colorScheme"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [xAxisLabel]="labelX"
+    [yAxisLabel]="labelY"
+    [timeline]="timeline"
+    [results]="chartData"
+    [yScaleMin]="minLabel"
+    [yScaleMax]="maxLabel"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)"
+  >
+  </ngx-charts-line-chart>
+</div>

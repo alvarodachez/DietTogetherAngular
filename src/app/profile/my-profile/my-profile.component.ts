@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,NgModule} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { LogInService } from 'src/app/entry/services/log-in.service';
 import { ProfileService } from '../services/profile.service';
+
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-my-profile',
@@ -13,6 +16,33 @@ export class MyProfileComponent implements OnInit {
   showMenu: string;
 
   actualUser: string;
+
+
+  /** Grafica para registros totales */
+  chartData : any[];
+  labelX = "Fechas";
+  labelY = "Pesos";
+
+  maxLabelWeightRegister;
+  minLabelWeightRegister;
+
+  /** Grafica para registros en diferencias de peso totales */
+  chartWeightDifferenceData : any[];
+  labelXWeightDifference = "Fechas";
+  labelYWeightDifference = "Diferencias";
+
+  maxLabelWeightDifferenceRegister;
+  minLabelWeightDifferenceRegister;
+
+  /** Grafica para puntacion total */
+  totalPoints;
+  textValue = "puntos";
+
+  /** Grafica para baremos del atleta */
+  chartScaleData;
+
+  labelXScale = "Fechas";
+  labelYScale = "Pesos";
 
   /* Variable que almacena el atleta actual */
   actualAthlete: any;
@@ -43,10 +73,16 @@ export class MyProfileComponent implements OnInit {
     // height: new FormControl({value: '', disabled: true}, Validators.required),
   });
 
+
+  
+
+
+  /* view: any[] = []; */
   constructor(
     private profileService: ProfileService,
     private login: LogInService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     /* Pestaña por defecto - Datos personales */
@@ -56,7 +92,12 @@ export class MyProfileComponent implements OnInit {
 
     this.login.isUserInSession();
     this.getActualAthlete();
+
+    this.getChartTotalRegisters();
+
+    this.getChartTotalWeightDifferenceRegisters();
   }
+
 
   /* Método que establece el valor de la pestaña actual */
   changeShowMenu(toChange: string) {
@@ -78,6 +119,20 @@ export class MyProfileComponent implements OnInit {
       this.athleteScales = res.physicalData.imc.scales;
       this.athleteHeight = res.physicalData.height;
       this.athleteWeight = res.physicalData.weight;
+      this.totalPoints = res.totalPoints;
+
+      let chartScaleData = [];
+
+      for(let scale of res.physicalData.imc.scales){
+        let scaleData = {
+          "name": scale.scale,
+          "value":scale.weightScale
+        }
+
+        chartScaleData.push(scaleData);
+      }
+
+      this.chartScaleData = chartScaleData;
     });
   }
 
@@ -133,4 +188,56 @@ export class MyProfileComponent implements OnInit {
 
     this.profileForm.reset();
   }
+
+  getChartTotalRegisters() {
+  
+    this.profileService.getChartTotalRegisters().subscribe(res => {
+      console.log(res);
+      this.chartData = res;
+      let series = res[0].series
+      console.log(series)
+      let maxValue = 0;
+      let minValue = 999999999;
+
+      for(let s of series){
+        if(s.value < minValue){
+          minValue = s.value;
+        }
+
+        if(s.value > maxValue){
+          maxValue = s.value;
+        }
+      }
+
+      this.maxLabelWeightRegister = maxValue;
+      this.minLabelWeightRegister = minValue;
+    })
+  }
+
+  getChartTotalWeightDifferenceRegisters() {
+  
+    this.profileService.getChartTotalWeightDifferenceRegisters().subscribe(res => {
+      console.log(res);
+      this.chartWeightDifferenceData = res;
+      let series = res[0].series
+      console.log(series)
+      let maxValue = -99999999999;
+      let minValue = 999999999;
+
+      for(let s of series){
+        if(s.value < minValue){
+          minValue = s.value;
+        }
+
+        if(s.value > maxValue){
+          maxValue = s.value;
+        }
+      }
+
+      this.maxLabelWeightDifferenceRegister = maxValue;
+      this.minLabelWeightDifferenceRegister = minValue;
+    })
+  }
+
+  
 }

@@ -24,6 +24,9 @@ import { PrivateModule } from './private-activity/private.module';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { NotFoundComponent } from './common/not-found/not-found.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,7 @@ import { NotFoundComponent } from './common/not-found/not-found.component';
     NotFoundComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule ,
     AppRoutingModule,
     EntryModule,
     HomeModule,
@@ -45,6 +48,7 @@ import { NotFoundComponent } from './common/not-found/not-found.component';
     RegimeModule,
     ProfileModule,
     PrivateModule,
+    NgxChartsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }

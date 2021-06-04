@@ -1,0 +1,11 @@
+<div class="altura-grafica">
+  <!-- <h3>Registros</h3> -->
+
+  <ngx-charts-linear-gauge
+    [scheme]="colorScheme"
+    [value]="value"
+    (select)="onSelect($event)"
+    [units]="units"
+  >
+  </ngx-charts-linear-gauge>
+</div>

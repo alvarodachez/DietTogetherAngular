@@ -10,6 +10,9 @@ import { ManagementGroupComponent } from './management-group/management-group.co
 import { ViewGroupComponent } from './view-group/view-group.component';
 import { CanActivateGuard } from '../entry/services/can-activate.guard';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ChartModule } from '../common/chart.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { LinearChartComponent } from '../common/linear-chart/linear-chart.component';
 
 
 
@@ -41,7 +44,8 @@ const routes: Routes = [
   declarations: [
     WelcomeGroupComponent,
     ManagementGroupComponent,
-    ViewGroupComponent
+    ViewGroupComponent,
+    
   ],
   exports: [],
   imports: [
@@ -50,6 +54,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
+    ChartModule,
+    NgxChartsModule,
     RouterModule.forChild(routes),
   ],
   providers:[
